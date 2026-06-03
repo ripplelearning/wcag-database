@@ -45,7 +45,7 @@
         </div>
         
         <label for="wcag-search-input" style="display:block; margin-bottom:4px; font-weight:bold; font-size:0.9rem;">Search Criteria:</label>
-        <input type="search" id="wcag-search-input" autocomplete="off" placeholder="e.g., Status, 4.1.3..." style="width:100%; padding:8px; box-sizing:border-box; border:2px solid #767676; border-radius:4px; margin-bottom:12px;">
+        <input type="search" id="wcag-search-input" autocomplete="off" placeholder="e.g., Contrast, 1.4.3..." style="width:100%; padding:8px; box-sizing:border-box; border:2px solid #767676; border-radius:4px; margin-bottom:12px;">
         
         <div style="display:flex; gap:10px; margin-bottom:15px;">
             <div style="flex:1;">
@@ -153,7 +153,7 @@
 
             let fullTextStr = `Success Criterion ${item.id}: ${item.title}\n`;
             item.orderedFields.forEach(f => {
-                if (f.value && f.key !== 'Link') {
+                if (f.value && f.key !== 'link') {
                     fullTextStr += `${f.label}: ${f.value}\n`;
                 }
             });
@@ -175,7 +175,7 @@
             let detailsHtml = '';
             
             item.orderedFields.forEach(field => {
-                if (field.key === 'Link') return; // Handled explicitly at the bottom
+                if (field.key === 'link') return; // Placed at the very bottom instead
 
                 if (field.value) {
                     const safeValue = encodeURIComponent(field.value);
@@ -196,7 +196,7 @@
                 <div class="wcag-card">
                     <button class="wcag-trigger" aria-expanded="false" aria-controls="panel-${idx}">
                         <span>${item.id} ${item.title}</span>
-                        <span style="font-size:0.75rem; background:#005a9c; color:#fff; padding:2px 6px; border-radius:3px; white-space:nowrap;">Level ${item.level || 'N/A'}</span>
+                        <span style="font-size:0.75rem; background:#005a9c; color:#fff; padding:2px 6px; border-radius:3px; white-space:nowrap;">${item.level}</span>
                     </button>
                     <div id="panel-${idx}" class="wcag-details">
                         <button class="wcag-master-copy" data-index="${idx}">Copy Full Success Criteria Entry</button>
@@ -226,8 +226,11 @@
                 item.categories.toLowerCase().includes(textVal) ||
                 item.tags.toLowerCase().includes(textVal);
             
+            // Flexible matching for "WCAG 2.2" or "2.2" formats in select drop-down strings
             const matchesVersion = !versionVal || (item.version && item.version.includes(versionVal));
-            const matchesLevel = !levelVal || (item.level && item.level.toUpperCase() === levelVal);
+            
+            // Matches "Level A", "Level AA", etc. seamlessly
+            const matchesLevel = !levelVal || (item.level && item.level.toUpperCase().includes(levelVal));
 
             return matchesText && matchesVersion && matchesLevel;
         });
@@ -246,26 +249,34 @@
                 const cells = Array.from(r.querySelectorAll('td')).map(c => c.textContent.trim());
                 
                 const rawId = cells[0] || '';
-                const rawTitle = cells[1] || '';
-                const cleanTitle = rawTitle.split(/\n|\r/)[0].replace(/Level\s+[A-Z]+/gi, '').replace(rawId, '').trim();
+                const rawLevel = cells[1] || '';
+                
+                // Extract clean, pure Success Criteria text string by removing the "1.1.1-heading-" prefix
+                let rawSuccessCriteria = cells[3] || '';
+                let cleanTitle = rawSuccessCriteria.replace(rawId, '').replace(/^[-_\s]+/, '');
+                // Capitalize text words cleanly for a beautiful presentation format
+                cleanTitle = cleanTitle.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
-                // Explicit 10-column spreadsheet alignment structure
+                // Explicitly align data indexing with your exact 12-column table
                 const dataObj = {
                     id: rawId,
+                    level: rawLevel,
+                    guideline: cells[2] || '',
                     title: cleanTitle,
-                    level: cells[1] || '',
-                    description: cells[2] || '',
-                    failures: cells[3] || '',
-                    fixes: cells[4] || '',
-                    disabilityImpact: cells[5] || '',
-                    version: cells[6] || '',
-                    categories: cells[7] || '',
-                    tags: cells[8] || '',
-                    link: cells[9] || ''
+                    description: cells[4] || '',
+                    failures: cells[5] || '',
+                    fixes: cells[6] || '',
+                    disabilityImpact: cells[7] || '',
+                    link: cells[8] || '',
+                    version: cells[9] || '',
+                    categories: cells[10] || '',
+                    tags: cells[11] || ''
                 };
 
-                // Ordered schema for details layout mapping
+                // The precise requested layout order for expanded blocks
                 const orderedFields = [
+                    { key: 'title', label: 'Success Criteria', value: `${dataObj.id} ${dataObj.title}` },
+                    { key: 'level', label: 'Conformance Level', value: dataObj.level },
                     { key: 'description', label: 'Description', value: dataObj.description },
                     { key: 'failures', label: 'Failures', value: dataObj.failures },
                     { key: 'fixes', label: 'Fixes (W3C Techniques)', value: dataObj.fixes },
