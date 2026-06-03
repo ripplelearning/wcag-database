@@ -175,7 +175,7 @@
             let detailsHtml = '';
             
             item.orderedFields.forEach(field => {
-                if (field.key === 'link') return; // Placed at the very bottom instead
+                if (field.key === 'link') return;
 
                 if (field.value) {
                     const safeValue = encodeURIComponent(field.value);
@@ -217,19 +217,16 @@
 
         const filtered = wcagData.filter(item => {
             const matchesText = !textVal || 
-                item.id.toLowerCase().includes(textVal) ||
-                item.title.toLowerCase().includes(textVal) ||
-                item.description.toLowerCase().includes(textVal) ||
-                item.failures.toLowerCase().includes(textVal) ||
-                item.fixes.toLowerCase().includes(textVal) ||
-                item.disabilityImpact.toLowerCase().includes(textVal) ||
-                item.categories.toLowerCase().includes(textVal) ||
-                item.tags.toLowerCase().includes(textVal);
+                (item.id && item.id.toLowerCase().includes(textVal)) ||
+                (item.title && item.title.toLowerCase().includes(textVal)) ||
+                (item.description && item.description.toLowerCase().includes(textVal)) ||
+                (item.failures && item.failures.toLowerCase().includes(textVal)) ||
+                (item.fixes && item.fixes.toLowerCase().includes(textVal)) ||
+                (item.disabilityImpact && item.disabilityImpact.toLowerCase().includes(textVal)) ||
+                (item.categories && item.categories.toLowerCase().includes(textVal)) ||
+                (item.tags && item.tags.toLowerCase().includes(textVal));
             
-            // Flexible matching for "WCAG 2.2" or "2.2" formats in select drop-down strings
             const matchesVersion = !versionVal || (item.version && item.version.includes(versionVal));
-            
-            // Matches "Level A", "Level AA", etc. seamlessly
             const matchesLevel = !levelVal || (item.level && item.level.toUpperCase().includes(levelVal));
 
             return matchesText && matchesVersion && matchesLevel;
@@ -246,18 +243,23 @@
             const rows = Array.from(doc.querySelectorAll('table tr')).filter(r => r.querySelector('td'));
             
             wcagData = rows.map(r => {
-                const cells = Array.from(r.querySelectorAll('td')).map(c => c.textContent.trim());
+                const cells = Array.from(r.querySelectorAll('td')).map(c => c.textContent ? c.textContent.trim() : '');
                 
                 const rawId = cells[0] || '';
                 const rawLevel = cells[1] || '';
+                const rawSuccessCriteria = cells[3] || '';
                 
-                // Extract clean, pure Success Criteria text string by removing the "1.1.1-heading-" prefix
-                let rawSuccessCriteria = cells[3] || '';
-                let cleanTitle = rawSuccessCriteria.replace(rawId, '').replace(/^[-_\s]+/, '');
-                // Capitalize text words cleanly for a beautiful presentation format
-                cleanTitle = cleanTitle.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                // Safe string parsing checks to protect layout assembly
+                let cleanTitle = 'Untitled';
+                if (rawSuccessCriteria) {
+                    cleanTitle = rawSuccessCriteria.replace(rawId, '').replace(/^[-_\s]+/, '');
+                    if (cleanTitle) {
+                        cleanTitle = cleanTitle.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                    } else {
+                        cleanTitle = 'Criteria Detail';
+                    }
+                }
 
-                // Explicitly align data indexing with your exact 12-column table
                 const dataObj = {
                     id: rawId,
                     level: rawLevel,
@@ -273,9 +275,8 @@
                     tags: cells[11] || ''
                 };
 
-                // The precise requested layout order for expanded blocks
                 const orderedFields = [
-                    { key: 'title', label: 'Success Criteria', value: `${dataObj.id} ${dataObj.title}` },
+                    { key: 'title', label: 'Success Criteria', value: dataObj.id && dataObj.title ? `${dataObj.id} ${dataObj.title}` : dataObj.title },
                     { key: 'level', label: 'Conformance Level', value: dataObj.level },
                     { key: 'description', label: 'Description', value: dataObj.description },
                     { key: 'failures', label: 'Failures', value: dataObj.failures },
@@ -293,8 +294,14 @@
                 };
             });
             
-            statusText.remove();
+            const existingStatus = document.getElementById('wcag-status-text');
+            if (existingStatus) existingStatus.remove();
+            
             renderList(wcagData);
             searchInput.focus();
-        }).catch(err => { console.error(err); statusText.textContent = "Error parsing rows from GitHub layout."; });
+        }).catch(err => { 
+            console.error("Scraping processing failed:", err); 
+            const existingStatus = document.getElementById('wcag-status-text');
+            if (existingStatus) existingStatus.textContent = "Error sorting data elements locally."; 
+        });
 })();
