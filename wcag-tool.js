@@ -20,6 +20,8 @@
 
     const styleRule = document.createElement('style');
     styleRule.textContent = `
+        .wcag-results-heading { font-size: 1.1rem; color: #333; margin: 15px 0 10px 0; border-bottom: 2px solid #005a9c; padding-bottom: 4px; }
+        .wcag-version-section { font-size: 1rem; color: #005a9c; margin: 15px 0 8px 0; padding-left: 2px; }
         .wcag-card { border: 1px solid #ddd; background: #fdfdfd; margin-bottom: 10px; border-radius: 4px; overflow: hidden; font-size: 0.9rem; }
         .wcag-trigger { width: 100%; text-align: left; border: none; background: #f4f4f4; padding: 12px; font-weight: bold; font-size: 0.95rem; color: #005a9c; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
         .wcag-trigger:focus { background: #e6f2fa; outline: 2px solid #005a9c; outline-offset: -2px; }
@@ -47,7 +49,7 @@
         <label for="wcag-search-input" style="display:block; margin-bottom:4px; font-weight:bold; font-size:0.9rem;">Search Criteria:</label>
         <input type="search" id="wcag-search-input" autocomplete="off" placeholder="e.g., Contrast, 1.4.3..." style="width:100%; padding:8px; box-sizing:border-box; border:2px solid #767676; border-radius:4px; margin-bottom:12px;">
         
-        <div style="display:flex; gap:10px; margin-bottom:15px;">
+        <div style="display:flex; gap:10px; margin-bottom:5px;">
             <div style="flex:1;">
                 <label for="wcag-version-filter" style="display:block; margin-bottom:4px; font-weight:bold; font-size:0.85rem;">Version:</label>
                 <select id="wcag-version-filter" style="width:100%; padding:6px; border:2px solid #767676; border-radius:4px;">
@@ -67,10 +69,13 @@
             </div>
         </div>
 
-        <div id="wcag-live-announcer" style="position:absolute; width:1px; height:1px; overflow:hidden;" aria-live="polite"></div>
-        <div id="wcag-results-wrapper" style="flex-grow:1; overflow-y:auto; padding-right:5px;" role="region" aria-label="Search Results">
+        <!-- Semantic Counter Heading Placement -->
+        <h2 id="wcag-results-counter" class="wcag-results-heading" aria-live="polite">Loading database...</h2>
+
+        <div id="wcag-results-wrapper" style="flex-grow:1; overflow-y:auto; padding-right:5px;" role="region" aria-labelledby="wcag-results-counter">
             <p id="wcag-status-text" style="color:#555; font-style:italic;">Scraping table from GitHub...</p>
         </div>
+        
         <div style="font-size:0.75rem; color:#444; margin-top:10px; border-top:1px solid #ddd; padding-top:8px;">
             <strong>Shortcuts:</strong> <kbd>Alt+Shift+A</kbd> (Toggle) | <kbd>Esc</kbd> (Close) | <kbd>&darr; / &uarr;</kbd> (Navigate Accordions)
         </div>
@@ -81,10 +86,10 @@
     const versionFilter = document.getElementById('wcag-version-filter');
     const levelFilter = document.getElementById('wcag-level-filter');
     const resultsWrapper = document.getElementById('wcag-results-wrapper');
-    const liveAnnouncer = document.getElementById('wcag-live-announcer');
-    const statusText = document.getElementById('wcag-status-text');
+    const resultsCounter = document.getElementById('wcag-results-counter');
     
     let wcagData = [];
+    let globalCardCounter = 0;
 
     function setTemporaryText(btn, tempText) {
         const oldText = btn.textContent;
@@ -147,8 +152,8 @@
 
         const masterBtn = e.target.closest('.wcag-master-copy');
         if (masterBtn) {
-            const index = masterBtn.getAttribute('data-index');
-            const item = wcagData[index];
+            const uid = masterBtn.getAttribute('data-uid');
+            const item = wcagData.find(d => d.uid === uid);
             if (!item) return;
 
             let fullTextStr = `Success Criterion ${item.id}: ${item.title}\n`;
@@ -165,49 +170,78 @@
         }
     });
 
+    function buildCardHtml(item) {
+        let detailsHtml = '';
+        
+        item.orderedFields.forEach(field => {
+            if (field.key === 'link') return;
+
+            if (field.value) {
+                const safeValue = encodeURIComponent(field.value);
+                detailsHtml += `
+                    <div class="wcag-meta-line">
+                        <div class="wcag-meta-content">
+                            <span class="wcag-meta-label">${field.label}:</span> ${field.value}
+                        </div>
+                        <button class="wcag-copy-btn" data-copy="${safeValue}" aria-label="Copy ${field.label}">Copy</button>
+                    </div>
+                `;
+            }
+        });
+
+        const bottomLinkHtml = item.link ? `<div style="margin-top:12px; border-top:1px dashed #eee; padding-top:8px;"><a href="${item.link}" target="_blank" style="color:#005a9c; font-weight:bold; text-decoration:underline;">Open Official WCAG Documentation &rarr;</a></div>` : '';
+
+        return `
+            <div class="wcag-card">
+                <button class="wcag-trigger" aria-expanded="false" aria-controls="panel-${item.uid}">
+                    <span>${item.id} ${item.title}</span>
+                    <span style="font-size:0.75rem; background:#005a9c; color:#fff; padding:2px 6px; border-radius:3px; white-space:nowrap;">${item.level}</span>
+                </button>
+                <div id="panel-${item.uid}" class="wcag-details">
+                    <button class="wcag-master-copy" data-uid="${item.uid}">Copy Full Success Criteria Entry</button>
+                    ${detailsHtml}
+                    ${bottomLinkHtml}
+                </div>
+            </div>
+        `;
+    }
+
     function renderList(items) {
         if (items.length === 0) {
-            resultsWrapper.innerHTML = '<p style="color:#666; font-style:italic;">No matching criteria found.</p>';
+            resultsCounter.textContent = "0 Matching Criteria Found";
+            resultsWrapper.innerHTML = '<p style="color:#666; font-style:italic; padding-top:10px;">No matching criteria found.</p>';
             return;
         }
 
-        resultsWrapper.innerHTML = items.map((item, idx) => {
-            let detailsHtml = '';
-            
-            item.orderedFields.forEach(field => {
-                if (field.key === 'link') return;
+        // Global total update
+        resultsCounter.textContent = `${items.length} Matching ${items.length === 1 ? 'Criterion' : 'Criteria'} Found`;
 
-                if (field.value) {
-                    const safeValue = encodeURIComponent(field.value);
-                    detailsHtml += `
-                        <div class="wcag-meta-line">
-                            <div class="wcag-meta-content">
-                                <span class="wcag-meta-label">${field.label}:</span> ${field.value}
-                            </div>
-                            <button class="wcag-copy-btn" data-copy="${safeValue}" aria-label="Copy ${field.label}">Copy</button>
-                        </div>
-                    `;
-                }
-            });
+        // Separate items by versions
+        const v21Items = items.filter(item => item.version.trim() === '2.1');
+        const v22Items = items.filter(item => item.version.trim() === '2.2');
+        const otherItems = items.filter(item => item.version.trim() !== '2.1' && item.version.trim() !== '2.2');
 
-            const bottomLinkHtml = item.link ? `<div style="margin-top:12px; border-top:1px dashed #eee; padding-top:8px;"><a href="${item.link}" target="_blank" style="color:#005a9c; font-weight:bold; text-decoration:underline;">Open Official WCAG Documentation &rarr;</a></div>` : '';
+        let finalHtml = '';
 
-            return `
-                <div class="wcag-card">
-                    <button class="wcag-trigger" aria-expanded="false" aria-controls="panel-${idx}">
-                        <span>${item.id} ${item.title}</span>
-                        <span style="font-size:0.75rem; background:#005a9c; color:#fff; padding:2px 6px; border-radius:3px; white-space:nowrap;">${item.level}</span>
-                    </button>
-                    <div id="panel-${idx}" class="wcag-details">
-                        <button class="wcag-master-copy" data-index="${idx}">Copy Full Success Criteria Entry</button>
-                        ${detailsHtml}
-                        ${bottomLinkHtml}
-                    </div>
-                </div>
-            `;
-        }).join('');
-        
-        liveAnnouncer.textContent = `${items.length} criteria loaded.`;
+        // Render WCAG 2.1 Section if data exists
+        if (v21Items.length > 0) {
+            finalHtml += `<h3 class="wcag-version-section">WCAG 2.1 (${v21Items.length})</h3>`;
+            finalHtml += v21Items.map(item => buildCardHtml(item)).join('');
+        }
+
+        // Render WCAG 2.2 Section if data exists
+        if (v22Items.length > 0) {
+            finalHtml += `<h3 class="wcag-version-section">WCAG 2.2 (${v22Items.length})</h3>`;
+            finalHtml += v22Items.map(item => buildCardHtml(item)).join('');
+        }
+
+        // Catch-all block for unassigned criteria formats
+        if (otherItems.length > 0) {
+            finalHtml += `<h3 class="wcag-version-section">Other Criteria (${otherItems.length})</h3>`;
+            finalHtml += otherItems.map(item => buildCardHtml(item)).join('');
+        }
+
+        resultsWrapper.innerHTML = finalHtml;
     }
 
     function filterResults() {
@@ -249,7 +283,6 @@
                 const rawLevel = cells[1] || '';
                 const rawSuccessCriteria = cells[3] || '';
                 
-                // Safe string parsing checks to protect layout assembly
                 let cleanTitle = 'Untitled';
                 if (rawSuccessCriteria) {
                     cleanTitle = rawSuccessCriteria.replace(rawId, '').replace(/^[-_\s]+/, '');
@@ -260,7 +293,11 @@
                     }
                 }
 
+                globalCardCounter++;
+                const uniqueId = `sc-${globalCardCounter}`;
+
                 const dataObj = {
+                    uid: uniqueId,
                     id: rawId,
                     level: rawLevel,
                     guideline: cells[2] || '',
@@ -301,7 +338,7 @@
             searchInput.focus();
         }).catch(err => { 
             console.error("Scraping processing failed:", err); 
-            const existingStatus = document.getElementById('wcag-status-text');
-            if (existingStatus) existingStatus.textContent = "Error sorting data elements locally."; 
+            resultsCounter.textContent = "Initialization Error";
+            resultsWrapper.innerHTML = '<p style="color:red; font-weight:bold;">Error sorting data elements locally.</p>';
         });
 })();
