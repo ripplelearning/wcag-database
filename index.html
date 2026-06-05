@@ -253,6 +253,20 @@
         <td>Forms, Input</td>
         <td>forms, autocomplete, input purpose</td>
       </tr>
+        <tr>
+        <td>1.3.6</td>
+        <td>AAA</td>
+        <td>1.3 Adaptable</td>
+        <td>1.3.6-Identify Purpose</td>
+        <td>In content implemented using markup languages, the purpose of User Interface Components, icons, and regions can be programmatically determined.</td>
+        <td>F107 Failure due to using custom navigation icons or structural regions without microdata, scoping metadata, or appropriate button purposes.</td>
+        <td>ARIA11, ARIA16 Use standard landmarks (role="navigation", role="main") and attach clear programmatic destination definitions to custom interactive icon sets.</td>
+        <td>Cognitive, Screen Reader Users, Alternative Input Users</td>
+        <td>https://www.w3.org/TR/WCAG21/#identify-purpose</td>
+        <td>WCAG 2.1</td>
+        <td>Structure, Navigation</td>
+        <td>purpose identification, microdata, custom icons, landmark roles</td>
+      </tr>
       <tr>
         <td>1.4.1</td>
         <td>A</td>
@@ -1128,275 +1142,1171 @@
 
   <h2>WCAG 2.2 Success Criteria Reference</h2>
   <table border="1">
-    <thead>
-      <tr>
-        <th>SC</th>
-        <th>Level</th>
-        <th>Guideline</th>
-        <th>Success Criterion Title</th>
-        <th>Requirement Description</th>
-        <th>Common Failures</th>
-        <th>Sufficient Techniques / Remediation</th>
-        <th>Impacted User Groups</th>
-        <th>Understanding Link</th>
-        <th>Version</th>
-        <th>Category</th>
-        <th>Keywords</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>2.4.11</td>
-        <td>Level AA</td>
-        <td>Navigational</td>
-        <td>2.4.11-Focus Appearance</td>
-        <td>The focus indicator has sufficient size and contrast relative to the unfocused state and adjacent components.</td>
-        <td>Failure: Modifying site layout focus templates to use subtle, light-gray dotted indicators that fall below minimal visual contrast or boundary line area widths.</td>
-        <td>G149, G195 Build highly defined visual outline focus rings that retain a minimum 3:1 contrast ratio against background layers, and span a perimeter calculation layout footprint matching the element boundary.</td>
-        <td>Low Vision Users, Cognitive Disabilities, Keyboard-Only Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html</td>
-        <td>WCAG 2.2</td>
-        <td>Interactivity, Keyboard</td>
-        <td>Focus Indicators, Visual Tracking, Component Visibility</td>
-      </tr>
-      <tr>
-        <td>2.4.12</td>
-        <td>Level AAA</td>
-        <td>Navigational</td>
-        <td>2.4.12-Focus Not Obscured (Enhanced)</td>
-        <td>No item receives focus if it is entirely covered or blocked from visual sight by sticky panels, promotional modals, or background layout changes.</td>
-        <td>Failure: Tracking keyboard focus pathways into a footer element or static form container that sits completely behind a persistent sticky CTA banner.</td>
-        <td>G222 Implement structural style declarations using CSS layout parameters that reposition overlay cards dynamically or shift viewports to keep focused indicators entirely uncovered.</td>
-        <td>Keyboard-Only Users, Low Vision Users, Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-enhanced.html</td>
-        <td>WCAG 2.2</td>
-        <td>Interactivity, Keyboard</td>
-        <td>Z-Index Management, Viewport Visibility, Keyboard Control Overlays</td>
-      </tr>
-      <tr>
-        <td>2.4.13</td>
-        <td>Level AA</td>
-        <td>Navigational</td>
-        <td>2.4.13-Focus Not Obscured (Minimum)</td>
-        <td>User interface components are not entirely hidden by author-created content when they receive keyboard focus.</td>
-        <td>Failure: Allowing a sticky page banner overlay container to fully block out active fields or functional navigation selectors as a user tabs through the sequence.</td>
-        <td>G222 Adjust scroll-margin padding properties inside design style sheets or inject focus logic ensuring that components snap neatly into plain view when targeted.</td>
-        <td>Keyboard-Only Users, Low Vision Users, Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html</td>
-        <td>WCAG 2.2</td>
-        <td>Interactivity, Keyboard</td>
-        <td>Focus Visibility, Sticky Headers, Bounding Enclosures</td>
-      </tr>
-      <tr>
-        <td>2.5.7</td>
-        <td>Level AA</td>
-        <td>Input Modalities</td>
-        <td>2.5.7-Dragging Movements</td>
-        <td>All functionality that involves a dragging movement can be operated by a single pointer without dragging, unless dragging is essential.</td>
-        <td>Failure: Building kanban workflow boards or custom sliders that can only be advanced by dragging icons across coordinates, lacking a standard point-and-click alternative.</td>
-        <td>G219 Pair drag-and-drop structures with standard single-click interactive menus (e.g., adding sequential "Move Up" or "Move Down" action buttons to items).</td>
-        <td>Motor Impairments, Low Dexterity, Alternative Pointer Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html</td>
-        <td>WCAG 2.2</td>
-        <td>Interactivity, Touch/Pointer</td>
-        <td>Drag Actions, Single-Pointer Operations, Path Gestures</td>
-      </tr>
-      <tr>
-        <td>2.5.8</td>
-        <td>Level AA</td>
-        <td>Input Modalities</td>
-        <td>2.5.8-Target Size (Minimum)</td>
-        <td>The size of the target for pointer inputs is at least 24 by 24 CSS pixels, or sufficient spacing is provided, with exceptions for inline links.</td>
-        <td>Failure: Nesting small standalone menu targets directly adjacent to each other with an active footprint area measuring under 24px wide, causing mistaps.</td>
-        <td>G220 Ensure interactive buttons maintain a 24x24px physical boundary layout footprint, or append empty spacing margins to expand isolation buffers.</td>
-        <td>Motor Impairments, Mobile Device Users, Low Dexterity</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html</td>
-        <td>WCAG 2.2</td>
-        <td>Interactivity, Touch/Pointer</td>
-        <td>Click Targets, Touch Footprint, Element Spacing Checks</td>
-      </tr>
-      <tr>
-        <td>3.2.5</td>
-        <td>Level AAA</td>
-        <td>Predictable</td>
-        <td>3.2.5-Change on Request</td>
-        <td>Changes of context are initiated only by user request or a mechanism is available to turn off such changes.</td>
-        <td>Failure: Automatic timer-driven system redirects, unannounced location updates, or random platform popups executing without explicit user confirmation click.</td>
-        <td>G110 Strip automated refresh/redirect triggers out of meta heads; execute context shifts entirely behind user-initiated mouse clicks or explicit keyboard commands.</td>
-        <td>Screen Reader Users, Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html</td>
-        <td>WCAG 2.2</td>
-        <td>Interactivity, Behavior</td>
-        <td>User-Initiated Changes, Forced Redirection, Live Content Interruption</td>
-      </tr>
-      <tr>
-        <td>3.2.6</td>
-        <td>Level AA</td>
-        <td>Predictable</td>
-        <td>3.2.6-Consistent Help</td>
-        <td>If a Web page contains any of the following help mechanisms, and those mechanisms are repeated on multiple Web pages, they occur in the same relative order: Contact Info, Chat Module, or Self-Help options.</td>
-        <td>Failure: Shifting the physical placement or appearance order of support links, contact numbers, or chat icons across individual application views.</td>
-        <td>Help Overrides Fix the relative order and layout coordinates of repeating support channels (e.g., place the support chatbot link at the lower right corner, or pin contact links inside identical footer blocks).</td>
-        <td>Cognitive Disabilities, Low Vision Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html</td>
-        <td>WCAG 2.2</td>
-        <td>Structure, Navigation</td>
-        <td>Help Desk Links, Support Chat Positioning, Contact Layouts</td>
-      </tr>
-      <tr>
-        <td>3.3.1</td>
-        <td>Level A</td>
-        <td>Input Assistance</td>
-        <td>3.3.1-Error Identification</td>
-        <td>If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text.</td>
-        <td>Failure: Displaying error states purely via red outline borders around field controls without adding clear descriptive error text strings.</td>
-        <td>G83, G85, H89 Generate clear inline error summary strings detailing the issue, link them to inputs using aria-describedby tokens, and alert AT utilizing role="alert" boxes.</td>
-        <td>Color Blindness, Screen Reader Users, Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Validation</td>
-        <td>Error Alerts, Textual Errors, Form Fields</td>
-      </tr>
-      <tr>
-        <td>3.3.2</td>
-        <td>Level A</td>
-        <td>Input Assistance</td>
-        <td>3.3.2-Labels or Instructions</td>
-        <td>Labels or instructions are provided when content requires user input.</td>
-        <td>F82: Failure due to using visual placeholder text inside an input field as its only descriptor label, which vanishes when text entry begins.</td>
-        <td>G184, H44 Pair all input field units with an explicitly defined visual &lt;label&gt; tag, include specific syntax requirements (e.g., "Date format: YYYY-MM-DD"), and mark required fields clearly.</td>
-        <td>Cognitive Disabilities, Motor Impairments, Low Vision Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Input</td>
-        <td>Form Field Labels, Input Formatting Hints, Required Indicator Marks</td>
-      </tr>
-      <tr>
-        <td>3.3.3</td>
-        <td>Level AA</td>
-        <td>Input Assistance</td>
-        <td>3.3.3-Error Suggestion</td>
-        <td>If an input error is automatically detected and suggestions for correction are known, then the suggestions are provided to the user, unless it would jeopardize security or purpose.</td>
-        <td>Failure: Giving ambiguous text errors ("Invalid input") without specifying syntax rules or format examples ("Enter date as MM/DD/YYYY").</td>
-        <td>G177, G84 Parse field entries programmatically and serve specific syntax remediation hints directly within the validation notice text block (e.g., "Password requires 1 uppercase letter").</td>
-        <td>Cognitive Disabilities, Blind Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Validation</td>
-        <td>Form Remediation, Correction Hints, Descriptive Errors</td>
-      </tr>
-      <tr>
-        <td>3.3.4</td>
-        <td>Level AA</td>
-        <td>Input Assistance</td>
-        <td>3.3.4-Error Prevention (Legal, Financial, Data)</td>
-        <td>For Web pages that cause legal commitments or financial transactions to occur, that modify or delete user-controllable data in data storage systems, or that submit user test responses, at least one of the following is true: Reversible, Checked, or Confirmed.</td>
-        <td>Failure: Finalizing online bank wire transfers or permanent account termination files instantly upon click, without a secondary confirmation screen or edit dashboard view.</td>
-        <td>G164, G155, G168 Provide a final transactional verification screen featuring structured edit checks, allow users to cancel and undo actions, or mandate an explicit pre-submission overview phase.</td>
-        <td>Motor Impairments, Cognitive Disabilities, Blind Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Financial</td>
-        <td>Data Reversibility, Review Panels, Transaction Verifications</td>
-      </tr>
-      <tr>
-        <td>3.3.5</td>
-        <td>Level AAA</td>
-        <td>Input Assistance</td>
-        <td>3.3.5-Help</td>
-        <td>Context-sensitive help is available.</td>
-        <td>Failure: Presenting intricate calculations or form tracking blocks on an intake system without integrating text instructions or instant help tools.</td>
-        <td>G89, G194, H89 Embed localized tooltips, provide easily discoverable inline help links anchored to text parameters, or implement persistent sidebar support breakdowns.</td>
-        <td>Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/help.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Navigation</td>
-        <td>Contextual Help, Inline Definitions, Support Overlays</td>
-      </tr>
-      <tr>
-        <td>3.3.6</td>
-        <td>Level AAA</td>
-        <td>Input Assistance</td>
-        <td>3.3.6-Error Prevention (All)</td>
-        <td>For Web pages that require the user to submit information, at least one of the following is true: Reversible, Checked, or Confirmed.</td>
-        <td>Failure: Processing typical everyday form data updates (like custom application profile edits) with no modification panel or cancellation capability.</td>
-        <td>G98, G155 Implement a comprehensive validation check overlay across all fields, and integrate a native 100% data rolling mechanism to reverse any submission state modifications.</td>
-        <td>Motor Impairments, Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Validation</td>
-        <td>Universal Error Prevention, Input Checks, Finalize Edits</td>
-      </tr>
-      <tr>
-        <td>3.3.7</td>
-        <td>Level AA</td>
-        <td>Input Assistance</td>
-        <td>3.3.7-Redundant Entry</td>
-        <td>Information previously entered by the user in the same process that is required to be entered again is either auto-populated or available for selection, except where re-entry is essential.</td>
-        <td>Failure: Forcing a user to manually re-type their complete home mailing address across consecutive steps of an application funnel with no auto-fill checkbox.</td>
-        <td>G220 Auto-populate repeated fields using backend data models, or include a functional checkbox control (e.g., "Billing address same as shipping address") that clones inputs instantly.</td>
-        <td>Motor Impairments, Cognitive Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Input</td>
-        <td>Data Duplication, Form Optimization, Step-by-Step Intake</td>
-      </tr>
-      <tr>
-        <td>3.3.8</td>
-        <td>Level AA</td>
-        <td>Input Assistance</td>
-        <td>3.3.8-Accessible Authentication (Minimum)</td>
-        <td>A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step of an authentication process unless an alternative or exception is provided (e.g., copy-paste support or object recognition).</td>
-        <td>Failure: Restricting users from using copy-and-paste commands into password entry controls, forcing manual code entry.</td>
-        <td>G221 Ensure password fields fully support native operating system copy-and-paste operations, enable WebAuthn biometric login sequences, or supply simple magic links via email.</td>
-        <td>Cognitive Disabilities, Motor Impairments</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Security</td>
-        <td>Cognitive Login, Copy-Paste Support, Captcha Exemptions</td>
-      </tr>
-      <tr>
-        <td>3.3.9</td>
-        <td>Level AAA</td>
-        <td>Input Assistance</td>
-        <td>3.3.9-Accessible Authentication (Enhanced)</td>
-        <td>A cognitive function test is not required for any step of an authentication process unless an alternative is provided or an exception for object recognition or personal content applies.</td>
-        <td>Failure: Demanding complex text mathematical calculations or puzzle completion metrics to authenticate or access an account view.</td>
-        <td>G221 Build authentication pathways relying exclusively on native hardware authentication mechanisms, standard copy/paste actions, or email magic link verifications.</td>
-        <td>Cognitive / Learning Disabilities</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, Security</td>
-        <td>Strict Authentication, Zero Cognitive Tests, Biometric Login Alternatives</td>
-      </tr>
-      <tr>
-        <td>4.1.2</td>
-        <td>Level A</td>
-        <td>Robust</td>
-        <td>4.1.2-Name, Role, Value</td>
-        <td>For all user interface components (including but not limited to: form elements, links and components generated by scripts), the name and role can be programmatically determined; states, properties, and values that can be set by the user can be programmatically determined; and notification of changes to these items is available to user agents, including assistive technologies.</td>
-        <td>F59: Failure due to developing custom interactive button elements or tab controls out of plain static `&lt;div&gt;` or `&lt;span&gt;` tags without adding matching ARIA roles or focus state management. ; F79: Failure due to binding interactive state toggles (like expanding list panels) without dynamically modifying attributes like `aria-expanded="true/false"`.</td>
-        <td>H91, ARIA4, ARIA5 Use native interactive HTML elements (&lt;button&gt;, &lt;a&gt;, &lt;select&gt;) to guarantee base tree exposure; apply correct ARIA attributes (role="tab", aria-expanded="true") when writing custom widgets.</td>
-        <td>Screen Reader Users, Switch Access Users, Motor Impairments</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html</td>
-        <td>WCAG 2.2</td>
-        <td>UI Components, ARIA</td>
-        <td>ARIA Attributes, Custom Controls, Accessibility Tree, Component States</td>
-      </tr>
-      <tr>
-        <td>4.1.3</td>
-        <td>Level AA</td>
-        <td>Robust</td>
-        <td>4.1.3-Status Messages</td>
-        <td>In content implemented using markup languages, status messages can be programmatically determined through role or properties such that they can be presented to the user by assistive technologies without receiving focus.</td>
-        <td>F103: Failure due to rendering dynamic "Success" banners or text alerts on a display workspace without wrapping them in appropriate live region containers (like `role="status"` or `aria-live="polite"`).</td>
-        <td>ARIA19 Wrap dynamic interface feedback strings within container blocks styled with explicit ARIA live regions (role="status", role="log", or aria-live="polite") to announce text logs automatically.</td>
-        <td>Screen Reader Users, Low Vision Users</td>
-        <td>https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html</td>
-        <td>WCAG 2.2</td>
-        <td>Forms, ARIA</td>
-        <td>Live Regions, Dynamic Alerts, Aria Status, Background Updates</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>SC</th>
+      <th>Level</th>
+      <th>Guideline</th>
+      <th>Success Criterion Title</th>
+      <th>Requirement Description</th>
+      <th>Common Failures</th>
+      <th>Sufficient Techniques / Remediation</th>
+      <th>Impacted User Groups</th>
+      <th>Understanding Link</th>
+      <th>Version</th>
+      <th>Category</th>
+      <th>Keywords</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.1.1</td>
+      <td>A</td>
+      <td>1.1 Text Alternatives</td>
+      <td>1.1.1-Non-text Content</td>
+      <td>All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for specific situations like controls, media, tests, or pure decoration.</td>
+      <td>F3 Failure due to using CSS to include images that convey important information, F65 Failure due to omitting the alt attribute on img elements.</td>
+      <td>G94 Provide descriptive alt text for informative images, H67 use alt="" for decorative images.</td>
+      <td>Screen Reader Users, Blindness, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html</td>
+      <td>WCAG 2.2</td>
+      <td>Screen reader</td>
+      <td>Alternate Text on Images, Decorative Images, Time-Based Media, CAPTCHAs, UI Elements Have Names</td>
+    </tr>
+    <tr>
+      <td>1.2.1</td>
+      <td>A</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.1-Audio-only and Video-only (Prerecorded)</td>
+      <td>For prerecorded audio-only or prerecorded video-only media, an alternative for time-based media or an audio description is provided.</td>
+      <td>F69 Failure due to omitting time-based media alternatives for audio-only or video-only tracks.</td>
+      <td>G158 Provide a full text transcript for prerecorded audio-only media.</td>
+      <td>Blindness, Low Vision, Deafness, Hard of Hearing</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Screen reader</td>
+      <td>transcripts, audio-only, video-only, media alternatives</td>
+    </tr>
+    <tr>
+      <td>1.2.2</td>
+      <td>A</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.2-Captions (Prerecorded)</td>
+      <td>Captions are provided for all prerecorded audio content in synchronized media.</td>
+      <td>F8 Failure due to captions omitting important information.</td>
+      <td>G93, H95 Provide synchronized captions for all prerecorded audio using formats like WebVTT.</td>
+      <td>Deafness, Hard of Hearing</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>captions, synchronized, audio, prerecorded</td>
+    </tr>
+    <tr>
+      <td>1.2.3</td>
+      <td>A</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.3-Audio Description or Media Alternative (Prerecorded)</td>
+      <td>An alternative for time-based media or audio description of the prerecorded video content is provided for synchronized media.</td>
+      <td>F69 Failure due to omitting time-based media alternatives.</td>
+      <td>G69, G58 Provide a descriptive text transcript or an audio description track.</td>
+      <td>Blindness, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>audio description, transcript, synchronized</td>
+    </tr>
+    <tr>
+      <td>1.2.4</td>
+      <td>AA</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.4-Captions (Live)</td>
+      <td>Captions are provided for all live audio content in synchronized media.</td>
+      <td>F73 Failure due to live captions dropping critical indicators.</td>
+      <td>G9, G87 Use real-time captioning services (CART).</td>
+      <td>Deafness, Hard of Hearing</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/captions-live</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>live captions, real-time, streaming</td>
+    </tr>
+    <tr>
+      <td>1.2.5</td>
+      <td>AA</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.5-Audio Description (Prerecorded)</td>
+      <td>Audio description is provided for all prerecorded video content in synchronized media.</td>
+      <td>F78 Failure due to omitting audio descriptions when visual updates occur.</td>
+      <td>G173, H96 Embed a dedicated descriptive audio narration track.</td>
+      <td>Blindness, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>audio description, narration, prerecorded</td>
+    </tr>
+    <tr>
+      <td>1.2.6</td>
+      <td>AAA</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.6-Sign Language (Prerecorded)</td>
+      <td>Sign language interpretation is provided for all prerecorded audio content in synchronized media.</td>
+      <td>F74 Failure due to synchronized media alternatives lacking sign translation overlays.</td>
+      <td>G54 Embed a synchronized sign language interpreter video layer.</td>
+      <td>Deafness, Native Sign Language Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>sign language, video, synchronization</td>
+    </tr>
+    <tr>
+      <td>1.2.7</td>
+      <td>AAA</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.7-Extended Audio Description (Prerecorded)</td>
+      <td>Where pauses in foreground audio are insufficient, an extended audio description is provided for all prerecorded video content.</td>
+      <td>F78 Failure due to missing audio context when speech gaps are too short.</td>
+      <td>G8 Provide extended audio descriptions by programmatically pausing the video playback loop.</td>
+      <td>Blindness, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>audio description, video pauses, narration</td>
+    </tr>
+    <tr>
+      <td>1.2.8</td>
+      <td>AAA</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.8-Media Alternative (Prerecorded)</td>
+      <td>An alternative for time-based media is provided for all prerecorded synchronized media and video-only media.</td>
+      <td>F69 Failure due to omitting comprehensive text transcripts.</td>
+      <td>G158, G69 Write an exhaustive narrative text transcript logging all dialogue and action.</td>
+      <td>Blindness, Deafness, Hard of Hearing, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>transcripts, textual media, documentation</td>
+    </tr>
+    <tr>
+      <td>1.2.9</td>
+      <td>AAA</td>
+      <td>1.2 Time-based Media</td>
+      <td>1.2.9-Audio-only (Live)</td>
+      <td>An alternative for time-based media that presents equivalent information for live audio-only content is provided.</td>
+      <td>F73 Failure due to live broadcast streaming audio lacking a synchronized textual feed.</td>
+      <td>G151 Provide a continuous, real-time updated text transcript feed.</td>
+      <td>Deafness, Hard of Hearing</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia</td>
+      <td>live audio, transcripts, streaming feeds</td>
+    </tr>
+    <tr>
+      <td>1.3.1</td>
+      <td>A</td>
+      <td>1.3 Adaptable</td>
+      <td>1.3.1-Info and Relationships</td>
+      <td>Information, structure, and relationships conveyed through presentation can be programmatically determined or are available in text.</td>
+      <td>F2 Failure due to using structural markup incorrectly, F43 Failure due to using structural markup for visual layout only.</td>
+      <td>G115 Use semantic HTML tags properly: headings (&lt;h1&gt;-&lt;h6&gt;), lists, and data tables with scope.</td>
+      <td>Screen Reader Users, Blindness, Motor, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Forms, Tables</td>
+      <td>semantics, tables, lists, headings, forms</td>
+    </tr>
+    <tr>
+      <td>1.3.2</td>
+      <td>A</td>
+      <td>1.3 Adaptable</td>
+      <td>1.3.2-Meaningful Sequence</td>
+      <td>When the sequence in which content is presented affects its meaning, a correct reading sequence can be programmatically determined.</td>
+      <td>F1 Failure due to structural layout changes masking the base HTML text flow.</td>
+      <td>G57, C27 Ensure the underlying DOM code order matches the logical, meaningful visual reading order.</td>
+      <td>Screen Reader Users, Blindness, Reading Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Layout</td>
+      <td>dom order, reading order, layout sequence</td>
+    </tr>
+    <tr>
+      <td>1.3.3</td>
+      <td>A</td>
+      <td>1.3 Adaptable</td>
+      <td>1.3.3-Sensory Characteristics</td>
+      <td>Instructions provided for understanding and operating content do not rely solely on sensory characteristics of components such as shape, color, position, or sound.</td>
+      <td>F14 Failure due to relying on color markers alone, F26 Failure due to instructions referencing spatial layout.</td>
+      <td>G96 Include clear textual descriptions alongside any sensory cues in instructions.</td>
+      <td>Blindness, Low Vision, Color Blindness, Deafness</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics</td>
+      <td>WCAG 2.2</td>
+      <td>Design, Instructions</td>
+      <td>sensory cues, color, shape, instructions</td>
+    </tr>
+    <tr>
+      <td>1.3.4</td>
+      <td>AA</td>
+      <td>1.3 Adaptable</td>
+      <td>1.3.4-Orientation</td>
+      <td>Content does not restrict its view and operation to a single display orientation, such as portrait or landscape, unless essential.</td>
+      <td>F97 Failure due to locking viewport layout parameters, F104 Failure due to hardcoding absolute layout dimensions.</td>
+      <td>G214 Avoid hardcoding orientation blocks in CSS; use fluid layouts and media queries.</td>
+      <td>Motor, Low Vision, Fixed Display Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/orientation</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Mobile</td>
+      <td>orientation, portrait, landscape, responsive</td>
+    </tr>
+    <tr>
+      <td>1.3.5</td>
+      <td>AA</td>
+      <td>1.3 Adaptable</td>
+      <td>1.3.5-Identify Input Purpose</td>
+      <td>The purpose of each input field collecting information about the user can be programmatically determined when utilizing common data types.</td>
+      <td>F107 Failure due to structural input identifiers lacking generic browser metadata mappings.</td>
+      <td>H98 Add valid native autocomplete attributes (e.g., autocomplete="given-name").</td>
+      <td>Cognitive, Motor, Dyslexia</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose</td>
+      <td>WCAG 2.2</td>
+      <td>Forms, Input</td>
+      <td>forms, autocomplete, input purpose</td>
+    </tr>
+    <tr>
+      <td>1.3.6</td>
+      <td>AAA</td>
+      <td>1.3 Adaptable</td>
+      <td>1.3.6-Identify Purpose</td>
+      <td>In content implemented using markup languages, the purpose of User Interface Components, icons, and regions can be programmatically determined.</td>
+      <td>F107 Failure due to using custom navigation icons or structural regions without microdata, scoping metadata, or appropriate button purposes.</td>
+      <td>ARIA11, ARIA16 Use standard landmarks (role="navigation", role="main") and attach clear programmatic destination definitions to custom interactive icon sets.</td>
+      <td>Cognitive, Screen Reader Users, Alternative Input Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Navigation</td>
+      <td>purpose identification, microdata, custom icons, landmark roles</td>
+    </tr>
+    <tr>
+      <td>1.4.1</td>
+      <td>A</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.1-Use of Color</td>
+      <td>Color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing an element.</td>
+      <td>F13 Failure due to link status updates executing exclusively via color shifts.</td>
+      <td>G14 Supplement color changes with text indicators, underlines for inline links, or distinct patterns.</td>
+      <td>Color Blindness, Low Vision, Blindness</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/use-of-color</td>
+      <td>WCAG 2.2</td>
+      <td>Design, Color</td>
+      <td>color, links, indicators, states</td>
+    </tr>
+    <tr>
+      <td>1.4.2</td>
+      <td>A</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.2-Audio Control</td>
+      <td>If any audio plays automatically for more than 3 seconds, a mechanism is available to pause, stop, or control volume independently from the system.</td>
+      <td>F23 Failure due to background media streams locking keyboard focus when running automatically.</td>
+      <td>G60, G170 Avoid autoplay entirely, or add an easily discoverable control component at the top of the page.</td>
+      <td>Screen Reader Users, Cognitive, Attention Deficit</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/audio-control</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia, Audio</td>
+      <td>autoplay, media controls, audio interference</td>
+    </tr>
+    <tr>
+      <td>1.4.3</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.3-Contrast (Minimum)</td>
+      <td>The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for large text (3:1), incidental text, or logotypes.</td>
+      <td>F24 Failure due to element text components falling below minimum ratio thresholds against backgrounds.</td>
+      <td>G18, G148 Select foreground/background colors that meet minimum contrast metrics (at least 4.5:1 for body text).</td>
+      <td>Low Vision, Color Blindness, Aging Eyes</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum</td>
+      <td>WCAG 2.2</td>
+      <td>Design, Contrast</td>
+      <td>color contrast, text size, readability, styles</td>
+    </tr>
+    <tr>
+      <td>1.4.4</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.4-Resize Text</td>
+      <td>Except for captions and images of text, text can be resized without assistive technology up to 200 percent without loss of content or functionality.</td>
+      <td>F80 Failure due to layout truncations clipping text blocks when browser scale is modified.</td>
+      <td>G142, C28 Use relative CSS font units (rem, em) instead of absolute pixels, and style layouts using fluid grids.</td>
+      <td>Low Vision, Presbyopia</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/resize-text</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Text</td>
+      <td>text zoom, relative units, responsiveness</td>
+    </tr>
+    <tr>
+      <td>1.4.5</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.5-Images of Text</td>
+      <td>If the technologies being used can achieve the visual presentation, text is used to convey information rather than images of text.</td>
+      <td>F30 Failure due to hardcoding typography straight into structural graphic assets.</td>
+      <td>G140, C30 Render structural typography using semantic HTML layouts and CSS styling instead of bitmap images.</td>
+      <td>Low Vision, Screen Reader Users, Learning Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/images-of-text</td>
+      <td>WCAG 2.2</td>
+      <td>Images, Text</td>
+      <td>images of text, custom fonts, typography</td>
+    </tr>
+    <tr>
+      <td>1.4.6</td>
+      <td>AAA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.6-Contrast (Enhanced)</td>
+      <td>The visual presentation of text and images of text has a contrast ratio of at least 7:1, except for large text (4.5:1), incidental text, or logotypes.</td>
+      <td>F24 Failure due to enhanced typographic layouts falling below a 7:1 color contrast metric threshold.</td>
+      <td>G17, G18 Select foreground and background color combinations that explicitly maintain a 7:1 contrast ratio.</td>
+      <td>Low Vision, Color Blindness, Aging Eyes</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced</td>
+      <td>WCAG 2.2</td>
+      <td>Design, Contrast</td>
+      <td>enhanced contrast, color choice, deep readability</td>
+    </tr>
+    <tr>
+      <td>1.4.7</td>
+      <td>AAA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.7-Low or No Background Audio</td>
+      <td>For prerecorded audio-only containing primarily speech, background sounds are absent or at least 20 decibels lower than the foreground speech.</td>
+      <td>F93 Failure due to background audio accompaniment drowning out spoken informational tracks.</td>
+      <td>G56 Master audio files so background music is omitted, or damp background noises down by at least 20 decibels.</td>
+      <td>Hard of Hearing, Cognitive, Attention Deficit</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia, Audio</td>
+      <td>audio levels, background noise, volume balance</td>
+    </tr>
+    <tr>
+      <td>1.4.8</td>
+      <td>AAA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.8-Visual Presentation</td>
+      <td>A mechanism is available to choose colors, width is under 80 characters, text is not justified, line spacing is at least 1.5, and text scales to 200%.</td>
+      <td>F88 Failure due to forced text justification settings or locking layout column boundaries past 80 characters.</td>
+      <td>G148, G156 Code liquid presentation styles that allow font changes and restrict paragraph spans to 80 characters.</td>
+      <td>Cognitive, Dyslexia, Low Vision, Reading Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Text</td>
+      <td>visual layout, layout wrapping, typography blocks</td>
+    </tr>
+    <tr>
+      <td>1.4.9</td>
+      <td>AAA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.9-Images of Text (No Exception)</td>
+      <td>Images of text are only used for pure decoration or where a particular presentation of text is essential.</td>
+      <td>F30 Failure due to utilizing embedded text imagery for non-essential visual brand components.</td>
+      <td>G140 Maximize native CSS web fonts and raw structural HTML text markup blocks to completely avoid images of text.</td>
+      <td>Low Vision, Screen Reader Users, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception</td>
+      <td>WCAG 2.2</td>
+      <td>Images, Text</td>
+      <td>text imagery, typography assets, branding</td>
+    </tr>
+    <tr>
+      <td>1.4.10</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.10-Reflow</td>
+      <td>Content can be presented without loss of information or functionality, and without requiring scrolling in two dimensions down to 320 CSS pixels wide.</td>
+      <td>F102 Failure due to layout templates forcing 2D scrolling behavior when assets render at 320px dimensions.</td>
+      <td>G206 Apply adaptive CSS grid/flexbox components, responsive breakpoints, and max-width fluid configurations.</td>
+      <td>Low Vision, Severe Hyperopia, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/reflow</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Responsive</td>
+      <td>reflow, responsive, zoom, horizontal scroll</td>
+    </tr>
+    <tr>
+      <td>1.4.11</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.11-Non-text Contrast</td>
+      <td>The visual presentation of user interface components and graphical objects has a contrast ratio of at least 3:1 against adjacent colors.</td>
+      <td>F108 Failure due to interface component outlines tracking below a 3:1 contrast ratio against surrounding fields.</td>
+      <td>G195, G207 Style input boundaries, interactive buttons, focus ring states, and infographics to retain at least a 3:1 ratio.</td>
+      <td>Low Vision, Color Blindness</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast</td>
+      <td>WCAG 2.2</td>
+      <td>Design, Contrast</td>
+      <td>non-text contrast, borders, states, graphical icons</td>
+    </tr>
+    <tr>
+      <td>1.4.12</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.12-Text Spacing</td>
+      <td>No loss of content or functionality occurs by setting specific paragraph, line, word, and letter spacing boundaries within markup languages.</td>
+      <td>F106 Failure due to layout elements overflowing or clipping structural text lines when styles override cell margins.</td>
+      <td>G148 Provide layout switches or G156 clean liquid styles that adapt fluidly to font override tools.</td>
+      <td>Low Vision, Dyslexia, Cognitive Overload</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/text-spacing</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Text</td>
+      <td>text spacing, line height, font styles, clipping text</td>
+    </tr>
+    <tr>
+      <td>1.4.13</td>
+      <td>AA</td>
+      <td>1.4 Distinguishable</td>
+      <td>1.4.13-Content on Hover or Focus</td>
+      <td>Where hover or focus triggers additional content to become visible, the content is dismissible, hoverable, and persistent.</td>
+      <td>F109 Failure due to dynamic overlay content closing automatically before user pointer trajectories traverse boundaries.</td>
+      <td>G211 Ensure popups/tooltips can be hidden with Escape, allow the pointer to travel over popup content, and keep it persistent.</td>
+      <td>Low Vision, Motor, Screen Magnifier Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus</td>
+      <td>WCAG 2.2</td>
+      <td>UI Components, Popups</td>
+      <td>tooltips, popups, hover states, focus management</td>
+    </tr>
+<tr>
+      <td>2.1.1</td>
+      <td>A</td>
+      <td>2.1 Keyboard Accessible</td>
+      <td>2.1.1-Keyboard</td>
+      <td>All functionality of the content is operable through a keyboard interface without requiring specific timings for individual keystrokes.</td>
+      <td>F42 Failure due to using scripting on an element without making it keyboard accessible, F54 Failure due to using incorrect markup.</td>
+      <td>G90 Bind native element hooks or map standardized event listeners to execute logic via standard keys like Enter and Spacebar.</td>
+      <td>Keyboard Only Users, Blindness, Motor</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/keyboard</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>keyboard accessibility, interactive controls, focus</td>
+    </tr>
+    <tr>
+      <td>2.1.2</td>
+      <td>A</td>
+      <td>2.1 Keyboard Accessible</td>
+      <td>2.1.2-No Keyboard Trap</td>
+      <td>If keyboard focus can be moved to a component using a keyboard interface, then focus can be moved away from that component using only a keyboard interface.</td>
+      <td>F10 Failure due to trapping keyboard focus within a plugin, applet, or embedded application context layer.</td>
+      <td>G21 Ensure modal script dialogs or complex rich app views close or return context properly without trapping focus.</td>
+      <td>Keyboard Only Users, Blindness, Motor</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>keyboard trap, modal dialogs, focus management</td>
+    </tr>
+    <tr>
+      <td>2.1.3</td>
+      <td>AAA</td>
+      <td>2.1 Keyboard Accessible</td>
+      <td>2.1.3-Keyboard (No Exception)</td>
+      <td>All functionality of the content is operable through a keyboard interface without requiring specific timings for individual keystrokes.</td>
+      <td>F42 Failure due to leaving interactive element functionalities dependent on specialized analog swipe speeds or path paths.</td>
+      <td>G90 Establish comprehensive, pure keyboard listener interactions for every single interactive feature across the DOM grid.</td>
+      <td>Keyboard Only Users, Blindness, Severe Motor Tremors</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>total keyboard control, no mouse tracking, interface hooks</td>
+    </tr>
+    <tr>
+      <td>2.1.4</td>
+      <td>A</td>
+      <td>2.1 Keyboard Accessible</td>
+      <td>2.1.4-Character Key Shortcuts</td>
+      <td>If a keyboard shortcut is implemented using only letter, punctuation, number, or symbol characters, then the shortcut can be turned off or remapped.</td>
+      <td>F95 Failure due to mapping universal character-key hotkeys that cannot be globally deactivated or customized.</td>
+      <td>G217 Provide an accessible framework that lets users clear or remap hotkeys, or confine hotkeys to active component focus bounds.</td>
+      <td>Speech Recognition Users, Screen Reader Users, Motor</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>keyboard shortcuts, hotkeys, speech input, character keys</td>
+    </tr>
+    <tr>
+      <td>2.2.1</td>
+      <td>A</td>
+      <td>2.2 Enough Time</td>
+      <td>2.2.1-Timing Adjustable</td>
+      <td>For each time limit set by the content, the user is allowed to turn off, adjust, or extend the limit before it occurs, with minimal exceptions.</td>
+      <td>F58 Failure due to content refresh loops running without an interactive mechanism to change time thresholds.</td>
+      <td>G198 Build functional warning dialog boxes that alert users before expiration, offering a simple mechanism to extend.</td>
+      <td>Cognitive, Low Vision, Motor, Reading Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Session</td>
+      <td>time limits, session timeout, overlays, warnings</td>
+    </tr>
+    <tr>
+      <td>2.2.2</td>
+      <td>A</td>
+      <td>2.2 Enough Time</td>
+      <td>2.2.2-Pause, Stop, Hide</td>
+      <td>For moving, blinking, scrolling, or auto-updating information that starts automatically and lasts more than five seconds, a stop mechanism is available.</td>
+      <td>F16 Failure due to including scrolling content that cannot be paused, F47 Failure due to using standard marquee elements.</td>
+      <td>G186, G187 Provide prominent physical controls (like a global pause/play button) to stop looping carousels or tickers.</td>
+      <td>Cognitive, Attention Deficit, Low Vision, Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Multimedia</td>
+      <td>carousels, animations, auto-update, scrolling text</td>
+    </tr>
+    <tr>
+      <td>2.2.3</td>
+      <td>AAA</td>
+      <td>2.2 Enough Time</td>
+      <td>2.2.3-No Timing</td>
+      <td>Timing is not an essential part of the activity or event presented by the content, except for non-interactive synchronized media.</td>
+      <td>F58 Failure due to hardcoding irreversible session timeout limits into an application configuration script.</td>
+      <td>G5 Build transactional data pathways completely free of structural clock expirations or session time limits.</td>
+      <td>Cognitive, Motor, Reading Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/no-timing</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Session</td>
+      <td>zero time limits, infinite sessions, form timing exceptions</td>
+    </tr>
+    <tr>
+      <td>2.2.4</td>
+      <td>AAA</td>
+      <td>2.2 Enough Time</td>
+      <td>2.2.4-Interruptions</td>
+      <td>Interruptions can be postponed or suppressed by the user, except interruptions involving an emergency.</td>
+      <td>F55 Failure due to launching automatic promotional alert modal containers that scramble active user context tracking.</td>
+      <td>G193 Add an administrative user preference configuration to mute non-emergency data updates, popups, and notification alerts.</td>
+      <td>Cognitive, Attention Deficit, Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/interruptions</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Popups</td>
+      <td>alert suppression, popups, modal flags, context preservation</td>
+    </tr>
+    <tr>
+      <td>2.2.5</td>
+      <td>AAA</td>
+      <td>2.2 Enough Time</td>
+      <td>2.2.5-Re-authenticating</td>
+      <td>When an authenticated session expires, the user can continue the activity without loss of data after re-authenticating.</td>
+      <td>F85 Failure due to purging unsubmitted user form data caches when an automated session expiration script triggers.</td>
+      <td>G105 Cache unsubmitted form inputs in localized data stores during a session timeout, restoring the exact state post re-login.</td>
+      <td>Motor, Cognitive, Dyslexia</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating</td>
+      <td>WCAG 2.2</td>
+      <td>Forms, Session</td>
+      <td>session restore, user login, cache retention, security data</td>
+    </tr>
+    <tr>
+      <td>2.2.6</td>
+      <td>AAA</td>
+      <td>2.2 Enough Time</td>
+      <td>2.2.6-Timeouts</td>
+      <td>Users are warned of duration of any user inactivity that could result in data loss, unless the data is preserved for more than 20 hours.</td>
+      <td>F58 Failure due to executing an unannounced session timeout state swap that wipes text inputs.</td>
+      <td>G212 State inactivity expiration terms early in the process flow, specifying the exact minute limits explicitly before usage begins.</td>
+      <td>Cognitive, Motor, Blindness</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/timeouts</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Session</td>
+      <td>inactivity markers, timing thresholds, transparency statements</td>
+    </tr>
+    <tr>
+      <td>2.3.1</td>
+      <td>A</td>
+      <td>2.3 Seizures and Physical Reactions</td>
+      <td>2.3.1-Three Flashes or Below Threshold</td>
+      <td>Web pages do not contain anything that flashes more than three times in any one-second period, or the flash is below thresholds.</td>
+      <td>F49 Failure due to using visual layouts or flickering media streams that violate flash frequency limits.</td>
+      <td>G19 Audit media streams to guarantee visual animation cycles do not flash greater than 3x in a one-second range.</td>
+      <td>Photosensitive Epilepsy, Seizure Disorders</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia, Design</td>
+      <td>flashing, seizures, animation, visual thresholds</td>
+    </tr>
+    <tr>
+      <td>2.3.2</td>
+      <td>AAA</td>
+      <td>2.3 Seizures and Physical Reactions</td>
+      <td>2.3.2-Three Flashes</td>
+      <td>Web pages do not contain anything that flashes more than three times in any one-second period.</td>
+      <td>F49 Failure due to running visual site animations that flash more than 3 times a second, completely disregarding size.</td>
+      <td>G19 Strip all high-frequency blinking loops or raw layout flicker components out of design models completely.</td>
+      <td>Photosensitive Epilepsy, Neurological Conditions</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/three-flashes</td>
+      <td>WCAG 2.2</td>
+      <td>Multimedia, Design</td>
+      <td>animation rules, flash elimination, absolute safety bounds</td>
+    </tr>
+    <tr>
+      <td>2.3.3</td>
+      <td>AAA</td>
+      <td>2.3 Seizures and Physical Reactions</td>
+      <td>2.3.3-Animation from Interactions</td>
+      <td>Motion animation triggered by interaction can be disabled, unless the animation is essential to the information or activity.</td>
+      <td>F103 Failure due to executing canvas parallax transitions or layout sliding movements without checking user variables.</td>
+      <td>G214 Wrap animation loops inside a media check targeting prefers-reduced-motion: reduce, instantly bypassing motion.</td>
+      <td>Vestibular Disorders, Motion Sickness, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Design</td>
+      <td>vestibular triggers, parallax motion, layout animation overrides</td>
+    </tr>
+    <tr>
+      <td>2.4.1</td>
+      <td>A</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.1-Bypass Blocks</td>
+      <td>A mechanism is available to bypass blocks of content that are repeated on multiple Web pages.</td>
+      <td>F2 Failure due to missing a structural framework or skip anchor to navigate past redundant header blocks.</td>
+      <td>G1 Implement an early keyboard-accessible "Skip to Main Content" link at the absolute top of the page DOM.</td>
+      <td>Keyboard Only Users, Screen Reader Users, Motor</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Navigation</td>
+      <td>skip links, landmarks, bypass blocks, structural architecture</td>
+    </tr>
+    <tr>
+      <td>2.4.2</td>
+      <td>A</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.2-Page Titled</td>
+      <td>Web pages have titles that describe topic or purpose.</td>
+      <td>F25 Failure due to using empty, generic, or duplicated head strings across distinct tracking routes.</td>
+      <td>G88, H25 Write clear, distinct, descriptive &lt;title&gt; tags for every distinct page template that specify the location.</td>
+      <td>Screen Reader Users, Cognitive, Blindness</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/page-titled</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Navigation</td>
+      <td>page titles, window tabs, document descriptors, templates</td>
+    </tr>
+    <tr>
+      <td>2.4.3</td>
+      <td>A</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.3-Focus Order</td>
+      <td>Focusable components receive focus in an order that preserves meaning and operability when navigated sequentially.</td>
+      <td>F44 Failure due to styling tab index coordinates manually out of natural source sequence layout boundaries.</td>
+      <td>G59, H4 Order interactive components logically inside the HTML source DOM to match the visual layout pattern.</td>
+      <td>Keyboard Only Users, Blindness, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-order</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>focus order, tab sequence, DOM layout, structural patterns</td>
+    </tr>
+    <tr>
+      <td>2.4.4</td>
+      <td>A</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.4-Link Purpose (In Context)</td>
+      <td>The purpose of each link can be determined from the link text alone or from the link text together with its programmatically context.</td>
+      <td>F63 Failure due to using non-specific link descriptions like click here or more without containing context hooks.</td>
+      <td>G53 Write explicit link text, or programmatically attach indicators using parent sentences or aria-describedby.</td>
+      <td>Screen Reader Users, Blindness, Cognitive, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Navigation</td>
+      <td>link text, anchor tags, accessibility names, contextual strings</td>
+    </tr>
+    <tr>
+      <td>2.4.5</td>
+      <td>AA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.5-Multiple Ways</td>
+      <td>More than one way is available to locate a Web page within a set of Web pages except where the page is a step in a process.</td>
+      <td>F67 Failure due to restricted, unlinked page routing models that provide only a single discovery corridor.</td>
+      <td>G125 Provide multiple navigational pathways, combining global dropmenus with search bars or XML/HTML Sitemaps.</td>
+      <td>Cognitive, Low Vision, Blindness, Motor</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Navigation</td>
+      <td>sitemaps, search index, global navigation, user orientation</td>
+    </tr>
+    <tr>
+      <td>2.4.6</td>
+      <td>AA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.6-Headings and Labels</td>
+      <td>Headings and labels describe topic or purpose.</td>
+      <td>F35 Failure due to drafting decorative heading texts or uninformative input placeholder names.</td>
+      <td>G130, G131 Compose precise, unique visual section headings and specific form input description text.</td>
+      <td>Cognitive, Blindness, Screen Reader Users, Low Vision</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Forms</td>
+      <td>headings, form labels, instructions, documentation clarity</td>
+    </tr>
+    <tr>
+      <td>2.4.7</td>
+      <td>AA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.7-Focus Visible</td>
+      <td>Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible.</td>
+      <td>F78 Failure due to disabling default focus outlines using explicit CSS properties like outline none without overrides.</td>
+      <td>G149, G165, C40 Author high-contrast CSS focus ring styles using pseudo-selectors like :focus-visible.</td>
+      <td>Keyboard Only Users, Low Vision, Motor</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-visible</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>focus visibility, outlines, focus indicators, keyboard tracking</td>
+    </tr>
+    <tr>
+      <td>2.4.8</td>
+      <td>AAA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.8-Location</td>
+      <td>Information about the user's location within a set of Web pages is available.</td>
+      <td>F65 Failure due to nesting subpages across dynamic application pathways without rendering orientation pointers.</td>
+      <td>G65, G128 Keep an active, interactive breadcrumb navigation trail visible near the main heading block.</td>
+      <td>Cognitive, Learning Disabilities, Blindness</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/location</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Navigation</td>
+      <td>breadcrumbs, user orientation, site location maps</td>
+    </tr>
+    <tr>
+      <td>2.4.9</td>
+      <td>AAA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.9-Link Purpose (Link Only)</td>
+      <td>A mechanism is available to allow the purpose of each link to be identified from link text alone, with minimal exceptions.</td>
+      <td>F63 Failure due to printing link titles like Read More that require checking neighboring sentence strings to comprehend.</td>
+      <td>G186 Phrase anchor text descriptions comprehensively so every individual link specifies its precise destination.</td>
+      <td>Blindness, Screen Reader Users, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Navigation</td>
+      <td>link descriptions, standalone anchors, independent clarity</td>
+    </tr>
+    <tr>
+      <td>2.4.10</td>
+      <td>AAA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.10-Section Headings</td>
+      <td>Section headings are used to organize the content.</td>
+      <td>F2 Failure due to building long-form documentation blocks without applying descriptive structural header breaks.</td>
+      <td>G141 Interleave structured visual heading breaks before logical content shifts to establish an organized tree.</td>
+      <td>Cognitive, Reading Disabilities, Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/section-headings</td>
+      <td>WCAG 2.2</td>
+      <td>Structure</td>
+      <td>structural headers, document divisions, readability chunks</td>
+    </tr>
+    <tr>
+      <td>2.4.11</td>
+      <td>AA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.11-Focus Appearance</td>
+      <td>The focus indicator has sufficient size and contrast relative to the unfocused state and adjacent components.</td>
+      <td>Failure due to using subtle, light-gray dotted indicators that fall below minimal visual contrast or boundary line area thresholds.</td>
+      <td>G149, G195 Build defined visual outline focus rings that retain a minimum 3:1 contrast ratio against background layers and meet minimal pixel perimeter calculations.</td>
+      <td>Low Vision Users, Keyboard-Only Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>focus indicators, visual tracking, visibility bounds</td>
+    </tr>
+    <tr>
+      <td>2.4.12</td>
+      <td>AAA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.12-Focus Not Obscured (Enhanced)</td>
+      <td>No item receives focus if it is entirely covered or blocked from visual sight by sticky panels, promotional modals, or background layout changes.</td>
+      <td>Failure due to tracking keyboard focus pathways into elements that sit completely behind persistent sticky content regions or layout frames.</td>
+      <td>G222 Implement layout declarations that reposition overlay components or adjust scrolling paths to keep focused items 100% uncovered.</td>
+      <td>Keyboard Only Users, Low Vision Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-enhanced</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>z-index tracking, viewport bounds, overlay control</td>
+    </tr>
+    <tr>
+      <td>2.4.13</td>
+      <td>AA</td>
+      <td>2.4 Navigable</td>
+      <td>2.4.13-Focus Not Obscured (Minimum)</td>
+      <td>User interface components are not entirely hidden by author-created content when they receive keyboard focus.</td>
+      <td>Failure due to allowing persistent fixed headers or chat widgets to completely block out targeted components as a user tabs forward.</td>
+      <td>G222 Adjust scroll-margin padding properties inside design style sheets so components snap cleanly into full view when targeted.</td>
+      <td>Keyboard Only Users, Low Vision Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Keyboard</td>
+      <td>focus visibility, sticky headers, view bounds</td>
+    </tr>
+    <tr>
+      <td>2.5.1</td>
+      <td>A</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.1-Pointer Gestures</td>
+      <td>All functionality operating via multipoint or path gestures can be operated with a single pointer without a path-based gesture, unless essential.</td>
+      <td>F98 Failure due to mapping dynamic functions exclusively to multi-touch pinch, swipe, or drag behaviors.</td>
+      <td>G215 Integrate single-pointer tap/click component alternatives alongside path gestures (e.g., standalone zoom buttons).</td>
+      <td>Motor, One-Handed Users, Alternative Pointer Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Touch/Pointer</td>
+      <td>touch gestures, swiping, single-pointer controls, fallbacks</td>
+    </tr>
+    <tr>
+      <td>2.5.2</td>
+      <td>A</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.2-Pointer Cancellation</td>
+      <td>For functionality operated via a single pointer, completions trigger on the up-event, can be aborted/undone, or are cancelable.</td>
+      <td>F101 Failure due to triggering immediate server mutations or irreversibly executing logic strictly on down-events.</td>
+      <td>G218 Execute operational logic on the standard pointer mouseup or click event phase to prevent accidental triggers.</td>
+      <td>Motor, Tremor Users, Learning Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Touch/Pointer</td>
+      <td>pointer cancellation, mouseup, click logic, execution tracking</td>
+    </tr>
+    <tr>
+      <td>2.5.3</td>
+      <td>A</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.3-Label in Name</td>
+      <td>For user interface components with labels that include text, the programmatic name contains the text presented visually.</td>
+      <td>F96 Failure due to assigning hidden ARIA string parameters that share zero typographic matches with face label text.</td>
+      <td>G208 Align text strings embedded inside aria-label attributes to strictly contain the exact visual typography.</td>
+      <td>Speech Recognition Users, Screen Reader Users, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/label-in-name</td>
+      <td>WCAG 2.2</td>
+      <td>Layout, Navigation</td>
+      <td>accessibility names, visible labels, aria labels, voice inputs</td>
+    </tr>
+    <tr>
+      <td>2.5.4</td>
+      <td>A</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.4-Motion Actuation</td>
+      <td>Functionality operated by device or user motion can also be operated by standard UI components, and motion activation can be disabled.</td>
+      <td>F100 Failure due to binding system logic parameters entirely to device shaking or physical camera tilts.</td>
+      <td>G213 Provide standard interactive layout elements (like buttons) and supply configuration menus to disable motion sensors.</td>
+      <td>Motor, Wheelchair Users, Severe Tremors</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Touch/Pointer</td>
+      <td>motion sensors, accelerometer, gestures, device orientation</td>
+    </tr>
+    <tr>
+      <td>2.5.5</td>
+      <td>AAA</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.5-Target Size</td>
+      <td>The size of the target for pointer inputs is at least 44 by 44 CSS pixels except when inline, handled by the UA, or essential.</td>
+      <td>F102 Failure due to crowding interactive icon items into layout boxes measuring under 44x44px footprint areas.</td>
+      <td>G215 Enlarge active bounding element footprints or apply padding rules to guarantee a minimum touch targeting area.</td>
+      <td>Motor, Low Dexterity, One-Handed Users, Mobile Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/target-size</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Touch/Pointer</td>
+      <td>touch target sizes, clickable regions, interactive icons, padding</td>
+    </tr>
+    <tr>
+      <td>2.5.6</td>
+      <td>AAA</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.6-Concurrent Input Mechanisms</td>
+      <td>Web content does not restrict use of input modalities available on a platform except where essential for security or user settings.</td>
+      <td>F99 Failure due to programmatically disabling mouse listeners or touch registers when a hardware keyboard syncs.</td>
+      <td>G216 Structure system gesture handlers to dynamically adapt to concurrent inputs, allowing hot-swapping.</td>
+      <td>Motor, Alternative Input Users, Dexterity Variations</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/concurrent-input-mechanisms</td>
+      <td>WCAG 2.2</td>
+      <td>Forms, ARIA</td>
+      <td>input modalities, hardware switching, touch restrictions</td>
+    </tr>
+    <tr>
+      <td>2.5.7</td>
+      <td>AA</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.7-Dragging Movements</td>
+      <td>All functionality that involves a dragging movement can be operated by a single pointer without dragging, unless dragging is essential.</td>
+      <td>Failure due to building layout panels or slider components that can only be advanced by dragging items, lacking static click configurations.</td>
+      <td>G219 Pair complex drag pathways with simple point-and-click command options (e.g., adding explicit move up/down directional action links).</td>
+      <td>Motor Impairments, Low Dexterity, Alternative Pointer Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Touch/Pointer</td>
+      <td>drag operations, single pointer, path gestures</td>
+    </tr>
+    <tr>
+      <td>2.5.8</td>
+      <td>AA</td>
+      <td>2.5 Input Modalities</td>
+      <td>2.5.8-Target Size (Minimum)</td>
+      <td>The size of the target for pointer inputs is at least 24 by 24 CSS pixels, or sufficient spacing is provided, with exceptions for inline links.</td>
+      <td>Failure due to packing small targets directly flush against each other with click areas spanning under 24px wide.</td>
+      <td>G220 Ensure elements maintain a physical 24x24px bounds footprint or add layout spacing margins to guarantee adequate target clearance areas.</td>
+      <td>Motor Impairments, Mobile Device Users, Low Dexterity</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Touch/Pointer</td>
+      <td>click targets, touch boundaries, element spacing margins</td>
+    </tr>
+<tr>
+      <td>3.1.1</td>
+      <td>Level A</td>
+      <td>Readable</td>
+      <td>3.1.1-Language of Page</td>
+      <td>The default human language of each Web page can be programmatically determined.</td>
+      <td>F59: Failure due to omitting the `lang` attribute entirely on the root `<html>` element, or typing an invalid ISO language code.</td>
+      <td>H57 Inject a valid ISO country/language shorthand tag directly inside the primary parent container (e.g., &lt;html lang="en"&gt; or &lt;html lang="es"&gt;).</td>
+      <td>Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Text</td>
+      <td>HTML Lang Attribute, Speech Engine Synthesis, Document Localization</td>
+    </tr>
+    <tr>
+      <td>3.1.2</td>
+      <td>Level AA</td>
+      <td>Readable</td>
+      <td>3.1.2-Language of Parts</td>
+      <td>The human language of each phrase or passage in the content can be programmatically determined except for proper names, technical terms, words of indeterminate language, and words or phrases that have become part of the vernacular of the immediate surrounding text.</td>
+      <td>F2: Failure due to embedding long foreign-language blocks or quotes directly inside a text section without applying a localized inline `lang="..."` container markup attribute.</td>
+      <td>H58 Frame localized foreign-language quotes or nested semantic paragraph components with localized attribute markers (e.g., &lt;span lang="fr"&gt;...&lt;/span&gt;).</td>
+      <td>Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Text</td>
+      <td>Inline Language, Multi-lingual Parsing, Accent Switching</td>
+    </tr>
+    <tr>
+      <td>3.1.3</td>
+      <td>Level AAA</td>
+      <td>Readable</td>
+      <td>3.1.3-Unusual Words</td>
+      <td>A mechanism is available for identifying specific definitions of words used in an unusual or restricted way, including idioms and jargon.</td>
+      <td>Failure: Mixing extremely dense context-specific jargon or regional slang across instructional guidelines without offering tooltips, glossary lists, or text references.</td>
+      <td>G101, H54 Provide inline definitions immediately upon initial use, embed a dedicated contextual glossary reference link, or deploy semantic &lt;dfn&gt; definition elements.</td>
+      <td>Cognitive Disabilities, Dyslexic Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/unusual-words.html</td>
+      <td>WCAG 2.2</td>
+      <td>Text, Content</td>
+      <td>Jargon Definitions, Glossaries, Idiom Explanations</td>
+    </tr>
+    <tr>
+      <td>3.1.4</td>
+      <td>Level AAA</td>
+      <td>Readable</td>
+      <td>3.1.4-Abbreviations</td>
+      <td>A mechanism is available for identifying the expanded form or definition of abbreviations.</td>
+      <td>Failure: Publishing unique acronyms or structural abbreviations without explaining their full textual meaning upon initial occurrence.</td>
+      <td>G102, H28 Provide the full text expansion directly before/after an abbreviation, use an interactive global abbreviation lexicon tool, or mark strings with &lt;abbr&gt; elements.</td>
+      <td>Cognitive Disabilities, Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html</td>
+      <td>WCAG 2.2</td>
+      <td>Text, Content</td>
+      <td>Acronym Expansions, Abbreviations, Abbr Tag Markup</td>
+    </tr>
+    <tr>
+      <td>3.1.5</td>
+      <td>Level AAA</td>
+      <td>Readable</td>
+      <td>3.1.5-Reading Level</td>
+      <td>When text requires reading ability more advanced than the lower secondary education level after removal of proper names and titles, a clear summary version is available.</td>
+      <td>Failure: Structuring core user setup manuals or portal instructional content with dense linguistic complexity requiring an advanced doctoral degree, without providing a simplified guide option.</td>
+      <td>G79, G153 Author text clearings using plain-language layout practices; compose an alternative, secondary simple summary tracking lower secondary education readability metrics.</td>
+      <td>Cognitive / Learning Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/reading-level.html</td>
+      <td>WCAG 2.2</td>
+      <td>Text, Content</td>
+      <td>Plain Language summaries, Readability Indexes, Clear Documentation</td>
+    </tr>
+    <tr>
+      <td>3.1.6</td>
+      <td>Level AAA</td>
+      <td>Readable</td>
+      <td>3.1.6-Pronunciation</td>
+      <td>A mechanism is available for identifying the specific pronunciation of words where meaning of the words, in context, is ambiguous without knowing the pronunciation.</td>
+      <td>Failure: Presenting heteronyms in layout sections where sentence structural phrasing fails to clarify intent.</td>
+      <td>G120, G163 Map explicit pronunciation helper attributes, link to phonetic spoken files, or mark up text words directly using specialized ruby characters.</td>
+      <td>Screen Reader Users, Cognitive Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/pronunciation.html</td>
+      <td>WCAG 2.2</td>
+      <td>Text, Content</td>
+      <td>Pronunciation Keys, Audio Guides, Ambiguous Phonetics</td>
+    </tr>
+    <tr>
+      <td>3.2.1</td>
+      <td>Level A</td>
+      <td>Predictable</td>
+      <td>3.2.1-On Focus</td>
+      <td>When any user interface component receives focus, it does not initiate a change of context.</td>
+      <td>F52: Failure due to launching automatic popups, shifting layout panels, or executing form updates the instant an element receives standard keyboard tab focus.</td>
+      <td>G107 Restrict element focus loops to styling/highlight selection logic; verify that context shifting triggers like window redirects happen strictly via explicit click activations.</td>
+      <td>Keyboard Users, Screen Reader Users, Cognitive Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/on-focus.html</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Behavior</td>
+      <td>Focus Context Changes, Tab Navigation Behavior, Form Traversal</td>
+    </tr>
+    <tr>
+      <td>3.2.2</td>
+      <td>Level A</td>
+      <td>Predictable</td>
+      <td>3.2.2-On Input</td>
+      <td>Changing the setting of any user interface component does not automatically initiate a change of context unless the user has been advised of the behavior before using the component.</td>
+      <td>F36: Failure due to auto-submitting a data transaction form, launching new browser view tabs, or refreshing layouts upon checking a checkbox or radio button element.</td>
+      <td>G80, G13 Provide an explicit "Submit" or "Apply" button next to checkbox/select fields; explicitly warn users beforehand via visual text if an input choice forces a layout redirect.</td>
+      <td>Screen Reader Users, Cognitive Disabilities, Keyboard Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/on-input.html</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Behavior</td>
+      <td>Input Event Triggers, Auto-submit Forms, Context Redirection</td>
+    </tr>
+    <tr>
+      <td>3.2.3</td>
+      <td>Level AA</td>
+      <td>Predictable</td>
+      <td>3.2.3-Consistent Navigation</td>
+      <td>Navigational mechanisms that are repeated on multiple Web pages within a set of Web pages occur in the same relative order each time they are repeated, unless a change is initiated by the user.</td>
+      <td>F66: Failure due to randomly rearranging the structural order of site menu links or moving global navigation panels across different subpages.</td>
+      <td>G61 Implement universal template header/sidebar master layouts that hold identical menu strings in a matching sequence across all domain views.</td>
+      <td>Cognitive Disabilities, Screen Reader Users, Low Vision Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation.html</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Navigation</td>
+      <td>Consistent Headers, Global Navigation order, Structural Templates</td>
+    </tr>
+    <tr>
+      <td>3.2.4</td>
+      <td>Level AA</td>
+      <td>Predictable</td>
+      <td>3.2.4-Consistent Identification</td>
+      <td>Components that have the same functionality within a set of Web pages are identified consistently.</td>
+      <td>F31: Failure due to utilizing different text labels or icon graphics for elements executing the exact same function (e.g., calling an icon "Search" on page A and "Find" on page B).</td>
+      <td>G197 Standardize naming conventions and alt text properties across the site; use identical iconography and text strings for elements running matching backend functions.</td>
+      <td>Cognitive Disabilities, Screen Reader Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification.html</td>
+      <td>WCAG 2.2</td>
+      <td>UI Components, Design</td>
+      <td>Consistent Suffixes, Icon Standardization, Component Naming</td>
+    </tr>
+    <tr>
+      <td>3.2.5</td>
+      <td>Level AAA</td>
+      <td>Predictable</td>
+      <td>3.2.5-Change on Request</td>
+      <td>Changes of context are initiated only by user request or a mechanism is available to turn off such changes.</td>
+      <td>Failure: Automatic timer-driven system redirects, unannounced location updates, or random platform popups executing without explicit user confirmation click.</td>
+      <td>G110 Strip automated refresh/redirect triggers out of meta heads; execute context shifts entirely behind user-initiated mouse clicks or explicit keyboard commands.</td>
+      <td>Screen Reader Users, Cognitive Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Behavior</td>
+      <td>User-Initiated Changes, Forced Redirection, Live Content Interruption</td>
+    </tr>          
+<tr>
+      <td>3.3.1</td>
+      <td>A</td>
+      <td>3.3 Input Assistance</td>
+      <td>3.3.1-Error Identification</td>
+      <td>If an input error is automatically detected, the item in error is identified and the error is described to the user in text.</td>
+      <td>F82 Failure due to using visual color signals or error rings exclusively to alert field input failures.</td>
+      <td>G83, G85, H89 Generate clear inline error summary strings, link them using aria-describedby, and use role="alert".</td>
+      <td>Blindness, Color Blindness, Screen Reader Users, Cognitive</td>
+      <td>https://www.w3.org/TR/WCAG21/#error-identification</td>
+      <td>WCAG 2.1</td>
+      <td>Interactivity, Behavior</td>
+      <td>error handling, validation messages, form tracking, alerts</td>
+    </tr>
+    <tr>
+      <td>3.3.2</td>
+      <td>A</td>
+      <td>3.3 Input Assistance</td>
+      <td>3.3.2-Labels or Instructions</td>
+      <td>Labels or instructions are provided when content requires user input.</td>
+      <td>F82 Failure due to mapping structural input forms without anchoring descriptive instructional strings.</td>
+      <td>G184, H44 Pair input fields with defined visual &lt;label&gt; tags and include specific syntax requirements (e.g., formats).</td>
+      <td>Cognitive, Motor, Blindness, Low Vision</td>
+      <td>https://www.w3.org/TR/WCAG21/#labels-or-instructions</td>
+      <td>WCAG 2.1</td>
+      <td>Interactivity, Behavior</td>
+      <td>form constraints, instructional strings, field guidelines</td>
+    </tr>
+    <tr>
+      <td>3.3.3</td>
+      <td>AA</td>
+      <td>3.3 Input Assistance</td>
+      <td>3.3.3-Error Suggestion</td>
+      <td>If an input error is detected and suggestions for correction are known, suggestions are provided unless security is jeopardized.</td>
+      <td>F82 Failure due to error layout templates notifying validation mistakes without rendering explicit fix parameters.</td>
+      <td>G177, G84 Parse entries and serve remediation hints directly within the notice text block (e.g., password criteria).</td>
+      <td>Cognitive, Learning Disabilities, Dyslexia, Blindness</td>
+      <td>https://www.w3.org/TR/WCAG21/#error-suggestion</td>
+      <td>WCAG 2.1</td>
+      <td>Structure, Navigation</td>
+      <td>input suggestions, hint parsing, formatting rules, user recovery</td>
+    </tr>
+    <tr>
+      <td>3.3.4</td>
+      <td>AA</td>
+      <td>3.3 Input Assistance</td>
+      <td>3.3.4-Error Prevention (Legal, Financial, Data)</td>
+      <td>For pages causing commitments, transactions, data modifications, or test responses, submissions are reversible, checked, or confirmed.</td>
+      <td>F82 Failure due to submitting critical transactional records immediately without allowing a revision step.</td>
+      <td>G164, G155 Provide a final verification screen with structured edit checks, allowing users to cancel or undo actions.</td>
+      <td>Cognitive, Motor, Tremor Users, Blindness</td>
+      <td>https://www.w3.org/TR/WCAG21/#error-prevention-legal-financial-data</td>
+      <td>WCAG 2.1</td>
+      <td>UI Components, Design</td>
+      <td>transactions, database deletion, summaries, data safety</td>
+    </tr>
+    <tr>
+      <td>3.3.5</td>
+      <td>AAA</td>
+      <td>3.3 Input Assistance</td>
+      <td>3.3.5-Help</td>
+      <td>Context-sensitive help is available.</td>
+      <td>F82 Failure due to rendering complex data forms without integrating any context-sensitive tips or assistance links.</td>
+      <td>G89, G194 Mount dedicated interactive help links or popups directly within form labels to provide instant guidance.</td>
+      <td>Cognitive, Learning Disabilities, Form Task Users</td>
+      <td>https://www.w3.org/TR/WCAG21/#help</td>
+      <td>WCAG 2.1</td>
+      <td>Interactivity, Behavior</td>
+      <td>context assistance, help buttons, documentation overlays</td>
+    </tr>
+    <tr>
+      <td>3.3.6</td>
+      <td>AAA</td>
+      <td>3.3 Input Assistance</td>
+      <td>3.3.6-Error Prevention (All)</td>
+      <td>For Web pages that require the user to submit information, submissions are reversible, checked, or confirmed.</td>
+      <td>F82 Failure due to executing raw database form storage pipelines without presenting a comprehensive data doublecheck phase.</td>
+      <td>G164, G155 Mandate a final pre-submission verification grid or provide an absolute confirmation state allowing reviews.</td>
+      <td>Cognitive, Motor, Blindness, All Users</td>
+      <td>https://www.w3.org/TR/WCAG21/#error-prevention-all</td>
+      <td>WCAG 2.1</td>
+      <td>Structure, Navigation</td>
+      <td>verification panels, database protection, validation screens</td>
+    </tr>
+    <tr>
+      <td>4.1.2</td>
+      <td>A</td>
+      <td>4.1 Compatible</td>
+      <td>4.1.2-Name, Role, Value</td>
+      <td>For all UI components, the name, role, states, properties, and values can be programmatically determined and tracked.</td>
+      <td>F59 Failure due to using generic semantic containers to compile complex forms without attaching ARIA logic trees.</td>
+      <td>H91, ARIA4, ARIA5 Use native interactive elements (&lt;button&gt;, &lt;a&gt;); apply correct ARIA attributes when building custom widgets.</td>
+      <td>Screen Reader Users, Blindness, Motor</td>
+      <td>https://www.w3.org/TR/WCAG21/#name-role-value</td>
+      <td>WCAG 2.1</td>
+      <td>Forms, Input</td>
+      <td>accessibility name, aria mapping, programmatic states, core roles</td>
+    </tr>
+    <tr>
+      <td>4.1.3</td>
+      <td>AA</td>
+      <td>4.1 Compatible</td>
+      <td>4.1.3-Status Messages</td>
+      <td>Status messages can be programmatically determined through roles or properties so they present without receiving focus.</td>
+      <td>F103 Failure due to executing layout updates or printing inline notifications without passing feedback to live regions.</td>
+      <td>ARIA19 Wrap dynamic interface feedback strings within container blocks styled with explicit live regions (role="status").</td>
+      <td>Screen Reader Users, Blindness, Cognitive</td>
+      <td>https://www.w3.org/TR/WCAG21/#status-messages</td>
+      <td>WCAG 2.1</td>
+      <td>Forms, Validation</td>
+      <td>live regions, status popups, toast notifications, feedback strings</td>
+    </tr>
+  </tbody>
+</table>      
 </div>
