@@ -1,4 +1,31 @@
-    <div class="table-container">
+<main style="font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #222; max-width: 680px; margin: 40px auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 1px solid #ccc;">
+    <h1 style="color: #005a9c; margin-top: 0; font-size: 1.8rem;">WCAG Lookup Tool</h1>
+    <p style="font-size: 1.05rem; color: #333;">An interactive semantic search overlay designed for digital accessibility specialists to reference compliance criteria, failures, and disability impacts directly on the page being audited.</p>
+    
+    <a href="wcag-bookmark-import.html" download="wcag-bookmark-import.html" style="display: inline-block; padding: 14px 28px; background-color: #005a9c; color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem; border-radius: 4px; margin: 15px 0; border: 2px solid #005a9c; text-align: center;">Download Bookmark Shortcut File</a>
+
+    <section aria-labelledby="instructions-heading" style="background: #fff; padding: 10px 0; margin-top: 25px; border-top: 2px solid #eee;">
+        <h2 id="instructions-heading" style="font-size: 1.3rem; color: #111; margin-top: 20px;">Installation Instructions</h2>
+        <ol style="padding-left: 24px;">
+            <li style="margin-bottom: 14px; font-size: 1.05rem;">Activate the <strong>"Download Bookmark Shortcut File"</strong> button above to save the installation file directly to your system's downloads folder.</li>
+            <li style="margin-bottom: 14px; font-size: 1.05rem;">Open Chrome's full-screen Bookmark Manager by pressing <code>Ctrl + Shift + O</code> (Windows) or <code>Cmd + Option + B</code> (Mac).</li>
+            <li style="margin-bottom: 14px; font-size: 1.05rem;">Navigate to the <strong>Organize Menu</strong> button (the three vertical dots located in the upper-right corner of the manager view) and activate it.</li>
+            <li style="margin-bottom: 14px; font-size: 1.05rem;">Select <strong>Import bookmarks</strong> from the dropdown list options.</li>
+            <li style="margin-bottom: 14px; font-size: 1.05rem;">Choose <code>wcag-bookmark-import.html</code> from your local downloads folder and select open.</li>
+        </ol>
+        
+        <h3 style="font-size: 1.15rem; margin-top: 20px; color: #111;">How to Run the Tool</h3>
+        <p style="font-size: 1.05rem; color: #333;">Navigate to any web domain you want to evaluate. Open your bookmarks folder structure, choose the newly imported <strong>WCAG Lookup Tool</strong> link, and press Enter. The visual search panel will slide directly onto the page window layout.</p>
+
+        <div style="background-color: #e6f2fa; border-left: 4px solid #005a9c; padding: 15px; margin-top: 20px; border-radius: 0 4px 4px 0;">
+            <p style="margin: 0; font-size: 1.05rem; color: #333;"><strong>⌨️ Keyboard Efficiency Tip:</strong> You can launch this completely hands-free. Press <code>Alt + F</code> then <code>B</code> to enter your bookmarks menu, then simply type <code>WCAG</code> to jump focus directly to the tool and activate it. Once launched, toggle panel visibility instantly at any point using <code>Alt + Shift + A</code>.</p>
+        </div>
+    </section>
+</main>
+
+<div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+    <h2 style="font-size: 1.4rem; color: #333; border-bottom: 2px solid #ccc; padding-bottom: 8px; margin-bottom: 20px;">Raw Database Source</h2>
+<div class="table-container">
         <table border="1" class="dataframe wcag-table">
   <thead>
     <tr style="text-align: right;">
