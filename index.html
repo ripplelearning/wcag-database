@@ -764,13 +764,41 @@
         <td>2.4.10-Section Headings</td>
         <td>Section headings are used to organize the content.</td>
         <td>F2 Failure due to building long-form documentation blocks without applying descriptive structural header breaks.</td>
-        <td>G141 Interleave structured visual heading breaks before logical content shifts to establish an organized tree.</td>
+        <td>G141 Interweave structured visual heading breaks before logical content shifts to establish an organized tree.</td>
         <td>Cognitive, Reading Disabilities, Screen Reader Users</td>
         <td>https://www.w3.org/TR/WCAG21/#section-headings</td>
         <td>WCAG 2.1</td>
         <td>Structure</td>
         <td>structural headers, document divisions, readability chunks</td>
       </tr>
+        <tr>
+      <td>2.4.11</td>
+      <td>Level AA</td>
+      <td>Navigable</td>
+      <td>2.4.12-Focus Appearance</td>
+      <td>An explicit user interface focus indicator has sufficient area and a contrast ratio of at least 3:1 against adjacent colors.</td>
+      <td>Failure due to using a thin 1px low-contrast dotted outline that disappears against dark or complex component backgrounds.</td>
+      <td>G195, G212 Apply a solid, thick focus ring outline (at least 2 CSS pixels thick) with a verified 3:1 contrast ratio against the surrounding elements.</td>
+      <td>Keyboard Users, Low Vision Users</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Design</td>
+      <td>focus ring, visual indicator, keyboard focus, contrast area</td>
+    </tr>
+        <tr>
+      <td>2.4.12</td>
+      <td>Level AAA</td>
+      <td>Navigable</td>
+      <td>2.4.12-Focus Appearance (Enhanced)</td>
+      <td>An explicit user interface focus indicator has an increased area and a sharper contrast ratio of at least 4.5:1 against adjacent colors, with no parts obscured.</td>
+      <td>Failure due to using focus rings that are partially hidden by overlapping layout containers or fail the higher 4.5:1 contrast barrier.</td>
+      <td>G195, G212 Ensure the focus indicator outline encloses the component entirely, uses an un-obscured solid border, and reaches a minimum 4.5:1 contrast threshold.</td>
+      <td>Keyboard Users, Low Vision Users, Cognitive</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance-enhanced</td>
+      <td>WCAG 2.2</td>
+      <td>Interactivity, Design</td>
+      <td>enhanced focus, focus ring, visual indicator, high contrast</td>
+    </tr>
       <tr>
         <td>2.5.1</td>
         <td>A</td>
@@ -1009,6 +1037,20 @@
         <td>Text, Content</td>
         <td>context loops, user requests, redirection configurations</td>
       </tr>
+        <tr>
+      <td>3.2.6</td>
+      <td>Level A</td>
+      <td>Predictable</td>
+      <td>3.2.6-Consistent Help</td>
+      <td>If a Web page contains any of specific self-help options, and those options are repeated on multiple Web pages within a set of Web pages, they occur in the same relative order each time they are repeated.</td>
+      <td>Failure due to moving contact numbers, chat buttons, or support links to different structural locations or changing their tab order across subpages.</td>
+      <td>G221 Anchor live chat links, help desks, and contact modules to an identical relative spot and layout structure across all pages.</td>
+      <td>Cognitive Disabilities, Low Vision Users, Learning Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/consistent-help</td>
+      <td>WCAG 2.2</td>
+      <td>Structure, Support</td>
+      <td>help portals, live chat frames, support contact, help location</td>
+    </tr>
       <tr>
         <td>3.3.1</td>
         <td>A</td>
@@ -1093,20 +1135,48 @@
         <td>Structure, Navigation</td>
         <td>verification panels, database protection, validation screens</td>
       </tr>
-      <tr>
-        <td>4.1.1</td>
-        <td>A</td>
-        <td>4.1 Compatible</td>
-        <td>4.1.1-Parsing</td>
-        <td>Elements have complete start/end tags, are nested according to specification, contain no duplicate attributes, and IDs are unique.</td>
-        <td>F70 Failure due to duplicate DOM identifier mappings, F77 Failure due to broken elements nesting out of alignments.</td>
-        <td>G134 Validate markup strings programmatically through syntax filters and linters to assure clean structural trees.</td>
-        <td>Screen Reader Users, Assistive Technology Parsers</td>
-        <td>https://www.w3.org/TR/WCAG21/#parsing</td>
-        <td>WCAG 2.1</td>
-        <td>Forms, Validation</td>
-        <td>markup parsing, dom compilation, structural trees, id duplication</td>
-      </tr>
+        <tr>
+      <td>3.3.7</td>
+      <td>Level Improvement / AA</td>
+      <td>Input Assistance</td>
+      <td>3.3.7-Redundant Entry</td>
+      <td>Information previously entered by the user in the same session that is required to be entered again is either auto-populated or available for the user to select.</td>
+      <td>Failure due to forcing a user to manually re-type a shipping street address on a checkout page after they already entered it as the billing address.</td>
+      <td>G223 Enable data persistence hooks, utilize auto-populate routines, or provide a simple checkbox to instantly mirror previous session input data fields.</td>
+      <td>Cognitive Impairments, Motor Dexterity Variations, Learning Disabilities</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry</td>
+      <td>WCAG 2.2</td>
+      <td>Forms, Data Cache</td>
+      <td>session states, duplicate inputs, auto-populate, form data</td>
+    </tr>
+        <tr>
+      <td>3.3.8</td>
+      <td>Level AA</td>
+      <td>Input Assistance</td>
+      <td>3.3.8-Accessible Authentication (Minimum)</td>
+      <td>A cognitive function test (such as remembering a password or solving a puzzle) is not required for any authentication step unless an alternative or copy-paste mechanism exists.</td>
+      <td>Failure due to disabling paste listeners on passcode fields or forcing users to parse garbled CAPTCHA text images to sign in.</td>
+      <td>G224 Ensure input blocks support native password manager injection, copy-paste event loops, or offer simple object recognition tests.</td>
+      <td>Cognitive, Dyscalculia, Memory Deficits, Dyslexia</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum</td>
+      <td>WCAG 2.2</td>
+      <td>Forms, Security</td>
+      <td>login gates, paste operations, token authentication, bypass paths</td>
+    </tr>
+        <tr>
+      <td>3.3.9</td>
+      <td>Level AAA</td>
+      <td>Input Assistance</td>
+      <td>3.3.9-Accessible Authentication (Enhanced)</td>
+      <td>A cognitive function test is not required for any authentication step unless an alternative method exists, or the test recognizes familiar objects or person identification.</td>
+      <td>Failure due to deploying mathematical logic problems, text transposition challenges, or mandatory spelling checks as mandatory login checkpoints.</td>
+      <td>G224 Deploy pure multi-factor token keys, hardware biometric login routes, or simple image-matching checks to completely bypass raw cognitive testing.</td>
+      <td>Cognitive, Memory and Focus Deficits, Dyslexia</td>
+      <td>https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced</td>
+      <td>WCAG 2.2</td>
+      <td>Forms, Security</td>
+      <td>biometric login paths, cognitive bypass, secure access control, token keys</td>
+    </tr>
       <tr>
         <td>4.1.2</td>
         <td>A</td>
