@@ -6,36 +6,32 @@
         .then(jsText => {
             (0, eval)(jsText);
             if(window.wcagData) {
-                createShadowUI(window.wcagData);
+                createIframeUI(window.wcagData);
             }
         });
 
-    function createShadowUI(data) {
-        // Create a host element
-        const host = document.createElement('div');
-        document.body.appendChild(host);
-        
-        // Create a Shadow DOM
-        const shadow = host.attachShadow({mode: 'open'});
-        
-        // Add styling that won't leak or be overridden
-        const style = document.createElement('style');
-        style.textContent = `
-            .wrapper { position:fixed; top:20px; right:20px; width:350px; background:white; z-index:2147483647; border:1px solid #000; padding:10px; font-family:sans-serif; }
-        `;
-        shadow.appendChild(style);
+    function createIframeUI(data) {
+        // Create an Iframe
+        const frame = document.createElement('iframe');
+        frame.style.cssText = 'position:fixed; top:20px; right:20px; width:400px; height:80vh; z-index:2147483647; border:2px solid #000; border-radius:8px;';
+        document.body.appendChild(frame);
 
-        // Build UI inside shadow
-        const container = document.createElement('div');
-        container.className = 'wrapper';
-        container.innerHTML = `<h3>WCAG Matrix</h3><input id="search" placeholder="Search..."><div id="res"></div>`;
-        shadow.appendChild(container);
+        // Write content inside the iframe
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        doc.open();
+        doc.write(`
+            <style>body { font-family:sans-serif; padding:10px; background:#fff; }</style>
+            <h3>WCAG Matrix</h3>
+            <input id="s" placeholder="Search..." style="width:90%;">
+            <div id="r"></div>
+        `);
+        doc.close();
 
-        // Add internal logic
-        container.querySelector('#search').oninput = (e) => {
-            const res = container.querySelector('#res');
-            res.innerHTML = data.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
-                .map(i => `<p>${i.name}</p>`).join('');
+        // Inject search logic into the Iframe's document
+        doc.querySelector('#s').oninput = (e) => {
+            const query = e.target.value.toLowerCase();
+            const results = data.filter(i => i.name.toLowerCase().includes(query));
+            doc.querySelector('#r').innerHTML = results.map(i => `<p>${i.name}</p>`).join('');
         };
     }
 })();
