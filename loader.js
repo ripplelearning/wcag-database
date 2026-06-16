@@ -1,29 +1,41 @@
 (function() {
-    // 1. Fetch your data from the raw GitHub source
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
 
     fetch(dataUrl)
-        .then(response => response.text())
+        .then(r => r.text())
         .then(jsText => {
-            // Execute the data string into the global scope
             (0, eval)(jsText);
-            
-            // Proceed to launch if data exists
             if(window.wcagData) {
-                launchWCAGTool(window.wcagData);
-            } else {
-                console.error("WCAG Error: Data failed to attach to window.");
+                createShadowUI(window.wcagData);
             }
-        })
-        .catch(err => console.error("WCAG Error: Network or CSP block:", err));
+        });
 
-    function launchWCAGTool(data) {
-        // --- YOUR UI LOGIC ---
-        // This is where you paste the exact code that creates the DIV and the search filter
-        // (From our previous conversation)
-        // Ensure this code uses only standard vanilla JS, no modules or imports.
+    function createShadowUI(data) {
+        // Create a host element
+        const host = document.createElement('div');
+        document.body.appendChild(host);
         
-        console.log("WCAG Tool: UI Launching...");
-        // ... [Paste your DIV/CSS/Search logic here] ...
+        // Create a Shadow DOM
+        const shadow = host.attachShadow({mode: 'open'});
+        
+        // Add styling that won't leak or be overridden
+        const style = document.createElement('style');
+        style.textContent = `
+            .wrapper { position:fixed; top:20px; right:20px; width:350px; background:white; z-index:2147483647; border:1px solid #000; padding:10px; font-family:sans-serif; }
+        `;
+        shadow.appendChild(style);
+
+        // Build UI inside shadow
+        const container = document.createElement('div');
+        container.className = 'wrapper';
+        container.innerHTML = `<h3>WCAG Matrix</h3><input id="search" placeholder="Search..."><div id="res"></div>`;
+        shadow.appendChild(container);
+
+        // Add internal logic
+        container.querySelector('#search').oninput = (e) => {
+            const res = container.querySelector('#res');
+            res.innerHTML = data.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
+                .map(i => `<p>${i.name}</p>`).join('');
+        };
     }
 })();
