@@ -26,10 +26,11 @@
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
             <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
-            <input id="s" type="search" placeholder="Search..." style="width:90%; padding:10px;">
+            <input id="s" type="search" placeholder="Search criteria..." style="width:90%; padding:10px;">
             <div id="container"></div>
         `;
 
+        // Scoped helper attached to the popup window
         popup.handleCopy = (btn, text) => {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.textContent;
@@ -71,11 +72,14 @@
                             <p><strong>Description:</strong> ${i.desc}</p>
                             <p><strong>Failures:</strong> ${i.failures}</p>
                             <p><strong>Fixes:</strong> ${i.fixes}</p>
-                            <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
-                            <button onclick="handleCopy(this, '${i.desc}')">Copy Desc</button>
-                            <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
-                            <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
-                            <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
+                            <p><a href="${i.Link}" target="_blank">Official W3C Documentation</a></p>
+                            <div style="margin-top:10px;">
+                                <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
+                                <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
+                                <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
+                                <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
+                                <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
+                            </div>
                         `;
                         container.appendChild(div);
                     });
@@ -84,6 +88,12 @@
         };
 
         render(data);
+        
+        // Search Filter
+        doc.getElementById('s').oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            render(data.filter(i => i.name.toLowerCase().includes(val) || i.desc.toLowerCase().includes(val)));
+        };
     }
     
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
