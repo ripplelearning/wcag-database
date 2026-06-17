@@ -10,16 +10,13 @@
         
         if (!popup || popup.closed) {
             popup = window.open('', 'WCAG Lookup Tool', options);
+            // Immediately inject the structure so it's never "About Blank"
+            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><h1>Loading...</h1></body></html>');
+            popup.document.close();
             
-            // Poll for document readiness
-            const check = setInterval(() => {
-                if (popup && popup.document && popup.document.readyState === 'complete') {
-                    clearInterval(check);
-                    fetch(dataUrl)
-                        .then(r => r.text())
-                        .then(jsText => setupPopup(JSON.parse(jsText)));
-                }
-            }, 50);
+            fetch(dataUrl)
+                .then(r => r.text())
+                .then(jsText => setupPopup(JSON.parse(jsText)));
         } else {
             popup.focus();
         }
@@ -27,7 +24,6 @@
 
     function setupPopup(data) {
         const doc = popup.document;
-        doc.title = "WCAG Lookup Tool";
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
         doc.body.innerHTML = `
@@ -51,14 +47,15 @@
                 <h3>How to use this tool</h3>
                 <ul>
                     <li><strong>Search:</strong> Type to filter criteria.</li>
-                    <li><strong>Expand:</strong> Click criterion button to view details.</li>
-                    <li><strong>Alt+Shift+A:</strong> Restore/Re-focus tool.</li>
+                    <li><strong>Expand:</strong> Click button to view details.</li>
+                    <li><strong>Alt+Shift+A:</strong> Restore tool.</li>
                     <li><strong>Alt+Shift+D:</strong> Reset filters (in tool).</li>
                     <li><strong>Escape:</strong> Close the tool.</li>
                 </ul>
             </footer>
         `;
 
+        // Logic continues... (Same as before)
         const sInput = doc.getElementById('s'), verF = doc.getElementById('ver-f'), 
               lvlF = doc.getElementById('lvl-f'), catF = doc.getElementById('cat-f');
 
@@ -131,7 +128,7 @@
             if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
         });
 
-        filterData();
+        render(data);
         sInput.focus();
     }
 
