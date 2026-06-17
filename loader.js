@@ -10,10 +10,16 @@
         
         if (!popup || popup.closed) {
             popup = window.open('', 'WCAG Lookup Tool', options);
-            fetch(dataUrl).then(r => r.text()).then(jsText => {
-                const wcagData = JSON.parse(jsText);
-                setupPopup(wcagData);
-            });
+            
+            // Poll for document readiness
+            const check = setInterval(() => {
+                if (popup && popup.document && popup.document.readyState === 'complete') {
+                    clearInterval(check);
+                    fetch(dataUrl)
+                        .then(r => r.text())
+                        .then(jsText => setupPopup(JSON.parse(jsText)));
+                }
+            }, 50);
         } else {
             popup.focus();
         }
@@ -21,40 +27,37 @@
 
     function setupPopup(data) {
         const doc = popup.document;
-        // Populate DOM only if it doesn't exist yet
-        if (!doc.getElementById('s')) {
-            doc.title = "WCAG Lookup Tool";
-            doc.body.style.fontFamily = "sans-serif";
-            doc.body.style.padding = "20px";
-            doc.body.innerHTML = `
-                <h1>WCAG Lookup Tool</h1>
-                <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
-                <label for="s">Search Criteria:</label>
-                <input id="s" type="search" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
-                <div style="margin:15px 0;">
-                    <label for="ver-f">Version:</label>
-                    <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
-                    <label for="lvl-f">Level:</label>
-                    <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
-                    <label for="cat-f">Category:</label>
-                    <select id="cat-f"><option value="">All</option><option value="Images">Images</option><option value="Multimedia">Multimedia</option><option value="UI Components">UI Components</option></select>
-                    <button id="reset-btn">Reset (Alt+Shift+D)</button>
-                </div>
-                <h2 id="count" aria-live="polite">Found ${data.length} results</h2>
-                <div id="container"></div>
-                <hr style="margin-top:40px;">
-                <footer>
-                    <h3>How to use this tool</h3>
-                    <ul>
-                        <li><strong>Search/Filter:</strong> Use fields above to narrow results.</li>
-                        <li><strong>Expand:</strong> Click button to see details.</li>
-                        <li><strong>Alt+Shift+A:</strong> Restore tool.</li>
-                        <li><strong>Alt+Shift+D:</strong> Reset filters (in tool).</li>
-                        <li><strong>Escape:</strong> Close tool.</li>
-                    </ul>
-                </footer>
-            `;
-        }
+        doc.title = "WCAG Lookup Tool";
+        doc.body.style.fontFamily = "sans-serif";
+        doc.body.style.padding = "20px";
+        doc.body.innerHTML = `
+            <h1>WCAG Lookup Tool</h1>
+            <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+            <label for="s">Search Criteria:</label>
+            <input id="s" type="search" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
+            <div style="margin:15px 0;">
+                <label for="ver-f">Version:</label>
+                <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
+                <label for="lvl-f">Level:</label>
+                <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
+                <label for="cat-f">Category:</label>
+                <select id="cat-f"><option value="">All</option><option value="Images">Images</option><option value="Multimedia">Multimedia</option><option value="UI Components">UI Components</option></select>
+                <button id="reset-btn">Reset (Alt+Shift+D)</button>
+            </div>
+            <h2 id="count" aria-live="polite">Found ${data.length} results</h2>
+            <div id="container"></div>
+            <hr style="margin-top:40px;">
+            <footer>
+                <h3>How to use this tool</h3>
+                <ul>
+                    <li><strong>Search:</strong> Type to filter criteria.</li>
+                    <li><strong>Expand:</strong> Click criterion button to view details.</li>
+                    <li><strong>Alt+Shift+A:</strong> Restore/Re-focus tool.</li>
+                    <li><strong>Alt+Shift+D:</strong> Reset filters (in tool).</li>
+                    <li><strong>Escape:</strong> Close the tool.</li>
+                </ul>
+            </footer>
+        `;
 
         const sInput = doc.getElementById('s'), verF = doc.getElementById('ver-f'), 
               lvlF = doc.getElementById('lvl-f'), catF = doc.getElementById('cat-f');
@@ -95,7 +98,7 @@
                             <li><strong>Description:</strong> ${i.desc}</li>
                             <li><strong>Failures:</strong> ${(i.failures||"").split('|').join(', ')}</li>
                             <li><strong>Fixes:</strong> ${(i.fixes||"").split('|').join(', ')}</li>
-                            <li><a href="${i.Link}" target="_blank" aria-label="Open ${i.name} official W3C documentation (opens in new tab)">Open ${i.name} official W3C documentation</a></li>
+                            <li><a href="${i.Link}" target="_blank" aria-label="Open ${i.name} (opens in new tab)">Official Documentation</a></li>
                         </ul>
                         <div style="margin-top:10px;">
                             <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
@@ -132,9 +135,6 @@
         sInput.focus();
     }
 
-    window.addEventListener('keydown', (e) => {
-        if (e.altKey && e.shiftKey && e.key === 'A') openTool();
-    });
-
+    window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
     openTool();
 })();
