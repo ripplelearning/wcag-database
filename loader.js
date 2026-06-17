@@ -1,7 +1,6 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
-    // Persistent state stored in the host page scope
     let appState = { q: '', v: '', l: '', c: '' };
 
     const openTool = () => {
@@ -12,8 +11,9 @@
         if (!popup || popup.closed) {
             popup = window.open('', 'WCAG Lookup Tool', options);
             fetch(dataUrl).then(r => r.text()).then(jsText => {
-                (0, eval)(jsText);
-                setupPopup(window.wcagData);
+                // Safely parse JSON data from your repository
+                const wcagData = JSON.parse(jsText);
+                setupPopup(wcagData);
             });
         } else {
             popup.focus();
@@ -27,6 +27,7 @@
         doc.body.style.padding = "20px";
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
+            <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
             <label for="s">Search Criteria:</label>
             <p id="s-desc" style="font-size:0.8em; color:#555;">Search by ID, name, description, failures, fixes, categories, or tags.</p>
             <input id="s" type="search" aria-describedby="s-desc" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
@@ -48,7 +49,7 @@
                     <li><strong>Search/Filter:</strong> Use the fields above to narrow down results.</li>
                     <li><strong>Expand:</strong> Click on any criterion button to show details.</li>
                     <li><strong>Alt+Shift+A:</strong> Re-open/restore the tool from the main page.</li>
-                    <li><strong>Alt+Shift+D:</strong> Reset filters (when inside tool).</li>
+                    <li><strong>Alt+Shift+D:</strong> Reset filters (when focus is inside the tool).</li>
                     <li><strong>Escape:</strong> Close the tool.</li>
                 </ul>
             </footer>
@@ -57,9 +58,17 @@
         const sInput = doc.getElementById('s'), verF = doc.getElementById('ver-f'), 
               lvlF = doc.getElementById('lvl-f'), catF = doc.getElementById('cat-f');
 
-        // Apply saved state
         sInput.value = appState.q; verF.value = appState.v; 
         lvlF.value = appState.l; catF.value = appState.c;
+
+        popup.handleCopy = (btn, text) => {
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = "Copied...";
+                doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
+                setTimeout(() => { btn.textContent = original; doc.getElementById('sr-announcer').textContent = ""; }, 2000);
+            });
+        };
 
         const render = (list) => {
             const container = doc.getElementById('container');
@@ -85,10 +94,17 @@
                         div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
                         div.innerHTML = `<ul>
                             <li><strong>Description:</strong> ${i.desc}</li>
-                            <li><strong>Failures:</strong> ${i.failures.split('|').join(', ')}</li>
-                            <li><strong>Fixes:</strong> ${i.fixes.split('|').join(', ')}</li>
+                            <li><strong>Failures:</strong> ${(i.failures||"").split('|').join(', ')}</li>
+                            <li><strong>Fixes:</strong> ${(i.fixes||"").split('|').join(', ')}</li>
                             <li><a href="${i.Link}" target="_blank" aria-label="Open ${i.name} official W3C documentation (opens in new tab)">Open ${i.name} official W3C documentation</a></li>
-                        </ul>`;
+                        </ul>
+                        <div style="margin-top:10px;">
+                            <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
+                            <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
+                            <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
+                            <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
+                            <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
+                        </div>`;
                         container.appendChild(div);
                     });
                 }
@@ -99,8 +115,8 @@
         const filterData = () => {
             appState = { q: sInput.value, v: verF.value, l: lvlF.value, c: catF.value };
             const filtered = data.filter(i => 
-                (i.name.toLowerCase().includes(appState.q.toLowerCase()) || i.desc.toLowerCase().includes(appState.q.toLowerCase()) || i.failures.toLowerCase().includes(appState.q.toLowerCase()) || i.fixes.toLowerCase().includes(appState.q.toLowerCase()) || i.disabilitie.toLowerCase().includes(appState.q.toLowerCase()) || i.categories.toLowerCase().includes(appState.q.toLowerCase()) || i.tags.toLowerCase().includes(appState.q.toLowerCase())) &&
-                (appState.v === "" || i.ver == appState.v) && (appState.l === "" || i.level === appState.l) && (appState.c === "" || i.categories.includes(appState.c))
+                (i.name.toLowerCase().includes(appState.q.toLowerCase()) || i.desc.toLowerCase().includes(appState.q.toLowerCase()) || (i.failures||"").toLowerCase().includes(appState.q.toLowerCase()) || (i.fixes||"").toLowerCase().includes(appState.q.toLowerCase()) || (i.disabilitie||"").toLowerCase().includes(appState.q.toLowerCase()) || (i.categories||"").toLowerCase().includes(appState.q.toLowerCase()) || (i.tags||"").toLowerCase().includes(appState.q.toLowerCase())) &&
+                (appState.v === "" || i.ver == appState.v) && (appState.l === "" || i.level === appState.l) && (appState.c === "" || (i.categories||"").includes(appState.c))
             );
             render(filtered);
         };
@@ -114,8 +130,6 @@
 
         sInput.oninput = verF.onchange = lvlF.onchange = catF.onchange = filterData;
         doc.getElementById('reset-btn').onclick = resetAll;
-
-        // LOCAL Listeners inside the popup
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
             if (e.altKey && e.shiftKey && e.key === 'D') resetAll();
@@ -125,10 +139,7 @@
         sInput.focus();
     }
 
-    // GLOBAL Listener on main page
     window.addEventListener('keydown', (e) => {
         if (e.altKey && e.shiftKey && e.key === 'A') openTool();
     });
-
-    openTool();
 })();
