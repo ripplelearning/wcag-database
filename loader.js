@@ -1,6 +1,8 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
+    // Persist filter state across sessions
+    let appState = { q: '', v: '', l: '', c: '' };
 
     const openTool = () => {
         const w = window.screen.availWidth * 0.5;
@@ -9,6 +11,10 @@
         
         if (!popup || popup.closed) {
             popup = window.open('', 'WCAG Lookup Tool', options);
+            // Requirement 26/28/29: Immediate structure to prevent about:blank
+            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
+            popup.document.close();
+            
             fetch(dataUrl).then(r => r.text()).then(jsText => {
                 (0, eval)(jsText);
                 setupPopup(window.wcagData);
@@ -20,17 +26,33 @@
 
     function setupPopup(data) {
         const doc = popup.document;
-        doc.title = "WCAG Lookup Tool";
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
             <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
-            <input id="s" type="search" placeholder="Search criteria..." style="width:90%; padding:10px;">
+            <label for="s">Search Criteria:</label><br>
+            <input id="s" type="search" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
+            <div style="margin:15px 0;">
+                <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
+                <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
+                <label>Category: <select id="cat-f"><option value="">All</option><option value="Images">Images</option><option value="Multimedia">Multimedia</option><option value="UI Components">UI Components</option></select></label>
+                <button id="reset-btn">Reset (Alt+Shift+D)</button>
+            </div>
+            <h2 id="count" aria-live="polite"></h2>
             <div id="container"></div>
+            <hr style="margin-top:40px;">
+            <footer>
+                <h3>How to use this tool</h3>
+                <ul>
+                    <li><strong>Alt+Shift+A:</strong> Restore tool</li>
+                    <li><strong>Alt+Shift+D:</strong> Reset filters</li>
+                    <li><strong>Escape:</strong> Close tool</li>
+                </ul>
+            </footer>
         `;
 
-        // Scoped helper attached to the popup window
+        // Requirement 24: HandleCopy on popup scope
         popup.handleCopy = (btn, text) => {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.textContent;
@@ -43,59 +65,78 @@
         const render = (list) => {
             const container = doc.getElementById('container');
             container.innerHTML = '';
-            ['2.2', '2.1'].forEach((version, vIdx) => {
-                const section = list.filter(i => i.ver == version);
-                if (section.length > 0) {
-                    const h3 = doc.createElement('h3');
-                    h3.textContent = `WCAG ${version} Success Criteria`;
-                    container.appendChild(h3);
-                    section.forEach((i, idx) => {
-                        const uniqueId = `div-${vIdx}-${idx}`;
-                        
-                        const btn = doc.createElement('button');
-                        btn.textContent = `${i.name} (Level ${i.level})`;
-                        btn.style.width = "100%"; 
-                        btn.style.textAlign = "left"; 
-                        btn.style.marginTop = "5px";
-                        btn.onclick = () => {
-                            const el = doc.getElementById(uniqueId);
-                            el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-                        };
-                        container.appendChild(btn);
-                        
-                        const div = doc.createElement('div');
-                        div.id = uniqueId;
-                        div.style.display = 'none'; 
-                        div.style.padding = "10px"; 
-                        div.style.border = "1px solid #ccc";
-                        div.innerHTML = `
-                            <p><strong>Description:</strong> ${i.desc}</p>
-                            <p><strong>Failures:</strong> ${i.failures}</p>
-                            <p><strong>Fixes:</strong> ${i.fixes}</p>
-                            <p><a href="${i.Link}" target="_blank">Official W3C Documentation</a></p>
-                            <div style="margin-top:10px;">
-                                <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
-                                <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
-                                <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
-                                <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
-                                <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
-                            </div>
-                        `;
-                        container.appendChild(div);
-                    });
-                }
+            doc.getElementById('count').textContent = `Found ${list.length} results`;
+
+            ['2.2', '2.1'].forEach((ver, vIdx) => {
+                const section = list.filter(i => i.ver == ver);
+                if (section.length === 0) return;
+
+                const h3 = doc.createElement('h3');
+                h3.textContent = `WCAG ${ver} Success Criteria`;
+                container.appendChild(h3);
+
+                section.forEach((i, idx) => {
+                    const id = `row-${vIdx}-${idx}`;
+                    const btn = doc.createElement('button');
+                    btn.textContent = `${i.name} (Level ${i.level})`;
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
+                    
+                    btn.onclick = () => {
+                        const el = doc.getElementById(id);
+                        const isExp = el.style.display === 'block';
+                        el.style.display = isExp ? 'none' : 'block';
+                        btn.setAttribute('aria-expanded', !isExp);
+                    };
+                    container.appendChild(btn);
+
+                    const div = doc.createElement('div');
+                    div.id = id; div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
+                    div.innerHTML = `
+                        <p><strong>Description:</strong> ${i.desc}</p>
+                        <p><strong>Failures:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
+                        <p><strong>Fixes:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
+                        <p><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</p>
+                        <p><a href="${i.Link}" target="_blank" aria-label="Open ${i.name} official W3C documentation (opens in new tab)">Open ${i.name} official W3C documentation</a></p>
+                        <div style="margin-top:10px;">
+                            <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
+                            <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
+                            <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
+                            <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
+                            <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
             });
         };
 
-        render(data);
-        
-        // Search Filter
-        doc.getElementById('s').oninput = (e) => {
-            const val = e.target.value.toLowerCase();
-            render(data.filter(i => i.name.toLowerCase().includes(val) || i.desc.toLowerCase().includes(val)));
+        const filter = () => {
+            appState = { q: doc.getElementById('s').value, v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
+            const q = appState.q.toLowerCase();
+            const filtered = data.filter(i => 
+                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
+                (appState.v === "" || i.ver == appState.v) && (appState.l === "" || i.level === appState.l) && (appState.c === "" || (i.categories||"").includes(appState.c))
+            );
+            render(filtered);
         };
+
+        // Initialize state
+        doc.getElementById('s').value = appState.q; doc.getElementById('ver-f').value = appState.v;
+        doc.getElementById('lvl-f').value = appState.l; doc.getElementById('cat-f').value = appState.c;
+
+        doc.getElementById('s').oninput = doc.getElementById('ver-f').onchange = doc.getElementById('lvl-f').onchange = doc.getElementById('cat-f').onchange = filter;
+        doc.getElementById('reset-btn').onclick = () => { appState = { q: '', v: '', l: '', c: '' }; doc.getElementById('s').value = doc.getElementById('ver-f').value = doc.getElementById('lvl-f').value = doc.getElementById('cat-f').value = ''; render(data); doc.getElementById('s').focus(); };
+        
+        doc.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') popup.close();
+            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
+        });
+
+        render(data);
+        doc.getElementById('s').focus();
     }
-    
+
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
     openTool();
 })();
