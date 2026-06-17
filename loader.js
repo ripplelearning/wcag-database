@@ -42,36 +42,40 @@
         const render = (list) => {
             const container = doc.getElementById('container');
             container.innerHTML = '';
-            // Group by version
-            ['2.2', '2.1'].forEach(version => {
+            ['2.2', '2.1'].forEach((version, vIdx) => {
                 const section = list.filter(i => i.ver == version);
                 if (section.length > 0) {
                     const h3 = doc.createElement('h3');
                     h3.textContent = `WCAG ${version} Success Criteria`;
                     container.appendChild(h3);
-                    section.forEach(i => {
+                    section.forEach((i, idx) => {
+                        const uniqueId = `div-${vIdx}-${idx}`;
+                        
                         const btn = doc.createElement('button');
                         btn.textContent = `${i.name} (Level ${i.level})`;
-                        btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
-                        btn.onclick = (e) => {
-                            const detailDiv = e.target.nextElementSibling;
-                            detailDiv.style.display = detailDiv.style.display === 'block' ? 'none' : 'block';
+                        btn.style.width = "100%"; 
+                        btn.style.textAlign = "left"; 
+                        btn.style.marginTop = "5px";
+                        btn.onclick = () => {
+                            const el = doc.getElementById(uniqueId);
+                            el.style.display = (el.style.display === 'none') ? 'block' : 'none';
                         };
                         container.appendChild(btn);
                         
                         const div = doc.createElement('div');
-                        div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
+                        div.id = uniqueId;
+                        div.style.display = 'none'; 
+                        div.style.padding = "10px"; 
+                        div.style.border = "1px solid #ccc";
                         div.innerHTML = `
                             <p><strong>Description:</strong> ${i.desc}</p>
                             <p><strong>Failures:</strong> ${i.failures}</p>
                             <p><strong>Fixes:</strong> ${i.fixes}</p>
-                            <div class="copy-bar">
-                                <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
-                                <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
-                                <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
-                                <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
-                                <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
-                            </div>
+                            <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
+                            <button onclick="handleCopy(this, '${i.desc}')">Copy Desc</button>
+                            <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
+                            <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
+                            <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
                         `;
                         container.appendChild(div);
                     });
