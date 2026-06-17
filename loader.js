@@ -1,7 +1,6 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
-    let appState = { q: '', v: '', l: '', c: '' };
 
     const openTool = () => {
         const w = window.screen.availWidth * 0.5;
@@ -31,41 +30,52 @@
             <div id="container"></div>
         `;
 
-        const render = (list) => {
-            const container = doc.getElementById('container');
-            container.innerHTML = '';
-            list.forEach(i => {
-                const btn = doc.createElement('button');
-                btn.textContent = `${i.name}`;
-                btn.onclick = () => {
-                    const c = btn.nextElementSibling;
-                    c.style.display = c.style.display === 'block' ? 'none' : 'block';
-                };
-                container.appendChild(btn);
-                
-                const div = doc.createElement('div');
-                div.style.display = 'none';
-                div.innerHTML = `
-                    <p>${i.desc}</p>
-                    <div class="copy-bar">
-                        <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
-                        <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
-                        </div>
-                `;
-                container.appendChild(div);
-            });
-        };
-
-        // Inject the handleCopy function into the popup window scope
         popup.handleCopy = (btn, text) => {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.textContent;
                 btn.textContent = "Copied...";
                 doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
-                setTimeout(() => {
-                    btn.textContent = original;
-                    doc.getElementById('sr-announcer').textContent = "";
-                }, 2000);
+                setTimeout(() => { btn.textContent = original; }, 2000);
+            });
+        };
+
+        const render = (list) => {
+            const container = doc.getElementById('container');
+            container.innerHTML = '';
+            // Group by version
+            ['2.2', '2.1'].forEach(version => {
+                const section = list.filter(i => i.ver == version);
+                if (section.length > 0) {
+                    const h3 = doc.createElement('h3');
+                    h3.textContent = `WCAG ${version} Success Criteria`;
+                    container.appendChild(h3);
+                    section.forEach(i => {
+                        const btn = doc.createElement('button');
+                        btn.textContent = `${i.name} (Level ${i.level})`;
+                        btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
+                        btn.onclick = (e) => {
+                            const detailDiv = e.target.nextElementSibling;
+                            detailDiv.style.display = detailDiv.style.display === 'block' ? 'none' : 'block';
+                        };
+                        container.appendChild(btn);
+                        
+                        const div = doc.createElement('div');
+                        div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
+                        div.innerHTML = `
+                            <p><strong>Description:</strong> ${i.desc}</p>
+                            <p><strong>Failures:</strong> ${i.failures}</p>
+                            <p><strong>Fixes:</strong> ${i.fixes}</p>
+                            <div class="copy-bar">
+                                <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
+                                <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
+                                <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
+                                <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
+                                <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
+                            </div>
+                        `;
+                        container.appendChild(div);
+                    });
+                }
             });
         };
 
