@@ -914,42 +914,6 @@
   {
     "ver": 2.2,
     "level": "A",
-    "name": "3.3.7 Redundant Entry",
-    "desc": "Information previously entered by the user is either auto-populated or available for selection.",
-    "failures": "Failure due to forcing users to re-type identical information (e.g., shipping address) that was already submitted in a previous form step.",
-    "fixes": "G219: Implement server-side session caching or client-side storage to re-populate known data fields automatically during multi-step processes.",
-    "disabilitie": "Cognitive Disabilities| Motor Disabilities",
-    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
-    "categories": "Forms",
-    "tags": "Input|Redundant Entry|Data Persistence|Form Caching"
-  },
-  {
-    "ver": 2.2,
-    "level": "A",
-    "name": "3.3.8 Accessible Authentication (Minimum)",
-    "desc": "A cognitive function test (e.g., remembering a password or solving a puzzle) is not required for any step in an authentication process.",
-    "failures": "Failure due to relying exclusively on memory-recall passwords or complex visual CAPTCHAs without providing alternatives.",
-    "fixes": "G221: Support standard password manager auto-fill protocols.| Provide alternative, non-cognitive authentication methods (e.g., email magic links, biometric auth).",
-    "disabilitie": "Cognitive Disabilities",
-    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
-    "categories": "Authentication| Forms|",
-    "tags": "Accessible Authentication| Password Managers| Cognitive Load"
-  },
-  {
-    "ver": 2.2,
-    "level": "AA",
-    "name": "3.3.9 Accessible Authentication (Enhanced)",
-    "desc": "A cognitive function test is not required, with no exceptions, for any step in an authentication process.",
-    "failures": "Failure due to maintaining a single-method authentication flow that requires memory recall or pattern matching as the only way to log in.",
-    "fixes": "Design an authentication system that entirely avoids cognitive challenges, such as full-screen password masking or non-standard puzzle-based security checks.",
-    "disabilitie": "Cognitive Disabilities",
-    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html",
-    "categories": "Authentication| Forms|",
-    "tags": "Full Authentication| Cognitive Safety| Authentication Alternatives"
-  },
-  {
-    "ver": 2.2,
-    "level": "A",
     "name": "3.3.1 Error Identification",
     "desc": "If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text.",
     "failures": "F82: Failure due to using visual color signals exclusively (such as turning an input border red) to convey an error condition without adding textual descriptions.",
@@ -1018,6 +982,42 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html",
     "categories": "Forms|Input",
     "tags": "Universal Checkpoints|Form Reversals|Data Verification"
+  },
+      {
+    "ver": 2.2,
+    "level": "A",
+    "name": "3.3.7 Redundant Entry",
+    "desc": "Information previously entered by the user is either auto-populated or available for selection.",
+    "failures": "Failure due to forcing users to re-type identical information (e.g., shipping address) that was already submitted in a previous form step.",
+    "fixes": "G219: Implement server-side session caching or client-side storage to re-populate known data fields automatically during multi-step processes.",
+    "disabilitie": "Cognitive Disabilities| Motor Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
+    "categories": "Forms",
+    "tags": "Input|Redundant Entry|Data Persistence|Form Caching"
+  },
+  {
+    "ver": 2.2,
+    "level": "A",
+    "name": "3.3.8 Accessible Authentication (Minimum)",
+    "desc": "A cognitive function test (e.g., remembering a password or solving a puzzle) is not required for any step in an authentication process.",
+    "failures": "Failure due to relying exclusively on memory-recall passwords or complex visual CAPTCHAs without providing alternatives.",
+    "fixes": "G221: Support standard password manager auto-fill protocols.| Provide alternative, non-cognitive authentication methods (e.g., email magic links, biometric auth).",
+    "disabilitie": "Cognitive Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
+    "categories": "Authentication| Forms|",
+    "tags": "Accessible Authentication| Password Managers| Cognitive Load"
+  },
+  {
+    "ver": 2.2,
+    "level": "AA",
+    "name": "3.3.9 Accessible Authentication (Enhanced)",
+    "desc": "A cognitive function test is not required, with no exceptions, for any step in an authentication process.",
+    "failures": "Failure due to maintaining a single-method authentication flow that requires memory recall or pattern matching as the only way to log in.",
+    "fixes": "Design an authentication system that entirely avoids cognitive challenges, such as full-screen password masking or non-standard puzzle-based security checks.",
+    "disabilitie": "Cognitive Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html",
+    "categories": "Authentication| Forms|",
+    "tags": "Full Authentication| Cognitive Safety| Authentication Alternatives"
   },
   {
     "ver": 2.2,
