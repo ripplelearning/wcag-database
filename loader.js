@@ -1,6 +1,7 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
+    // Persist filter state across sessions
     let appState = { q: '', v: '', l: '', c: '' };
 
     const openTool = () => {
@@ -10,16 +11,13 @@
         
         if (!popup || popup.closed) {
             popup = window.open('', 'WCAG Lookup Tool', options);
-            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><h1>Loading WCAG Data...</h1></body></html>');
+            // Requirement 26/28/29: Immediate structure to prevent about:blank
+            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
             popup.document.close();
             
             fetch(dataUrl).then(r => r.text()).then(jsText => {
-                try {
-                    (0, eval)(jsText);
-                    setupPopup(window.wcagData);
-                } catch (e) {
-                    popup.document.body.innerHTML = `<h1>Data Error</h1><p>Check console: ${e.message}</p>`;
-                }
+                (0, eval)(jsText);
+                setupPopup(window.wcagData);
             });
         } else {
             popup.focus();
@@ -30,14 +28,6 @@
         const doc = popup.document;
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
-
-        const catSet = new Set();
-        data.forEach(item => {
-            const combined = [...(item.categories || "").split('|'), ...(item.tags || "").split('|')];
-            combined.forEach(val => { if (val.trim()) catSet.add(val.trim()); });
-        });
-        const sortedOptions = Array.from(catSet).sort((a, b) => a.localeCompare(b));
-
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
             <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
@@ -46,15 +36,23 @@
             <div style="margin:15px 0;">
                 <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
                 <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
-                <label>Cat/Tag: <select id="cat-f"><option value="">All</option>${sortedOptions.map(o => `<option value="${o}">${o}</option>`).join('')}</select></label>
+                <label>Category: <select id="cat-f"><option value="">All</option><option value="Images">Images</option><option value="Multimedia">Multimedia</option><option value="UI Components">UI Components</option></select></label>
                 <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
             <h2 id="count" aria-live="polite"></h2>
             <div id="container"></div>
             <hr style="margin-top:40px;">
-            <footer><h3>How to use:</h3><ul><li><strong>Alt+Shift+A:</strong> Restore tool</li><li><strong>Alt+Shift+D:</strong> Reset filters</li><li><strong>Escape:</strong> Close tool</li></ul></footer>
+            <footer>
+                <h3>How to use this tool</h3>
+                <ul>
+                    <li><strong>Alt+Shift+A:</strong> Restore tool</li>
+                    <li><strong>Alt+Shift+D:</strong> Reset filters</li>
+                    <li><strong>Escape:</strong> Close tool</li>
+                </ul>
+            </footer>
         `;
 
+        // Requirement 24: HandleCopy on popup scope
         popup.handleCopy = (btn, text) => {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.textContent;
@@ -68,9 +66,9 @@
             const container = doc.getElementById('container');
             container.innerHTML = '';
             doc.getElementById('count').textContent = `Found ${list.length} results`;
-            
+
             ['2.2', '2.1'].forEach((ver, vIdx) => {
-                const section = list.filter(i => i.ver.toString() === ver);
+                const section = list.filter(i => i.ver == ver);
                 if (section.length === 0) return;
 
                 const h3 = doc.createElement('h3');
@@ -83,6 +81,7 @@
                     btn.textContent = `${i.name} (Level ${i.level})`;
                     btn.setAttribute('aria-expanded', 'false');
                     btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
+                    
                     btn.onclick = () => {
                         const el = doc.getElementById(id);
                         const isExp = el.style.display === 'block';
@@ -113,23 +112,27 @@
         };
 
         const filter = () => {
-            appState = { q: doc.getElementById('s').value.toLowerCase(), v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
-            const filtered = data.filter(i => {
-                const matchesSearch = (i.name.toLowerCase().includes(appState.q) || i.desc.toLowerCase().includes(appState.q) || (i.failures||"").toLowerCase().includes(appState.q) || (i.fixes||"").toLowerCase().includes(appState.q));
-                const matchesVersion = (appState.v === "" || i.ver.toString() === appState.v);
-                const matchesLevel = (appState.l === "" || i.level === appState.l);
-                const matchesCatTag = (appState.c === "" || (i.categories + "|" + i.tags).includes(appState.c));
-                return matchesSearch && matchesVersion && matchesLevel && matchesCatTag;
-            });
+            appState = { q: doc.getElementById('s').value, v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
+            const q = appState.q.toLowerCase();
+            const filtered = data.filter(i => 
+                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
+                (appState.v === "" || i.ver == appState.v) && (appState.l === "" || i.level === appState.l) && (appState.c === "" || (i.categories||"").includes(appState.c))
+            );
             render(filtered);
         };
 
+        // Initialize state
         doc.getElementById('s').value = appState.q; doc.getElementById('ver-f').value = appState.v;
         doc.getElementById('lvl-f').value = appState.l; doc.getElementById('cat-f').value = appState.c;
+
         doc.getElementById('s').oninput = doc.getElementById('ver-f').onchange = doc.getElementById('lvl-f').onchange = doc.getElementById('cat-f').onchange = filter;
         doc.getElementById('reset-btn').onclick = () => { appState = { q: '', v: '', l: '', c: '' }; doc.getElementById('s').value = doc.getElementById('ver-f').value = doc.getElementById('lvl-f').value = doc.getElementById('cat-f').value = ''; render(data); doc.getElementById('s').focus(); };
-        doc.addEventListener('keydown', (e) => { if (e.key === 'Escape') popup.close(); if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click(); });
         
+        doc.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') popup.close();
+            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
+        });
+
         render(data);
         doc.getElementById('s').focus();
     }
