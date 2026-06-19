@@ -73,29 +73,16 @@
             </details>
         `;
 
-        popup.handleCopy = (btn, text) => {
-            popup.focus();
-            const originalText = btn.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                btn.textContent = "Copied...";
-                btn.setAttribute('aria-label', 'Copied to clipboard');
-                btn.disabled = true;
-                doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
+        // Event Delegation for Copy Buttons
+        doc.addEventListener('click', (e) => {
+            if (e.target.classList.contains('copy-trigger')) {
+                const btn = e.target;
+                const text = btn.getAttribute('data-clipboard-text');
                 
-                setTimeout(() => { 
-                    btn.textContent = originalText; 
-                    btn.removeAttribute('aria-label');
-                    btn.disabled = false;
-                }, 2000);
-            }).catch(err => {
-                console.error("Clipboard API failed, trying fallback...", err);
-                const textArea = doc.createElement("textarea");
-                textArea.value = text;
-                doc.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    doc.execCommand('copy');
+                popup.focus();
+                const originalText = btn.textContent;
+                
+                navigator.clipboard.writeText(text).then(() => {
                     btn.textContent = "Copied...";
                     btn.disabled = true;
                     doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
@@ -103,12 +90,19 @@
                         btn.textContent = originalText; 
                         btn.disabled = false;
                     }, 2000);
-                } catch (fallbackErr) {
-                    console.error("Fallback copy failed", fallbackErr);
-                }
-                doc.body.removeChild(textArea);
-            });
-        };
+                }).catch(() => {
+                    // Fallback
+                    const textArea = doc.createElement("textarea");
+                    textArea.value = text;
+                    doc.body.appendChild(textArea);
+                    textArea.select();
+                    doc.execCommand('copy');
+                    doc.body.removeChild(textArea);
+                    btn.textContent = "Copied...";
+                    setTimeout(() => { btn.textContent = originalText; }, 2000);
+                });
+            }
+        });
 
         const render = (list) => {
             const container = doc.getElementById('container');
@@ -142,13 +136,7 @@
                     const div = doc.createElement('div');
                     div.id = id; div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
                     
-                    const nameEsc = i.name.replace(/'/g, "\\'");
-                    const descEsc = (i.desc || "").replace(/'/g, "\\'");
-                    const failEsc = (i.failures || "").replace(/'/g, "\\'");
-                    const fixEsc = (i.fixes || "").replace(/'/g, "\\'");
-                    const linkEsc = (i.Link || "").replace(/'/g, "\\'");
                     const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures:\n${(i.failures||"").split('|').join('\n')}\n\nFixes:\n${(i.fixes||"").split('|').join('\n')}\n\nLink: ${i.Link}`;
-                    const fullEntryEsc = fullEntry.replace(/'/g, "\\'").replace(/\n/g, "\\n");
 
                     div.innerHTML = `
                         <p><strong>Description:</strong> ${i.desc}</p>
@@ -157,12 +145,12 @@
                         <p><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</p>
                         <p><a href="${i.Link}" target="_blank">Open W3C Documentation</a></p>
                         <div style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
-                            <button onclick="handleCopy(this, '${fullEntryEsc}')" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
-                            <button onclick="handleCopy(this, '${nameEsc}')">Copy Name</button>
-                            <button onclick="handleCopy(this, '${descEsc}')">Copy Description</button>
-                            <button onclick="handleCopy(this, '${failEsc}')">Copy Failures</button>
-                            <button onclick="handleCopy(this, '${fixEsc}')">Copy Fixes</button>
-                            <button onclick="handleCopy(this, '${linkEsc}')">Copy Link</button>
+                            <button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
+                            <button class="copy-trigger" data-clipboard-text="${i.name.replace(/"/g, '&quot;')}">Copy Name</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/"/g, '&quot;')}">Copy Failures</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/"/g, '&quot;')}">Copy Fixes</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button>
                         </div>
                     `;
                     container.appendChild(div);
