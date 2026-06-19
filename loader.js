@@ -4,6 +4,25 @@
     // Persist filter state across sessions
     let appState = { q: '', v: '', l: '', c: '' };
 
+    // Discovery Mapping: Connects UI labels to your JSON tags
+    const categoryMap = {
+        "ARIA & Live Regions": "ARIA|Live",
+        "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts",
+        "Buttons & Navigation": "Navigation|Link|Skip|Bypass",
+        "Color & Contrast": "Color|Contrast",
+        "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal",
+        "Forms & Inputs": "Forms|Input|Autocomplete|Authentication",
+        "Images & Graphics": "Images|Graphic|Icons|Charts",
+        "Interactions": "Interactions|Pointer|Dragging|Input Modalities",
+        "Language & Text": "Text|Language|Jargon|Acronym|Pronunciation",
+        "Layout & Structure": "Layout|Structure|Semantics|Reading Order|Reflow|CSS",
+        "Mobile & Touch": "Mobile|Orientation|Tap Targets",
+        "Motion & Animation": "Animation|Reduced Motion|Seizure|Flash",
+        "Notifications & Errors": "Error|Notifications|Alert|Status",
+        "Time & Timeouts": "Timeouts|Refresh|Expiration",
+        "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog"
+    };
+
     const openTool = () => {
         const w = window.screen.availWidth * 0.5;
         const h = window.screen.availHeight * 0.5;
@@ -11,7 +30,6 @@
         
         if (!popup || popup.closed) {
             popup = window.open('', 'WCAG Lookup Tool', options);
-            // Requirement 26/28/29: Immediate structure to prevent about:blank
             popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
             popup.document.close();
             
@@ -36,7 +54,12 @@
             <div style="margin:15px 0;">
                 <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
                 <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
-                <label>Category: <select id="cat-f"><option value="">All</option><option value="Images">Images</option><option value="Multimedia">Multimedia</option><option value="UI Components">UI Components</option></select></label>
+                <label>Category: 
+                    <select id="cat-f">
+                        <option value="">All</option>
+                        ${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                    </select>
+                </label>
                 <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
             <h2 id="count" aria-live="polite"></h2>
@@ -52,7 +75,6 @@
             </footer>
         `;
 
-        // Requirement 24: HandleCopy on popup scope
         popup.handleCopy = (btn, text) => {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.textContent;
@@ -114,14 +136,17 @@
         const filter = () => {
             appState = { q: doc.getElementById('s').value, v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
             const q = appState.q.toLowerCase();
+            const mapEntry = categoryMap[appState.c] || "";
+            
             const filtered = data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
-                (appState.v === "" || i.ver == appState.v) && (appState.l === "" || i.level === appState.l) && (appState.c === "" || (i.categories||"").includes(appState.c))
+                (appState.v === "" || i.ver == appState.v) && 
+                (appState.l === "" || i.level === appState.l) && 
+                (appState.c === "" || mapEntry.split('|').some(k => (i.categories + "|" + i.tags).includes(k)))
             );
             render(filtered);
         };
 
-        // Initialize state
         doc.getElementById('s').value = appState.q; doc.getElementById('ver-f').value = appState.v;
         doc.getElementById('lvl-f').value = appState.l; doc.getElementById('cat-f').value = appState.c;
 
