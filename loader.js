@@ -74,8 +74,10 @@
         `;
 
         popup.handleCopy = (btn, text) => {
+            popup.focus();
+            const originalText = btn.textContent;
+            
             navigator.clipboard.writeText(text).then(() => {
-                const originalText = btn.textContent;
                 btn.textContent = "Copied...";
                 btn.setAttribute('aria-label', 'Copied to clipboard');
                 btn.disabled = true;
@@ -87,7 +89,24 @@
                     btn.disabled = false;
                 }, 2000);
             }).catch(err => {
-                console.error("Copy failed", err);
+                console.error("Clipboard API failed, trying fallback...", err);
+                const textArea = doc.createElement("textarea");
+                textArea.value = text;
+                doc.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    doc.execCommand('copy');
+                    btn.textContent = "Copied...";
+                    btn.disabled = true;
+                    doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
+                    setTimeout(() => { 
+                        btn.textContent = originalText; 
+                        btn.disabled = false;
+                    }, 2000);
+                } catch (fallbackErr) {
+                    console.error("Fallback copy failed", fallbackErr);
+                }
+                doc.body.removeChild(textArea);
             });
         };
 
