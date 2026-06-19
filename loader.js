@@ -42,18 +42,6 @@
 
     function setupPopup(data) {
         const doc = popup.document;
-        
-        // FIX: Attach copy function to the popup window globally to ensure onclick can see it
-        popup.handleCopy = (btn, text) => {
-            navigator.clipboard.writeText(text).then(() => {
-                const original = btn.textContent;
-                btn.textContent = "Copied!";
-                const announcer = doc.getElementById('sr-announcer');
-                if (announcer) announcer.textContent = "Copied to clipboard";
-                setTimeout(() => { btn.textContent = original; }, 2000);
-            });
-        };
-
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
         doc.body.innerHTML = `
@@ -85,6 +73,24 @@
             </details>
         `;
 
+        popup.handleCopy = (btn, text) => {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = "Copied...";
+                btn.setAttribute('aria-label', 'Copied to clipboard');
+                btn.disabled = true;
+                doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
+                
+                setTimeout(() => { 
+                    btn.textContent = originalText; 
+                    btn.removeAttribute('aria-label');
+                    btn.disabled = false;
+                }, 2000);
+            }).catch(err => {
+                console.error("Copy failed", err);
+            });
+        };
+
         const render = (list) => {
             const container = doc.getElementById('container');
             container.innerHTML = '';
@@ -105,6 +111,7 @@
                     btn.setAttribute('aria-expanded', 'false');
                     btn.setAttribute('aria-controls', id);
                     btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
+                    
                     btn.onclick = () => {
                         const el = doc.getElementById(id);
                         const isExp = el.style.display === 'block';
@@ -130,7 +137,7 @@
                         <p><strong>Fixes:</strong></p><ul>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
                         <p><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</p>
                         <p><a href="${i.Link}" target="_blank">Open W3C Documentation</a></p>
-                        <div style="margin-top:10px;">
+                        <div style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
                             <button onclick="handleCopy(this, '${fullEntryEsc}')" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
                             <button onclick="handleCopy(this, '${nameEsc}')">Copy Name</button>
                             <button onclick="handleCopy(this, '${descEsc}')">Copy Description</button>
@@ -148,6 +155,7 @@
             appState = { q: doc.getElementById('s').value, v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
             const q = appState.q.toLowerCase();
             const mapEntry = categoryMap[appState.c] || "";
+            
             const filtered = data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
                 (appState.v === "" || i.ver == appState.v) && 
@@ -162,7 +170,12 @@
 
         doc.getElementById('s').oninput = doc.getElementById('ver-f').onchange = doc.getElementById('lvl-f').onchange = doc.getElementById('cat-f').onchange = filter;
         doc.getElementById('reset-btn').onclick = () => { appState = { q: '', v: '', l: '', c: '' }; doc.getElementById('s').value = doc.getElementById('ver-f').value = doc.getElementById('lvl-f').value = doc.getElementById('cat-f').value = ''; render(data); doc.getElementById('s').focus(); };
-        doc.addEventListener('keydown', (e) => { if (e.key === 'Escape') popup.close(); if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click(); });
+        
+        doc.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') popup.close();
+            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
+        });
+
         render(data);
         doc.getElementById('s').focus();
     }
