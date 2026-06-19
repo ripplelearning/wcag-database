@@ -1,10 +1,8 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
-    // Persist filter state across sessions
     let appState = { q: '', v: '', l: '', c: '' };
 
-    // Discovery Mapping: Connects UI labels to your JSON tags
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live",
         "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts",
@@ -50,7 +48,7 @@
             <h1>WCAG Lookup Tool</h1>
             <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
             <label for="s">Search Criteria:</label><br>
-            <input id="s" type="search" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
+            <input id="s" type="search" autocomplete="off" aria-controls="count" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
             <div style="margin:15px 0;">
                 <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
                 <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
@@ -65,20 +63,20 @@
             <h2 id="count" aria-live="polite"></h2>
             <div id="container"></div>
             <hr style="margin-top:40px;">
-            <footer>
-                <h3>How to use this tool</h3>
+            <details>
+                <summary><h3>How to use this tool</h3></summary>
                 <ul>
                     <li><strong>Alt+Shift+A:</strong> Restore tool</li>
                     <li><strong>Alt+Shift+D:</strong> Reset filters</li>
                     <li><strong>Escape:</strong> Close tool</li>
                 </ul>
-            </footer>
+            </details>
         `;
 
         popup.handleCopy = (btn, text) => {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.textContent;
-                btn.textContent = "Copied...";
+                btn.textContent = "Copied!";
                 doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
                 setTimeout(() => { btn.textContent = original; }, 2000);
             });
@@ -102,6 +100,7 @@
                     const btn = doc.createElement('button');
                     btn.textContent = `${i.name} (Level ${i.level})`;
                     btn.setAttribute('aria-expanded', 'false');
+                    btn.setAttribute('aria-controls', id);
                     btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
                     
                     btn.onclick = () => {
@@ -114,18 +113,28 @@
 
                     const div = doc.createElement('div');
                     div.id = id; div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
+                    
+                    const nameEsc = i.name.replace(/'/g, "\\'");
+                    const descEsc = (i.desc || "").replace(/'/g, "\\'");
+                    const failEsc = (i.failures || "").replace(/'/g, "\\'");
+                    const fixEsc = (i.fixes || "").replace(/'/g, "\\'");
+                    const linkEsc = (i.Link || "").replace(/'/g, "\\'");
+                    const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures:\n${(i.failures||"").split('|').join('\n')}\n\nFixes:\n${(i.fixes||"").split('|').join('\n')}\n\nLink: ${i.Link}`;
+                    const fullEntryEsc = fullEntry.replace(/'/g, "\\'").replace(/\n/g, "\\n");
+
                     div.innerHTML = `
                         <p><strong>Description:</strong> ${i.desc}</p>
-                        <p><strong>Failures:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
-                        <p><strong>Fixes:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
+                        <p><strong>Failures:</strong></p><ul>${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
+                        <p><strong>Fixes:</strong></p><ul>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
                         <p><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</p>
-                        <p><a href="${i.Link}" target="_blank" aria-label="Open ${i.name} official W3C documentation (opens in new tab)">Open ${i.name} official W3C documentation</a></p>
+                        <p><a href="${i.Link}" target="_blank">Open W3C Documentation</a></p>
                         <div style="margin-top:10px;">
-                            <button onclick="handleCopy(this, '${i.name}')">Copy Name</button>
-                            <button onclick="handleCopy(this, '${i.desc}')">Copy Description</button>
-                            <button onclick="handleCopy(this, '${i.failures}')">Copy Failures</button>
-                            <button onclick="handleCopy(this, '${i.fixes}')">Copy Fixes</button>
-                            <button onclick="handleCopy(this, '${i.Link}')">Copy Link</button>
+                            <button onclick="handleCopy(this, '${fullEntryEsc}')" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
+                            <button onclick="handleCopy(this, '${nameEsc}')">Copy Name</button>
+                            <button onclick="handleCopy(this, '${descEsc}')">Copy Description</button>
+                            <button onclick="handleCopy(this, '${failEsc}')">Copy Failures</button>
+                            <button onclick="handleCopy(this, '${fixEsc}')">Copy Fixes</button>
+                            <button onclick="handleCopy(this, '${linkEsc}')">Copy Link</button>
                         </div>
                     `;
                     container.appendChild(div);
