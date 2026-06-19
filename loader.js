@@ -73,36 +73,53 @@
             </details>
         `;
 
-        // Event Delegation for Copy Buttons
+        // FIXED: Event delegation to handle all clicks reliably
         doc.addEventListener('click', (e) => {
-            if (e.target.classList.contains('copy-trigger')) {
-                const btn = e.target;
-                const text = btn.getAttribute('data-clipboard-text');
-                
-                popup.focus();
-                const originalText = btn.textContent;
-                
-                navigator.clipboard.writeText(text).then(() => {
-                    btn.textContent = "Copied...";
-                    btn.disabled = true;
-                    doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
-                    setTimeout(() => { 
-                        btn.textContent = originalText; 
-                        btn.disabled = false;
-                    }, 2000);
-                }).catch(() => {
-                    // Fallback
-                    const textArea = doc.createElement("textarea");
-                    textArea.value = text;
-                    doc.body.appendChild(textArea);
-                    textArea.select();
-                    doc.execCommand('copy');
-                    doc.body.removeChild(textArea);
-                    btn.textContent = "Copied...";
-                    setTimeout(() => { btn.textContent = originalText; }, 2000);
-                });
+            const btn = e.target.closest('.copy-trigger');
+            if (!btn) return;
+
+            const text = btn.getAttribute('data-clipboard-text');
+            const originalText = btn.textContent;
+            
+            // Force focus
+            popup.focus();
+
+            const finishCopy = (success) => {
+                btn.textContent = success ? "Copied..." : "Error!";
+                btn.disabled = true;
+                doc.getElementById('sr-announcer').textContent = success ? "Copied to clipboard" : "Copy failed";
+                setTimeout(() => { 
+                    btn.textContent = originalText; 
+                    btn.disabled = false;
+                }, 2000);
+            };
+
+            // Attempt modern Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(() => finishCopy(true))
+                    .catch(() => fallbackCopy(text, finishCopy));
+            } else {
+                fallbackCopy(text, finishCopy);
             }
         });
+
+        function fallbackCopy(text, callback) {
+            const textArea = doc.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            doc.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const success = doc.execCommand('copy');
+                callback(success);
+            } catch (err) {
+                callback(false);
+            }
+            doc.body.removeChild(textArea);
+        }
 
         const render = (list) => {
             const container = doc.getElementById('container');
@@ -146,7 +163,7 @@
                         <p><a href="${i.Link}" target="_blank">Open W3C Documentation</a></p>
                         <div style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
                             <button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
-                            <button class="copy-trigger" data-clipboard-text="${i.name.replace(/"/g, '&quot;')}">Copy Name</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/"/g, '&quot;')}">Copy Failures</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/"/g, '&quot;')}">Copy Fixes</button>
