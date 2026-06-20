@@ -137,11 +137,14 @@
 
                 section.forEach((i, idx) => {
                     const id = `row-${vIdx}-${idx}`;
+                    
+                    // Wrapped button in a paragraph for semantic separation
+                    const p = doc.createElement('p');
                     const btn = doc.createElement('button');
                     btn.textContent = `${i.name} (Level ${i.level})`;
                     btn.setAttribute('aria-expanded', 'false');
                     btn.setAttribute('aria-controls', id);
-                    btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "5px";
+                    btn.style.width = "100%"; btn.style.textAlign = "left";
                     
                     btn.onclick = () => {
                         const el = doc.getElementById(id);
@@ -149,18 +152,18 @@
                         el.style.display = isExp ? 'none' : 'block';
                         btn.setAttribute('aria-expanded', !isExp);
                     };
-                    container.appendChild(btn);
+                    p.appendChild(btn);
+                    container.appendChild(p);
 
                     const div = doc.createElement('div');
                     div.id = id; div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
                     
-                    // Added \r before description as requested
                     const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
 
                     div.innerHTML = `
-                        <p><strong>Description:</strong> ${i.desc}</p>
-                        <p><strong>Failures:</strong></p><ul>${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
-                        <p><strong>Fixes:</strong></p><ul>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
+                        <p style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;"><strong>Description:</strong> ${i.desc}</p>
+                        <p><strong>Failures:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
+                        <p><strong>Fixes:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
                         <p><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</p>
                         <p><a href="${i.Link}" target="_blank">Open W3C Documentation</a></p>
                         <div style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
