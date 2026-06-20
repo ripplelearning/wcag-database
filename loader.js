@@ -147,8 +147,6 @@
                     };
                     
                     const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
-                    
-                    // Convert disabilities list | to comma space
                     const disabilitiesList = (i.disabilitie || 'N/A').replace(/\|/g, ', ');
 
                     details.innerHTML = `
@@ -157,14 +155,13 @@
                         <li style="margin-top: 10px;"><strong>Fixes:</strong></li>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}
                         <li style="margin-top: 10px;"><strong>Disabilities:</strong> ${disabilitiesList}</li>
                         <li style="margin-top: 10px;"><a href="${i.Link}" target="_blank">Open W3C Documentation</a></li>
-                        <li style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
-                            <button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button>
-                        </li>
+                        <li style="margin-top: 10px;"><strong>Copy Actions:</strong></li>
+                        <li style="margin-top: 5px;"><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold;">Copy Full Entry</button></li>
+                        <li style="margin-top: 5px;"><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
+                        <li style="margin-top: 5px;"><button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button></li>
+                        <li style="margin-top: 5px;"><button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button></li>
+                        <li style="margin-top: 5px;"><button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button></li>
+                        <li style="margin-top: 5px;"><button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button></li>
                     `;
                     li.appendChild(btn);
                     li.appendChild(details);
