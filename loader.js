@@ -1,25 +1,6 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
-    let appState = { q: '', v: '', l: '', c: '' };
-
-    const categoryMap = {
-        "ARIA & Live Regions": "ARIA|Live",
-        "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts",
-        "Buttons & Navigation": "Navigation|Link|Skip|Bypass",
-        "Color & Contrast": "Color|Contrast",
-        "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal",
-        "Forms & Inputs": "Forms|Input|Autocomplete|Authentication",
-        "Images & Graphics": "Images|Graphic|Icons|Charts",
-        "Interactions": "Interactions|Pointer|Dragging|Input Modalities",
-        "Language & Text": "Text|Language|Jargon|Acronym|Pronunciation",
-        "Layout & Structure": "Layout|Structure|Semantics|Reading Order|Reflow|CSS",
-        "Mobile & Touch": "Mobile|Orientation|Tap Targets",
-        "Motion & Animation": "Animation|Reduced Motion|Seizure|Flash",
-        "Notifications & Errors": "Error|Notifications|Alert|Status",
-        "Time & Timeouts": "Timeouts|Refresh|Expiration",
-        "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog"
-    };
 
     const openTool = () => {
         const options = `width=800,height=600,scrollbars=yes,resizable=yes`;
@@ -39,20 +20,13 @@
         doc.body.style.padding = "20px";
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
-            <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
             <input id="s" type="search" placeholder="Search criteria..." style="width:90%; padding:10px;">
-            <div style="margin:15px 0;">
-                <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
-                <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
-                <button id="reset-btn">Reset (Alt+Shift+D)</button>
-            </div>
-            <h2 id="count" aria-live="polite"></h2>
             <ul id="container" style="list-style-type:none; padding:0;"></ul>
-            <hr>
+            <hr style="margin-top:40px;">
             <details>
                 <summary><h3>How to use this tool</h3></summary>
-                <p>This tool is a specialized reference library for the Web Content Accessibility Guidelines (WCAG). Its purpose is to provide rapid access to success criteria, common failures, and remediation strategies to help teams build more accessible digital products.</p>
-                <p>To use the tool, enter keywords into the search input or use the filter controls to narrow down the criteria. You can interact with the results list to view specific details for each criterion and utilize the copy buttons to quickly grab text for your documentation or reporting tasks.</p>
+                <p>This WCAG Lookup Tool is a professional reference library built to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It centralizes technical requirements to ensure your digital products adhere to global accessibility standards.</p>
+                <p>To use the tool, search by keyword or use the version filters. Clicking a criterion title expands its technical details, where you can find failures, recommended fixes, and disability contexts. You can then use the specialized copy buttons to extract individual data points or the full criterion text for your reports or project documentation.</p>
                 <ul>
                     <li><strong>Alt+Shift+D:</strong> Reset filters</li>
                     <li><strong>Escape:</strong> Close tool</li>
@@ -71,11 +45,12 @@
                 btn.textContent = `${i.name} (Level ${i.level})`;
                 btn.setAttribute('aria-expanded', 'false');
                 btn.setAttribute('aria-controls', panelId);
+                btn.style.display = "block";
                 btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "10px";
                 
                 const panel = doc.createElement('ul');
                 panel.id = panelId;
-                panel.style.display = 'none';
+                panel.hidden = true;
                 panel.style.listStyleType = 'none';
                 panel.style.padding = '10px';
                 panel.style.border = '1px solid #ccc';
@@ -83,7 +58,7 @@
                 btn.onclick = () => {
                     const isExpanded = btn.getAttribute('aria-expanded') === 'true';
                     btn.setAttribute('aria-expanded', !isExpanded);
-                    panel.style.display = isExpanded ? 'none' : 'block';
+                    panel.hidden = isExpanded;
                 };
 
                 const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}`;
@@ -91,10 +66,12 @@
                     <li><strong>Description:</strong> ${i.desc}</li>
                     <li style="margin-top:10px;"><strong>Disabilities:</strong> ${(i.disabilitie || 'N/A').replace(/\|/g, ', ')}</li>
                     <li style="margin-top:10px;"><strong>Copy Actions:</strong></li>
-                    <li><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}">Copy Full Entry</button></li>
-                    <li><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
+                    <li style="margin-top:5px;"><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}">Copy Full Entry</button></li>
+                    <li style="margin-top:5px;"><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
+                    <li style="margin-top:5px;"><button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button></li>
                 `;
-                li.appendChild(btn); li.appendChild(panel);
+                li.appendChild(btn); 
+                li.appendChild(panel);
                 container.appendChild(li);
             });
         };
