@@ -46,7 +46,7 @@
         doc.body.style.padding = "20px";
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
-            <div id="sr-announcer" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+            <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
             <label for="s">Search Criteria:</label><br>
             <input id="s" type="search" autocomplete="off" aria-controls="count" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
             <div style="margin:15px 0;">
@@ -73,34 +73,39 @@
             </details>
         `;
 
-        // FIXED: Event delegation to handle all clicks reliably
         doc.addEventListener('click', (e) => {
             const btn = e.target.closest('.copy-trigger');
             if (!btn) return;
 
-            const text = btn.getAttribute('data-clipboard-text');
-            const originalText = btn.textContent;
+            const rawText = btn.getAttribute('data-clipboard-text');
+            const formattedText = rawText.replace(/\|/g, '\r');
             
-            // Force focus
+            const originalText = btn.textContent;
             popup.focus();
 
             const finishCopy = (success) => {
-                btn.textContent = success ? "Copied..." : "Error!";
+                if (success) {
+                    btn.textContent = "Copied...";
+                    btn.setAttribute('aria-label', 'Copied to clipboard');
+                    doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
+                } else {
+                    btn.textContent = "Error!";
+                }
+                
                 btn.disabled = true;
-                doc.getElementById('sr-announcer').textContent = success ? "Copied to clipboard" : "Copy failed";
                 setTimeout(() => { 
                     btn.textContent = originalText; 
+                    btn.removeAttribute('aria-label');
                     btn.disabled = false;
                 }, 2000);
             };
 
-            // Attempt modern Clipboard API
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text)
+                navigator.clipboard.writeText(formattedText)
                     .then(() => finishCopy(true))
-                    .catch(() => fallbackCopy(text, finishCopy));
+                    .catch(() => fallbackCopy(formattedText, finishCopy));
             } else {
-                fallbackCopy(text, finishCopy);
+                fallbackCopy(formattedText, finishCopy);
             }
         });
 
@@ -112,13 +117,9 @@
             doc.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-            try {
-                const success = doc.execCommand('copy');
-                callback(success);
-            } catch (err) {
-                callback(false);
-            }
+            const success = doc.execCommand('copy');
             doc.body.removeChild(textArea);
+            callback(success);
         }
 
         const render = (list) => {
@@ -153,7 +154,8 @@
                     const div = doc.createElement('div');
                     div.id = id; div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
                     
-                    const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures:\n${(i.failures||"").split('|').join('\n')}\n\nFixes:\n${(i.fixes||"").split('|').join('\n')}\n\nLink: ${i.Link}`;
+                    // Added \r before description as requested
+                    const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
 
                     div.innerHTML = `
                         <p><strong>Description:</strong> ${i.desc}</p>
@@ -165,8 +167,8 @@
                             <button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/"/g, '&quot;')}">Copy Failures</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/"/g, '&quot;')}">Copy Fixes</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button>
+                            <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button>
                         </div>
                     `;
