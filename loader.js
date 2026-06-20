@@ -61,7 +61,7 @@
                 <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
             <h2 id="count" aria-live="polite"></h2>
-            <div id="container"></div>
+            <ul id="container" style="list-style-type:none; padding:0;"></ul>
             <hr style="margin-top:40px;">
             <details>
                 <summary><h3>How to use this tool</h3></summary>
@@ -76,10 +76,8 @@
         doc.addEventListener('click', (e) => {
             const btn = e.target.closest('.copy-trigger');
             if (!btn) return;
-
             const rawText = btn.getAttribute('data-clipboard-text');
             const formattedText = rawText.replace(/\|/g, '\r');
-            
             const originalText = btn.textContent;
             popup.focus();
 
@@ -91,7 +89,6 @@
                 } else {
                     btn.textContent = "Error!";
                 }
-                
                 btn.disabled = true;
                 setTimeout(() => { 
                     btn.textContent = originalText; 
@@ -127,7 +124,7 @@
             container.innerHTML = '';
             doc.getElementById('count').textContent = `Found ${list.length} results`;
 
-            ['2.2', '2.1'].forEach((ver, vIdx) => {
+            ['2.2', '2.1'].forEach((ver) => {
                 const section = list.filter(i => i.ver == ver);
                 if (section.length === 0) return;
 
@@ -136,46 +133,39 @@
                 container.appendChild(h3);
 
                 section.forEach((i, idx) => {
-                    const id = `row-${vIdx}-${idx}`;
-                    
-                    // Wrapped button in a paragraph for semantic separation
-                    const p = doc.createElement('p');
+                    const li = doc.createElement('li');
                     const btn = doc.createElement('button');
                     btn.textContent = `${i.name} (Level ${i.level})`;
-                    btn.setAttribute('aria-expanded', 'false');
-                    btn.setAttribute('aria-controls', id);
-                    btn.style.width = "100%"; btn.style.textAlign = "left";
+                    btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "10px";
+                    
+                    const details = doc.createElement('ul');
+                    details.style.display = 'none'; details.style.padding = "10px"; details.style.border = "1px solid #ccc"; details.style.listStyleType = "none";
                     
                     btn.onclick = () => {
-                        const el = doc.getElementById(id);
-                        const isExp = el.style.display === 'block';
-                        el.style.display = isExp ? 'none' : 'block';
-                        btn.setAttribute('aria-expanded', !isExp);
+                        const isExp = details.style.display === 'block';
+                        details.style.display = isExp ? 'none' : 'block';
                     };
-                    p.appendChild(btn);
-                    container.appendChild(p);
-
-                    const div = doc.createElement('div');
-                    div.id = id; div.style.display = 'none'; div.style.padding = "10px"; div.style.border = "1px solid #ccc";
                     
                     const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
 
-                    div.innerHTML = `
-                        <p style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;"><strong>Description:</strong> ${i.desc}</p>
-                        <p><strong>Failures:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
-                        <p><strong>Fixes:</strong></p><ul style="list-style-type:none; padding-left:0;">${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}</ul>
-                        <p><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</p>
-                        <p><a href="${i.Link}" target="_blank">Open W3C Documentation</a></p>
-                        <div style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
+                    details.innerHTML = `
+                        <li style="margin-top: 15px; padding-bottom: 10px;"><strong>Description:</strong> ${i.desc}</li>
+                        <li><strong>Failures:</strong></li>${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}
+                        <li style="margin-top: 10px;"><strong>Fixes:</strong></li>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}
+                        <li style="margin-top: 10px;"><strong>Disabilities:</strong> ${i.disabilitie || 'N/A'}</li>
+                        <li style="margin-top: 10px;"><a href="${i.Link}" target="_blank">Open W3C Documentation</a></li>
+                        <li style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
                             <button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button>
                             <button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button>
-                        </div>
+                        </li>
                     `;
-                    container.appendChild(div);
+                    li.appendChild(btn);
+                    li.appendChild(details);
+                    container.appendChild(li);
                 });
             });
         };
@@ -184,7 +174,6 @@
             appState = { q: doc.getElementById('s').value, v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
             const q = appState.q.toLowerCase();
             const mapEntry = categoryMap[appState.c] || "";
-            
             const filtered = data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
                 (appState.v === "" || i.ver == appState.v) && 
@@ -196,19 +185,15 @@
 
         doc.getElementById('s').value = appState.q; doc.getElementById('ver-f').value = appState.v;
         doc.getElementById('lvl-f').value = appState.l; doc.getElementById('cat-f').value = appState.c;
-
         doc.getElementById('s').oninput = doc.getElementById('ver-f').onchange = doc.getElementById('lvl-f').onchange = doc.getElementById('cat-f').onchange = filter;
         doc.getElementById('reset-btn').onclick = () => { appState = { q: '', v: '', l: '', c: '' }; doc.getElementById('s').value = doc.getElementById('ver-f').value = doc.getElementById('lvl-f').value = doc.getElementById('cat-f').value = ''; render(data); doc.getElementById('s').focus(); };
-        
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
             if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
         });
-
         render(data);
         doc.getElementById('s').focus();
     }
-
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
     openTool();
 })();
