@@ -68,16 +68,22 @@
             <details>
     <summary style="font-size: 1.17em; font-weight: bold; cursor: pointer; margin-bottom: 10px;">How to use this tool</summary>
     
-    <div role="group" style="padding-top: 10px;">
-        <p>This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
-        <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
-        <p><strong>Keyboard Shortcuts</strong></p>
-        <ul>
-            <li><strong>Alt+Shift+A:</strong> Restore tool</li>
-            <li><strong>Alt+Shift+D:</strong> Reset filters</li>
-            <li><strong>Escape:</strong> Close tool</li>
-        </ul>
-    </div>
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+        <li style="margin-top: 10px;">
+            <p style="margin: 0;">This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
+        </li>
+        <li style="margin-top: 10px;">
+            <p style="margin: 0;">To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
+        </li>
+        <li style="margin-top: 10px;">
+            <strong>Keyboard Shortcuts</strong>
+            <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
+                <li><strong>Alt+Shift+A:</strong> Restore tool</li>
+                <li><strong>Alt+Shift+D:</strong> Reset filters</li>
+                <li><strong>Escape:</strong> Close tool</li>
+            </ul>
+        </li>
+    </ul>
 </details>
         `;
 
