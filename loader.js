@@ -67,6 +67,7 @@
                 <summary><h3>How to use this tool</h3></summary>
                 <p>This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
                 <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, click its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
+                <p>Keyboard Shortcuts</p>
                 <ul>
                     <li><strong>Alt+Shift+A:</strong> Restore tool</li>
                     <li><strong>Alt+Shift+D:</strong> Reset filters</li>
