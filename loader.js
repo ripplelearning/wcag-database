@@ -45,7 +45,7 @@
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
         
-        // Includes your 'Keyboard Shortcuts' addition (now bolded)
+        // FIXED: Look at the <details> tag at the bottom. <h3> is replaced with pure CSS.
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
             <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
@@ -66,9 +66,8 @@
             <ul id="container" style="list-style-type:none; padding:0;"></ul>
             <hr style="margin-top:40px;">
             <details>
-                <summary><h3>How to use this tool</h3></summary>
-                <p></p>
-                <p>This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
+                <summary style="font-size: 1.17em; font-weight: bold; cursor: pointer; margin-bottom: 10px;">How to use this tool</summary>
+                <p style="margin-top: 10px;">This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
                 <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
                 <p><strong>Keyboard Shortcuts</strong></p>
                 <ul>
@@ -163,7 +162,6 @@
                     const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
                     const disabilitiesList = (i.disabilitie || 'N/A').replace(/\|/g, ', ');
 
-                    // STEP 3: See the bottom <li> titled "Export Options"
                     details.innerHTML = `
                         <li style="margin-top: 15px; padding-bottom: 10px;"><strong>Description:</strong> ${i.desc}</li>
                         <li><strong>Failures:</strong></li>${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}
