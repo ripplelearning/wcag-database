@@ -44,6 +44,8 @@
         const doc = popup.document;
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
+        
+        // Includes your 'Keyboard Shortcuts' addition (now bolded)
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
             <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
@@ -67,7 +69,7 @@
                 <summary><h3>How to use this tool</h3></summary>
                 <p>This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
                 <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
-                <p>Keyboard Shortcuts</p>
+                <p><strong>Keyboard Shortcuts</strong></p>
                 <ul>
                     <li><strong>Alt+Shift+A:</strong> Restore tool</li>
                     <li><strong>Alt+Shift+D:</strong> Reset filters</li>
@@ -160,19 +162,23 @@
                     const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
                     const disabilitiesList = (i.disabilitie || 'N/A').replace(/\|/g, ', ');
 
+                    // STEP 3: See the bottom <li> titled "Export Options"
                     details.innerHTML = `
                         <li style="margin-top: 15px; padding-bottom: 10px;"><strong>Description:</strong> ${i.desc}</li>
                         <li><strong>Failures:</strong></li>${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}
                         <li style="margin-top: 10px;"><strong>Fixes:</strong></li>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}
                         <li style="margin-top: 10px;"><strong>Disabilities:</strong> ${disabilitiesList}</li>
                         <li style="margin-top: 10px;"><a href="${i.Link}" target="_blank">Open W3C Documentation</a></li>
-                        <li style="margin-top:10px; display: flex; gap: 5px; flex-wrap: wrap;">
-                            <button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button>
-                            <button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button>
+                        <li style="margin-top: 15px;">
+                            <strong>Export Options:</strong>
+                            <ul style="display: flex; gap: 5px; flex-wrap: wrap; list-style-type: none; padding: 0; margin: 6px 0 0 0;">
+                                <li><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button></li>
+                            </ul>
                         </li>
                     `;
                     li.appendChild(btn);
