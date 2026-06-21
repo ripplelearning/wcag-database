@@ -67,7 +67,7 @@
             <hr style="margin-top:40px;">
             <details>
                 <summary style="font-size: 1.17em; font-weight: bold; cursor: pointer; margin-bottom: 10px;">How to use this tool</summary>
-                <div class="sr-disclosure-body"> 
+                <br><br>
                     <p style="margin-top: 10px;">This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
                     <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
                     <p><strong>Keyboard Shortcuts</strong></p>
@@ -76,8 +76,7 @@
                         <li><strong>Alt+Shift+D:</strong> Reset filters</li>
                         <li><strong>Escape:</strong> Close tool</li>
                     </ul>
-                </div>
-            </details>
+                            </details>
         `;
 
         doc.addEventListener('click', (e) => {
@@ -171,8 +170,7 @@
                         <li style="margin-top: 10px;"><strong>Disabilities:</strong> ${disabilitiesList}</li>
                         <li style="margin-top: 10px;"><a href="${i.Link}" target="_blank">Open W3C Documentation</a></li>
                         <li style="margin-top: 15px;">
-                            <strong>Export Options:</strong>
-                            <ul style="display: flex; gap: 5px; flex-wrap: wrap; list-style-type: none; padding: 0; margin: 6px 0 0 0;">
+                                                        <ul style="display: flex; gap: 5px; flex-wrap: wrap; list-style-type: none; padding: 0; margin: 6px 0 0 0;">
                                 <li><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button></li>
                                 <li><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
                                 <li><button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button></li>
