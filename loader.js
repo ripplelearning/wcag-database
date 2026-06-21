@@ -66,7 +66,7 @@
             <details>
                 <summary><h3>How to use this tool</h3></summary>
                 <p>This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
-                <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, click its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
+                <p>To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
                 <p>Keyboard Shortcuts</p>
                 <ul>
                     <li><strong>Alt+Shift+A:</strong> Restore tool</li>
@@ -139,25 +139,21 @@
                     const li = doc.createElement('li');
                     const btn = doc.createElement('button');
                     
-                    // --- STEP 2 ARIA ADDITION ---
                     const panelId = `panel-${ver.replace('.', '_')}-${idx}`;
                     
                     btn.textContent = `${i.name} (Level ${i.level})`;
                     btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "10px";
                     
-                    // Apply initial collapsed state to the button
                     btn.setAttribute('aria-expanded', 'false');
                     btn.setAttribute('aria-controls', panelId);
                     
                     const details = doc.createElement('ul');
-                    details.id = panelId; // Bind the ID to the panel
+                    details.id = panelId; 
                     details.style.display = 'none'; details.style.padding = "10px"; details.style.border = "1px solid #ccc"; details.style.listStyleType = "none";
                     
                     btn.onclick = () => {
                         const isExp = details.style.display === 'block';
                         details.style.display = isExp ? 'none' : 'block';
-                        
-                        // Flip the ARIA state dynamically on click
                         btn.setAttribute('aria-expanded', isExp ? 'false' : 'true');
                     };
                     
@@ -191,7 +187,7 @@
             const q = appState.q.toLowerCase();
             const mapEntry = categoryMap[appState.c] || "";
             const filtered = data.filter(i => 
-                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i a categories||"").toLowerCase().includes(q)) &&
+                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
                 (appState.v === "" || i.ver == appState.v) && 
                 (appState.l === "" || i.level === appState.l) && 
                 (appState.c === "" || mapEntry.split('|').some(k => (i.categories + "|" + i.tags).includes(k)))
