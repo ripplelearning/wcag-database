@@ -1,4 +1,4 @@
-[
+window.wcagData = [
   {
     "ver": 2.2,
     "level": "A",
@@ -1881,4 +1881,4 @@
     "categories": "UI Components|Notifications",
     "tags": "Status Messages|ARIA Live|Notifications"
   }
-]
+];
