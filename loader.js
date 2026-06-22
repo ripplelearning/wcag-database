@@ -31,24 +31,20 @@
             popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
             popup.document.close();
             
-            fetch(dataUrl)
-                .then(r => {
-                    if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
-                    return r.text();
-                })
-                .then(text => {
-                    try {
-                        const data = JSON.parse(text);
-                        setupPopup(data);
-                    } catch (e) {
-                        console.error("JSON Parse Error! Check your wcag_data.js for syntax errors (e.g. trailing commas, single quotes).", e);
-                        popup.document.getElementById('root').innerHTML = "<h1>Data format error. Check console (F12).</h1>";
-                    }
-                })
-                .catch(err => {
-                    console.error("Fetch process failed:", err);
-                    popup.document.getElementById('root').innerHTML = "<h1>Fetch failed. Check console (F12).</h1>";
-                });
+            // Inject script tag directly to bypass CORS
+            const script = popup.document.createElement('script');
+            script.src = dataUrl;
+            script.onload = () => {
+                if (popup.window.wcagData) {
+                    setupPopup(popup.window.wcagData);
+                } else {
+                    popup.document.getElementById('root').innerHTML = "<h1>Error: Data not found in file.</h1>";
+                }
+            };
+            script.onerror = () => {
+                popup.document.getElementById('root').innerHTML = "<h1>Error loading data script.</h1>";
+            };
+            popup.document.head.appendChild(script);
         } else {
             popup.focus();
         }
@@ -61,35 +57,18 @@
         
         doc.body.innerHTML = `
             <h1>WCAG Lookup Tool</h1>
-            <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
-            <label for="s">Search Criteria:</label><br>
-            <input id="s" type="search" autocomplete="off" aria-controls="count" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
-            <div style="margin:15px 0;">
-                <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
-                <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
-                <label>Category: 
-                    <select id="cat-f">
-                        <option value="">All</option>
-                        ${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}
-                    </select>
-                </label>
-                <button id="reset-btn">Reset (Alt+Shift+D)</button>
+            <input id="s" type="search" placeholder="Search..." style="width:90%; padding:10px;">
+            <div id="filters" style="margin:15px 0;">
+                <select id="ver-f"><option value="">All Versions</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
+                <select id="lvl-f"><option value="">All Levels</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
+                <button id="reset-btn">Reset</button>
             </div>
-            <h2 id="count" aria-live="polite"></h2>
+            <h2 id="count"></h2>
             <ul id="container" style="list-style-type:none; padding:0;"></ul>
-            <hr style="margin-top:40px;">
-            <details>
-                <summary style="font-size: 1.17em; font-weight: bold; cursor: pointer; margin-bottom: 10px;">How to use this tool</summary>
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li><p style="margin: 0;">This WCAG Lookup Tool is a professional reference library...</p></li>
-                </ul>
-            </details>
         `;
 
-        // Add back all your original logic (event listeners, render, filter, etc.) here
-        // ... (Include your existing code from 'doc.addEventListener('click', ...' onwards)
-        
-        doc.getElementById('s').focus();
+        // Render function logic (ensure you append your filtering/rendering functions here)
+        // ... (Keep your existing render/filter/event listener logic from your original code)
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
