@@ -31,45 +31,39 @@
             popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
             popup.document.close();
             
-            // Inject script tag directly to bypass CORS
+            // Create script tag to load the data file
             const script = popup.document.createElement('script');
             script.src = dataUrl;
+            
             script.onload = () => {
+                // Now that the script has loaded, the data should be available on the popup's window object
                 if (popup.window.wcagData) {
+                    console.log("Data successfully loaded into popup.");
                     setupPopup(popup.window.wcagData);
                 } else {
-                    popup.document.getElementById('root').innerHTML = "<h1>Error: Data not found in file.</h1>";
+                    console.error("Script loaded, but window.wcagData not found.");
+                    popup.document.getElementById('root').innerHTML = "<h1>Error: wcagData not found.</h1>";
                 }
             };
+            
             script.onerror = () => {
+                console.error("Failed to load the external script.");
                 popup.document.getElementById('root').innerHTML = "<h1>Error loading data script.</h1>";
             };
+            
             popup.document.head.appendChild(script);
         } else {
             popup.focus();
         }
     };
 
+    // Note: Ensure your original 'setupPopup' function follows this line
     function setupPopup(data) {
-        const doc = popup.document;
-        doc.body.style.fontFamily = "sans-serif";
-        doc.body.style.padding = "20px";
-        
-        doc.body.innerHTML = `
-            <h1>WCAG Lookup Tool</h1>
-            <input id="s" type="search" placeholder="Search..." style="width:90%; padding:10px;">
-            <div id="filters" style="margin:15px 0;">
-                <select id="ver-f"><option value="">All Versions</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
-                <select id="lvl-f"><option value="">All Levels</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
-                <button id="reset-btn">Reset</button>
-            </div>
-            <h2 id="count"></h2>
-            <ul id="container" style="list-style-type:none; padding:0;"></ul>
-        `;
-
-        // Render function logic (ensure you append your filtering/rendering functions here)
-        // ... (Keep your existing render/filter/event listener logic from your original code)
+        // ... (Keep your original code from here down)
+        console.log("setupPopup initiated with", data.length, "items.");
+        // Make sure your rendering logic calls here...
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
+    // openTool(); // Uncomment if you want it to open automatically
 })();
