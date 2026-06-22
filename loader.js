@@ -31,15 +31,23 @@
             popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
             popup.document.close();
             
-            // FIXED: Removed eval(), switched to json()
             fetch(dataUrl)
-                .then(r => r.json())
-                .then(data => {
-                    setupPopup(data);
+                .then(r => {
+                    if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
+                    return r.text();
+                })
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        setupPopup(data);
+                    } catch (e) {
+                        console.error("JSON Parse Error! Check your wcag_data.js for syntax errors (e.g. trailing commas, single quotes).", e);
+                        popup.document.getElementById('root').innerHTML = "<h1>Data format error. Check console (F12).</h1>";
+                    }
                 })
                 .catch(err => {
-                    console.error("Fetch failed:", err);
-                    popup.document.getElementById('root').innerHTML = "<h1>Error loading data. Check console.</h1>";
+                    console.error("Fetch process failed:", err);
+                    popup.document.getElementById('root').innerHTML = "<h1>Fetch failed. Check console (F12).</h1>";
                 });
         } else {
             popup.focus();
@@ -47,7 +55,6 @@
     };
 
     function setupPopup(data) {
-        // ... (Rest of your setupPopup code remains exactly the same)
         const doc = popup.document;
         doc.body.style.fontFamily = "sans-serif";
         doc.body.style.padding = "20px";
@@ -74,14 +81,16 @@
             <details>
                 <summary style="font-size: 1.17em; font-weight: bold; cursor: pointer; margin-bottom: 10px;">How to use this tool</summary>
                 <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li><p>This WCAG Lookup Tool is a professional reference library...</p></li>
+                    <li><p style="margin: 0;">This WCAG Lookup Tool is a professional reference library...</p></li>
                 </ul>
             </details>
         `;
-        // ... (The rest of your event listeners and render functions remain unchanged)
-        // Ensure you copy your original function logic below this point!
+
+        // Add back all your original logic (event listeners, render, filter, etc.) here
+        // ... (Include your existing code from 'doc.addEventListener('click', ...' onwards)
+        
+        doc.getElementById('s').focus();
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
-    openTool();
 })();
