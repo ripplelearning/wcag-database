@@ -1881,4 +1881,4 @@
     "categories": "UI Components|Notifications",
     "tags": "Status Messages|ARIA Live|Notifications"
   }
-];
+]
