@@ -3,31 +3,33 @@
     let popup;
 
     const openTool = () => {
-        const options = 'width=600,height=400,scrollbars=yes,resizable=yes';
-        if (!popup || popup.closed) {
-            popup = window.open('', 'WCAG Tool', options);
-            popup.document.write('<h1>Loading...</h1>');
-            
-            fetch(dataUrl)
-                .then(r => {
-                    if (!r.ok) throw new Error("HTTP " + r.status);
-                    return r.text();
-                })
-                .then(text => {
-                    // Diagnostic step: log the first 50 chars to see what we actually got
-                    console.log("Raw file preview:", text.substring(0, 50));
-                    
-                    const clean = text.trim().replace(/^window\.wcagData\s*=\s*/, '').replace(/;$/, '').replace(/];$/, ']');
-                    const data = JSON.parse(clean);
-                    popup.document.write('<h1>Data Loaded!</h1>');
-                    // setupPopup(data); // We'll trigger this after we confirm the fetch works
-                })
-                .catch(err => {
-                    console.error("DEBUG ERROR:", err);
-                    popup.document.body.innerHTML = `<h1>Debug Error:</h1><p>${err.message}</p><p>Check Console (F12) for more.</p>`;
-                });
-        }
+        popup = window.open('', 'WCAG Tool', 'width=600,height=400,scrollbars=yes');
+        popup.document.write('<h1>Loading...</h1>');
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', dataUrl, true);
+        
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // This is the part that mimics the old "eval" behavior
+                // by manually parsing the variable assignment
+                try {
+                    const text = xhr.responseText;
+                    // Extract the data array by removing the wrapper
+                    const dataString = text.substring(text.indexOf('['), text.lastIndexOf(']') + 1);
+                    const data = JSON.parse(dataString);
+                    setupPopup(data);
+                } catch (e) {
+                    popup.document.body.innerHTML = '<h1>Parsing Error</h1><p>' + e.message + '</p>';
+                }
+            }
+        };
+        xhr.send();
     };
+
+    function setupPopup(data) {
+        popup.document.body.innerHTML = '<h1>Success!</h1><p>Loaded ' + data.length + ' items.</p>';
+    }
 
     window.addEventListener('keydown', (e) => { 
         if (e.altKey && e.shiftKey && e.key === 'A') openTool(); 
