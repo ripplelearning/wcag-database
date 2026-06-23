@@ -1,40 +1,74 @@
 (function() {
+    // URL to your raw JSON data
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js';
 
     const openTool = () => {
-        const popup = window.open('', 'WCAGTool', 'width=600,height=400,scrollbars=yes,resizable=yes');
-        popup.document.body.innerHTML = '<h1 id="status">Loading...</h1>';
+        // 1. Open popup window
+        const popup = window.open('', 'WCAGTool', 'width=800,height=600,scrollbars=yes,resizable=yes');
+        
+        if (!popup) {
+            alert("Popup blocked! Please allow popups for this site.");
+            return;
+        }
 
+        // 2. Set initial "Loading" state
+        popup.document.open();
+        popup.document.write(`
+            <html>
+                <head><title>WCAG Lookup Tool</title></head>
+                <body style="font-family:sans-serif; padding:20px;">
+                    <h1 id="status">Loading...</h1>
+                    <div id="root"></div>
+                </body>
+            </html>
+        `);
+        popup.document.close();
+
+        // 3. Fetch data via XHR (The "Classic" Protocol)
         const xhr = new XMLHttpRequest();
         xhr.open('GET', dataUrl, true);
         
         xhr.onload = function() {
             if (xhr.status === 200) {
-                const text = xhr.responseText;
-                const start = text.indexOf('[');
-                const end = text.lastIndexOf(']') + 1;
-                
-                // Let's get the specific JSON slice
-                const jsonString = text.substring(start, end);
-                
                 try {
-                    const data = JSON.parse(jsonString);
+                    const text = xhr.responseText;
+                    // Robust extraction: find content between first [ and last ]
+                    const start = text.indexOf('[');
+                    const end = text.lastIndexOf(']') + 1;
+                    const data = JSON.parse(text.substring(start, end));
+                    
+                    // Render successfully loaded data
                     popup.document.getElementById('status').innerText = "Success! " + data.length + " items.";
+                    
+                    // Your rendering logic here
+                    let html = '<ul>';
+                    data.forEach(item => {
+                        html += `<li><strong>${item.name}</strong> - ${item.level}</li>`;
+                    });
+                    html += '</ul>';
+                    popup.document.getElementById('root').innerHTML = html;
+                    
                 } catch (e) {
-                    // This is the important part:
-                    popup.document.body.innerHTML = `
-                        <h1>Parsing Error</h1>
-                        <p>${e.message}</p>
-                        <p><b>Preview of what I tried to parse:</b></p>
-                        <textarea style="width:90%; height:100px;">${jsonString.substring(0, 200)}...</textarea>
-                    `;
+                    popup.document.getElementById('status').innerText = "Parsing Error";
+                    popup.document.getElementById('root').innerHTML = `<p>${e.message}</p>`;
                 }
+            } else {
+                popup.document.getElementById('status').innerText = "Error: " + xhr.status;
             }
         };
+
+        xhr.onerror = () => {
+            popup.document.getElementById('status').innerText = "Network Error";
+        };
+
         xhr.send();
     };
 
+    // Shortcut: Alt+Shift+A
     window.addEventListener('keydown', (e) => { 
-        if (e.altKey && e.shiftKey && e.key === 'A') openTool(); 
+        if (e.altKey && e.shiftKey && e.key === 'A') {
+            e.preventDefault();
+            openTool();
+        }
     });
 })();
