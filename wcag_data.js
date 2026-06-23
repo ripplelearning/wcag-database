@@ -370,7 +370,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html",
     "categories": "Keyboard|Navigation",
     "tags": "Keyboard trap|focus management|modal dialogs|pop-ups|iframes|embedded content|keyboard navigation|navigation flow|focus recovery|tab key|tabbing|trap|stuck"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -490,7 +490,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes.html",
     "categories": "Multimedia|Design",
     "tags": "Three flashes|flashing content|strobing effects|animation|video content|motion graphics|screen flicker|photosensitive seizures|flash rate|flickering"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -586,7 +586,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
     "categories": "Navigation|Keyboard",
     "tags": "Focus visible|focus indicators|keyboard navigation|interactive elements|buttons|links|form fields|CSS outline|ring properties|state indicators|tab index"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -718,7 +718,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/target-size.html",
     "categories": "Interaction|Mobile",
     "tags": "Target size|touch targets|button size|icon buttons|padding|margin|hit area|tap targets|minimum dimensions|mobile layout|interactive elements"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -838,7 +838,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/on-focus.html",
     "categories": "Navigation|Interactivity",
     "tags": "On focus|context change|unexpected navigation|form fields|checkboxes|radio buttons|select menus|event handlers|keyboard navigation|focus management|combobox"
-  }
+  },
 {
     "ver": 2.2,
     "level": "A",
@@ -922,7 +922,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html",
     "categories": "Forms|Input|Security",
     "tags": "Error prevention|financial transactions|legal commitments|data modification|confirmation steps|reversibility|data storage|form submission|data integrity"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -958,7 +958,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html",
     "categories": "Structure|ARIA|UI Components",
     "tags": "Name role value|accessible names|ARIA roles|state properties|UI components|screen reader support|custom widgets|input attributes|programmatic access"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AA",
@@ -970,7 +970,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
     "categories": "UI Components|Notifications",
     "tags": "Status messages|aria live|notifications|toast messages|error alerts|success banners|loading spinners|progress bars|dynamic content updates|page updates|screen reader announcements|success messages"
-  }
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1162,7 +1162,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/identify-purpose.html",
     "categories": "Structure|Adaptability",
     "tags": "Identify Purpose|Personalization|Semantics|Regions|Icons"
-  }
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1460,7 +1460,7 @@ window.wcagData = [
   "Link": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html",
   "categories": "Seizures and Physical Reactions",
   "tags": "Animation|Motion|Vestibular Disorders|Interaction"
-}
+},
   {
     "ver": 2.1,
     "level": "A",
