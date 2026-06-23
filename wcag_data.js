@@ -710,7 +710,7 @@ window.wcagData = [
   {
     "ver": 2.2,
     "level": "AAA",
-    "name": "2.5.5 Target Size",
+    "name": "2.5.5 Target Size (Enhanced)",
     "desc": "The size of the target for pointer inputs is at least 44 by 44 CSS pixels.",
     "failures": "F110: Failure due to small target size.",
     "fixes": "G210: Ensure target size is at least 44x44.",
@@ -877,6 +877,42 @@ window.wcagData = [
   },
   {
     "ver": 2.2,
+    "level": "AA",
+    "name": "3.2.5 Change on Request",
+    "desc": "Changes of context are initiated only by user request or a mechanism is available to turn off such changes.",
+    "failures": "Automatically submitting a form upon selection",
+    "fixes": "Use explicit 'Submit' buttons; avoid on-change auto-submissions.",
+    "disabilitie": "Cognitive Disabilities|Motor Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html",
+    "categories": "Predictable",
+    "tags": "Change of context"
+  },
+  {
+    "ver": 2.2,
+    "level": "A",
+    "name": "3.2.6 Consistent Help",
+    "desc": "If a Web page contains help features, they are available in the same relative order on each page.",
+    "failures": "Help link moves to different locations on different pages.",
+    "fixes": "Keep help links (e.g., contact, chatbot) in the same position across the site.",
+    "disabilitie": "Cognitive Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html",
+    "categories": "Predictable",
+    "tags": "Help"
+  },
+  {
+    "ver": 2.2,
+    "level": "AA",
+    "name": "3.2.7 Visible Controls",
+    "desc": "Controls required to complete a process are visible when they are needed.",
+    "failures": "Controls hidden until hover when required for navigation.",
+    "fixes": "Ensure essential controls are always visible.",
+    "disabilitie": "Cognitive Disabilities|Low Vision",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/visible-controls.html",
+    "categories": "Predictable",
+    "tags": "Controls"
+  },
+  {
+    "ver": 2.2,
     "level": "A",
     "name": "3.3.1 Error Identification",
     "desc": "If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text.",
@@ -946,6 +982,42 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html",
     "categories": "Forms|Input",
     "tags": "Error prevention|form submission|confirmation steps|reversibility|data review|input checking|accessibility design"
+  },
+  {
+    "ver": 2.2,
+    "level": "A",
+    "name": "3.3.7 Redundant Entry",
+    "desc": "Information previously entered by the user is either auto-populated or available for selection.",
+    "failures": "User must re-enter same info (like billing address) multiple times.",
+    "fixes": "Use persistent storage or session data to pre-fill forms.",
+    "disabilitie": "Cognitive Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
+    "categories": "Input Assistance",
+    "tags": "Forms"
+  },
+  {
+    "ver": 2.2,
+    "level": "AA",
+    "name": "3.3.8 Accessible Authentication (Minimum)",
+    "desc": "A cognitive function test (e.g., memorizing a password) is not required for authentication.",
+    "failures": "Forcing memorization of passwords without alternatives.",
+    "fixes": "Use WebAuthn (biometrics), SSO, or copy-paste support.",
+    "disabilitie": "Cognitive Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
+    "categories": "Input Assistance",
+    "tags": "Authentication"
+  },
+  {
+    "ver": 2.2,
+    "level": "AAA",
+    "name": "3.3.9 Accessible Authentication (Enhanced)",
+    "desc": "No cognitive function test is required for authentication without an exception.",
+    "failures": "Complex security puzzles required to log in.",
+    "fixes": "Provide non-cognitive authentication methods like FIDO tokens.",
+    "disabilitie": "Cognitive Disabilities",
+    "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html",
+    "categories": "Input Assistance",
+    "tags": "Authentication"
   },
   {
     "ver": 2.2,
