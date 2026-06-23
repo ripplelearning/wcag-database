@@ -1,26 +1,6 @@
-alert("Loader is running!");
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js';
     let popup;
-    let appState = { q: '', v: '', l: '', c: '' };
-
-    const categoryMap = {
-        "ARIA & Live Regions": "ARIA|Live",
-        "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts",
-        "Buttons & Navigation": "Navigation|Link|Skip|Bypass",
-        "Color & Contrast": "Color|Contrast",
-        "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal",
-        "Forms & Inputs": "Forms|Input|Autocomplete|Authentication",
-        "Images & Graphics": "Images|Graphic|Icons|Charts",
-        "Interactions": "Interactions|Pointer|Dragging|Input Modalities",
-        "Language & Text": "Text|Language|Jargon|Acronym|Pronunciation",
-        "Layout & Structure": "Layout|Structure|Semantics|Reading Order|Reflow|CSS",
-        "Mobile & Touch": "Mobile|Orientation|Tap Targets",
-        "Motion & Animation": "Animation|Reduced Motion|Seizure|Flash",
-        "Notifications & Errors": "Error|Notifications|Alert|Status",
-        "Time & Timeouts": "Timeouts|Refresh|Expiration",
-        "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog"
-    };
 
     const openTool = () => {
         const w = window.screen.availWidth * 0.5;
@@ -31,40 +11,45 @@ alert("Loader is running!");
             popup = window.open('', 'WCAG Lookup Tool', options);
             popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
             popup.document.close();
-            
-            // Create script tag to load the data file
-            const script = popup.document.createElement('script');
-            script.src = dataUrl;
-            
-            script.onload = () => {
-                // Now that the script has loaded, the data should be available on the popup's window object
-                if (popup.window.wcagData) {
-                    console.log("Data successfully loaded into popup.");
-                    setupPopup(popup.window.wcagData);
-                } else {
-                    console.error("Script loaded, but window.wcagData not found.");
-                    popup.document.getElementById('root').innerHTML = "<h1>Error: wcagData not found.</h1>";
-                }
-            };
-            
-            script.onerror = () => {
-                console.error("Failed to load the external script.");
-                popup.document.getElementById('root').innerHTML = "<h1>Error loading data script.</h1>";
-            };
-            
-            popup.document.head.appendChild(script);
+
+            // Fetch the data as text and parse manually to ensure stability
+            fetch(dataUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok (" + response.status + ")");
+                    return response.text();
+                })
+                .then(text => {
+                    // Extract the JSON array from the file content
+                    // Removes "window.wcagData =" and trailing "];"
+                    const jsonString = text.trim().replace(/^window\.wcagData\s*=\s*/, '').replace(/;$/, '').replace(/];$/, ']');
+                    const data = JSON.parse(jsonString);
+                    setupPopup(data);
+                })
+                .catch(err => {
+                    console.error("Fetch failed:", err);
+                    if (popup && !popup.closed) {
+                        popup.document.getElementById('root').innerHTML = "<h1>Error: " + err.message + "</h1>";
+                    }
+                });
         } else {
             popup.focus();
         }
     };
 
-    // Note: Ensure your original 'setupPopup' function follows this line
     function setupPopup(data) {
-        // ... (Keep your original code from here down)
-        console.log("setupPopup initiated with", data.length, "items.");
-        // Make sure your rendering logic calls here...
+        const doc = popup.document;
+        doc.body.innerHTML = `
+            <h1>WCAG Lookup Tool</h1>
+            <input id="s" type="search" placeholder="Search criteria..." style="width:90%; padding:10px;">
+            <div id="count"></div>
+            <ul id="container"></ul>
+        `;
+        // Add your filter/render logic here using 'data'
+        console.log("Data loaded successfully with " + data.length + " items.");
     }
 
-    window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
-    // openTool(); // Uncomment if you want it to open automatically
+    // Trigger on Alt+Shift+A
+    window.addEventListener('keydown', (e) => { 
+        if (e.altKey && e.shiftKey && e.key === 'A') openTool(); 
+    });
 })();
