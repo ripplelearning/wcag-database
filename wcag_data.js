@@ -274,7 +274,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio.html",
     "categories": "Multimedia|Audio",
     "tags": "Background Audio|Decibel Level|Speech Isolation|Mixing Standards|Low background audio|speech foreground|audio mixing|volume level|audio tracks|background noise|media player|multimedia content|volume controls"
-  }
+  },
 {
     "ver": 2.2,
     "level": "AAA",
