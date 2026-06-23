@@ -1,3 +1,4 @@
+alert("Loader is running!");
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js';
     let popup;
