@@ -118,7 +118,7 @@ window.wcagData = [
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live.html",
     "categories": "Multimedia",
     "tags": "Live Audio|Real-time Transcripts|CART Services|Audio-only Streams"
-  }
+  },
 {
     "ver": 2.2,
     "level": "A",
