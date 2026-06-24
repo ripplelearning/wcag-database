@@ -1,7 +1,6 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup = null;
-    // Persists search, filters, and panel expansion states
     let appState = { q: '', v: '', l: '', c: '', expandedPanels: [] };
 
     const categoryMap = {
@@ -26,20 +25,17 @@
         const w = Math.round(window.screen.availWidth * 0.5);
         const h = Math.round(window.screen.availHeight * 0.5);
         
-        // RESTORE: If exists, show it and force a re-filter to match existing search
         if (popup && !popup.closed) {
             popup.resizeTo(w, h);
             popup.moveTo((window.screen.availWidth - w) / 2, (window.screen.availHeight - h) / 2);
+            popup.document.body.style.display = "block"; // Make visible to screen readers
             popup.focus();
-            if (popup.document.getElementById('s')) {
-                popup.document.getElementById('s').dispatchEvent(new Event('input'));
-            }
+            popup.document.getElementById('s').focus();
             return;
         }
 
-        // INIT: Open new window
         popup = window.open('', 'WCAG Lookup Tool', `width=${w},height=${h},scrollbars=yes,resizable=yes`);
-        popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
+        popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading...</h1></div></body></html>');
         popup.document.close();
             
         fetch(dataUrl).then(r => r.text()).then(jsText => {
@@ -62,37 +58,45 @@
                 <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
             <h2 id="count" aria-live="polite"></h2>
-            <ul id="container" style="list-style-type:none; padding:0;"></ul>
+            <div id="container"></div>
         `;
 
         const render = (list) => {
             const container = doc.getElementById('container');
             container.innerHTML = '';
             doc.getElementById('count').textContent = `Found ${list.length} results`;
-            doc.getElementById('sr-announcer').textContent = `Found ${list.length} results`;
 
-            list.forEach((i) => {
-                const li = doc.createElement('li');
-                const btn = doc.createElement('button');
-                btn.textContent = `${i.name} (Level ${i.level})`;
-                btn.style.cssText = "width:100%; text-align:left; margin-top:10px;";
+            ['2.2', '2.1'].forEach(ver => {
+                const section = list.filter(i => i.ver == ver);
+                if (section.length === 0) return;
                 
-                const details = doc.createElement('div');
-                details.style.cssText = `display:${appState.expandedPanels.includes(i.name) ? 'block' : 'none'}; padding:10px; border:1px solid #ccc;`;
-                details.innerHTML = `<strong>Description:</strong> ${i.desc}<br><br><a href="${i.Link}" target="_blank">View W3C Docs</a>`;
+                const h3 = doc.createElement('h3');
+                h3.textContent = `WCAG ${ver} Success Criteria`;
+                container.appendChild(h3);
                 
-                btn.onclick = () => {
-                    const isOpen = details.style.display === 'block';
-                    details.style.display = isOpen ? 'none' : 'block';
-                    // Persist expansion state
-                    if (!isOpen) {
-                        if (!appState.expandedPanels.includes(i.name)) appState.expandedPanels.push(i.name);
-                    } else {
-                        appState.expandedPanels = appState.expandedPanels.filter(name => name !== i.name);
-                    }
-                };
-                li.append(btn, details);
-                container.append(li);
+                const ul = doc.createElement('ul');
+                ul.style.listStyleType = "none"; ul.style.padding = "0";
+                
+                section.forEach(i => {
+                    const li = doc.createElement('li');
+                    const btn = doc.createElement('button');
+                    btn.textContent = `${i.name} (Level ${i.level})`;
+                    btn.style.cssText = "width:100%; text-align:left; margin-top:5px;";
+                    
+                    const details = doc.createElement('div');
+                    details.style.cssText = `display:${appState.expandedPanels.includes(i.name) ? 'block' : 'none'}; padding:10px; border:1px solid #ccc;`;
+                    details.innerHTML = `<strong>Description:</strong> ${i.desc}<br><br><a href="${i.Link}" target="_blank">View W3C Docs</a>`;
+                    
+                    btn.onclick = () => {
+                        const isOpen = details.style.display === 'block';
+                        details.style.display = isOpen ? 'none' : 'block';
+                        if (!isOpen) appState.expandedPanels.push(i.name);
+                        else appState.expandedPanels = appState.expandedPanels.filter(n => n !== i.name);
+                    };
+                    li.append(btn, details);
+                    ul.append(li);
+                });
+                container.appendChild(ul);
             });
         };
 
@@ -104,7 +108,7 @@
             
             const mapEntry = categoryMap[appState.c] || "";
             const filtered = data.filter(i => 
-                (i.name.toLowerCase().includes(appState.q) || i.desc.toLowerCase().includes(appState.q) || (i.tags||"").toLowerCase().includes(appState.q)) &&
+                (i.name.toLowerCase().includes(appState.q) || (i.tags||"").toLowerCase().includes(appState.q)) &&
                 (appState.v === "" || i.ver == appState.v) && 
                 (appState.l === "" || i.level === appState.l) && 
                 (appState.c === "" || (i.categories + "|" + i.tags).includes(mapEntry.split('|')[0]))
@@ -112,10 +116,8 @@
             render(filtered);
         };
 
-        // Event listeners attached to popup document
         doc.getElementById('s').oninput = filter;
         ['ver-f', 'lvl-f', 'cat-f'].forEach(id => doc.getElementById(id).onchange = filter);
-        
         doc.getElementById('reset-btn').onclick = () => { 
             appState = { q: '', v: '', l: '', c: '', expandedPanels: [] };
             doc.getElementById('s').value = '';
@@ -123,18 +125,21 @@
             doc.getElementById('lvl-f').value = '';
             doc.getElementById('cat-f').value = '';
             render(data);
+            doc.getElementById('s').focus();
         };
 
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 e.preventDefault();
-                popup.resizeTo(0, 0); // Hide the tool
+                doc.body.style.display = "none"; // Hide from AT/Users
+                popup.resizeTo(0, 0);
                 popup.moveTo(window.screen.availWidth, window.screen.availHeight);
-                popup.blur();
             }
+            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
         });
 
         render(data);
+        doc.getElementById('s').focus();
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
