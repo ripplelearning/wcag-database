@@ -1,7 +1,7 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
     let popup;
-    // Track search, filters, and now, which specific criteria panels are expanded
+    // Track search, filters, and specific criteria panels that are expanded
     let appState = { q: '', v: '', l: '', c: '', expandedPanels: [] };
 
     const categoryMap = {
@@ -30,7 +30,6 @@
             popup.resizeTo(w, h);
             popup.moveTo((window.screen.availWidth - w) / 2, (window.screen.availHeight - h) / 2);
             popup.focus();
-            // Force re-filter on restore to ensure UI matches persistent state
             if (popup.document.getElementById('s')) {
                 popup.document.getElementById('s').dispatchEvent(new Event('input'));
             }
@@ -81,7 +80,6 @@
                 btn.onclick = () => {
                     const isOpen = details.style.display === 'block';
                     details.style.display = isOpen ? 'none' : 'block';
-                    // Update persistent expanded state
                     if (!isOpen) {
                         if (!appState.expandedPanels.includes(i.name)) appState.expandedPanels.push(i.name);
                     } else {
@@ -110,16 +108,27 @@
         };
 
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => doc.getElementById(id).onchange = filter);
-        doc.getElementById('s').oninput = filter; // Ensure search works live
+        doc.getElementById('s').oninput = filter;
         doc.getElementById('reset-btn').onclick = () => { 
             appState = { q: '', v: '', l: '', c: '', expandedPanels: [] };
             doc.getElementById('s').value = '';
+            doc.getElementById('ver-f').value = '';
+            doc.getElementById('lvl-f').value = '';
+            doc.getElementById('cat-f').value = '';
             render(data);
         };
 
         doc.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { popup.resizeTo(0, 0); popup.moveTo(window.screen.availWidth, window.screen.availHeight); }
-            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                popup.resizeTo(0, 0);
+                popup.moveTo(window.screen.availWidth, window.screen.availHeight);
+                popup.blur();
+            }
+            if (e.altKey && e.shiftKey && e.key === 'D') {
+                e.preventDefault();
+                doc.getElementById('reset-btn').click();
+            }
         });
 
         render(data);
