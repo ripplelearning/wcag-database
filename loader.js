@@ -1,13 +1,13 @@
 (function() {
     const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
-    let popup;
-    // Track search, filters, and specific criteria panels that are expanded
+    let popup = null;
+    // Persists search, filters, and panel expansion states
     let appState = { q: '', v: '', l: '', c: '', expandedPanels: [] };
 
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live",
         "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts",
-        "Buttons & Navigation": "Navigation|Link|Skip|Bypass",
+        "Buttons & Navigation": "Navigation|Link|Skip|Bypass|Button",
         "Color & Contrast": "Color|Contrast",
         "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal",
         "Forms & Inputs": "Forms|Input|Autocomplete|Authentication",
@@ -26,6 +26,7 @@
         const w = Math.round(window.screen.availWidth * 0.5);
         const h = Math.round(window.screen.availHeight * 0.5);
         
+        // RESTORE: If exists, show it and force a re-filter to match existing search
         if (popup && !popup.closed) {
             popup.resizeTo(w, h);
             popup.moveTo((window.screen.availWidth - w) / 2, (window.screen.availHeight - h) / 2);
@@ -36,6 +37,7 @@
             return;
         }
 
+        // INIT: Open new window
         popup = window.open('', 'WCAG Lookup Tool', `width=${w},height=${h},scrollbars=yes,resizable=yes`);
         popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
         popup.document.close();
@@ -51,6 +53,7 @@
         doc.body.style.cssText = "font-family:sans-serif; padding:20px;";
         doc.getElementById('root').innerHTML = `
             <h1>WCAG Lookup Tool</h1>
+            <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
             <input id="s" type="search" placeholder="Search criteria..." style="width:90%; padding:10px;">
             <div style="margin:15px 0;">
                 <select id="ver-f"><option value="">All Versions</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
@@ -58,7 +61,7 @@
                 <select id="cat-f"><option value="">All Categories</option>${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}</select>
                 <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
-            <h2 id="count"></h2>
+            <h2 id="count" aria-live="polite"></h2>
             <ul id="container" style="list-style-type:none; padding:0;"></ul>
         `;
 
@@ -66,6 +69,7 @@
             const container = doc.getElementById('container');
             container.innerHTML = '';
             doc.getElementById('count').textContent = `Found ${list.length} results`;
+            doc.getElementById('sr-announcer').textContent = `Found ${list.length} results`;
 
             list.forEach((i) => {
                 const li = doc.createElement('li');
@@ -80,6 +84,7 @@
                 btn.onclick = () => {
                     const isOpen = details.style.display === 'block';
                     details.style.display = isOpen ? 'none' : 'block';
+                    // Persist expansion state
                     if (!isOpen) {
                         if (!appState.expandedPanels.includes(i.name)) appState.expandedPanels.push(i.name);
                     } else {
@@ -99,7 +104,7 @@
             
             const mapEntry = categoryMap[appState.c] || "";
             const filtered = data.filter(i => 
-                (i.name.toLowerCase().includes(appState.q) || i.desc.toLowerCase().includes(appState.q)) &&
+                (i.name.toLowerCase().includes(appState.q) || i.desc.toLowerCase().includes(appState.q) || (i.tags||"").toLowerCase().includes(appState.q)) &&
                 (appState.v === "" || i.ver == appState.v) && 
                 (appState.l === "" || i.level === appState.l) && 
                 (appState.c === "" || (i.categories + "|" + i.tags).includes(mapEntry.split('|')[0]))
@@ -107,8 +112,10 @@
             render(filtered);
         };
 
-        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => doc.getElementById(id).onchange = filter);
+        // Event listeners attached to popup document
         doc.getElementById('s').oninput = filter;
+        ['ver-f', 'lvl-f', 'cat-f'].forEach(id => doc.getElementById(id).onchange = filter);
+        
         doc.getElementById('reset-btn').onclick = () => { 
             appState = { q: '', v: '', l: '', c: '', expandedPanels: [] };
             doc.getElementById('s').value = '';
@@ -121,13 +128,9 @@
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 e.preventDefault();
-                popup.resizeTo(0, 0);
+                popup.resizeTo(0, 0); // Hide the tool
                 popup.moveTo(window.screen.availWidth, window.screen.availHeight);
                 popup.blur();
-            }
-            if (e.altKey && e.shiftKey && e.key === 'D') {
-                e.preventDefault();
-                doc.getElementById('reset-btn').click();
             }
         });
 
@@ -135,4 +138,5 @@
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
+    openTool();
 })();
