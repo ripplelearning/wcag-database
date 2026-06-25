@@ -3,6 +3,7 @@
     let popup;
     let appState = { q: '', v: '', l: '', c: '' };
 
+    // Enhanced category and tag mapping for deep filtering
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
         "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts|Media",
@@ -67,6 +68,7 @@
                 </details>
             </footer>`;
 
+        // Handle Copy Functionality
         doc.addEventListener('click', (e) => {
             if (e.target.classList.contains('copy-trigger')) {
                 const text = e.target.getAttribute('data-clipboard-text');
@@ -103,6 +105,7 @@
                     btn.setAttribute('aria-expanded', 'false');
                     
                     details.style.display = 'none';
+                    // Prepare Copy Data
                     const fullEntry = `Name: ${i.name}\r\nDescription: ${i.desc}\r\nFailures:\n${i.failures}\r\nFixes:\n${i.fixes}\r\nLink: ${i.Link}`;
                     
                     details.innerHTML = `
@@ -110,7 +113,7 @@
                         <p><strong>Failures:</strong> ${i.failures}</p>
                         <p><strong>Fixes:</strong> ${i.fixes}</p>
                         <p><a href="${i.Link}" target="_blank" rel="noopener noreferrer">View on W3C Website</a></p>
-                        <p><strong>Copy Data:</strong></p>
+                        <p><strong>Copy Full Entry:</strong></p>
                         <ul style="display: flex; gap: 5px; flex-wrap: wrap; list-style-type: none; padding: 0;">
                             <li><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}">Copy Full Entry</button></li>
                             <li><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
@@ -121,14 +124,8 @@
                     
                     btn.onclick = () => {
                         const isExp = details.style.display === 'block';
-                        // Accordion Logic: Close all, then toggle current
-                        doc.querySelectorAll('#container div[style*="display"]').forEach(d => d.style.display = 'none');
-                        doc.querySelectorAll('#container button[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
-                        
-                        if (!isExp) {
-                            details.style.display = 'block';
-                            btn.setAttribute('aria-expanded', 'true');
-                        }
+                        details.style.display = isExp ? 'none' : 'block';
+                        btn.setAttribute('aria-expanded', !isExp);
                     };
                     li.append(btn, details);
                     ul.append(li);
