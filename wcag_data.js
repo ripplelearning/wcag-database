@@ -1878,8 +1878,8 @@ window.wcagData = [
     "fixes": "G84: Provide error suggestions.",
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-suggestion.html",
-    "categories": "Forms|Input",
-    "tags": "Error Suggestion|Correction Assistance"
+    "categories": "Forms|Input|ARIA",
+    "tags": "Error Suggestion|Correction Assistance|ARIA"
   },
   {
     "ver": 2.1,
