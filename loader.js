@@ -1,34 +1,41 @@
 (function() {
-    // CDN proxy URL
     const dataUrl = 'https://cdn.jsdelivr.net/gh/ripplelearning/wcag-database@main/wcag_data.js';
     let popup;
 
     const openTool = () => {
         popup = window.open('', 'WCAG Lookup Tool', 'width=800,height=600,scrollbars=yes');
-        popup.document.write('<html><body><h1>Loading...</h1></body></html>');
+        popup.document.write('<html><body><h1 id="status">Loading data...</h1></body></html>');
         popup.document.close();
 
-        // Standard script injection is most reliable when using a CDN
-        const script = popup.document.createElement('script');
-        script.src = dataUrl;
-        script.onload = () => {
-            if (popup.wcagData) {
-                setupPopup(popup.wcagData);
-            } else {
-                popup.document.body.innerHTML = '<h1>Error: Data structure not found.</h1>';
-            }
-        };
-        script.onerror = () => {
-            popup.document.body.innerHTML = '<h1>Error: Failed to load data from CDN.</h1>';
-        };
-        popup.document.head.appendChild(script);
+        // Bypass script execution blocks by using fetch
+        fetch(dataUrl)
+            .then(r => r.text())
+            .then(text => {
+                // Remove variable declaration if present to make it valid JSON
+                const jsonText = text.replace(/window\.wcagData\s*=\s*/, '');
+                const data = JSON.parse(jsonText);
+                setupPopup(data);
+            })
+            .catch(err => {
+                popup.document.getElementById('status').textContent = "Error: " + err;
+            });
     };
 
     function setupPopup(data) {
         const doc = popup.document;
         doc.body.innerHTML = '<h1>WCAG Lookup Tool</h1><div id="container"></div>';
 
-        // Keyboard & Copy Logic
+        // Copy Handler
+        doc.addEventListener('click', (e) => {
+            if (e.target.classList.contains('copy-trigger')) {
+                navigator.clipboard.writeText(e.target.dataset.clipboardText);
+                const original = e.target.textContent;
+                e.target.textContent = "Copied!";
+                setTimeout(() => e.target.textContent = original, 1000);
+            }
+        });
+
+        // Navigation
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
             if (e.ctrlKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
@@ -40,34 +47,21 @@
             }
         });
 
-        doc.addEventListener('click', (e) => {
-            if (e.target.classList.contains('copy-trigger')) {
-                navigator.clipboard.writeText(e.target.dataset.clipboardText);
-                const original = e.target.textContent;
-                e.target.textContent = "Copied!";
-                setTimeout(() => e.target.textContent = original, 1000);
-            }
-        });
-
         const container = doc.getElementById('container');
-        data.forEach((i) => {
+        data.forEach(i => {
             const btn = doc.createElement('button');
             const details = doc.createElement('div');
             
             btn.textContent = `${i.name} (Level ${i.level})`;
-            btn.style.cssText = "display:block; width:100%; text-align:left; padding:10px; margin-top:5px; cursor:pointer;";
+            btn.style.cssText = "display:block; width:100%; text-align:left; padding:10px; margin-top:5px;";
             btn.setAttribute('aria-expanded', 'false');
             
             details.style.display = 'none';
             details.style.padding = "10px";
             details.style.border = "1px solid #ccc";
 
-            details.append(
-                Object.assign(doc.createElement('p'), {innerHTML: `<strong>Desc:</strong> ${i.desc}`}),
-                Object.assign(doc.createElement('p'), {innerHTML: `<strong>Failures:</strong> ${i.failures}`}),
-                Object.assign(doc.createElement('p'), {innerHTML: `<strong>Fixes:</strong> ${i.fixes}`})
-            );
-
+            details.innerHTML = `<p><strong>Desc:</strong> ${i.desc}</p><p><strong>Failures:</strong> ${i.failures}</p><p><strong>Fixes:</strong> ${i.fixes}</p>`;
+            
             const copyActions = [
                 { l: "Copy Full", v: `Name: ${i.name}\nDesc: ${i.desc}\nFailures: ${i.failures}\nFixes: ${i.fixes}\nLink: ${i.Link}` },
                 { l: "Copy Name", v: i.name },
@@ -76,12 +70,11 @@
                 { l: "Copy Link", v: i.Link }
             ];
 
-            copyActions.forEach(action => {
+            copyActions.forEach(a => {
                 const b = doc.createElement('button');
                 b.className = "copy-trigger";
-                b.textContent = action.l;
-                b.dataset.clipboardText = action.v;
-                b.style.margin = "2px";
+                b.textContent = a.l;
+                b.dataset.clipboardText = a.v;
                 details.append(b);
             });
 
