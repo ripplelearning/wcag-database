@@ -8,8 +8,8 @@ window.wcagData = [
     "fixes": "G94: Provide descriptive alt text for informative images|H67: Use alt=&#39;&#39; for decorative images|H44: Use explicit form labels|G143: Provide text alternatives for CAPTCHA|ARIA6: Use aria-label to provide labels|ARIA10: Use aria-labelledby to link text elements as a label.",
     "disabilitie": "Blindness|Low Vision|Color Blindness|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html",
-    "categories": "Images|UI Components|Media",
-    "tags": "Alternate Text|Decorative Images|CAPTCHA|Form Controls|Graphic Symbols|Structural Markup"
+    "categories": "Images|UI Components|Media|Forms|Buttons",
+    "tags": "Alternate Text|Decorative Images|CAPTCHA|Form Controls|Graphic Symbols|Structural Markup|Buttons|Input|Forms"
   },
   {
     "ver": 2.2,
@@ -129,7 +129,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html",
     "categories": "Structure|Forms|Tables|ARIA",
-    "tags": "Semantics|Landmarks|Headings|Form Labels|Data Tables|ARIA Roles|Info and relationships|semantic markup|lists|form controls|fieldsets|programmatic structure"
+    "tags": "Semantics|Landmarks|Headings|Form Labels|Data Tables|ARIA Roles|Info and relationships|semantic markup|lists|form controls|fieldsets|programmatic structure|Buttons|Input|Forms|Labels|Radio Groups|Tables|Accordians|Navigation|Checkboxes|Textvoxes|Comboboxes|Listboxes"
   },
   {
     "ver": 2.2,
@@ -141,7 +141,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html",
     "categories": "Structure|Layout",
-    "tags": "Reading Order|DOM Sequence|CSS Positioning|Layout Tables|Meaningful sequence|navigation order|DOM structure"
+    "tags": "Reading Order|DOM Sequence|CSS Positioning|Layout Tables|Meaningful sequence|navigation order|DOM structure|Headings|Heading Level"
   },
   {
     "ver": 2.2,
@@ -201,7 +201,7 @@ window.wcagData = [
     "disabilitie": "Color Blindness|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
     "categories": "Design|Color",
-    "tags": "Color Dependence|Links|Headings|Visual Markers|Use of color|contrast|visual cues|indicators|forms"
+    "tags": "Color Dependence|Links|Headings|Visual Markers|Use of color|contrast|visual cues|indicators|forms|Buttons|Input"
   },
   {
     "ver": 2.2,
@@ -357,7 +357,7 @@ window.wcagData = [
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Keyboard navigation|keyboard access|interactive elements|buttons|links|form controls|menus|widgets|tab index|event handlers|mouse dependent functionality|drag and drop|custom controls|tab key|tabbing|arrow keys"
+    "tags": "Keyboard navigation|keyboard access|interactive elements|buttons|links|form controls|menus|widgets|tab index|event handlers|mouse dependent functionality|drag and drop|custom controls|tab key|tabbing|arrow keys|Activation"
   },
   {
     "ver": 2.2,
@@ -525,7 +525,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html",
     "categories": "Navigation|Structure",
-    "tags": "Page titled|document title|head element|browser tab title|page context|document structure|meta tags|site navigation|title attribute|page title|site map"
+    "tags": "Page titled|document title|head element|browser tab title|page context|document structure|meta tags|site navigation|title attribute|page title|site map|Popups"
   },
   {
     "ver": 2.2,
@@ -549,7 +549,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html",
     "categories": "Navigation|Text",
-    "tags": "Link purpose|anchor tags|link text|context clues|navigation menus|call to action|buttons|hypertext|accessible name|navigation flow|link name|link purpose|links"
+    "tags": "Link purpose|anchor tags|link text|context clues|navigation menus|call to action|hypertext|accessible name|navigation flow|link name|link purpose|links"
   },
   {
     "ver": 2.2,
@@ -921,7 +921,7 @@ window.wcagData = [
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html",
     "categories": "Forms|Input",
-    "tags": "Error identification|form validation|error messages|input errors|text descriptions|screen reader announcements|form submission"
+    "tags": "Error identification|form validation|error messages|input errors|text descriptions|screen reader announcements|form submission|ARIA"
   },
   {
     "ver": 2.2,
@@ -933,7 +933,7 @@ window.wcagData = [
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html",
     "categories": "Forms|Input",
-    "tags": "Labels|instructions|form controls|input fields|placeholders|accessible names|form requirements|user guidance"
+    "tags": "Labels|instructions|form controls|input fields|placeholders|accessible names|form requirements|user guidance|Forms"
   },
   {
     "ver": 2.2,
@@ -945,7 +945,7 @@ window.wcagData = [
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html",
     "categories": "Forms|Input",
-    "tags": "Error suggestion|correction assistance|input validation|form fields|form submission|user guidance|accessibility help"
+    "tags": "Error suggestion|correction assistance|input validation|form fields|form submission|user guidance|accessibility help|ARIA"
   },
   {
     "ver": 2.2,
@@ -1028,8 +1028,8 @@ window.wcagData = [
     "fixes": "ARIA4: Use aria-label.",
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html",
-    "categories": "Structure|ARIA|UI Components",
-    "tags": "Name role value|accessible names|ARIA roles|state properties|UI components|screen reader support|custom widgets|input attributes|programmatic access"
+    "categories": "Structure|ARIA|UI Components|Forms",
+    "tags": "Name role value|accessible names|ARIA roles|state properties|UI components|screen reader support|custom widgets|input attributes|programmatic access|ARIA|Role|Forms"
   },
 {
     "ver": 2.2,
@@ -1052,8 +1052,8 @@ window.wcagData = [
     "fixes": "G94: Provide descriptive alt text for informative images|H67: Use alt='' for decorative images|H44: Use explicit form labels|G143: Provide text alternatives for CAPTCHA|ARIA6: Use aria-label to provide labels|ARIA10: Use aria-labelledby to link text elements as a label.",
     "disabilitie": "Blindness|Low Vision|Color Blindness|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html",
-    "categories": "Images|UI Components|Media",
-    "tags": "Alternate Text|Decorative Images|CAPTCHA|Form Controls|Graphic Symbols|Structural Markup|Alt Text Descriptions"
+    "categories": "Images|UI Components|Media|Forms",
+    "tags": "Alternate Text|Decorative Images|CAPTCHA|Form Controls|Graphic Symbols|Structural Markup|Alt Text Descriptions|Forms|Input|Buttons"
   },
   {
     "ver": 2.1,
@@ -1172,8 +1172,8 @@ window.wcagData = [
     "fixes": "H42: Use h1-h6 for headings|H44: Use label elements|H48: Use li elements|ARIA1: Use role='combobox'|ARIA2: Use aria-required.",
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html",
-    "categories": "Structure|Forms|Tables",
-    "tags": "Semantics|Landmarks|Headings|Form Labels|Data Tables|ARIA Roles"
+    "Categories": "Structure|Forms|Tables|ARIA",
+"Tags": "Semantics|Landmarks|Headings|Form Labels|Data Tables|ARIA Roles|Info and relationships|semantic markup|lists|form controls|fieldsets|programmatic structure|Buttons|Input|Forms|Labels|Radio Groups|Tables|Accordians|Navigation|Checkboxes|Textvoxes|Comboboxes|Listboxes"
   },
 {
     "ver": 2.1,
@@ -1185,7 +1185,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/meaningful-sequence.html",
     "categories": "Structure|Layout",
-    "tags": "Reading Order|DOM Sequence|CSS Positioning|Layout Tables"
+    "Tags": "Reading Order|DOM Sequence|CSS Positioning|Layout Tables|Meaningful sequence|navigation order|DOM structure|Headings|Heading Level"
   },
   {
     "ver": 2.1,
@@ -1245,7 +1245,7 @@ window.wcagData = [
     "disabilitie": "Color Blindness|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html",
     "categories": "Design|Color",
-    "tags": "Color Dependence|Links|Headings|Visual Markers"
+    "Tags": "Color Dependence|Links|Headings|Visual Markers|Use of color|contrast|visual cues|indicators|forms|Buttons|Input"
   },
   {
     "ver": 2.1,
@@ -1401,7 +1401,7 @@ window.wcagData = [
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Keyboard Navigation|Keyboard Access|Interactive Elements"
+    "Tags": "Keyboard navigation|keyboard access|interactive elements|buttons|links|form controls|menus|widgets|tab index|event handlers|mouse dependent functionality|drag and drop|custom controls|tab key|tabbing|arrow keys|Activation"
   },
   {
     "ver": 2.1,
@@ -1555,7 +1555,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/page-titled.html",
     "categories": "Navigation|Structure",
-    "tags": "Page Titled|Document Title|Browser Tab Title"
+    "Tags": "Page titled|document title|head element|browser tab title|page context|document structure|meta tags|site navigation|title attribute|page title|site map|Popups"
   },
   {
     "ver": 2.1,
@@ -1579,7 +1579,7 @@ window.wcagData = [
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html",
     "categories": "Navigation|Text",
-    "tags": "Link Purpose|Anchor Tags|Link Text"
+    "Tags": "Link purpose|anchor tags|link text|context clues|navigation menus|call to action|hypertext|accessible name|navigation flow|link name|link purpose|links"
   },
   {
     "ver": 2.1,
@@ -1854,8 +1854,8 @@ window.wcagData = [
     "fixes": "G83: Provide error description.",
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html",
-    "categories": "Forms|Input",
-    "tags": "Error Identification|Form Validation"
+    "categories": "Forms|Input|ARIA",
+    "tags": "Error Identification|Form Validation|ARIA"
   },
   {
     "ver": 2.1,
@@ -1867,7 +1867,7 @@ window.wcagData = [
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html",
     "categories": "Forms|Input",
-    "tags": "Labels|Instructions|Form Controls"
+    "Tags": "Labels|instructions|form controls|input fields|placeholders|accessible names|form requirements|user guidance|Forms|Required"
   },
   {
     "ver": 2.1,
@@ -1938,8 +1938,8 @@ window.wcagData = [
     "fixes": "ARIA4: Use aria-label.",
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html",
-    "categories": "Structure|ARIA|UI Components",
-    "tags": "Name Role Value|ARIA Roles|State Properties"
+    "Categories": "Structure|ARIA|UI Components|Forms",
+"Tags": "Name role value|accessible names|ARIA roles|state properties|UI components|screen reader support|custom widgets|input attributes|programmatic access|ARIA|Role|Forms"
   },
   {
     "ver": 2.1,
