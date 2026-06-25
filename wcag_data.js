@@ -125,7 +125,7 @@ window.wcagData = [
     "name": "1.3.1 Info and Relationships",
     "desc": "Information, structure, and relationships conveyed through presentation can be programmatically determined or are available in text.",
     "failures": "F43: Failure due to using structural markup in a way that does not represent relationships in the information|F92: Failure due to the lack of role, state, and properties information.",
-    "fixes": "H42: Use h1-h6 for headings|H44: Use label elements|H48: Use li elements|ARIA1: Use role="combobox"|ARIA2: Use aria-required.",
+    "fixes": "H42: Use h1-h6 for headings|H44: Use label elements|H48: Use li elements|ARIA1: Use role=\"combobox\"|ARIA2: Use aria-required.",
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html",
     "categories": "Structure|Forms|Tables|ARIA",
