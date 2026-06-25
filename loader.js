@@ -1,6 +1,6 @@
 (function() {
-    // UPDATED URL
-    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js';
+    // URL with cache-busting timestamp
+    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js?t=' + new Date().getTime();
     let popup;
 
     const openTool = () => {
@@ -16,15 +16,16 @@
         script.src = dataUrl;
         
         script.onload = () => {
+            // Check if wcagData exists globally in the popup window
             if (popup.window.wcagData) {
                 setupPopup(popup.window.wcagData);
             } else {
-                popup.document.body.innerHTML = '<h1>Error: Data not found in the loaded file.</h1>';
+                popup.document.body.innerHTML = '<h1>Error: Data structure not found in the loaded file.</h1>';
             }
         };
         
         script.onerror = () => {
-            popup.document.body.innerHTML = '<h1>Error: Failed to load data script.</h1>';
+            popup.document.body.innerHTML = '<h1>Error: Failed to load data script. Check console for CORS or 404 details.</h1>';
         };
 
         popup.document.head.appendChild(script);
@@ -34,9 +35,10 @@
         const doc = popup.document;
         doc.body.innerHTML = '<h1>WCAG Lookup Tool</h1><div id="container"></div>';
         
-        // Keyboard Navigation and Escape to Close
+        // --- Event Listeners ---
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
+            // Ctrl + Arrow keys for navigation
             if (e.ctrlKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
                 e.preventDefault();
                 const btns = Array.from(doc.querySelectorAll('#container button[aria-expanded]'));
@@ -58,12 +60,13 @@
 
         const container = doc.getElementById('container');
         
+        // --- Rendering ---
         data.forEach((i) => {
             const btn = doc.createElement('button');
             const details = doc.createElement('div');
             
             btn.textContent = `${i.name} (Level ${i.level})`;
-            btn.style.cssText = "display:block; width:100%; text-align:left; padding:10px; margin-top:5px;";
+            btn.style.cssText = "display:block; width:100%; text-align:left; padding:10px; margin-top:5px; cursor:pointer;";
             btn.setAttribute('aria-expanded', 'false');
             
             details.style.display = 'none';
@@ -105,6 +108,7 @@
         });
     }
 
+    // Hotkey to open the tool
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
     openTool();
 })();
