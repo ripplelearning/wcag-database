@@ -591,7 +591,7 @@ window.wcagData = [
     "ver": 2.2,
     "level": "AAA",
     "name": "2.4.8 Location",
-    "desc": "Information about the user"s location within a set of Web pages is available.",
+    "desc": "Information about the user\'s location within a set of Web pages is available.",
     "failures": "F64: Failure due to lack of location indicators.",
     "fixes": "G65: Provide breadcrumbs.",
     "disabilitie": "Blindness|Cognitive Disabilities",
