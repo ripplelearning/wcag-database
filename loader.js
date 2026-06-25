@@ -1,6 +1,5 @@
 (function() {
-    // URL with cache-busting timestamp
-    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js?t=' + new Date().getTime();
+    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js';
     let popup;
 
     const openTool = () => {
@@ -9,36 +8,30 @@
         const options = `width=${w},height=${h},top=0,left=0,scrollbars=yes,resizable=yes`;
         
         popup = window.open('', 'WCAG Lookup Tool', options);
-        popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><h1>Loading data...</h1></body></html>');
+        popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><h1>Loading...</h1></body></html>');
         popup.document.close();
 
-        const script = popup.document.createElement('script');
-        script.src = dataUrl;
-        
-        script.onload = () => {
-            // Check if wcagData exists globally in the popup window
-            if (popup.window.wcagData) {
-                setupPopup(popup.window.wcagData);
-            } else {
-                popup.document.body.innerHTML = '<h1>Error: Data structure not found in the loaded file.</h1>';
-            }
-        };
-        
-        script.onerror = () => {
-            popup.document.body.innerHTML = '<h1>Error: Failed to load data script. Check console for CORS or 404 details.</h1>';
-        };
-
-        popup.document.head.appendChild(script);
+        // Using the eval method as you requested
+        fetch(dataUrl)
+            .then(r => r.text())
+            .then(jsText => {
+                try {
+                    (0, eval)(jsText);
+                    setupPopup(popup.window.wcagData);
+                } catch (e) {
+                    popup.document.body.innerHTML = '<h1>Eval Error:</h1><pre>' + e + '</pre>';
+                }
+            })
+            .catch(err => popup.document.body.innerHTML = '<h1>Fetch Error:</h1>' + err);
     };
 
     function setupPopup(data) {
         const doc = popup.document;
         doc.body.innerHTML = '<h1>WCAG Lookup Tool</h1><div id="container"></div>';
-        
-        // --- Event Listeners ---
+
+        // Keyboard & Escape Handlers
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
-            // Ctrl + Arrow keys for navigation
             if (e.ctrlKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
                 e.preventDefault();
                 const btns = Array.from(doc.querySelectorAll('#container button[aria-expanded]'));
@@ -48,19 +41,17 @@
             }
         });
 
-        // Copy Handler
+        // Safe Copy Handler (using dataset)
         doc.addEventListener('click', (e) => {
             if (e.target.classList.contains('copy-trigger')) {
                 navigator.clipboard.writeText(e.target.dataset.clipboardText);
-                const orig = e.target.textContent;
+                const original = e.target.textContent;
                 e.target.textContent = "Copied!";
-                setTimeout(() => e.target.textContent = orig, 1000);
+                setTimeout(() => e.target.textContent = original, 1000);
             }
         });
 
         const container = doc.getElementById('container');
-        
-        // --- Rendering ---
         data.forEach((i) => {
             const btn = doc.createElement('button');
             const details = doc.createElement('div');
@@ -73,6 +64,7 @@
             details.style.padding = "10px";
             details.style.border = "1px solid #ccc";
 
+            // Safe DOM insertion (avoids quotes breaking the code)
             const pDesc = doc.createElement('p'); pDesc.innerHTML = `<strong>Desc:</strong> ${i.desc}`;
             const pFail = doc.createElement('p'); pFail.innerHTML = `<strong>Failures:</strong> ${i.failures}`;
             const pFix = doc.createElement('p'); pFix.innerHTML = `<strong>Fixes:</strong> ${i.fixes}`;
@@ -99,16 +91,12 @@
                 const isOpen = details.style.display === 'block';
                 doc.querySelectorAll('#container > div').forEach(d => d.style.display = 'none');
                 doc.querySelectorAll('#container > button').forEach(b => b.setAttribute('aria-expanded', 'false'));
-                if (!isOpen) {
-                    details.style.display = 'block';
-                    btn.setAttribute('aria-expanded', 'true');
-                }
+                if (!isOpen) { details.style.display = 'block'; btn.setAttribute('aria-expanded', 'true'); }
             };
             container.append(btn, details);
         });
     }
 
-    // Hotkey to open the tool
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
     openTool();
 })();
