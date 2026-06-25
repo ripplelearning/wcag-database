@@ -3,33 +3,26 @@
     let popup;
 
     const openTool = () => {
-        const w = window.screen.availWidth * 0.5;
-        const h = window.screen.availHeight * 0.5;
-        const options = `width=${w},height=${h},top=0,left=0,scrollbars=yes,resizable=yes`;
-        
-        popup = window.open('', 'WCAG Lookup Tool', options);
-        popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><h1>Loading...</h1></body></html>');
+        popup = window.open('', 'WCAG Lookup Tool', 'width=800,height=600,scrollbars=yes');
+        popup.document.write('<html><body><h1>Loading...</h1></body></html>');
         popup.document.close();
 
-        // Using the eval method as you requested
         fetch(dataUrl)
             .then(r => r.text())
             .then(jsText => {
-                try {
-                    (0, eval)(jsText);
-                    setupPopup(popup.window.wcagData);
-                } catch (e) {
-                    popup.document.body.innerHTML = '<h1>Eval Error:</h1><pre>' + e + '</pre>';
-                }
+                // Force the data to attach to the POPUP's window object
+                const scriptContent = jsText + "; window.wcagData = wcagData;";
+                popup.eval(scriptContent); 
+                setupPopup(popup.wcagData);
             })
-            .catch(err => popup.document.body.innerHTML = '<h1>Fetch Error:</h1>' + err);
+            .catch(err => popup.document.body.innerHTML = '<h1>Error:</h1>' + err);
     };
 
     function setupPopup(data) {
         const doc = popup.document;
         doc.body.innerHTML = '<h1>WCAG Lookup Tool</h1><div id="container"></div>';
 
-        // Keyboard & Escape Handlers
+        // Keyboard & Copy logic...
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
             if (e.ctrlKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
@@ -41,7 +34,6 @@
             }
         });
 
-        // Safe Copy Handler (using dataset)
         doc.addEventListener('click', (e) => {
             if (e.target.classList.contains('copy-trigger')) {
                 navigator.clipboard.writeText(e.target.dataset.clipboardText);
@@ -64,11 +56,11 @@
             details.style.padding = "10px";
             details.style.border = "1px solid #ccc";
 
-            // Safe DOM insertion (avoids quotes breaking the code)
-            const pDesc = doc.createElement('p'); pDesc.innerHTML = `<strong>Desc:</strong> ${i.desc}`;
-            const pFail = doc.createElement('p'); pFail.innerHTML = `<strong>Failures:</strong> ${i.failures}`;
-            const pFix = doc.createElement('p'); pFix.innerHTML = `<strong>Fixes:</strong> ${i.fixes}`;
-            details.append(pDesc, pFail, pFix);
+            details.append(
+                Object.assign(doc.createElement('p'), {innerHTML: `<strong>Desc:</strong> ${i.desc}`}),
+                Object.assign(doc.createElement('p'), {innerHTML: `<strong>Failures:</strong> ${i.failures}`}),
+                Object.assign(doc.createElement('p'), {innerHTML: `<strong>Fixes:</strong> ${i.fixes}`})
+            );
 
             const copyActions = [
                 { l: "Copy Full", v: `Name: ${i.name}\nDesc: ${i.desc}\nFailures: ${i.failures}\nFixes: ${i.fixes}\nLink: ${i.Link}` },
@@ -98,5 +90,4 @@
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
-    openTool();
 })();
