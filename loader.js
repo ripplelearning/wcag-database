@@ -52,6 +52,11 @@
             </div>
             <h2 id="count" aria-live="polite"></h2>
             <div id="container"></div>
+            <hr style="margin-top: 40px;">
+            <details>
+                <summary style="font-size: 1.2em; font-weight: bold; cursor: pointer; padding: 10px 0;">How to use this tool</summary>
+                <p style="padding-left: 20px;">Use the search box and filters above to find WCAG success criteria. Click on any criterion title to expand its details, including descriptions, failures, and remediation fixes.</p>
+            </details>
         `;
 
         const render = (list) => {
