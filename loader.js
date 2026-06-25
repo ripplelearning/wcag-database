@@ -1,5 +1,6 @@
 (function() {
-    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js';
+    // CDN proxy URL
+    const dataUrl = 'https://cdn.jsdelivr.net/gh/ripplelearning/wcag-database@main/wcag_data.js';
     let popup;
 
     const openTool = () => {
@@ -7,22 +8,27 @@
         popup.document.write('<html><body><h1>Loading...</h1></body></html>');
         popup.document.close();
 
-        fetch(dataUrl)
-            .then(r => r.text())
-            .then(jsText => {
-                // Force the data to attach to the POPUP's window object
-                const scriptContent = jsText + "; window.wcagData = wcagData;";
-                popup.eval(scriptContent); 
+        // Standard script injection is most reliable when using a CDN
+        const script = popup.document.createElement('script');
+        script.src = dataUrl;
+        script.onload = () => {
+            if (popup.wcagData) {
                 setupPopup(popup.wcagData);
-            })
-            .catch(err => popup.document.body.innerHTML = '<h1>Error:</h1>' + err);
+            } else {
+                popup.document.body.innerHTML = '<h1>Error: Data structure not found.</h1>';
+            }
+        };
+        script.onerror = () => {
+            popup.document.body.innerHTML = '<h1>Error: Failed to load data from CDN.</h1>';
+        };
+        popup.document.head.appendChild(script);
     };
 
     function setupPopup(data) {
         const doc = popup.document;
         doc.body.innerHTML = '<h1>WCAG Lookup Tool</h1><div id="container"></div>';
 
-        // Keyboard & Copy logic...
+        // Keyboard & Copy Logic
         doc.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') popup.close();
             if (e.ctrlKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
@@ -90,4 +96,5 @@
     }
 
     window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
+    openTool();
 })();
