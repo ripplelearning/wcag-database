@@ -1,4 +1,4 @@
-window.wcagData = [
+[
   {
     "ver": 2.2,
     "level": "A",
