@@ -52,12 +52,21 @@
             </div>
             <h2 id="count" aria-live="polite"></h2>
             <div id="container"></div>
-            <hr style="margin-top: 40px;">
-            <details>
-                <summary style="font-size: 1.2em; font-weight: bold; cursor: pointer; padding: 10px 0;">How to use this tool</summary>
-                <p style="padding-left: 20px;">Use the search box and filters above to find WCAG success criteria. Click on any criterion title to expand its details, including descriptions, failures, and remediation fixes.</p>
-            </details>
-        `;
+            <footer style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 10px;">
+<details>
+    <summary style="font-size: 1.2em; font-weight: bold; cursor: pointer; padding: 10px 0;">How to use this tool</summary>
+    <div style="padding-left: 20px;">
+        <p><strong>Searching & Filtering:</strong> Use the search box to find criteria by ID or keyword. Refine results using the Version, Level, and Category dropdowns.</p>
+        <p><strong>Viewing & Copying:</strong> Click any success criterion to reveal descriptions, failures, and fixes. Use the "Copy" buttons within the expanded view to quickly extract data for your documentation.</p>
+        <p><strong>Keyboard Shortcuts:</strong></p>
+        <ul>
+            <li><strong>Alt+Shift+A:</strong> Restore the tool window.</li>
+            <li><strong>Alt+Shift+D:</strong> Reset all filters and clear the search.</li>
+            <li><strong>Escape:</strong> Close the tool window.</li>
+        </ul>
+    </div>
+</details>
+</footer>`;
 
         const render = (list) => {
             const container = doc.getElementById('container');
