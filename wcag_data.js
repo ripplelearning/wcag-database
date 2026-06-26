@@ -881,7 +881,7 @@
     "name": "3.2.5 Change on Request",
     "desc": "Changes of context are initiated only by user request or a mechanism is available to turn off such changes.",
     "failures": "Automatically submitting a form upon selection",
-    "fixes": "Use explicit "Submit" buttons; avoid on-change auto-submissions.",
+    "fixes": "Use explicit \"Submit\" buttons; avoid on-change auto-submissions.",
     "disabilitie": "Cognitive Disabilities|Motor Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html",
     "categories": "Predictable",
@@ -1621,7 +1621,7 @@
     "ver": 2.1,
     "level": "AAA",
     "name": "2.4.8 Location",
-    "desc": "Information about the user"s location within a set of Web pages is available.",
+    "desc": "Information about the user's location within a set of Web pages is available.",
     "failures": "F64: Failure due to lack of location indicators.",
     "fixes": "G65: Provide breadcrumbs.",
     "disabilitie": "Blindness|Cognitive Disabilities",
@@ -1953,4 +1953,4 @@
     "categories": "UI Components|Notifications",
     "tags": "Status Messages|ARIA Live|Notifications"
   }
-];
+]
