@@ -1,4 +1,5 @@
 (function() {
+    // Point this to your hosted JSON file
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     let popup;
 
@@ -20,7 +21,7 @@
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    async function openTool() {
+    const openTool = async () => {
         const w = window.screen.availWidth * 0.5;
         const h = window.screen.availHeight * 0.5;
         const options = `width=${w},height=${h},top=0,left=0,scrollbars=yes,resizable=yes`;
@@ -35,20 +36,26 @@
                 const data = await response.json();
                 setupPopup(data);
             } catch (err) {
-                popup.document.getElementById('root').innerHTML = '<h1>Error Loading Data</h1><p>Check the console for details.</p>';
+                popup.document.getElementById('root').innerHTML = '<h1>Error Loading Data</h1><p>Ensure wcag_data.js is valid JSON.</p>';
             }
         } else {
             popup.focus();
         }
-    }
+    };
 
     function setupPopup(data) {
         const doc = popup.document;
         doc.body.style.cssText = "font-family:sans-serif; padding:20px;";
         
-        // ... [Insert the rest of your setupPopup logic here exactly as you had it] ...
-        // Ensure the HTML/Event Listener logic you provided remains inside this function
+        // ... (Include your existing HTML innerHTML template here) ...
+        // Ensure your 'render' and 'filter' functions remain exactly as you wrote them
+        
+        // NOTE: Make sure the 'render' and 'filter' functions are defined inside setupPopup 
+        // OR accessible to the event listeners you attached.
+        
+        // ... rest of your logic ...
     }
 
+    window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
     openTool();
 })();
