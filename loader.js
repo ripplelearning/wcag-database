@@ -1,33 +1,43 @@
-(function() {
-    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
+(async function() {
+    // This is the URL to your data file hosted on GitHub Pages
+    const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
 
-    // 1. Fetch the text using a helper function to bypass common blocks
-    fetch(dataUrl)
-        .then(response => response.text())
-        .then(jsText => {
-            // 2. Create a "Blob" (a fake local file)
-            const blob = new Blob([jsText], {type: 'application/javascript'});
-            const blobUrl = URL.createObjectURL(blob);
+    try {
+        const response = await fetch(dataUrl);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-            // 3. Inject the local blob URL instead of the remote GitHub URL
-            const script = document.createElement('script');
-            script.src = blobUrl;
-            script.onload = () => {
-                if (typeof window.wcagData !== 'undefined') {
-                    openTool(window.wcagData);
-                } else {
-                    alert("Script loaded, but wcagData not found.");
-                }
-            };
-            document.head.appendChild(script);
-        })
-        .catch(err => {
-            alert("Still blocked! Error: " + err);
-        });
+        const data = await response.json();
 
-    function openTool(data) {
+        // Create the popup window
         const popup = window.open('', 'WCAG Tool', 'width=800,height=600');
-        popup.document.write('<h1>Loaded! Rendering...</h1>');
-        // ... (Render your data here)
+        popup.document.write('<html><head><title>WCAG Tool</title></head><body>');
+        popup.document.write('<h1>WCAG Tool</h1><div id="container"></div>');
+        popup.document.write('</body></html>');
+        
+        const container = popup.document.getElementById('container');
+        
+        // Render buttons
+        data.forEach((i, index) => {
+            const btn = popup.document.createElement('button');
+            btn.textContent = `${i.name || "Item " + index} (Level ${i.level || "N/A"})`;
+            btn.style.display = "block";
+            btn.style.width = "100%";
+            btn.style.textAlign = "left";
+            btn.style.margin = "5px 0";
+            btn.style.padding = "10px";
+            btn.style.cursor = "pointer";
+            
+            btn.onclick = () => {
+                alert(`Description:\n${i.desc || "No description provided."}`);
+            };
+            
+            container.appendChild(btn);
+        });
+    } catch (e) {
+        console.error("Failed to load WCAG data:", e);
+        alert("Error loading tool. Ensure wcag_data.js is valid JSON and accessible via GitHub Pages.");
     }
 })();
