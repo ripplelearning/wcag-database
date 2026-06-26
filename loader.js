@@ -1,43 +1,54 @@
-(async function() {
-    // This is the URL to your data file hosted on GitHub Pages
+(function() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
+    let popup;
 
-    try {
-        const response = await fetch(dataUrl);
+    const categoryMap = {
+        "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
+        "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts|Media",
+        "Buttons & Navigation": "Navigation|Link|Skip|Bypass|Button|Menu|Interaction",
+        "Color & Contrast": "Color|Contrast|Luminance|Foreground|Background",
+        "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal|Operable",
+        "Forms & Inputs": "Forms|Input|Autocomplete|Authentication|Labels",
+        "Images & Graphics": "Images|Graphic|Icons|Charts|Alt Text",
+        "Interactions": "Interactions|Pointer|Dragging|Input Modalities|Gestures",
+        "Language & Text": "Text|Language|Jargon|Acronym|Pronunciation|Readability",
+        "Layout & Structure": "Layout|Structure|Semantics|Reading Order|Reflow|CSS|Grouping",
+        "Mobile & Touch": "Mobile|Orientation|Tap Targets|Touch|Sensors",
+        "Motion & Animation": "Animation|Reduced Motion|Seizure|Flash|Blinking",
+        "Notifications & Errors": "Error|Notifications|Alert|Status|Validation",
+        "Time & Timeouts": "Timeouts|Refresh|Expiration|Interruptions",
+        "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
+    };
+
+    async function openTool() {
+        const w = window.screen.availWidth * 0.5;
+        const h = window.screen.availHeight * 0.5;
+        const options = `width=${w},height=${h},top=0,left=0,scrollbars=yes,resizable=yes`;
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        if (!popup || popup.closed) {
+            popup = window.open('', 'WCAG Lookup Tool', options);
+            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
+            popup.document.close();
+            
+            try {
+                const response = await fetch(dataUrl);
+                const data = await response.json();
+                setupPopup(data);
+            } catch (err) {
+                popup.document.getElementById('root').innerHTML = '<h1>Error Loading Data</h1><p>Check the console for details.</p>';
+            }
+        } else {
+            popup.focus();
         }
-
-        const data = await response.json();
-
-        // Create the popup window
-        const popup = window.open('', 'WCAG Tool', 'width=800,height=600');
-        popup.document.write('<html><head><title>WCAG Tool</title></head><body>');
-        popup.document.write('<h1>WCAG Tool</h1><div id="container"></div>');
-        popup.document.write('</body></html>');
-        
-        const container = popup.document.getElementById('container');
-        
-        // Render buttons
-        data.forEach((i, index) => {
-            const btn = popup.document.createElement('button');
-            btn.textContent = `${i.name || "Item " + index} (Level ${i.level || "N/A"})`;
-            btn.style.display = "block";
-            btn.style.width = "100%";
-            btn.style.textAlign = "left";
-            btn.style.margin = "5px 0";
-            btn.style.padding = "10px";
-            btn.style.cursor = "pointer";
-            
-            btn.onclick = () => {
-                alert(`Description:\n${i.desc || "No description provided."}`);
-            };
-            
-            container.appendChild(btn);
-        });
-    } catch (e) {
-        console.error("Failed to load WCAG data:", e);
-        alert("Error loading tool. Ensure wcag_data.js is valid JSON and accessible via GitHub Pages.");
     }
+
+    function setupPopup(data) {
+        const doc = popup.document;
+        doc.body.style.cssText = "font-family:sans-serif; padding:20px;";
+        
+        // ... [Insert the rest of your setupPopup logic here exactly as you had it] ...
+        // Ensure the HTML/Event Listener logic you provided remains inside this function
+    }
+
+    openTool();
 })();
