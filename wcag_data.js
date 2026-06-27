@@ -1,4 +1,4 @@
-window.processWcagData([
+[
   {
     "ver": 2.2,
     "level": "A",
@@ -1953,4 +1953,4 @@ window.processWcagData([
     "categories": "UI Components|Notifications",
     "tags": "Status Messages|ARIA Live|Notifications"
   }
-]);
+]
