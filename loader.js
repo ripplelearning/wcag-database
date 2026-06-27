@@ -4,6 +4,7 @@ async function initTool() {
     const container = document.getElementById('container');
     const announcer = document.getElementById('sr-announcer');
 
+    // 1. Centralized Category Map
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
         "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts|Media",
@@ -49,70 +50,11 @@ async function initTool() {
             ['2.2', '2.1'].forEach(ver => {
                 const section = list.filter(i => i.ver == ver);
                 if (!section.length) return;
-                
-                const h3 = document.createElement('h3');
-                h3.textContent = `WCAG ${ver} Success Criteria`;
-                listContainer.appendChild(h3);
-                
+                listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
                 section.forEach(i => {
                     const div = document.createElement('div');
-                    div.style.marginBottom = "5px";
                     div.innerHTML = `
-                        <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (${i.level})</button>
+                        <button class="acc-btn" style="width:100%; text-align:left; padding:10px;">${i.name} (${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
                             <p><strong>Desc:</strong> ${i.desc}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
-                            <div style="margin-top:10px;">
-                                <button class="copy-btn" data-text="${i.name}">Copy Name</button>
-                                <button class="copy-btn" data-text="${i.failures}">Copy Failures</button>
-                                <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
-                            </div>
-                        </div>
-                    `;
-                    div.querySelector('.acc-btn').onclick = function() {
-                        const content = this.nextElementSibling;
-                        const isHidden = content.style.display === 'none';
-                        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
-                        document.querySelectorAll('.acc-btn').forEach(el => el.setAttribute('aria-expanded', 'false'));
-                        if(isHidden) { content.style.display = 'block'; this.setAttribute('aria-expanded', 'true'); }
-                    };
-                    div.querySelectorAll('.copy-btn').forEach(btn => btn.onclick = function() {
-                        navigator.clipboard.writeText(this.getAttribute('data-text'));
-                        const old = this.textContent; this.textContent = "Copied!";
-                        setTimeout(() => this.textContent = old, 2000);
-                    });
-                    listContainer.appendChild(div);
-                });
-            });
-        };
-
-        const applyFilters = () => {
-            const q = document.getElementById('s').value.toLowerCase();
-            const v = document.getElementById('ver-f').value;
-            const l = document.getElementById('lvl-f').value;
-            const c = document.getElementById('cat-f').value;
-            
-            // Matches against 'tags' field in your JSON, or regex if tags are missing
-            const catPattern = categoryMap[c] || "";
-            render(data.filter(i => 
-                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && 
-                (l === "" || i.level === l) &&
-                (c === "" || (i.tags && i.tags.some(t => t.match(new RegExp(catPattern, 'i')))))
-            ));
-        };
-
-        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
-        document.getElementById('s').oninput = applyFilters;
-        document.getElementById('reset-btn').onclick = () => { window.location.reload(); };
-
-        window.addEventListener('keydown', (e) => {
-            if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
-            if (e.key === 'Escape') { window.resizeTo(0, 0); window.blur(); }
-        });
-
-        render(data);
-        document.getElementById('s').focus();
-    } catch (e) { container.innerHTML = 'Error loading data: ' + e.message; }
-}
-initTool();
