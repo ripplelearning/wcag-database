@@ -113,14 +113,16 @@ async function initTool() {
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
         document.getElementById('reset-btn').onclick = () => { window.location.reload(); };
-
-        window.addEventListener('keydown', (e) => {
+        
+        window.addEventListener('keydown', (e) => { 
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
-            if (e.key === 'Escape') { window.resizeTo(0, 0); }
+            if (e.key === 'Escape') { window.resizeTo(0, 0); } 
         });
 
         render(data);
         document.getElementById('s').focus();
-    } catch (e) { container.innerHTML = 'Error loading data: ' + e.message; }
+    } catch (e) {
+        container.innerHTML = 'Error loading data: ' + e.message;
+    }
 }
 initTool();
