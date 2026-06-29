@@ -53,7 +53,7 @@ async function initTool() {
             listContainer.innerHTML = '';
             const msg = `Found ${list.length} results`;
             document.getElementById('count').textContent = msg;
-            if(announcer) announcer.textContent = msg;
+            announcer.textContent = msg;
 
             ['2.2', '2.1'].forEach(ver => {
                 const section = list.filter(i => i.ver == ver);
@@ -61,6 +61,7 @@ async function initTool() {
                 listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
                 
                 section.forEach(i => {
+                    // Uses \n\n for paragraph breaks
                     const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}`;
                     const div = document.createElement('div');
                     div.innerHTML = `
@@ -82,8 +83,7 @@ async function initTool() {
                         const content = this.nextElementSibling;
                         const isHidden = content.style.display === 'none';
                         document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
-                        document.querySelectorAll('.acc-btn').forEach(el => el.setAttribute('aria-expanded', 'false'));
-                        if(isHidden) { content.style.display = 'block'; this.setAttribute('aria-expanded', 'true'); }
+                        if(isHidden) content.style.display = 'block';
                     };
                     div.querySelectorAll('.copy-btn').forEach(btn => btn.onclick = function() {
                         navigator.clipboard.writeText(this.getAttribute('data-text'));
@@ -101,11 +101,9 @@ async function initTool() {
             const l = document.getElementById('lvl-f').value;
             const c = document.getElementById('cat-f').value;
             const catPattern = categoryMap[c] || "";
-            
             render(data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && 
-                (l === "" || i.level === l) &&
+                (v === "" || i.ver == v) && (l === "" || i.level === l) &&
                 (c === "" || (i.tags && i.tags.some(t => t.match(new RegExp(catPattern, 'i')))))
             ));
         };
@@ -113,16 +111,13 @@ async function initTool() {
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
         document.getElementById('reset-btn').onclick = () => { window.location.reload(); };
-        
-        window.addEventListener('keydown', (e) => { 
+
+        window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
-            if (e.key === 'Escape') { window.resizeTo(0, 0); } 
+            if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
         render(data);
-        document.getElementById('s').focus();
-    } catch (e) {
-        container.innerHTML = 'Error loading data: ' + e.message;
-    }
+    } catch (e) { container.innerHTML = 'Error loading data.'; }
 }
 initTool();
