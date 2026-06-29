@@ -1,16 +1,7 @@
 async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
-    
-    // Announcer for screen readers
-    let announcer = document.getElementById('sr-announcer');
-    if (!announcer) {
-        announcer = document.createElement('div');
-        announcer.id = 'sr-announcer';
-        announcer.setAttribute('aria-live', 'polite');
-        announcer.style.cssText = "position:absolute; left:-9999px;";
-        document.body.appendChild(announcer);
-    }
+    const announcer = document.getElementById('sr-announcer');
 
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
@@ -47,29 +38,28 @@ async function initTool() {
             <div id="list-container"></div>
         `;
 
-        const sanitize = (str) => str.replace(/\|/g, '\n\n');
-
         const render = (list) => {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
             const msg = `Found ${list.length} results`;
             document.getElementById('count').textContent = msg;
-            announcer.textContent = msg;
+            if(announcer) announcer.textContent = msg;
 
             ['2.2', '2.1'].forEach(ver => {
                 const section = list.filter(i => i.ver == ver);
                 if (!section.length) return;
                 listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
+                
                 section.forEach(i => {
                     const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}`;
                     const div = document.createElement('div');
                     div.innerHTML = `
-                        <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (${i.level})</button>
+                        <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
                             <p><strong>Description:</strong> ${i.desc}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
-                                <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
+                                <button class="copy-btn" data-text="Name: ${i.name}\n\nDesc: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}">Copy Full Entry</button>
                                 <button class="copy-btn" data-text="${i.name}">Copy Name</button>
                                 <button class="copy-btn" data-text="${i.desc}">Copy Description</button>
                                 <button class="copy-btn" data-text="${i.failures}">Copy Failures</button>
@@ -78,16 +68,29 @@ async function initTool() {
                             </div>
                         </div>
                     `;
-                    div.querySelector('.acc-btn').onclick = function() {
-                        const content = this.nextElementSibling;
-                        const isHidden = content.style.display === 'none';
-                        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
-                        if(isHidden) content.style.display = 'block';
+                    
+                    const btn = div.querySelector('.acc-btn');
+                    const content = div.querySelector('.acc-content');
+                    
+                    btn.onclick = () => {
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        // Close all others
+                        document.querySelectorAll('.acc-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+                        document.querySelectorAll('.acc-content').forEach(c => c.style.display = 'none');
+                        // Toggle this one
+                        if (!isExpanded) {
+                            btn.setAttribute('aria-expanded', 'true');
+                            content.style.display = 'block';
+                        }
                     };
-                    div.querySelectorAll('.copy-btn').forEach(btn => btn.onclick = function() {
-                        navigator.clipboard.writeText(sanitize(this.getAttribute('data-text')));
-                        const old = this.textContent; this.textContent = "Copied!";
-                        setTimeout(() => this.textContent = old, 2000);
+
+                    div.querySelectorAll('.copy-btn').forEach(btn => {
+                        btn.onclick = function() {
+                            const text = this.getAttribute('data-text').replace(/\|/g, '\n\n');
+                            navigator.clipboard.writeText(text);
+                            const old = this.textContent; this.textContent = "Copied!";
+                            setTimeout(() => this.textContent = old, 2000);
+                        };
                     });
                     listContainer.appendChild(div);
                 });
@@ -101,35 +104,31 @@ async function initTool() {
             const c = document.getElementById('cat-f').value;
             const catPattern = categoryMap[c] || "";
             
-            const filtered = data.filter(i => 
+            render(data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && 
-                (l === "" || i.level === l) &&
+                (v === "" || i.ver == v) && (l === "" || i.level === l) &&
                 (c === "" || (i.tags && i.tags.some(t => t.match(new RegExp(catPattern, 'i')))))
-            );
-            render(filtered);
+            ));
         };
 
-        // Category Accessibility: Announce count on focus
-        document.getElementById('cat-f').querySelectorAll('option').forEach(opt => {
-            opt.onfocus = () => {
-                const val = opt.value;
-                const count = val === "" ? data.length : data.filter(i => i.tags && i.tags.some(t => t.match(new RegExp(categoryMap[val], 'i')))).length;
-                announcer.textContent = `${val || 'All Categories'}: ${count} results available.`;
-            };
-        });
+        // Category Accessibility
+        document.getElementById('cat-f').onfocus = (e) => {
+            const val = e.target.value;
+            announcer.textContent = `Category ${val || 'All'} selected.`;
+        };
 
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
-        document.getElementById('reset-btn').onclick = () => { window.location.reload(); };
-
-        // Global Keyboard Shortcuts
+        
+        // GLOBAL Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
             if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
         render(data);
-    } catch (e) { container.innerHTML = 'Error: ' + e.message; }
+    } catch (e) {
+        container.innerHTML = 'Error loading data: ' + e.message;
+    }
 }
 initTool();
