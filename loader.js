@@ -57,7 +57,6 @@ async function initTool() {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
             
-            // Separate by version
             ['2.2', '2.1'].forEach(ver => {
                 const filteredVer = list.filter(i => i.ver == ver);
                 if (filteredVer.length === 0) return;
@@ -69,6 +68,9 @@ async function initTool() {
                 filteredVer.forEach(i => {
                     const div = document.createElement('div');
                     div.style.marginBottom = "10px";
+                    // Build full entry string for the "Copy Full Entry" button
+                    const fullEntry = `Name: ${i.name}\nDesc: ${i.desc}\nFailures: ${i.failures}\nFixes: ${i.fixes}\nDisabilities: ${i.disabilities || 'N/A'}\nLink: ${i.Link}`;
+                    
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
@@ -78,6 +80,7 @@ async function initTool() {
                             <p><strong>Disabilities:</strong> ${i.disabilities || 'N/A'}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
+                                <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
                                 <button class="copy-btn" data-text="${i.name}">Copy Name</button>
                                 <button class="copy-btn" data-text="${i.desc}">Copy Desc</button>
                                 <button class="copy-btn" data-text="${i.failures}">Copy Failures</button>
@@ -94,7 +97,12 @@ async function initTool() {
                         content.style.display = exp ? 'none' : 'block';
                     };
                     div.querySelectorAll('.copy-btn').forEach(b => {
-                        b.onclick = () => navigator.clipboard.writeText(b.getAttribute('data-text'));
+                        b.onclick = () => {
+                            navigator.clipboard.writeText(b.getAttribute('data-text'));
+                            const original = b.textContent;
+                            b.textContent = "Copied!";
+                            setTimeout(() => b.textContent = original, 2000);
+                        };
                     });
                     listContainer.appendChild(div);
                 });
@@ -123,6 +131,7 @@ async function initTool() {
         };
 
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
+        document.getElementById('s').oninput = applyFilters;
         document.getElementById('reset-btn').onclick = () => window.location.reload();
 
         window.addEventListener('keydown', (e) => {
