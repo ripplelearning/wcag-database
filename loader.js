@@ -20,11 +20,15 @@ async function initTool() {
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    const announcer = document.createElement('div');
-    announcer.id = 'sr-announcer';
-    announcer.setAttribute('aria-live', 'polite');
-    announcer.style.cssText = "position:absolute; left:-9999px;";
-    document.body.appendChild(announcer);
+    // Ensure we have an announcer for accessibility
+    let announcer = document.getElementById('sr-announcer');
+    if (!announcer) {
+        announcer = document.createElement('div');
+        announcer.id = 'sr-announcer';
+        announcer.setAttribute('aria-live', 'polite');
+        announcer.style.cssText = "position:absolute; left:-9999px;";
+        document.body.appendChild(announcer);
+    }
 
     try {
         const response = await fetch(dataUrl, { cache: "no-cache" });
@@ -84,8 +88,8 @@ async function initTool() {
                 let matchCat = true;
                 if (c) {
                     const regex = new RegExp(categoryMap[c], 'i');
-                    // Check tags array if it exists; fallback to checking name/description
-                    const hasTagMatch = Array.isArray(i.tags) && i.tags.some(t => regex.test(t));
+                    // Defensive check: Only use .some() if tags is a valid array
+                    const hasTagMatch = (i.tags && Array.isArray(i.tags)) ? i.tags.some(t => regex.test(t)) : false;
                     const hasKeywordMatch = regex.test(i.name) || regex.test(i.desc);
                     matchCat = hasTagMatch || hasKeywordMatch;
                 }
@@ -102,6 +106,7 @@ async function initTool() {
         document.getElementById('cat-f').onchange = applyFilters;
         document.getElementById('reset-btn').onclick = () => window.location.reload();
 
+        // Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); }
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
