@@ -25,7 +25,6 @@ async function initTool() {
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    // Helper to format pipe-separated text for UI and Clipboard
     const formatText = (text) => (text ? text.toString().replace(/\|/g, '\n\n') : '');
 
     try {
@@ -59,27 +58,20 @@ async function initTool() {
         const render = (list) => {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
-            
             ['2.2', '2.1'].forEach(ver => {
                 const filteredVer = list.filter(i => i.ver == ver);
                 if (filteredVer.length === 0) return;
-
                 const h3 = document.createElement('h3');
                 h3.textContent = `WCAG ${ver} Success Criteria`;
                 listContainer.appendChild(h3);
-
                 filteredVer.forEach(i => {
                     const div = document.createElement('div');
                     div.style.marginBottom = "10px";
-
-                    // Apply formatting to every data field
                     const desc = formatText(i.desc);
                     const fails = formatText(i.failures);
                     const fixes = formatText(i.fixes);
-                    const disab = formatText(i.disabilitie); // Using 'disabilitie' key from JSON
-                    
+                    const disab = formatText(i.disabilitie);
                     const fullEntry = `Name: ${i.name}\n\nDescription:\n${desc}\n\nFailures:\n${fails}\n\nFixes:\n${fixes}\n\nDisabilities:\n${disab}\n\nLink: ${i.Link}`;
-                    
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee; white-space:pre-wrap;">
@@ -94,15 +86,15 @@ async function initTool() {
                                 <button class="copy-btn" data-text="${desc}">Copy Desc</button>
                                 <button class="copy-btn" data-text="${fails}">Copy Failures</button>
                                 <button class="copy-btn" data-text="${fixes}">Copy Fixes</button>
+                                <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
                             </div>
                         </div>
                     `;
                     const btn = div.querySelector('.acc-btn');
-                    const content = div.querySelector('.acc-content');
                     btn.onclick = () => {
                         const exp = btn.getAttribute('aria-expanded') === 'true';
                         btn.setAttribute('aria-expanded', !exp);
-                        content.style.display = exp ? 'none' : 'block';
+                        div.querySelector('.acc-content').style.display = exp ? 'none' : 'block';
                     };
                     div.querySelectorAll('.copy-btn').forEach(b => {
                         b.onclick = () => {
@@ -115,7 +107,6 @@ async function initTool() {
                     listContainer.appendChild(div);
                 });
             });
-            
             const msg = `Found ${list.length} results`;
             document.getElementById('count').textContent = msg;
             announcer.textContent = msg;
@@ -126,7 +117,6 @@ async function initTool() {
             const v = document.getElementById('ver-f').value;
             const l = document.getElementById('lvl-f').value;
             const c = document.getElementById('cat-f').value;
-            
             const filtered = data.filter(i => {
                 const matchSearch = i.name.toLowerCase().includes(q) || (i.desc && i.desc.toLowerCase().includes(q));
                 const matchVer = v === "" || i.ver == v;
@@ -137,17 +127,14 @@ async function initTool() {
             });
             render(filtered);
         };
-
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
         document.getElementById('reset-btn').onclick = () => window.location.reload();
-
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); }
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
             if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
-
         render(data);
     } catch (e) {
         if(container) container.innerHTML = 'Error loading data: ' + e.message;
