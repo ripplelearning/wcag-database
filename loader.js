@@ -1,9 +1,16 @@
-(function() {
-    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
-    let popup;
-    let appState = { q: '', v: '', l: '', c: '' };
+// loader.js
+async function initTool() {
+    const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
+    const container = document.getElementById('container');
+    const announcer = document.getElementById('sr-announcer') || (() => {
+        const div = document.createElement('div');
+        div.id = 'sr-announcer';
+        div.setAttribute('aria-live', 'polite');
+        div.style.cssText = "position:absolute; left:-9999px;";
+        document.body.appendChild(div);
+        return div;
+    })();
 
-    // Enhanced category and tag mapping for deep filtering
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
         "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts|Media",
@@ -22,111 +29,68 @@
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    const openTool = () => {
-        const w = window.screen.availWidth * 0.5;
-        const h = window.screen.availHeight * 0.5;
-        const options = `width=${w},height=${h},top=0,left=0,scrollbars=yes,resizable=yes`;
-        
-        if (!popup || popup.closed) {
-            popup = window.open('', 'WCAG Lookup Tool', options);
-            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
-            popup.document.close();
-            fetch(dataUrl).then(r => r.text()).then(jsText => { (0, eval)(jsText); setupPopup(window.wcagData); });
-        } else { popup.focus(); }
-    };
+    try {
+        const response = await fetch(dataUrl, { cache: "no-cache" });
+        const data = await response.json();
 
-    function setupPopup(data) {
-        const doc = popup.document;
-        doc.body.style.cssText = "font-family:sans-serif; padding:20px;";
-        
-        doc.body.innerHTML = `
-            <h1>WCAG Lookup Tool</h1>
-            <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
-            <label for="s">Search Criteria (ID, name, or keywords):</label><br>
-            <input id="s" type="search" style="width:90%; padding:10px;">
-            <div style="margin:15px 0;">
-                <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
-                <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
-                <label>Category: <select id="cat-f"><option value="">All</option>${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}</select></label>
-                <button id="reset-btn">Reset (Alt+Shift+D)</button>
-            </div>
-            <h2 id="count" aria-live="polite"></h2>
-            <div id="container"></div>
+        container.innerHTML = `
+            <label for="s">Search:</label><input id="s" type="search"><br>
+            <select id="ver-f"><option value="">All Versions</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
+            <select id="lvl-f"><option value="">All Levels</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
+            <select id="cat-f"><option value="">All Categories</option>${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}</select>
+            <button id="reset-btn">Reset (Alt+Shift+D)</button>
+            <h2 id="count" aria-live="polite">Found 0 results</h2>
+            <div id="list-container"></div>
         `;
 
         const render = (list) => {
-            const container = doc.getElementById('container');
-            container.innerHTML = '';
-            doc.getElementById('count').textContent = `Found ${list.length} results`;
-            doc.getElementById('sr-announcer').textContent = `Found ${list.length} results`;
-
-            ['2.2', '2.1'].forEach((ver) => {
-                const section = list.filter(i => i.ver == ver);
-                if (section.length === 0) return;
-                const h3 = doc.createElement('h3');
-                h3.textContent = `WCAG ${ver} Success Criteria`;
-                container.appendChild(h3);
-                const ul = doc.createElement('ul');
-                ul.style.listStyleType = "none"; ul.style.padding = "0";
-
-                section.forEach((i, idx) => {
-                    const li = doc.createElement('li');
-                    const btn = doc.createElement('button');
-                    const details = doc.createElement('div');
-                    
-                    btn.textContent = `${i.name} (Level ${i.level})`;
-                    btn.style.cssText = "width:100%; text-align:left; margin-top:5px;";
-                    btn.setAttribute('aria-expanded', 'false');
-                    
-                    details.style.display = 'none';
-                    details.innerHTML = `<p><strong>Description:</strong> ${i.desc}</p><p><strong>Failures:</strong> ${i.failures}</p><p><strong>Fixes:</strong> ${i.fixes}</p>`;
-                    
-                    btn.onclick = () => {
-                        const isExp = details.style.display === 'block';
-                        details.style.display = isExp ? 'none' : 'block';
-                        btn.setAttribute('aria-expanded', !isExp);
-                    };
-                    li.append(btn, details);
-                    ul.append(li);
-                });
-                container.appendChild(ul);
+            const listContainer = document.getElementById('list-container');
+            listContainer.innerHTML = '';
+            list.forEach(i => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <button class="acc-btn" aria-expanded="false">${i.name} (${i.level})</button>
+                    <div class="acc-content" style="display:none;">
+                        <p>${i.desc}</p>
+                        <button class="copy-btn" data-text="${i.name}\n\n${i.desc}">Copy Entry</button>
+                    </div>
+                `;
+                const btn = div.querySelector('.acc-btn');
+                const content = div.querySelector('.acc-content');
+                btn.onclick = () => {
+                    const expanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !expanded);
+                    content.style.display = expanded ? 'none' : 'block';
+                };
+                listContainer.appendChild(div);
             });
+            announcer.textContent = `Displaying ${list.length} results.`;
         };
 
-        const filter = () => {
-            const q = doc.getElementById('s').value.toLowerCase();
-            const v = doc.getElementById('ver-f').value;
-            const l = doc.getElementById('lvl-f').value;
-            const c = doc.getElementById('cat-f').value;
-            const mapFilter = categoryMap[c] || "";
+        const applyFilters = () => {
+            const q = document.getElementById('s').value.toLowerCase();
+            const v = document.getElementById('ver-f').value;
+            const l = document.getElementById('lvl-f').value;
+            const c = document.getElementById('cat-f').value;
             
-            const filtered = data.filter(i => 
-                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.tags||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && 
-                (l === "" || i.level === l) && 
-                (c === "" || (i.categories + "|" + i.tags).toLowerCase().includes(mapFilter.split('|')[0].toLowerCase()))
-            );
+            const filtered = data.filter(i => {
+                const matchCat = !c || (i.tags && i.tags.some(t => new RegExp(categoryMap[c], 'i').test(t)));
+                return (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
+                       (v === "" || i.ver == v) && (l === "" || i.level === l) && matchCat;
+            });
             render(filtered);
         };
 
-        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => doc.getElementById(id).onchange = filter);
-        doc.getElementById('s').oninput = filter;
-        
-        doc.getElementById('reset-btn').onclick = () => { 
-            ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => doc.getElementById(id).value = '');
-            render(data); 
-            doc.getElementById('s').focus();
-        };
+        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
+        document.getElementById('reset-btn').onclick = () => window.location.reload();
 
-        doc.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') popup.close();
-            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
+        window.addEventListener('keydown', (e) => {
+            if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); }
+            if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
+            if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
         render(data);
-        doc.getElementById('s').focus();
-    }
-
-    window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
-    openTool();
-})();
+    } catch (e) { container.innerHTML = 'Error.'; }
+}
+initTool();
