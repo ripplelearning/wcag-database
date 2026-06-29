@@ -1,17 +1,13 @@
-// loader.js
 async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
     
-    // Ensure screen reader announcer exists
-    if (!document.getElementById('sr-announcer')) {
-        const announcer = document.createElement('div');
-        announcer.id = 'sr-announcer';
-        announcer.setAttribute('aria-live', 'polite');
-        announcer.style.cssText = "position:absolute; left:-9999px;";
-        document.body.appendChild(announcer);
-    }
-    const announcer = document.getElementById('sr-announcer');
+    // Announcer for status updates (filters/categories)
+    const announcer = document.createElement('div');
+    announcer.id = 'sr-announcer';
+    announcer.setAttribute('aria-live', 'polite');
+    announcer.style.cssText = "position:absolute; left:-9999px;";
+    document.body.appendChild(announcer);
 
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
@@ -48,12 +44,14 @@ async function initTool() {
             <div id="list-container"></div>
         `;
 
-        const render = (list) => {
+        const sanitize = (str) => str.replace(/\|/g, '\n\n');
+
+        const render = (list, silent = false) => {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
             const msg = `Found ${list.length} results`;
             document.getElementById('count').textContent = msg;
-            announcer.textContent = msg;
+            if (!silent) announcer.textContent = msg;
 
             ['2.2', '2.1'].forEach(ver => {
                 const section = list.filter(i => i.ver == ver);
@@ -61,7 +59,6 @@ async function initTool() {
                 listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
                 
                 section.forEach(i => {
-                    // Uses \n\n for paragraph breaks
                     const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}`;
                     const div = document.createElement('div');
                     div.innerHTML = `
@@ -86,7 +83,9 @@ async function initTool() {
                         if(isHidden) content.style.display = 'block';
                     };
                     div.querySelectorAll('.copy-btn').forEach(btn => btn.onclick = function() {
-                        navigator.clipboard.writeText(this.getAttribute('data-text'));
+                        // Sanitize | to new paragraphs on copy
+                        const text = sanitize(this.getAttribute('data-text'));
+                        navigator.clipboard.writeText(text);
                         const old = this.textContent; this.textContent = "Copied!";
                         setTimeout(() => this.textContent = old, 2000);
                     });
@@ -101,11 +100,14 @@ async function initTool() {
             const l = document.getElementById('lvl-f').value;
             const c = document.getElementById('cat-f').value;
             const catPattern = categoryMap[c] || "";
-            render(data.filter(i => 
+            
+            const filtered = data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && (l === "" || i.level === l) &&
+                (v === "" || i.ver == v) && 
+                (l === "" || i.level === l) &&
                 (c === "" || (i.tags && i.tags.some(t => t.match(new RegExp(catPattern, 'i')))))
-            ));
+            );
+            render(filtered);
         };
 
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
@@ -117,7 +119,8 @@ async function initTool() {
             if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
-        render(data);
+        render(data, true); // Initial load silent
+        document.getElementById('s').focus();
     } catch (e) { container.innerHTML = 'Error loading data.'; }
 }
 initTool();
