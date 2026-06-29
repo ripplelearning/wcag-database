@@ -2,12 +2,15 @@ async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
     
-    // Announcer for status updates (filters/categories)
-    const announcer = document.createElement('div');
-    announcer.id = 'sr-announcer';
-    announcer.setAttribute('aria-live', 'polite');
-    announcer.style.cssText = "position:absolute; left:-9999px;";
-    document.body.appendChild(announcer);
+    // Announcer for screen readers
+    let announcer = document.getElementById('sr-announcer');
+    if (!announcer) {
+        announcer = document.createElement('div');
+        announcer.id = 'sr-announcer';
+        announcer.setAttribute('aria-live', 'polite');
+        announcer.style.cssText = "position:absolute; left:-9999px;";
+        document.body.appendChild(announcer);
+    }
 
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
@@ -46,18 +49,17 @@ async function initTool() {
 
         const sanitize = (str) => str.replace(/\|/g, '\n\n');
 
-        const render = (list, silent = false) => {
+        const render = (list) => {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
             const msg = `Found ${list.length} results`;
             document.getElementById('count').textContent = msg;
-            if (!silent) announcer.textContent = msg;
+            announcer.textContent = msg;
 
             ['2.2', '2.1'].forEach(ver => {
                 const section = list.filter(i => i.ver == ver);
                 if (!section.length) return;
                 listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
-                
                 section.forEach(i => {
                     const fullEntry = `Name: ${i.name}\n\nDescription: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}`;
                     const div = document.createElement('div');
@@ -83,9 +85,7 @@ async function initTool() {
                         if(isHidden) content.style.display = 'block';
                     };
                     div.querySelectorAll('.copy-btn').forEach(btn => btn.onclick = function() {
-                        // Sanitize | to new paragraphs on copy
-                        const text = sanitize(this.getAttribute('data-text'));
-                        navigator.clipboard.writeText(text);
+                        navigator.clipboard.writeText(sanitize(this.getAttribute('data-text')));
                         const old = this.textContent; this.textContent = "Copied!";
                         setTimeout(() => this.textContent = old, 2000);
                     });
@@ -110,17 +110,26 @@ async function initTool() {
             render(filtered);
         };
 
+        // Category Accessibility: Announce count on focus
+        document.getElementById('cat-f').querySelectorAll('option').forEach(opt => {
+            opt.onfocus = () => {
+                const val = opt.value;
+                const count = val === "" ? data.length : data.filter(i => i.tags && i.tags.some(t => t.match(new RegExp(categoryMap[val], 'i')))).length;
+                announcer.textContent = `${val || 'All Categories'}: ${count} results available.`;
+            };
+        });
+
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
         document.getElementById('reset-btn').onclick = () => { window.location.reload(); };
 
+        // Global Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
             if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
-        render(data, true); // Initial load silent
-        document.getElementById('s').focus();
-    } catch (e) { container.innerHTML = 'Error loading data.'; }
+        render(data);
+    } catch (e) { container.innerHTML = 'Error: ' + e.message; }
 }
 initTool();
