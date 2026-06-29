@@ -1,6 +1,9 @@
+// loader.js
 async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
+
+    // Announcer for accessibility
     const announcer = document.getElementById('sr-announcer') || (() => {
         const div = document.createElement('div');
         div.id = 'sr-announcer';
@@ -32,49 +35,60 @@ async function initTool() {
         const response = await fetch(dataUrl, { cache: "no-cache" });
         const data = await response.json();
 
-        // Ensure we are working with the full object from the DB
+        // Single Render Function
         const render = (list) => {
-            container.querySelector('#list-container').innerHTML = '';
+            const listContainer = document.getElementById('list-container');
+            const countHeader = document.getElementById('count');
+            listContainer.innerHTML = '';
             
-            // Re-render items using the FULL data object passed in the list
-            list.forEach(item => {
+            const msg = `Found ${list.length} results`;
+            countHeader.textContent = msg;
+            announcer.textContent = msg; // Accessibility update
+
+            list.forEach(i => {
                 const div = document.createElement('div');
                 div.innerHTML = `
-                    <button class="acc-btn" aria-expanded="false">${item.name}</button>
-                    <div class="acc-content" style="display:none;">
-                        <p>${item.desc}</p>
+                    <button class="acc-btn" aria-expanded="false">${i.name} (Level ${i.level})</button>
+                    <div class="acc-content" style="display:none; padding:10px; border:1px solid #ccc;">
+                        <p>${i.desc}</p>
                     </div>
                 `;
-                // ... rest of your UI logic ...
-                container.querySelector('#list-container').appendChild(div);
+                const btn = div.querySelector('.acc-btn');
+                const content = div.querySelector('.acc-content');
+                btn.onclick = () => {
+                    const expanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !expanded);
+                    content.style.display = expanded ? 'none' : 'block';
+                };
+                listContainer.appendChild(div);
             });
-            container.querySelector('#count').textContent = `Found ${list.length} results`;
-            announcer.textContent = `Found ${list.length} results`;
         };
 
         const applyFilters = () => {
-            const c = document.getElementById('cat-f').value;
+            const catSelection = document.getElementById('cat-f').value;
+            const searchTerm = document.getElementById('s').value.toLowerCase();
+            
             const filtered = data.filter(item => {
-                // If "All" is selected, return true
-                if (!c) return true;
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || item.desc.toLowerCase().includes(searchTerm);
                 
-                // Construct regex from map
-                const regex = new RegExp(categoryMap[c], 'i');
+                // If "All" is selected (empty string), matchesCategory is true
+                const matchesCategory = !catSelection || 
+                    (item.tags && item.tags.some(tag => new RegExp(categoryMap[catSelection], 'i').test(tag))) ||
+                    new RegExp(categoryMap[catSelection], 'i').test(item.name) ||
+                    new RegExp(categoryMap[catSelection], 'i').test(item.desc);
                 
-                // IMPORTANT: Check if item.tags is an array, if not, verify the item fields
-                // This assumes your data has an array property called 'tags'
-                const hasTagMatch = item.tags && item.tags.some(tag => regex.test(tag));
-                
-                // Fallback: If tags missing, check if keywords exist in description/name
-                const hasKeywordMatch = regex.test(item.name) || regex.test(item.desc);
-                
-                return hasTagMatch || hasKeywordMatch;
+                return matchesSearch && matchesCategory;
             });
+            
             render(filtered);
         };
 
-        // UI Setup
+        // Attach listeners
         document.getElementById('cat-f').onchange = applyFilters;
-        
-    } catch (e) { console.error(e); }
+        document.getElementById('s').oninput = applyFilters;
+
+        // Initial View
+        render(data);
+    } catch (e) { console.error("Data error:", e); }
 }
+initTool();
