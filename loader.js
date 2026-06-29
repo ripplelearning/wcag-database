@@ -20,7 +20,6 @@ async function initTool() {
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    // Initialize Announcer
     const announcer = document.createElement('div');
     announcer.id = 'sr-announcer';
     announcer.setAttribute('aria-live', 'polite');
@@ -53,12 +52,11 @@ async function initTool() {
                 div.innerHTML = `
                     <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                     <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
-                        <p>${i.desc}</p>
+                        <p><strong>Description:</strong> ${i.desc}</p>
                     </div>
                 `;
                 const btn = div.querySelector('.acc-btn');
                 const content = div.querySelector('.acc-content');
-                
                 btn.onclick = () => {
                     const expanded = btn.getAttribute('aria-expanded') === 'true';
                     btn.setAttribute('aria-expanded', !expanded);
@@ -82,30 +80,37 @@ async function initTool() {
                 const matchSearch = i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q);
                 const matchVer = v === "" || i.ver == v;
                 const matchLvl = l === "" || i.level === l;
-                const matchCat = !c || (i.tags && i.tags.some(t => new RegExp(categoryMap[c], 'i').test(t)));
+                
+                let matchCat = true;
+                if (c) {
+                    const regex = new RegExp(categoryMap[c], 'i');
+                    // Check tags array if it exists; fallback to checking name/description
+                    const hasTagMatch = Array.isArray(i.tags) && i.tags.some(t => regex.test(t));
+                    const hasKeywordMatch = regex.test(i.name) || regex.test(i.desc);
+                    matchCat = hasTagMatch || hasKeywordMatch;
+                }
+                
                 return matchSearch && matchVer && matchLvl && matchCat;
             });
             render(filtered);
         };
 
-        // Attach listeners
+        // UI Listeners
         document.getElementById('s').oninput = applyFilters;
         document.getElementById('ver-f').onchange = applyFilters;
         document.getElementById('lvl-f').onchange = applyFilters;
         document.getElementById('cat-f').onchange = applyFilters;
         document.getElementById('reset-btn').onclick = () => window.location.reload();
 
-        // Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); }
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
             if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
-        // Initialize view
         render(data);
     } catch (e) {
-        container.innerHTML = 'Error loading data: ' + e.message;
+        if(container) container.innerHTML = 'Error loading data: ' + e.message;
     }
 }
 initTool();
