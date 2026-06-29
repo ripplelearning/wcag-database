@@ -1,6 +1,11 @@
 async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
+    const announcer = document.createElement('div');
+    announcer.id = 'sr-announcer';
+    announcer.setAttribute('aria-live', 'polite');
+    announcer.style.cssText = "position:absolute; left:-9999px;";
+    document.body.appendChild(announcer);
 
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
@@ -20,16 +25,6 @@ async function initTool() {
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    // Ensure we have an announcer for accessibility
-    let announcer = document.getElementById('sr-announcer');
-    if (!announcer) {
-        announcer = document.createElement('div');
-        announcer.id = 'sr-announcer';
-        announcer.setAttribute('aria-live', 'polite');
-        announcer.style.cssText = "position:absolute; left:-9999px;";
-        document.body.appendChild(announcer);
-    }
-
     try {
         const response = await fetch(dataUrl, { cache: "no-cache" });
         const data = await response.json();
@@ -44,29 +39,65 @@ async function initTool() {
             </div>
             <h2 id="count" aria-live="polite">Found 0 results</h2>
             <div id="list-container"></div>
+            <footer style="margin-top:40px; border-top:1px solid #ccc; padding-top:10px;">
+                <details>
+                    <summary style="font-weight:bold; cursor:pointer;">How to use this tool</summary>
+                    <p>This tool allows you to search and filter WCAG success criteria to identify accessibility issues and their corresponding fixes.</p>
+                    <p><strong>Keyboard Shortcuts:</strong></p>
+                    <ul>
+                        <li><strong>Alt+Shift+A:</strong> Restore Tool</li>
+                        <li><strong>Alt+Shift+D:</strong> Reset Filters</li>
+                        <li><strong>Escape:</strong> Minimize/Hide Tool</li>
+                    </ul>
+                </details>
+            </footer>
         `;
 
         const render = (list) => {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
             
-            list.forEach(i => {
-                const div = document.createElement('div');
-                div.style.marginBottom = "5px";
-                div.innerHTML = `
-                    <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
-                    <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
-                        <p><strong>Description:</strong> ${i.desc}</p>
-                    </div>
-                `;
-                const btn = div.querySelector('.acc-btn');
-                const content = div.querySelector('.acc-content');
-                btn.onclick = () => {
-                    const expanded = btn.getAttribute('aria-expanded') === 'true';
-                    btn.setAttribute('aria-expanded', !expanded);
-                    content.style.display = expanded ? 'none' : 'block';
-                };
-                listContainer.appendChild(div);
+            // Separate by version
+            ['2.2', '2.1'].forEach(ver => {
+                const filteredVer = list.filter(i => i.ver == ver);
+                if (filteredVer.length === 0) return;
+
+                const h3 = document.createElement('h3');
+                h3.textContent = `WCAG ${ver} Success Criteria`;
+                listContainer.appendChild(h3);
+
+                filteredVer.forEach(i => {
+                    const div = document.createElement('div');
+                    div.style.marginBottom = "10px";
+                    div.innerHTML = `
+                        <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
+                        <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
+                            <p><strong>Description:</strong> ${i.desc}</p>
+                            <p><strong>Failures:</strong> ${i.failures}</p>
+                            <p><strong>Fixes:</strong> ${i.fixes}</p>
+                            <p><strong>Disabilities:</strong> ${i.disabilities || 'N/A'}</p>
+                            <a href="${i.Link}" target="_blank">View on W3C</a>
+                            <div style="margin-top:10px;">
+                                <button class="copy-btn" data-text="${i.name}">Copy Name</button>
+                                <button class="copy-btn" data-text="${i.desc}">Copy Desc</button>
+                                <button class="copy-btn" data-text="${i.failures}">Copy Failures</button>
+                                <button class="copy-btn" data-text="${i.fixes}">Copy Fixes</button>
+                                <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
+                            </div>
+                        </div>
+                    `;
+                    const btn = div.querySelector('.acc-btn');
+                    const content = div.querySelector('.acc-content');
+                    btn.onclick = () => {
+                        const exp = btn.getAttribute('aria-expanded') === 'true';
+                        btn.setAttribute('aria-expanded', !exp);
+                        content.style.display = exp ? 'none' : 'block';
+                    };
+                    div.querySelectorAll('.copy-btn').forEach(b => {
+                        b.onclick = () => navigator.clipboard.writeText(b.getAttribute('data-text'));
+                    });
+                    listContainer.appendChild(div);
+                });
             });
             
             const msg = `Found ${list.length} results`;
@@ -84,29 +115,16 @@ async function initTool() {
                 const matchSearch = i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q);
                 const matchVer = v === "" || i.ver == v;
                 const matchLvl = l === "" || i.level === l;
-                
-                let matchCat = true;
-                if (c) {
-                    const regex = new RegExp(categoryMap[c], 'i');
-                    // Defensive check: Only use .some() if tags is a valid array
-                    const hasTagMatch = (i.tags && Array.isArray(i.tags)) ? i.tags.some(t => regex.test(t)) : false;
-                    const hasKeywordMatch = regex.test(i.name) || regex.test(i.desc);
-                    matchCat = hasTagMatch || hasKeywordMatch;
-                }
-                
+                const regex = c ? new RegExp(categoryMap[c], 'i') : null;
+                const matchCat = !c || (Array.isArray(i.tags) && i.tags.some(t => regex.test(t))) || (regex && (regex.test(i.name) || regex.test(i.desc)));
                 return matchSearch && matchVer && matchLvl && matchCat;
             });
             render(filtered);
         };
 
-        // UI Listeners
-        document.getElementById('s').oninput = applyFilters;
-        document.getElementById('ver-f').onchange = applyFilters;
-        document.getElementById('lvl-f').onchange = applyFilters;
-        document.getElementById('cat-f').onchange = applyFilters;
+        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('reset-btn').onclick = () => window.location.reload();
 
-        // Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); }
             if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
