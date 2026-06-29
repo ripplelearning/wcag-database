@@ -32,96 +32,49 @@ async function initTool() {
         const response = await fetch(dataUrl, { cache: "no-cache" });
         const data = await response.json();
 
-        container.innerHTML = `
-            <input id="s" type="search" placeholder="Search Criteria..." style="width:90%; padding:10px;">
-            <div style="margin:15px 0;">
-                <select id="ver-f"><option value="">Version: All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
-                <select id="lvl-f"><option value="">Level: All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
-                <select id="cat-f"><option value="">Category: All</option>${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}</select>
-                <button id="reset-btn">Reset (Alt+Shift+D)</button>
-            </div>
-            <h2 id="count" aria-live="polite">Found 0 results</h2>
-            <div id="list-container"></div>
-        `;
-
+        // Ensure we are working with the full object from the DB
         const render = (list) => {
-            const listContainer = document.getElementById('list-container');
-            listContainer.innerHTML = '';
-            const msg = `Found ${list.length} results`;
-            document.getElementById('count').textContent = msg;
-            announcer.textContent = msg;
-
-            ['2.2', '2.1'].forEach(ver => {
-                const section = list.filter(i => i.ver == ver);
-                if (!section.length) return;
-                
-                listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
-                section.forEach(i => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `
-                        <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
-                        <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
-                            <p><strong>Description:</strong> ${i.desc}</p>
-                            <a href="${i.Link}" target="_blank">View on W3C</a>
-                            <div style="margin-top:10px;">
-                                <button class="copy-btn" data-text="Name: ${i.name}\n\nDesc: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}">Copy Full Entry</button>
-                                <button class="copy-btn" data-text="${i.name}">Copy Name</button>
-                                <button class="copy-btn" data-text="${i.desc}">Copy Description</button>
-                                <button class="copy-btn" data-text="${i.failures}">Copy Failures</button>
-                                <button class="copy-btn" data-text="${i.fixes}">Copy Fixes</button>
-                                <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
-                            </div>
-                        </div>
-                    `;
-                    
-                    const btn = div.querySelector('.acc-btn');
-                    const content = div.querySelector('.acc-content');
-                    
-                    btn.onclick = () => {
-                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-                        btn.setAttribute('aria-expanded', !isExpanded);
-                        content.style.display = isExpanded ? 'none' : 'block';
-                    };
-
-                    div.querySelectorAll('.copy-btn').forEach(b => {
-                        b.onclick = function() {
-                            navigator.clipboard.writeText(this.getAttribute('data-text').replace(/\|/g, '\n\n'));
-                            const old = this.textContent;
-                            this.textContent = "Copied!";
-                            setTimeout(() => this.textContent = old, 2000);
-                        };
-                    });
-                    listContainer.appendChild(div);
-                });
+            container.querySelector('#list-container').innerHTML = '';
+            
+            // Re-render items using the FULL data object passed in the list
+            list.forEach(item => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <button class="acc-btn" aria-expanded="false">${item.name}</button>
+                    <div class="acc-content" style="display:none;">
+                        <p>${item.desc}</p>
+                    </div>
+                `;
+                // ... rest of your UI logic ...
+                container.querySelector('#list-container').appendChild(div);
             });
+            container.querySelector('#count').textContent = `Found ${list.length} results`;
+            announcer.textContent = `Found ${list.length} results`;
         };
 
         const applyFilters = () => {
-            const q = document.getElementById('s').value.toLowerCase();
-            const v = document.getElementById('ver-f').value;
-            const l = document.getElementById('lvl-f').value;
             const c = document.getElementById('cat-f').value;
-            const pattern = categoryMap[c] ? new RegExp(categoryMap[c], 'i') : null;
-            
-            const filtered = data.filter(i => 
-                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && (l === "" || i.level === l) &&
-                (!pattern || (i.tags && i.tags.some(t => pattern.test(t))))
-            );
+            const filtered = data.filter(item => {
+                // If "All" is selected, return true
+                if (!c) return true;
+                
+                // Construct regex from map
+                const regex = new RegExp(categoryMap[c], 'i');
+                
+                // IMPORTANT: Check if item.tags is an array, if not, verify the item fields
+                // This assumes your data has an array property called 'tags'
+                const hasTagMatch = item.tags && item.tags.some(tag => regex.test(tag));
+                
+                // Fallback: If tags missing, check if keywords exist in description/name
+                const hasKeywordMatch = regex.test(item.name) || regex.test(item.desc);
+                
+                return hasTagMatch || hasKeywordMatch;
+            });
             render(filtered);
-            announcer.textContent = `Filtered to ${filtered.length} results.`;
         };
 
-        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
-        document.getElementById('s').oninput = applyFilters;
-        document.getElementById('reset-btn').onclick = () => window.location.reload();
-
-        window.addEventListener('keydown', (e) => {
-            if (e.altKey && e.shiftKey && e.key === 'D') window.location.reload();
-            if (e.key === 'Escape') { window.resizeTo(0, 0); window.blur(); }
-        });
-
-        render(data);
-    } catch (e) { container.innerHTML = 'Error: ' + e.message; }
+        // UI Setup
+        document.getElementById('cat-f').onchange = applyFilters;
+        
+    } catch (e) { console.error(e); }
 }
-initTool();
