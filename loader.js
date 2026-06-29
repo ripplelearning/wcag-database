@@ -1,116 +1,225 @@
-// loader.js
-async function initTool() {
-    const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
-    const container = document.getElementById('container');
-    
-    // Ensure announcer is ready
-    let announcer = document.getElementById('sr-announcer');
-    if (!announcer) {
-        announcer = document.createElement('div');
-        announcer.id = 'sr-announcer';
-        announcer.setAttribute('aria-live', 'polite');
-        announcer.style.cssText = "position:absolute; left:-9999px;";
-        document.body.appendChild(announcer);
-    }
+(function() {
+    const dataUrl = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
+    let popup;
+    let appState = { q: '', v: '', l: '', c: '' };
 
     const categoryMap = {
-        "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
-        "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts|Media",
-        "Buttons & Navigation": "Navigation|Link|Skip|Bypass|Button|Menu|Interaction",
-        "Color & Contrast": "Color|Contrast|Luminance|Foreground|Background",
-        "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal|Operable",
-        "Forms & Inputs": "Forms|Input|Autocomplete|Authentication|Labels",
-        "Images & Graphics": "Images|Graphic|Icons|Charts|Alt Text",
-        "Interactions": "Interactions|Pointer|Dragging|Input Modalities|Gestures",
-        "Language & Text": "Text|Language|Jargon|Acronym|Pronunciation|Readability",
-        "Layout & Structure": "Layout|Structure|Semantics|Reading Order|Reflow|CSS|Grouping",
-        "Mobile & Touch": "Mobile|Orientation|Tap Targets|Touch|Sensors",
-        "Motion & Animation": "Animation|Reduced Motion|Seizure|Flash|Blinking",
-        "Notifications & Errors": "Error|Notifications|Alert|Status|Validation",
-        "Time & Timeouts": "Timeouts|Refresh|Expiration|Interruptions",
-        "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
+        "ARIA & Live Regions": "ARIA|Live",
+        "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts",
+        "Buttons & Navigation": "Navigation|Link|Skip|Bypass",
+        "Color & Contrast": "Color|Contrast",
+        "Focus & Keyboard": "Keyboard|Focus|Tabindex|Modal",
+        "Forms & Inputs": "Forms|Input|Autocomplete|Authentication",
+        "Images & Graphics": "Images|Graphic|Icons|Charts",
+        "Interactions": "Interactions|Pointer|Dragging|Input Modalities",
+        "Language & Text": "Text|Language|Jargon|Acronym|Pronunciation",
+        "Layout & Structure": "Layout|Structure|Semantics|Reading Order|Reflow|CSS",
+        "Mobile & Touch": "Mobile|Orientation|Tap Targets",
+        "Motion & Animation": "Animation|Reduced Motion|Seizure|Flash",
+        "Notifications & Errors": "Error|Notifications|Alert|Status",
+        "Time & Timeouts": "Timeouts|Refresh|Expiration",
+        "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog"
     };
 
-    try {
-        const response = await fetch(dataUrl, { cache: "no-cache" });
-        const data = await response.json();
+    const openTool = () => {
+        const w = window.screen.availWidth * 0.5;
+        const h = window.screen.availHeight * 0.5;
+        const options = `width=${w},height=${h},top=0,left=0,scrollbars=yes,resizable=yes`;
+        
+        if (!popup || popup.closed) {
+            popup = window.open('', 'WCAG Lookup Tool', options);
+            popup.document.write('<html><head><title>WCAG Lookup Tool</title></head><body><div id="root"><h1>Loading WCAG Data...</h1></div></body></html>');
+            popup.document.close();
+            
+            fetch(dataUrl).then(r => r.text()).then(jsText => {
+                (0, eval)(jsText);
+                setupPopup(window.wcagData);
+            });
+        } else {
+            popup.focus();
+        }
+    };
 
-        container.innerHTML = `
+    function setupPopup(data) {
+        const doc = popup.document;
+        doc.body.style.fontFamily = "sans-serif";
+        doc.body.style.padding = "20px";
+        
+        // FIXED: Look at the <details> tag at the bottom. <h3> is replaced with pure CSS.
+        doc.body.innerHTML = `
+            <h1>WCAG Lookup Tool</h1>
+            <div id="sr-announcer" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
             <label for="s">Search Criteria:</label><br>
-            <input id="s" type="search" style="width:90%; padding:10px;">
+            <input id="s" type="search" autocomplete="off" aria-controls="count" placeholder="e.g. 1.1.1, images, keyboard..." style="width:90%; padding:10px;">
             <div style="margin:15px 0;">
-                <select id="ver-f"><option value="">Version: All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
-                <select id="lvl-f"><option value="">Level: All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
-                <select id="cat-f"><option value="">Category: All</option>${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}</select>
+                <label>Version: <select id="ver-f"><option value="">All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select></label>
+                <label>Level: <select id="lvl-f"><option value="">All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select></label>
+                <label>Category: 
+                    <select id="cat-f">
+                        <option value="">All</option>
+                        ${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                    </select>
+                </label>
                 <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
-            <h2 id="count" aria-live="polite">Found 0 results</h2>
-            <div id="list-container"></div>
+            <h2 id="count" aria-live="polite"></h2>
+            <ul id="container" style="list-style-type:none; padding:0;"></ul>
+            <hr style="margin-top:40px;">
+<details>
+    <summary style="font-size: 1.17em; font-weight: bold; cursor: pointer; margin-bottom: 10px;">How to use this tool</summary>
+    
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+        <li style="margin-top: 10px;">
+            <p style="margin: 0;">This WCAG Lookup Tool is a professional reference library designed to help accessibility testers, designers, and developers quickly locate specific success criteria from the Web Content Accessibility Guidelines (WCAG). It serves as a central hub for technical requirements, ensuring your digital products consistently meet global accessibility standards.</p>
+        </li>
+        <li style="margin-top: 10px;">
+            <p style="margin: 0;">To use the tool, enter keywords into the search input or use the version, level, and category filter controls to narrow down your results. When you find a criterion, activate its title to expand the detailed view, where you can review failures, recommended remediation fixes, and relevant disability contexts. You can then use the integrated copy buttons to quickly extract data for your reports or project documentation.</p>
+        </li>
+        <li style="margin-top: 10px;">
+            <strong>Keyboard Shortcuts</strong>
+            <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
+                <li><strong>Alt+Shift+A:</strong> Restore tool</li>
+                <li><strong>Alt+Shift+D:</strong> Reset filters</li>
+                <li><strong>Escape:</strong> Close tool</li>
+            </ul>
+        </li>
+    </ul>
+</details>
         `;
 
-        const render = (list) => {
-            const listContainer = document.getElementById('list-container');
-            listContainer.innerHTML = '';
-            
-            // Update UI count and Announcer
-            const msg = `Found ${list.length} results`;
-            document.getElementById('count').textContent = msg;
-            announcer.textContent = msg;
+        doc.addEventListener('click', (e) => {
+            const btn = e.target.closest('.copy-trigger');
+            if (!btn) return;
+            const rawText = btn.getAttribute('data-clipboard-text');
+            const formattedText = rawText.replace(/\|/g, '\r');
+            const originalText = btn.textContent;
+            popup.focus();
 
-            ['2.2', '2.1'].forEach(ver => {
+            const finishCopy = (success) => {
+                if (success) {
+                    btn.textContent = "Copied...";
+                    btn.setAttribute('aria-label', 'Copied to clipboard');
+                    doc.getElementById('sr-announcer').textContent = "Copied to clipboard";
+                } else {
+                    btn.textContent = "Error!";
+                }
+                btn.disabled = true;
+                setTimeout(() => { 
+                    btn.textContent = originalText; 
+                    btn.removeAttribute('aria-label');
+                    btn.disabled = false;
+                }, 2000);
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(formattedText)
+                    .then(() => finishCopy(true))
+                    .catch(() => fallbackCopy(formattedText, finishCopy));
+            } else {
+                fallbackCopy(formattedText, finishCopy);
+            }
+        });
+
+        function fallbackCopy(text, callback) {
+            const textArea = doc.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            doc.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            const success = doc.execCommand('copy');
+            doc.body.removeChild(textArea);
+            callback(success);
+        }
+
+        const render = (list) => {
+            const container = doc.getElementById('container');
+            container.innerHTML = '';
+            doc.getElementById('count').textContent = `Found ${list.length} results`;
+
+            ['2.2', '2.1'].forEach((ver) => {
                 const section = list.filter(i => i.ver == ver);
-                if (!section.length) return;
-                listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
-                
-                section.forEach(i => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `
-                        <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
-                        <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
-                            <p><strong>Description:</strong> ${i.desc}</p>
-                            <a href="${i.Link}" target="_blank">View on W3C</a>
-                        </div>
-                    `;
+                if (section.length === 0) return;
+
+                const h3 = doc.createElement('h3');
+                h3.textContent = `WCAG ${ver} Success Criteria`;
+                container.appendChild(h3);
+
+                section.forEach((i, idx) => {
+                    const li = doc.createElement('li');
+                    const btn = doc.createElement('button');
                     
-                    const btn = div.querySelector('.acc-btn');
+                    const panelId = `panel-${ver.replace('.', '_')}-${idx}`;
+                    
+                    btn.textContent = `${i.name} (Level ${i.level})`;
+                    btn.style.width = "100%"; btn.style.textAlign = "left"; btn.style.marginTop = "10px";
+                    
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.setAttribute('aria-controls', panelId);
+                    
+                    const details = doc.createElement('ul');
+                    details.id = panelId; 
+                    details.style.display = 'none'; details.style.padding = "10px"; details.style.border = "1px solid #ccc"; details.style.listStyleType = "none";
+                    
                     btn.onclick = () => {
-                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-                        btn.setAttribute('aria-expanded', !isExpanded);
-                        div.querySelector('.acc-content').style.display = isExpanded ? 'none' : 'block';
+                        const isExp = details.style.display === 'block';
+                        details.style.display = isExp ? 'none' : 'block';
+                        btn.setAttribute('aria-expanded', isExp ? 'false' : 'true');
                     };
-                    listContainer.appendChild(div);
+                    
+                    const fullEntry = `Name: ${i.name}\r\n\rDescription: ${i.desc}\r\n\rFailures:\n${(i.failures||"").replace(/\|/g, '\r')}\r\n\rFixes:\n${(i.fixes||"").replace(/\|/g, '\r')}\r\n\rLink: ${i.Link}`;
+                    const disabilitiesList = (i.disabilitie || 'N/A').replace(/\|/g, ', ');
+
+                    details.innerHTML = `
+                        <li style="margin-top: 15px; padding-bottom: 10px;"><strong>Description:</strong> ${i.desc}</li>
+                        <li><strong>Failures:</strong></li>${(i.failures||"").split('|').map(f => `<li>${f}</li>`).join('')}
+                        <li style="margin-top: 10px;"><strong>Fixes:</strong></li>${(i.fixes||"").split('|').map(f => `<li>${f}</li>`).join('')}
+                        <li style="margin-top: 10px;"><strong>Disabilities:</strong> ${disabilitiesList}</li>
+                        <li style="margin-top: 10px;"><a href="${i.Link}" target="_blank">Open W3C Documentation</a></li>
+                        <li style="margin-top: 15px;">
+                                                        <ul style="display: flex; gap: 5px; flex-wrap: wrap; list-style-type: none; padding: 0; margin: 6px 0 0 0;">
+                                <li><button class="copy-trigger" data-clipboard-text="${fullEntry.replace(/"/g, '&quot;')}" style="font-weight:bold; background-color:#e0e0e0;">Copy Full Entry</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.name||"").replace(/"/g, '&quot;')}">Copy Name</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.desc||"").replace(/"/g, '&quot;')}">Copy Description</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.failures||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Failures</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.fixes||"").replace(/\|/g, '\r').replace(/"/g, '&quot;')}">Copy Fixes</button></li>
+                                <li><button class="copy-trigger" data-clipboard-text="${(i.Link||"").replace(/"/g, '&quot;')}">Copy Link</button></li>
+                            </ul>
+                        </li>
+                    `;
+                    li.appendChild(btn);
+                    li.appendChild(details);
+                    container.appendChild(li);
                 });
             });
         };
 
-        const applyFilters = () => {
-            const q = document.getElementById('s').value.toLowerCase();
-            const v = document.getElementById('ver-f').value;
-            const l = document.getElementById('lvl-f').value;
-            const c = document.getElementById('cat-f').value;
-            
-            // Fix: Strict filtering logic
-            const filtered = data.filter(i => {
-                const matchesSearch = i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q);
-                const matchesVer = v === "" || i.ver == v;
-                const matchesLvl = l === "" || i.level === l;
-                const matchesCat = c === "" || (i.tags && i.tags.some(tag => new RegExp(categoryMap[c], 'i').test(tag)));
-                return matchesSearch && matchesVer && matchesLvl && matchesCat;
-            });
+        const filter = () => {
+            appState = { q: doc.getElementById('s').value, v: doc.getElementById('ver-f').value, l: doc.getElementById('lvl-f').value, c: doc.getElementById('cat-f').value };
+            const q = appState.q.toLowerCase();
+            const mapEntry = categoryMap[appState.c] || "";
+            const filtered = data.filter(i => 
+                (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || (i.failures||"").toLowerCase().includes(q) || (i.fixes||"").toLowerCase().includes(q) || (i.disabilitie||"").toLowerCase().includes(q) || (i.categories||"").toLowerCase().includes(q)) &&
+                (appState.v === "" || i.ver == appState.v) && 
+                (appState.l === "" || i.level === appState.l) && 
+                (appState.c === "" || mapEntry.split('|').some(k => (i.categories + "|" + i.tags).includes(k)))
+            );
             render(filtered);
         };
 
-        ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
-        document.getElementById('s').oninput = applyFilters;
-        document.getElementById('reset-btn').onclick = () => window.location.reload();
-
-        window.addEventListener('keydown', (e) => {
-            if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); }
-            if (e.altKey && e.shiftKey && e.key === 'D') { window.location.reload(); }
-            if (e.key === 'Escape') { window.resizeTo(0, 0); }
+        doc.getElementById('s').value = appState.q; doc.getElementById('ver-f').value = appState.v;
+        doc.getElementById('lvl-f').value = appState.l; doc.getElementById('cat-f').value = appState.c;
+        doc.getElementById('s').oninput = doc.getElementById('ver-f').onchange = doc.getElementById('lvl-f').onchange = doc.getElementById('cat-f').onchange = filter;
+        doc.getElementById('reset-btn').onclick = () => { appState = { q: '', v: '', l: '', c: '' }; doc.getElementById('s').value = doc.getElementById('ver-f').value = doc.getElementById('lvl-f').value = doc.getElementById('cat-f').value = ''; render(data); doc.getElementById('s').focus(); };
+        doc.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') popup.close();
+            if (e.altKey && e.shiftKey && e.key === 'D') doc.getElementById('reset-btn').click();
         });
-
         render(data);
-    } catch (e) { container.innerHTML = 'Error: ' + e.message; }
-}
-initTool();
+        doc.getElementById('s').focus();
+    }
+
+    window.addEventListener('keydown', (e) => { if (e.altKey && e.shiftKey && e.key === 'A') openTool(); });
+    openTool();
+})();
