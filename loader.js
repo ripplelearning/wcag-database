@@ -25,6 +25,9 @@ async function initTool() {
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
+    // Helper to format pipe-separated text for UI and Clipboard
+    const formatText = (text) => (text ? text.toString().replace(/\|/g, '\n\n') : '');
+
     try {
         const response = await fetch(dataUrl, { cache: "no-cache" });
         const data = await response.json();
@@ -68,24 +71,29 @@ async function initTool() {
                 filteredVer.forEach(i => {
                     const div = document.createElement('div');
                     div.style.marginBottom = "10px";
-                    // Build full entry string for the "Copy Full Entry" button
-                    const fullEntry = `Name: ${i.name}\nDesc: ${i.desc}\nFailures: ${i.failures}\nFixes: ${i.fixes}\nDisabilities: ${i.disabilities || 'N/A'}\nLink: ${i.Link}`;
+
+                    // Map fields, apply pipe-to-newline conversion
+                    const desc = formatText(i.desc);
+                    const fails = formatText(i.failures);
+                    const fixes = formatText(i.fixes);
+                    const disab = formatText(i.disabilitie); // Using your custom key
+                    
+                    const fullEntry = `Name: ${i.name}\n\nDesc: ${desc}\n\nFailures: ${fails}\n\nFixes: ${fixes}\n\nDisabilities: ${disab}\n\nLink: ${i.Link}`;
                     
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
-                        <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
-                            <p><strong>Description:</strong> ${i.desc}</p>
-                            <p><strong>Failures:</strong> ${i.failures}</p>
-                            <p><strong>Fixes:</strong> ${i.fixes}</p>
-                            <p><strong>Disabilities:</strong> ${i.disabilities || 'N/A'}</p>
+                        <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee; white-space:pre-wrap;">
+                            <p><strong>Description:</strong> ${desc}</p>
+                            <p><strong>Failures:</strong> ${fails}</p>
+                            <p><strong>Fixes:</strong> ${fixes}</p>
+                            <p><strong>Disabilities:</strong> ${disab || 'N/A'}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
                                 <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
                                 <button class="copy-btn" data-text="${i.name}">Copy Name</button>
-                                <button class="copy-btn" data-text="${i.desc}">Copy Desc</button>
-                                <button class="copy-btn" data-text="${i.failures}">Copy Failures</button>
-                                <button class="copy-btn" data-text="${i.fixes}">Copy Fixes</button>
-                                <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
+                                <button class="copy-btn" data-text="${desc}">Copy Desc</button>
+                                <button class="copy-btn" data-text="${fails}">Copy Failures</button>
+                                <button class="copy-btn" data-text="${fixes}">Copy Fixes</button>
                             </div>
                         </div>
                     `;
@@ -120,11 +128,11 @@ async function initTool() {
             const c = document.getElementById('cat-f').value;
             
             const filtered = data.filter(i => {
-                const matchSearch = i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q);
+                const matchSearch = i.name.toLowerCase().includes(q) || (i.desc && i.desc.toLowerCase().includes(q));
                 const matchVer = v === "" || i.ver == v;
                 const matchLvl = l === "" || i.level === l;
                 const regex = c ? new RegExp(categoryMap[c], 'i') : null;
-                const matchCat = !c || (Array.isArray(i.tags) && i.tags.some(t => regex.test(t))) || (regex && (regex.test(i.name) || regex.test(i.desc)));
+                const matchCat = !c || (Array.isArray(i.tags) && i.tags.some(t => regex.test(t))) || (regex && (regex.test(i.name) || (i.desc && regex.test(i.desc))));
                 return matchSearch && matchVer && matchLvl && matchCat;
             });
             render(filtered);
