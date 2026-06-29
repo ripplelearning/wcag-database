@@ -1,3 +1,4 @@
+// loader.js
 async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
@@ -33,7 +34,8 @@ async function initTool() {
         const data = await response.json();
 
         container.innerHTML = `
-            <input id="s" type="search" placeholder="Search Criteria..." style="width:90%; padding:10px;">
+            <label for="s">Search Criteria:</label><br>
+            <input id="s" type="search" style="width:90%; padding:10px;">
             <div style="margin:15px 0;">
                 <select id="ver-f"><option value="">Version: All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
                 <select id="lvl-f"><option value="">Level: All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
@@ -42,6 +44,16 @@ async function initTool() {
             </div>
             <h2 id="count" aria-live="polite">Found 0 results</h2>
             <div id="list-container"></div>
+            <footer style="margin-top: 40px; border-top: 1px solid #ccc;">
+                <details>
+                    <summary style="font-weight:bold; cursor:pointer;">How to use this tool</summary>
+                    <ul>
+                        <li><strong>Alt+Shift+A:</strong> Restore Tool</li>
+                        <li><strong>Alt+Shift+D:</strong> Reset Filters</li>
+                        <li><strong>Escape:</strong> Minimize/Hide Tool</li>
+                    </ul>
+                </details>
+            </footer>
         `;
 
         const render = (list) => {
@@ -54,14 +66,19 @@ async function initTool() {
             ['2.2', '2.1'].forEach(ver => {
                 const section = list.filter(i => i.ver == ver);
                 if (!section.length) return;
-                
-                listContainer.appendChild(document.createElement('h3')).textContent = `WCAG ${ver} Success Criteria`;
+                const h3 = document.createElement('h3');
+                h3.textContent = `WCAG ${ver} Success Criteria`;
+                listContainer.appendChild(h3);
+
                 section.forEach(i => {
                     const div = document.createElement('div');
+                    div.style.marginBottom = "5px";
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
                             <p><strong>Description:</strong> ${i.desc}</p>
+                            <p><strong>Failures:</strong> ${i.failures}</p>
+                            <p><strong>Fixes:</strong> ${i.fixes}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
                                 <button class="copy-btn" data-text="Name: ${i.name}\n\nDesc: ${i.desc}\n\nFailures: ${i.failures}\n\nFixes: ${i.fixes}\n\nLink: ${i.Link}">Copy Full Entry</button>
@@ -76,7 +93,6 @@ async function initTool() {
                     
                     const btn = div.querySelector('.acc-btn');
                     const content = div.querySelector('.acc-content');
-                    
                     btn.onclick = () => {
                         const isExpanded = btn.getAttribute('aria-expanded') === 'true';
                         btn.setAttribute('aria-expanded', !isExpanded);
@@ -86,9 +102,9 @@ async function initTool() {
                     div.querySelectorAll('.copy-btn').forEach(b => {
                         b.onclick = function() {
                             navigator.clipboard.writeText(this.getAttribute('data-text').replace(/\|/g, '\n\n'));
-                            const old = this.textContent;
+                            const original = this.textContent;
                             this.textContent = "Copied!";
-                            setTimeout(() => this.textContent = old, 2000);
+                            setTimeout(() => this.textContent = original, 2000);
                         };
                     });
                     listContainer.appendChild(div);
@@ -105,7 +121,8 @@ async function initTool() {
             
             const filtered = data.filter(i => 
                 (i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q)) &&
-                (v === "" || i.ver == v) && (l === "" || i.level === l) &&
+                (v === "" || i.ver == v) && 
+                (l === "" || i.level === l) &&
                 (!pattern || (i.tags && i.tags.some(t => pattern.test(t))))
             );
             render(filtered);
@@ -118,10 +135,10 @@ async function initTool() {
 
         window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'D') window.location.reload();
-            if (e.key === 'Escape') { window.resizeTo(0, 0); window.blur(); }
+            if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
 
         render(data);
-    } catch (e) { container.innerHTML = 'Error: ' + e.message; }
+    } catch (e) { container.innerHTML = 'Error loading data: ' + e.message; }
 }
 initTool();
