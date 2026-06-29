@@ -72,21 +72,21 @@ async function initTool() {
                     const div = document.createElement('div');
                     div.style.marginBottom = "10px";
 
-                    // Map fields, apply pipe-to-newline conversion
+                    // Apply formatting to every data field
                     const desc = formatText(i.desc);
                     const fails = formatText(i.failures);
                     const fixes = formatText(i.fixes);
-                    const disab = formatText(i.disabilitie); // Using your custom key
+                    const disab = formatText(i.disabilitie); // Using 'disabilitie' key from JSON
                     
-                    const fullEntry = `Name: ${i.name}\n\nDesc: ${desc}\n\nFailures: ${fails}\n\nFixes: ${fixes}\n\nDisabilities: ${disab}\n\nLink: ${i.Link}`;
+                    const fullEntry = `Name: ${i.name}\n\nDescription:\n${desc}\n\nFailures:\n${fails}\n\nFixes:\n${fixes}\n\nDisabilities:\n${disab}\n\nLink: ${i.Link}`;
                     
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee; white-space:pre-wrap;">
-                            <p><strong>Description:</strong> ${desc}</p>
-                            <p><strong>Failures:</strong> ${fails}</p>
-                            <p><strong>Fixes:</strong> ${fixes}</p>
-                            <p><strong>Disabilities:</strong> ${disab || 'N/A'}</p>
+                            <p><strong>Description:</strong><br>${desc}</p>
+                            <p><strong>Failures:</strong><br>${fails}</p>
+                            <p><strong>Fixes:</strong><br>${fixes}</p>
+                            <p><strong>Disabilities:</strong><br>${disab || 'N/A'}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
                                 <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
