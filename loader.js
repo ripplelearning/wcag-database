@@ -1,6 +1,12 @@
 async function initTool() {
     const dataUrl = 'https://ripplelearning.github.io/wcag-database/wcag_data.js';
     const container = document.getElementById('container');
+    
+    // Inject Styles for semantic lists without bullets
+    const style = document.createElement('style');
+    style.innerHTML = `.acc-content ul { list-style-type: none; padding-left: 0; } .acc-content ul li { margin-bottom: 5px; }`;
+    document.head.appendChild(style);
+
     const announcer = document.createElement('div');
     announcer.id = 'sr-announcer';
     announcer.setAttribute('aria-live', 'polite');
@@ -26,6 +32,10 @@ async function initTool() {
     };
 
     const formatText = (text) => (text ? text.toString().replace(/\|/g, '\n\n') : '');
+    const formatAsList = (text) => {
+        if (!text) return '<ul><li>N/A</li></ul>';
+        return `<ul>${text.toString().split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>`;
+    };
 
     try {
         const response = await fetch(dataUrl, { cache: "no-cache" });
@@ -44,7 +54,7 @@ async function initTool() {
             <footer style="margin-top:40px; border-top:1px solid #ccc; padding-top:10px;">
                 <details>
                     <summary style="font-weight:bold; cursor:pointer;">How to use this tool</summary>
-                    <p>This tool allows you to search and filter WCAG success criteria to identify accessibility issues and their corresponding fixes.</p>
+                    <p>This tool allows you to search and filter WCAG success criteria.</p>
                     <p><strong>Keyboard Shortcuts:</strong></p>
                     <ul>
                         <li><strong>Alt+Shift+A:</strong> Restore Tool</li>
@@ -66,36 +76,37 @@ async function initTool() {
                 listContainer.appendChild(h3);
                 filteredVer.forEach(i => {
                     const div = document.createElement('div');
-                    div.style.marginBottom = "10px";
                     const desc = formatText(i.desc);
-                    const fails = formatText(i.failures);
-                    const fixes = formatText(i.fixes);
+                    const failsList = formatAsList(i.failures);
+                    const fixesList = formatAsList(i.fixes);
                     const disab = formatText(i.disabilitie);
-                    const fullEntry = `Name: ${i.name}\n\nDescription:\n${desc}\n\nFailures:\n${fails}\n\nFixes:\n${fixes}\n\nDisabilities:\n${disab}\n\nLink: ${i.Link}`;
+                    const fullEntry = `Name: ${i.name}\n\nDescription:\n${desc}\n\nFailures:\n${i.failures.replace(/\|/g, '\n')}\n\nFixes:\n${i.fixes.replace(/\|/g, '\n')}\n\nDisabilities:\n${disab}\n\nLink: ${i.Link}`;
+                    
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee; white-space:pre-wrap;">
                             <p><strong>Description:</strong><br>${desc}</p>
-                            <p><strong>Failures:</strong><br>${fails}</p>
-                            <p><strong>Fixes:</strong><br>${fixes}</p>
+                            <p><strong>Failures:</strong></p>${failsList}
+                            <p><strong>Fixes:</strong></p>${fixesList}
                             <p><strong>Disabilities:</strong><br>${disab || 'N/A'}</p>
                             <a href="${i.Link}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
                                 <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
                                 <button class="copy-btn" data-text="${i.name}">Copy Name</button>
                                 <button class="copy-btn" data-text="${desc}">Copy Desc</button>
-                                <button class="copy-btn" data-text="${fails}">Copy Failures</button>
-                                <button class="copy-btn" data-text="${fixes}">Copy Fixes</button>
+                                <button class="copy-btn" data-text="${i.failures.replace(/\|/g, '\n')}">Copy Failures</button>
+                                <button class="copy-btn" data-text="${i.fixes.replace(/\|/g, '\n')}">Copy Fixes</button>
                                 <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
                             </div>
                         </div>
                     `;
-                    const btn = div.querySelector('.acc-btn');
-                    btn.onclick = () => {
-                        const exp = btn.getAttribute('aria-expanded') === 'true';
-                        btn.setAttribute('aria-expanded', !exp);
+                    
+                    div.querySelector('.acc-btn').onclick = function() {
+                        const exp = this.getAttribute('aria-expanded') === 'true';
+                        this.setAttribute('aria-expanded', !exp);
                         div.querySelector('.acc-content').style.display = exp ? 'none' : 'block';
                     };
+                    
                     div.querySelectorAll('.copy-btn').forEach(b => {
                         b.onclick = () => {
                             navigator.clipboard.writeText(b.getAttribute('data-text'));
@@ -136,8 +147,6 @@ async function initTool() {
             if (e.key === 'Escape') { window.resizeTo(0, 0); }
         });
         render(data);
-    } catch (e) {
-        if(container) container.innerHTML = 'Error loading data: ' + e.message;
-    }
+    } catch (e) { console.error(e); }
 }
 initTool();
