@@ -1,40 +1,49 @@
 (async function() {
-    const container = document.getElementById('container');
-    if (!container) return;
+    // Unique ID to prevent multiple instances
+    const ID = "wcag-lookup-tool";
+    let container = document.getElementById(ID);
     
-    // We add an overlay wrapper that we can show/hide
-    container.innerHTML = '<div id="tool-ui">Loading...</div>';
+    // Toggle logic: If it exists, just show/hide it
+    if (container) {
+        container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        return;
+    }
+
+    // Otherwise, create the container
+    container = document.createElement('div');
+    container.id = ID;
+    container.style.cssText = "position:fixed; top:10px; right:10px; width:400px; max-height:80vh; background:white; z-index:999999; border:1px solid #000; overflow-y:auto; padding:10px;";
+    document.body.appendChild(container);
+    
+    container.innerHTML = '<div id="tool-ui">Loading data...</div>';
     const toolUi = document.getElementById('tool-ui');
 
     try {
         const response = await fetch('https://ripplelearning.github.io/wcag-database/wcag_data.js', { cache: "no-cache" });
-        const wcagData = await response.json();
+        const data = await response.json();
         
-        // ... [Insert categoryMap, formatters, and render logic here] ...
+        // --- [Insert categoryMap, formatters, and render function logic here] ---
+        // (Use the logic from our previous successful build)
 
-        toolUi.innerHTML = `
-            <input id="s" type="search" placeholder="Search... 1.1.1, buttons..." style="width:90%; padding:10px;">
-            <div id="list-container"></div>
-        `;
-
-        // AGGRESSIVE KEYBOARD LISTENER
-        document.addEventListener('keydown', (e) => {
-            // Restore: Alt+Shift+A
+        toolUi.innerHTML = `<h3>WCAG Lookup</h3><input id="s" type="search" placeholder="Search..."><div id="list-container"></div>`;
+        
+        // ATTACH TO WINDOW TO BYPASS PAGE-LEVEL INTERFERENCE
+        window.addEventListener('keydown', (e) => {
             if (e.altKey && e.shiftKey && e.key === 'A') {
-                toolUi.style.display = 'block';
+                container.style.display = 'block';
                 document.getElementById('s').focus();
-                e.preventDefault();
-            }
-            // Minimize: Escape
-            if (e.key === 'Escape') {
-                toolUi.style.display = 'none';
-            }
-            // Reset: Alt+Shift+D
-            if (e.altKey && e.shiftKey && e.key === 'D') {
+            } else if (e.key === 'Escape') {
+                container.style.display = 'none';
+            } else if (e.altKey && e.shiftKey && e.key === 'D') {
+                container.remove(); // Removes tool to allow clean re-launch
                 window.location.reload();
             }
-        }, true); // Use 'true' to capture event in the 'capture' phase, before the site intercepts it
+        }, { capture: true });
 
-        render(wcagData);
-    } catch (e) { container.innerHTML = 'Error: ' + e.message; }
+        // Logic to render content...
+        // render(data); 
+
+    } catch (e) {
+        container.innerHTML = 'Error: ' + e.message;
+    }
 })();
