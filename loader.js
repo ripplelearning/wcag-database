@@ -3,7 +3,6 @@ async function initTool() {
     const container = document.getElementById('container');
     container.innerHTML = 'Loading criteria...';
 
-    // Inject styles
     const style = document.createElement('style');
     style.innerHTML = `
         .acc-content ul { list-style-type: none; padding-left: 0; margin: 0; } 
@@ -13,7 +12,6 @@ async function initTool() {
     `;
     document.head.appendChild(style);
 
-    // Announcer for screen readers
     const announcer = document.createElement('div');
     announcer.id = 'sr-announcer';
     announcer.setAttribute('aria-live', 'polite');
@@ -49,6 +47,15 @@ async function initTool() {
     };
     const cleanForCopy = (val) => (val || '').toString().replace(/\|/g, '\n');
 
+    const resetTool = () => {
+        document.getElementById('s').value = '';
+        document.getElementById('ver-f').value = '';
+        document.getElementById('lvl-f').value = '';
+        document.getElementById('cat-f').value = '';
+        document.getElementById('s').dispatchEvent(new Event('input'));
+        document.getElementById('s').focus();
+    };
+
     try {
         const response = await fetch(dataUrl, { cache: "no-cache" });
         const data = await response.json();
@@ -59,14 +66,21 @@ async function initTool() {
                 <select id="ver-f"><option value="">Version: All</option><option value="2.1">2.1</option><option value="2.2">2.2</option></select>
                 <select id="lvl-f"><option value="">Level: All</option><option value="A">A</option><option value="AA">AA</option><option value="AAA">AAA</option></select>
                 <select id="cat-f"><option value="">Category: All</option>${Object.keys(categoryMap).sort().map(cat => `<option value="${cat}">${cat}</option>`).join('')}</select>
-                <button id="reset-btn">Reset</button>
+                <button id="reset-btn">Reset (Alt+Shift+D)</button>
             </div>
             <h2 id="count" aria-live="polite">Found 0 results</h2>
             <div id="list-container"></div>
             <footer style="margin-top:40px; border-top:1px solid #ccc; padding-top:10px;">
                 <details>
                     <summary style="font-weight:bold; cursor:pointer;">How to use this tool</summary>
-                    <p>Search and filter WCAG success criteria.</p>
+                    <p>Use the search box to find specific criteria by name or content. Filters for version, level, and category narrow down your results quickly.</p>
+                    <p>Each result provides details, failures, and fixes. Use the "Copy" buttons to quickly grab text for your reports.</p>
+                    <p><strong>Keyboard Shortcuts:</strong></p>
+                    <ul>
+                        <li><strong>Minimize Tool:</strong> Escape</li>
+                        <li><strong>Restore Tool:</strong> Alt+Shift+A</li>
+                        <li><strong>Reset Tool:</strong> Alt+Shift+D</li>
+                    </ul>
                 </details>
             </footer>
         `;
@@ -83,23 +97,16 @@ async function initTool() {
                 
                 filteredVer.forEach(i => {
                     const div = document.createElement('div');
-                    const desc = formatParagraphs(i.desc);
-                    const fails = formatAsList(i.failures);
-                    const fixes = formatAsList(i.fixes);
-                    const disab = formatAsCommaList(i.disabilitie);
-                    
-                    const fullEntry = `Name: ${i.name}\n\nDescription:\n${cleanForCopy(i.desc)}\n\nFailures:\n${cleanForCopy(i.failures)}\n\nFixes:\n${cleanForCopy(i.fixes)}\n\nDisabilities: ${disab}\n\nLink: ${i.Link}`;
-                    
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
                         <div class="acc-content" style="display:none; padding:10px; border:1px solid #eee;">
-                            <strong>Description:</strong>${desc}
-                            <strong>Failures:</strong>${fails}
-                            <strong>Fixes:</strong>${fixes}
-                            <p><strong>Disabilities:</strong> ${disab}</p>
+                            <strong>Description:</strong>${formatParagraphs(i.desc)}
+                            <strong>Failures:</strong>${formatAsList(i.failures)}
+                            <strong>Fixes:</strong>${formatAsList(i.fixes)}
+                            <p><strong>Disabilities:</strong> ${formatAsCommaList(i.disabilitie)}</p>
                             <a href="${i.Link || '#'}" target="_blank">View on W3C</a>
                             <div style="margin-top:10px;">
-                                <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
+                                <button class="copy-btn" data-text="${cleanForCopy(i.name)}\n\nDesc:\n${cleanForCopy(i.desc)}\n\nFailures:\n${cleanForCopy(i.failures)}\n\nFixes:\n${cleanForCopy(i.fixes)}\n\nDisabilities: ${formatAsCommaList(i.disabilitie)}">Copy Full</button>
                                 <button class="copy-btn" data-text="${cleanForCopy(i.name)}">Copy Name</button>
                                 <button class="copy-btn" data-text="${cleanForCopy(i.desc)}">Copy Desc</button>
                                 <button class="copy-btn" data-text="${cleanForCopy(i.failures)}">Copy Failures</button>
@@ -124,9 +131,9 @@ async function initTool() {
                     listContainer.appendChild(div);
                 });
             });
-            const countText = `Found ${list.length} results`;
-            document.getElementById('count').textContent = countText;
-            announcer.textContent = countText;
+            const msg = `Found ${list.length} results`;
+            document.getElementById('count').textContent = msg;
+            announcer.textContent = msg;
         };
 
         const applyFilters = () => {
@@ -144,8 +151,16 @@ async function initTool() {
 
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
-        document.getElementById('reset-btn').onclick = () => window.location.reload();
+        document.getElementById('reset-btn').onclick = resetTool;
+
+        window.addEventListener('keydown', (e) => {
+            if (e.altKey && e.shiftKey && e.key === 'A') { window.resizeTo(800, 600); window.focus(); document.getElementById('s').focus(); }
+            if (e.altKey && e.shiftKey && e.key === 'D') { resetTool(); }
+            if (e.key === 'Escape') { window.resizeTo(0, 0); }
+        });
+
         render(data);
+        document.getElementById('s').focus();
     } catch (e) { container.innerHTML = 'Error loading data: ' + e.message; }
 }
 initTool();
