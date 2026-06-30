@@ -1,12 +1,10 @@
 (async function() {
-    // 1. Setup UI and Styles first
     const container = document.getElementById('container');
-    if (!container) return; // Guard clause
+    if (!container) return;
     
     container.innerHTML = 'Loading...';
     document.title = "WCAG Lookup Tool";
 
-    // 2. Define data and config inside the same scope
     const categoryMap = {
         "ARIA & Live Regions": "ARIA|Live|Region|Role|State",
         "Audio & Video": "Multimedia|Audio|Video|Captions|Transcripts|Media",
@@ -29,12 +27,10 @@
         const response = await fetch('https://ripplelearning.github.io/wcag-database/wcag_data.js', { cache: "no-cache" });
         const wcagData = await response.json();
 
-        // 3. Define helper functions inside the scope
         const formatAsList = (val) => (val || '').toString() ? `<ul>${(val || '').toString().split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>` : '<ul><li>N/A</li></ul>';
         const formatAsCommaList = (val) => (val || '').toString().replace(/\|/g, ', ') || 'N/A';
         const formatParagraphs = (val) => (val || '').toString().split('|').map(p => `<p>${p.trim()}</p>`).join('');
 
-        // 4. Define Render within the scope
         const render = (list) => {
             const listContainer = document.getElementById('list-container');
             listContainer.innerHTML = '';
@@ -61,7 +57,6 @@
             document.getElementById('count').textContent = `Found ${list.length} results`;
         };
 
-        // 5. Build UI and attach events
         container.innerHTML = `
             <input id="s" type="search" placeholder="Search... 1.1.1, buttons..." style="width:90%; padding:10px;">
             <div>
@@ -90,6 +85,21 @@
         ['s', 'ver-f', 'lvl-f', 'cat-f'].forEach(id => document.getElementById(id).onchange = applyFilters);
         document.getElementById('s').oninput = applyFilters;
         document.getElementById('reset-btn').onclick = () => window.location.reload();
+
+        // Keyboard Shortcuts
+        window.addEventListener('keydown', (e) => {
+            if (e.altKey && e.shiftKey && e.key === 'A') {
+                window.resizeTo(window.screen.width * 0.5, window.screen.height * 0.5);
+                window.focus();
+                document.getElementById('s').focus();
+            }
+            if (e.key === 'Escape') {
+                window.resizeTo(1, 1);
+            }
+            if (e.altKey && e.shiftKey && e.key === 'D') {
+                window.location.reload();
+            }
+        });
 
         render(wcagData);
         document.getElementById('s').focus();
