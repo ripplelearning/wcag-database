@@ -3,7 +3,6 @@ async function initTool() {
     const container = document.getElementById('container');
     container.innerHTML = 'Loading criteria...';
 
-    // Inject styles for clean semantic lists and paragraphs
     const style = document.createElement('style');
     style.innerHTML = `
         .acc-content ul { list-style-type: none; padding-left: 0; margin: 0; } 
@@ -31,9 +30,18 @@ async function initTool() {
         "Tooltips & Overlays": "Tooltips|Overlays|Popups|Dialog|Hover|Focus"
     };
 
-    const formatAsList = (text) => text ? `<ul>${text.toString().split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>` : '<ul><li>N/A</li></ul>';
-    const formatAsCommaList = (text) => text ? text.toString().replace(/\|/g, ', ') : 'N/A';
-    const formatParagraphs = (text) => text ? text.toString().split('|').map(p => `<p>${p.trim()}</p>`).join('') : '';
+    // Helper functions with defensive checks to prevent "Cannot read property of undefined"
+    const safeString = (val) => (val || '').toString();
+    const formatAsList = (text) => {
+        const val = safeString(text);
+        if (!val) return '<ul><li>N/A</li></ul>';
+        return `<ul>${val.split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>`;
+    };
+    const formatAsCommaList = (text) => (text ? safeString(text).replace(/\|/g, ', ') : 'N/A');
+    const formatParagraphs = (text) => {
+        const val = safeString(text);
+        return val ? val.split('|').map(p => `<p>${p.trim()}</p>`).join('') : '';
+    };
 
     try {
         const response = await fetch(dataUrl, { cache: "no-cache" });
@@ -60,6 +68,7 @@ async function initTool() {
                 const h3 = document.createElement('h3');
                 h3.textContent = `WCAG ${ver} Success Criteria`;
                 listContainer.appendChild(h3);
+                
                 filteredVer.forEach(i => {
                     const div = document.createElement('div');
                     const desc = formatParagraphs(i.desc);
@@ -67,7 +76,7 @@ async function initTool() {
                     const fixesList = formatAsList(i.fixes);
                     const disab = formatAsCommaList(i.disabilitie);
                     
-                    const fullEntry = `Name: ${i.name}\n\nDescription:\n${i.desc.replace(/\|/g, '\n')}\n\nFailures:\n${i.failures.replace(/\|/g, '\n')}\n\nFixes:\n${i.fixes.replace(/\|/g, '\n')}\n\nDisabilities: ${disab}\n\nLink: ${i.Link}`;
+                    const fullEntry = `Name: ${i.name}\n\nDescription:\n${safeString(i.desc).replace(/\|/g, '\n')}\n\nFailures:\n${safeString(i.failures).replace(/\|/g, '\n')}\n\nFixes:\n${safeString(i.fixes).replace(/\|/g, '\n')}\n\nDisabilities: ${disab}\n\nLink: ${i.Link}`;
                     
                     div.innerHTML = `
                         <button class="acc-btn" aria-expanded="false" style="width:100%; text-align:left; padding:10px;">${i.name} (Level ${i.level})</button>
@@ -80,9 +89,9 @@ async function initTool() {
                             <div style="margin-top:10px;">
                                 <button class="copy-btn" data-text="${fullEntry}">Copy Full Entry</button>
                                 <button class="copy-btn" data-text="${i.name}">Copy Name</button>
-                                <button class="copy-btn" data-text="${i.desc.replace(/\|/g, '\n')}">Copy Desc</button>
-                                <button class="copy-btn" data-text="${i.failures.replace(/\|/g, '\n')}">Copy Failures</button>
-                                <button class="copy-btn" data-text="${i.fixes.replace(/\|/g, '\n')}">Copy Fixes</button>
+                                <button class="copy-btn" data-text="${safeString(i.desc).replace(/\|/g, '\n')}">Copy Desc</button>
+                                <button class="copy-btn" data-text="${safeString(i.failures).replace(/\|/g, '\n')}">Copy Failures</button>
+                                <button class="copy-btn" data-text="${safeString(i.fixes).replace(/\|/g, '\n')}">Copy Fixes</button>
                                 <button class="copy-btn" data-text="${i.Link}">Copy Link</button>
                             </div>
                         </div>
@@ -95,8 +104,9 @@ async function initTool() {
                     div.querySelectorAll('.copy-btn').forEach(b => {
                         b.onclick = () => {
                             navigator.clipboard.writeText(b.getAttribute('data-text'));
+                            const original = b.textContent;
                             b.textContent = "Copied!";
-                            setTimeout(() => b.textContent = b.textContent.replace("Copied!", "Copy"), 2000);
+                            setTimeout(() => b.textContent = original, 2000);
                         };
                     });
                     listContainer.appendChild(div);
