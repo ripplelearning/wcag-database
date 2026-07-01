@@ -19,7 +19,7 @@
     const toolUi = document.getElementById('tool-ui');
 
     try {
-        const response = await fetch('https://ripplelearning.github.io/wcag-database/wcag_data.js', { cache: "no-cache" });
+        const response = await fetch('https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js', { cache: "no-cache" });
         const data = await response.json();
         
         toolUi.innerHTML = `
