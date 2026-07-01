@@ -12,17 +12,21 @@
     </style>
 </head>
 <body>
-    <div id="container">Loading tool...</div>
+    <div id="container">Loading data... Check Console (F12) for errors.</div>
+
     <script>
         const formatAsList = (val) => val ? `<ul>${val.toString().split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>` : '';
 
         async function initTool() {
             const container = document.getElementById('container');
             try {
-                // Using the raw URL you provided
                 const res = await fetch('https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js', { cache: "no-cache" });
-                if (!res.ok) throw new Error('Could not fetch data');
-                const data = await res.json();
+                const text = await res.text();
+                
+                // Debugging: Log what we actually got
+                console.log("Raw Response:", text);
+                
+                const data = JSON.parse(text);
 
                 container.innerHTML = `
                     <input id="s" type="search" placeholder="Search criteria..." aria-label="Search WCAG">
@@ -36,7 +40,7 @@
                 const render = (list) => {
                     const listContainer = document.getElementById('list-container');
                     listContainer.innerHTML = '';
-                    if (!Array.isArray(list)) return; 
+                    if (!Array.isArray(list)) throw new Error("Data is not an array");
                     list.forEach(i => {
                         const div = document.createElement('div');
                         div.innerHTML = `<button class="acc-btn">${i.name || 'Untitled'}</button><div class="acc-content">${formatAsList(i.fixes)}</div>`;
@@ -61,8 +65,8 @@
                 });
                 render(data);
             } catch (err) {
-                container.innerHTML = "Error loading data. Please check your JSON format.";
-                console.error(err);
+                container.innerHTML = "<strong>Error loading data.</strong> Check the Browser Console (F12) to see if the file is valid JSON.";
+                console.error("Critical Error:", err);
             }
         }
         initTool();
