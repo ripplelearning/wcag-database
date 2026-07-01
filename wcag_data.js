@@ -9,8 +9,8 @@
     "disabilitie": "Blindness|Low Vision|Color Blindness|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html",
     "categories": "Images|UI Components|Media|Forms|Buttons",
-    "tags": "Alternate Text|Decorative Images|CAPTCHA|Form Controls|Graphic Symbols|Structural Markup|Buttons|Input|Forms"
-  },
+    "tags": ["Alternate Text", "Decorative Images", "CAPTCHA", "Form Controls", "Graphic Symbols", "Structural Markup", "Buttons", "Input", "Forms"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -21,8 +21,8 @@
     "disabilitie": "Blindness|Low Vision|Deafness|Hard of Hearing|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Audio-only|Video-only|Transcripts|Prerecorded Media|Media Alternatives"
-  },
+    "tags": ["Audio-only", "Video-only", "Transcripts", "Prerecorded Media", "Media Alternatives"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -33,8 +33,8 @@
     "disabilitie": "Deafness|Hard of Hearing|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Captions|Synchronized Media|Prerecorded Media|Audio Tracks"
-  },
+    "tags": ["Captions", "Synchronized Media", "Prerecorded Media", "Audio Tracks"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -45,8 +45,8 @@
     "disabilitie": "Blindness|Low Vision|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Audio Description|Media Alternatives|Transcripts|Synchronized Media"
-  },
+    "tags": ["Audio Description", "Media Alternatives", "Transcripts", "Synchronized Media"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -57,8 +57,8 @@
     "disabilitie": "Deafness|Hard of Hearing|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/captions-live.html",
     "categories": "Multimedia",
-    "tags": "Live Captions|Real-time Media|Synchronization|Live Broadcasts"
-  },
+    "tags": ["Live Captions", "Real-time Media", "Synchronization", "Live Broadcasts"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -69,9 +69,9 @@
     "disabilitie": "Blindness|Low Vision|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Audio Description|Prerecorded Media|Video Descriptions|Text Overlays"
-  },
-  {
+    "tags": ["Audio Description", "Prerecorded Media", "Video Descriptions", "Text Overlays"]
+  },,
+{
     "ver": 2.2,
     "level": "AAA",
     "name": "1.2.6 Sign Language (Prerecorded)",
@@ -81,8 +81,8 @@
     "disabilitie": "Deafness|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Sign Language|Interpretation|Prerecorded Media|Synchronized Media"
-  },
+    "tags": ["Sign Language", "Interpretation", "Prerecorded Media", "Synchronized Media"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -93,8 +93,8 @@
     "disabilitie": "Blindness|Low Vision|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Extended Audio Description|Video Pauses|Media Alternatives|Prerecorded Media"
-  },
+    "tags": ["Extended Audio Description", "Video Pauses", "Media Alternatives", "Prerecorded Media"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -105,8 +105,8 @@
     "disabilitie": "Blindness|Low Vision|Deafness|Hard of Hearing|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Media Alternatives|Text Transcripts|Storyboards|Prerecorded Media"
-  },
+    "tags": ["Media Alternatives", "Text Transcripts", "Storyboards", "Prerecorded Media"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -117,9 +117,9 @@
     "disabilitie": "Deafness|Hard of Hearing|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live.html",
     "categories": "Multimedia",
-    "tags": "Live Audio|Real-time Transcripts|CART Services|Audio-only Streams"
-  },
-{
+    "tags": ["Live Audio", "Real-time Transcripts", "CART Services", "Audio-only Streams"]
+  },,
+  {
     "ver": 2.2,
     "level": "A",
     "name": "1.3.1 Info and Relationships",
@@ -129,8 +129,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html",
     "categories": "Structure|Forms|Tables|ARIA",
-    "tags": "Semantics|Landmarks|Headings|Form Labels|Data Tables|ARIA Roles|Info and relationships|semantic markup|lists|form controls|fieldsets|programmatic structure|Buttons|Input|Forms|Labels|Radio Groups|Tables|Accordians|Navigation|Checkboxes|Textvoxes|Comboboxes|Listboxes"
-  },
+    "tags": ["Semantics", "Landmarks", "Headings", "Form Labels", "Data Tables", "ARIA Roles", "Info and relationships", "Semantic markup", "Lists", "Form controls", "Fieldsets", "Programmatic structure", "Buttons", "Input", "Forms", "Labels", "Radio Groups", "Tables", "Accordians", "Navigation", "Checkboxes", "Textboxes", "Comboboxes", "Listboxes"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -141,8 +141,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html",
     "categories": "Structure|Layout",
-    "tags": "Reading Order|DOM Sequence|CSS Positioning|Layout Tables|Meaningful sequence|navigation order|DOM structure|Headings|Heading Level"
-  },
+    "tags": ["Reading Order", "DOM Sequence", "CSS Positioning", "Layout Tables", "Meaningful sequence", "navigation order", "DOM structure", "Headings", "Heading Level"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -153,8 +153,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics.html",
     "categories": "Design|Instructions",
-    "tags": "Sensory Cues|Spatial Location|Audio Instructions|Sensory characteristics|color|shape|size|location|orientation|sound"
-  },
+    "tags": ["Sensory Cues", "Spatial Location", "Audio Instructions", "Sensory characteristics", "Color", "Shape", "Size", "Location", "Orientation", "Sound"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -165,8 +165,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/orientation.html",
     "categories": "Layout|Mobile",
-    "tags": "Orientation Lock|Responsive Design|Portrait|Landscape|Orientation|responsive design"
-  },
+    "tags": ["Orientation Lock", "Responsive Design", "Portrait", "Landscape", "Orientation", "Responsive design"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -177,8 +177,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html",
     "categories": "Forms|Input",
-    "tags": "Autocomplete|Input Purpose|Autofill Metadata|Identify input purpose|personal data|form fields"
-  },
+    "tags": ["Autocomplete", "Input Purpose", "Autofill Metadata", "Identify input purpose", "Personal data", "Form fields"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -189,8 +189,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose.html",
     "categories": "Structure|ARIA",
-    "tags": "ARIA Landmarks|Personalization UI|Component Identification|Identify purpose|icons|buttons|regions|UI components"
-  },
+    "tags": ["ARIA Landmarks", "Personalization UI", "Component Identification", "Identify purpose", "Icons", "Buttons", "Regions", "UI components"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -201,8 +201,8 @@
     "disabilitie": "Color Blindness|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
     "categories": "Design|Color",
-    "tags": "Color Dependence|Links|Headings|Visual Markers|Use of color|contrast|visual cues|indicators|forms|Buttons|Input"
-  },
+    "tags": ["Color Dependence", "Links", "Headings", "Visual Markers", "Use of color", "Contrast", "Visual cues", "Indicators", "Forms", "Buttons", "Input"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -213,9 +213,9 @@
     "disabilitie": "Cognitive Disabilities|Hearing Impairments",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-control.html",
     "categories": "Multimedia|Audio",
-    "tags": "Audio Control|Autoplay|Interference|Volume Control|Audio control|autoplay|volume|pause|stop"
+    "tags": ["Audio Control", "Autoplay", "Interference", "Volume Control", "Audio control", "Autoplay", "Volume", "Pause", "Stop"]
   },
-  {
+{
     "ver": 2.2,
     "level": "AA",
     "name": "1.4.3 Contrast (Minimum)",
@@ -225,8 +225,8 @@
     "disabilitie": "Low Vision|Color Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
     "categories": "Design|Contrast",
-    "tags": "Text Contrast|Background Images|Color Ratios|Contrast minimum|text|images of text|readability|color ratio"
-  },
+    "tags": ["Text Contrast", "Background Images", "Color Ratios", "Contrast minimum", "Text", "Images of text", "Readability", "Color ratio"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -237,8 +237,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html",
     "categories": "Layout|Text",
-    "tags": "Text Scaling|Zoom 200%|Fixed Containers|Viewport Meta|Resize text|zoom|text scaling|readability|layout"
-  },
+    "tags": ["Text Scaling", "Zoom 200%", "Fixed Containers", "Viewport Meta", "Resize text", "Zoom", "Text scaling", "Readability", "Layout"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -249,8 +249,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html",
     "categories": "Images|Text",
-    "tags": "Images of Text|CSS Layouts|Web Fonts|Styling Properties|Images of text|logos|branding|CSS styling"
-  },
+    "tags": ["Images of Text", "CSS Layouts", "Web Fonts", "Styling Properties", "Images of text", "Logos", "Branding", "CSS styling"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -261,8 +261,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html",
     "categories": "Design|Contrast",
-    "tags": "Enhanced Contrast|7:1 Ratio|High Contrast|Color Ratios|Contrast enhanced|readability|color ratio"
-  },
+    "tags": ["Enhanced Contrast", "7:1 Ratio", "High Contrast", "Color Ratios", "Contrast enhanced", "Readability", "Color ratio"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -273,9 +273,9 @@
     "disabilitie": "Hearing Impairments|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio.html",
     "categories": "Multimedia|Audio",
-    "tags": "Background Audio|Decibel Level|Speech Isolation|Mixing Standards|Low background audio|speech foreground|audio mixing|volume level|audio tracks|background noise|media player|multimedia content|volume controls"
-  },
-{
+    "tags": ["Background Audio", "Decibel Level", "Speech Isolation", "Mixing Standards", "Low background audio", "Speech foreground", "Audio mixing", "Volume level", "Audio tracks", "Background noise", "Media player", "Multimedia content", "Volume controls"]
+  },,
+  {
     "ver": 2.2,
     "level": "AAA",
     "name": "1.4.8 Visual Presentation",
@@ -285,8 +285,8 @@
     "disabilitie": "Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html",
     "categories": "Layout|Text",
-    "tags": "Visual presentation|text blocks|line spacing|paragraph spacing|letter spacing|word spacing|text alignment|column width|text justification|CSS layout|font size|margin|padding|typography"
-  },
+    "tags": ["Visual presentation", "Text blocks", "Line spacing", "Paragraph spacing", "Letter spacing", "Word spacing", "Text alignment", "Column width", "Text justification", "CSS layout", "Font size", "Margin", "Padding", "Typography"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -297,8 +297,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception.html",
     "categories": "Images|Text",
-    "tags": "Images of text|text graphics|logos|banners|CSS styled text|web fonts|SVG text|bitmap text|branding elements|icon labels|images|text"
-  },
+    "tags": ["Images of text", "Text graphics", "Logos", "Banners", "CSS styled text", "Web fonts", "SVG text", "Bitmap text", "Branding elements", "Icon labels", "Images", "Text"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -309,8 +309,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
     "categories": "Layout|Responsive",
-    "tags": "Reflow|responsive design|viewport|horizontal scrolling|zoom scaling|CSS flexbox|CSS grid|media queries|fluid layout|container width|content wrapping|mobile optimization"
-  },
+    "tags": ["Reflow", "Responsive design", "Viewport", "Horizontal scrolling", "Zoom scaling", "CSS flexbox", "CSS grid", "Media queries", "Fluid layout", "Container width", "Content wrapping", "Mobile optimization"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -321,9 +321,9 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
     "categories": "Design|Contrast",
-    "tags": "Non text contrast|UI components|graphical objects|focus indicators|form borders|icons|buttons|selection states|active states|hover states|state indicators|color ratio|color palette"
-  },
-  {
+    "tags": ["Non text contrast", "UI components", "Graphical objects", "Focus indicators", "Form borders", "Icons", "Buttons", "Selection states", "Active states", "Hover states", "State indicators", "Color ratio", "Color palette"]
+  },,
+{
     "ver": 2.2,
     "level": "AA",
     "name": "1.4.12 Text Spacing",
@@ -333,8 +333,8 @@
     "disabilitie": "Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html",
     "categories": "Layout|Text",
-    "tags": "Text spacing|line height|letter spacing|paragraph spacing|word spacing|CSS styles|text blocks|font size|layout overflow|content clipping|responsive typography|text|spacing"
-  },
+    "tags": ["Text spacing", "Line height", "Letter spacing", "Paragraph spacing", "Word spacing", "CSS styles", "Text blocks", "Font size", "Layout overflow", "Content clipping", "Responsive typography"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -345,8 +345,8 @@
     "disabilitie": "Low Vision|Physical Disabilities|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html",
     "categories": "UI Components|Popups",
-    "tags": "Content on hover or focus|tooltips|pop-ups|sub-menus|persistent content|dismissible content|hover states|focus states|mouse over|keyboard focus|transient elements|hidden content|hover|focus"
-  },
+    "tags": ["Content on hover or focus", "Tooltips", "Pop-ups", "Sub-menus", "Persistent content", "Dismissible content", "Hover states", "Focus states", "Mouse over", "Keyboard focus", "Transient elements", "Hidden content", "Hover", "Focus"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -357,8 +357,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Keyboard navigation|keyboard access|interactive elements|buttons|links|form controls|menus|widgets|tab index|event handlers|mouse dependent functionality|drag and drop|custom controls|tab key|tabbing|arrow keys|Activation"
-  },
+    "tags": ["Keyboard navigation", "Keyboard access", "Interactive elements", "Buttons", "Links", "Form controls", "Menus", "Widgets", "Tab index", "Event handlers", "Mouse dependent functionality", "Drag and drop", "Custom controls", "Tab key", "Tabbing", "Arrow keys", "Activation"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -369,9 +369,9 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html",
     "categories": "Keyboard|Navigation",
-    "tags": "Keyboard trap|focus management|modal dialogs|pop-ups|iframes|embedded content|keyboard navigation|navigation flow|focus recovery|tab key|tabbing|trap|stuck"
-  },
-{
+    "tags": ["Keyboard trap", "Focus management", "Modal dialogs", "Pop-ups", "Iframes", "Embedded content", "Keyboard navigation", "Navigation flow", "Focus recovery", "Tab key", "Tabbing", "Trap", "Stuck"]
+  },,
+  {
     "ver": 2.2,
     "level": "AAA",
     "name": "2.1.3 Keyboard (No Exception)",
@@ -381,8 +381,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Keyboard navigation|mouse only functionality|drag and drop|drawing applications|path based gestures|specialized controls|pointer events|input devices|interactive canvases|interaction"
-  },
+    "tags": ["Keyboard navigation", "Mouse only functionality", "Drag and drop", "Drawing applications", "Path based gestures", "Specialized controls", "Pointer events", "Input devices", "Interactive canvases", "Interaction"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -393,8 +393,8 @@
     "disabilitie": "Physical Disabilities|Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Character key shortcuts|hotkeys|single key shortcuts|keyboard mapping|remapping tools|bypass mechanisms|application commands|toolbar actions|input device settings"
-  },
+    "tags": ["Character key shortcuts", "Hotkeys", "Single key shortcuts", "Keyboard mapping", "Remapping tools", "Bypass mechanisms", "Application commands", "Toolbar actions", "Input device settings"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -405,10 +405,10 @@
     "disabilitie": "Physical Disabilities|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html",
     "categories": "Timeouts|Interactivity",
-    "tags": "Timing adjustable|session timeouts|auto refresh|content updates|warning thresholds|session extension|pause button|stop button|time limit notifications|form submission|extend"
-  },
-  {
-"ver": 2.2,
+    "tags": ["Timing adjustable", "Session timeouts", "Auto refresh", "Content updates", "Warning thresholds", "Session extension", "Pause button", "Stop button", "Time limit notifications", "Form submission", "Extend"]
+  },,
+{
+    "ver": 2.2,
     "level": "A",
     "name": "2.2.2 Pause, Stop, Hide",
     "desc": "For any moving, blinking, scrolling, or information that updates automatically, the user can pause, stop, or hide it.",
@@ -417,8 +417,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html",
     "categories": "Animation|Interactivity",
-    "tags": "Pause|stop|hide|auto play|scrolling content|blinking content|moving content|carousels|marquees|animations|sliders|dynamic updates|focus indicators|time based media|advertisements|interruptions|slides|slide shows"
-  },
+    "tags": ["Pause", "Stop", "Hide", "Auto play", "Scrolling content", "Blinking content", "Moving content", "Carousels", "Marquees", "Animations", "Sliders", "Dynamic updates", "Focus indicators", "Time based media", "Advertisements", "Interruptions", "Slides", "Slide shows"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -429,8 +429,8 @@
     "disabilitie": "Cognitive Disabilities|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/no-timing.html",
     "categories": "Timeouts|Interactivity",
-    "tags": "No timing|real time processes|synchronization|session timeouts|interactive sequences|user paced content|time independent navigation|task completion"
-  },
+    "tags": ["No timing", "Real time processes", "Synchronization", "Session timeouts", "Interactive sequences", "User paced content", "Time independent navigation", "Task completion"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -441,8 +441,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/interruptions.html",
     "categories": "Interactivity|Notifications",
-    "tags": "Interruptions|notifications|alerts|modal dialogs|updates|pop-ups|user postponement|content suppression|system messages|focus management|advertisements"
-  },
+    "tags": ["Interruptions", "Notifications", "Alerts", "Modal dialogs", "Updates", "Pop-ups", "User postponement", "Content suppression", "System messages", "Focus management", "Advertisements"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -453,8 +453,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating.html",
     "categories": "Timeouts|Forms",
-    "tags": "Re-authentication|login sessions|session expiry|data persistence|user authentication|forms|input fields|form submission|data loss prevention|expiration|session timeouts"
-  },
+    "tags": ["Re-authentication", "Login sessions", "Session expiry", "Data persistence", "User authentication", "Forms", "Input fields", "Form submission", "Data loss prevention", "Expiration", "Session timeouts"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -465,8 +465,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/timeouts.html",
     "categories": "Timeouts|Forms",
-    "tags": "Timeouts|inactivity timers|session limits|data persistence|user activity|background activity|idle state|session warnings|logout flow|user data security|time limits"
-  },
+    "tags": ["Timeouts", "Inactivity timers", "Session limits", "Data persistence", "User activity", "Background activity", "Idle state", "Session warnings", "Logout flow", "User data security", "Time limits"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -477,8 +477,8 @@
     "disabilitie": "Photosensitive Epilepsy",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html",
     "categories": "Multimedia|Design",
-    "tags": "Three flashes|flashing content|strobing effects|animation|video content|motion graphics|screen flicker|photosensitive seizures|flash rate|flashing|flickering"
-  },
+    "tags": ["Three flashes", "Flashing content", "Strobing effects", "Animation", "Video content", "Motion graphics", "Screen flicker", "Photosensitive seizures", "Flash rate", "Flashing", "Flickering"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -489,8 +489,8 @@
     "disabilitie": "Photosensitive Epilepsy",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes.html",
     "categories": "Multimedia|Design",
-    "tags": "Three flashes|flashing content|strobing effects|animation|video content|motion graphics|screen flicker|photosensitive seizures|flash rate|flickering"
-  },
+    "tags": ["Three flashes", "Flashing content", "Strobing effects", "Animation", "Video content", "Motion graphics", "Screen flicker", "Photosensitive seizures", "Flash rate", "Flickering"]
+  },,
 {
     "ver": 2.2,
     "level": "AAA",
@@ -501,8 +501,8 @@
     "disabilitie": "Vestibular Disorders|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html",
     "categories": "Animation|Design",
-    "tags": "Animation from interactions|motion triggers|state transitions|hover effects|click effects|parallax scrolling|page transitions|scroll animations|CSS transitions|web animations API"
-  },
+    "tags": ["Animation from interactions", "Motion triggers", "State transitions", "Hover effects", "Click effects", "Parallax scrolling", "Page transitions", "Scroll animations", "CSS transitions", "Web animations API"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -513,8 +513,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
     "categories": "Navigation|Structure",
-    "tags": "Bypass blocks|skip links|navigation menus|page headers|main content|landmark regions|header elements|navigation elements|document structure|keyboard navigation|Main landmark|Skip to content"
-  },
+    "tags": ["Bypass blocks", "Skip links", "Navigation menus", "Page headers", "Main content", "Landmark regions", "Header elements", "Navigation elements", "Document structure", "Keyboard navigation", "Main landmark", "Skip to content"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -525,8 +525,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html",
     "categories": "Navigation|Structure",
-    "tags": "Page titled|document title|head element|browser tab title|page context|document structure|meta tags|site navigation|title attribute|page title|site map|Popups"
-  },
+    "tags": ["Page titled", "Document title", "Head element", "Browser tab title", "Page context", "Document structure", "Meta tags", "Site navigation", "Title attribute", "Page title", "Site map", "Popups"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -537,8 +537,8 @@
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html",
     "categories": "Navigation|Keyboard",
-    "tags": "Focus order|tab order|reading order|navigation flow|keyboard navigation|interactive elements|logical sequence|source order|scripts|event handlers|tabbing|Tab key"
-  },
+    "tags": ["Focus order", "Tab order", "Reading order", "Navigation flow", "Keyboard navigation", "Interactive elements", "Logical sequence", "Source order", "Scripts", "Event handlers", "Tabbing", "Tab key"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -549,8 +549,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html",
     "categories": "Navigation|Text",
-    "tags": "Link purpose|anchor tags|link text|context clues|navigation menus|call to action|hypertext|accessible name|navigation flow|link name|link purpose|links"
-  },
+    "tags": ["Link purpose", "Anchor tags", "Link text", "Context clues", "Navigation menus", "Call to action", "Hypertext", "Accessible name", "Navigation flow", "Link name", "Link purpose", "Links"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -561,8 +561,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways.html",
     "categories": "Navigation",
-    "tags": "Multiple ways|site navigation|search functionality|site map|table of contents|navigation menus|page links|user orientation|content access"
-  },
+    "tags": ["Multiple ways", "Site navigation", "Search functionality", "Site map", "Table of contents", "Navigation menus", "Page links", "User orientation", "Content access"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -573,8 +573,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html",
     "categories": "Navigation|Structure",
-    "tags": "Headings|labels|form labels|input fields|page structure|content hierarchy|descriptive text|navigation|site architecture|H1|H2|H3|H4|H5|H6"
-  },
+    "tags": ["Headings", "Labels", "Form labels", "Input fields", "Page structure", "Content hierarchy", "Descriptive text", "Navigation", "Site architecture", "H1", "H2", "H3", "H4", "H5", "H6"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -585,8 +585,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
     "categories": "Navigation|Keyboard",
-    "tags": "Focus visible|focus indicators|keyboard navigation|interactive elements|buttons|links|form fields|CSS outline|ring properties|state indicators|tab index"
-  },
+    "tags": ["Focus visible", "Focus indicators", "Keyboard navigation", "Interactive elements", "Buttons", "Links", "Form fields", "CSS outline", "Ring properties", "State indicators", "Tab index"]
+  },,
 {
     "ver": 2.2,
     "level": "AAA",
@@ -597,8 +597,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/location.html",
     "categories": "Navigation",
-    "tags": "Location|breadcrumbs|site navigation|content hierarchy|page context|navigation menus|site structure|user orientation"
-  },
+    "tags": ["Location", "Breadcrumbs", "Site navigation", "Content hierarchy", "Page context", "Navigation menus", "Site structure", "User orientation"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -609,8 +609,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only.html",
     "categories": "Navigation|Text",
-    "tags": "Link purpose|anchor tags|link text|accessible name|aria label|unique links|call to action|navigation menus|hypertext|link"
-  },
+    "tags": ["Link purpose", "Anchor tags", "Link text", "Accessible name", "Aria label", "Unique links", "Call to action", "Navigation menus", "Hypertext", "Link"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -621,8 +621,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/section-headings.html",
     "categories": "Navigation|Structure",
-    "tags": "Section headings|H1-H6|content organization|hierarchy|nesting|document structure|page sections|structural semantics"
-  },
+    "tags": ["Section headings", "H1-H6", "Content organization", "Hierarchy", "Nesting", "Document structure", "Page sections", "Structural semantics"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -633,8 +633,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
     "categories": "Navigation|Layout",
-    "tags": "Focus not obscured (minimum)|focus visibility|sticky headers|fixed footers|floating action buttons|modal overlays|cookie banners|non-modal dialogs|interactive elements|links|buttons|form inputs|viewport scrolling|Version 2.2"
-  },
+    "tags": ["Focus not obscured (minimum)", "Focus visibility", "Sticky headers", "Fixed footers", "Floating action buttons", "Modal overlays", "Cookie banners", "Non-modal dialogs", "Interactive elements", "Links", "Buttons", "Form inputs", "Viewport scrolling", "Version 2.2"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -645,8 +645,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-enhanced.html",
     "categories": "Navigation|Layout",
-    "tags": "Focus not obscured (enhanced)|full focus visibility|sticky content|fixed positioning|overlapping UI|interactive elements|links|buttons|form inputs|zero occlusion|scroll into view|Version 2.2"
-  },
+    "tags": ["Focus not obscured (enhanced)", "Full focus visibility", "Sticky content", "Fixed positioning", "Overlapping UI", "Interactive elements", "Links", "Buttons", "Form inputs", "Zero occlusion", "Scroll into view", "Version 2.2"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -657,8 +657,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html",
     "categories": "Navigation|Design",
-    "tags": "Focus appearance|focus indicator|target size|area size|obstruction|clipping|occlusion|visual indicator|interactive elements"
-  },
+    "tags": ["Focus appearance", "Focus indicator", "Target size", "Area size", "Obstruction", "Clipping", "Occlusion", "Visual indicator", "Interactive elements"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -669,8 +669,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html",
     "categories": "Interaction",
-    "tags": "Pointer gestures|multi point|path based|drag and drop|pinch zoom|swipe|rotation|single pointer alternative|touch events|mouse events|interactive elements"
-  },
+    "tags": ["Pointer gestures", "Multi point", "Path based", "Drag and drop", "Pinch zoom", "Swipe", "Rotation", "Single pointer alternative", "Touch events", "Mouse events", "Interactive elements"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -681,9 +681,9 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html",
     "categories": "Interaction",
-    "tags": "Pointer cancellation|mouse up|touch end|click events|down event|button press|interactive elements|abort action|reversal mechanism"
-  },
-  {
+    "tags": ["Pointer cancellation", "Mouse up", "Touch end", "Click events", "Down event", "Button press", "Interactive elements", "Abort action", "Reversal mechanism"]
+  },,
+{
     "ver": 2.2,
     "level": "A",
     "name": "2.5.3 Label in Name",
@@ -693,8 +693,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
     "categories": "Interaction|Forms",
-    "tags": "Label in name|accessible name|aria label|aria labelledby|form labels|button text|icon labels|input fields|screen reader interaction|speech input|link text|mismatch"
-  },
+    "tags": ["Label in name", "Accessible name", "Aria label", "Aria labelledby", "Form labels", "Button text", "Icon labels", "Input fields", "Screen reader interaction", "Speech input", "Link text", "Mismatch"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -705,8 +705,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation.html",
     "categories": "Interaction",
-    "tags": "Motion actuation|device motion|accelerometer|gyroscope|shake to undo|tilt to scroll|gesture control|override mechanism|settings menu|user controls"
-  },
+    "tags": ["Motion actuation", "Device motion", "Accelerometer", "Gyroscope", "Shake to undo", "Tilt to scroll", "Gesture control", "Override mechanism", "Settings menu", "User controls"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -717,9 +717,9 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/target-size.html",
     "categories": "Interaction|Mobile",
-    "tags": "Target size|touch targets|button size|icon buttons|padding|margin|hit area|tap targets|minimum dimensions|mobile layout|interactive elements"
-  },
-{
+    "tags": ["Target size", "Touch targets", "Button size", "Icon buttons", "Padding", "Margin", "Hit area", "Tap targets", "Minimum dimensions", "Mobile layout", "Interactive elements"]
+  },,
+  {
     "ver": 2.2,
     "level": "AAA",
     "name": "2.5.6 Concurrent Input Mechanisms",
@@ -729,8 +729,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/concurrent-input-mechanisms.html",
     "categories": "Interaction",
-    "tags": "Concurrent input|touch input|mouse input|keyboard input|stylus input|cross device compatibility|input flexibility|hardware abstraction|user preference"
-  },
+    "tags": ["Concurrent input", "Touch input", "Mouse input", "Keyboard input", "Stylus input", "Cross device compatibility", "Input flexibility", "Hardware abstraction", "User preference"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -741,8 +741,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
     "categories": "Interaction",
-    "tags": "Dragging movements|drag and drop|sliders|path based gestures|single pointer alternative|touch events|mouse events|interactive elements|click to move|keyboard shortcuts|mouse"
-  },
+    "tags": ["Dragging movements", "Drag and drop", "Sliders", "Path based gestures", "Single pointer alternative", "Touch events", "Mouse events", "Interactive elements", "Click to move", "Keyboard shortcuts", "Mouse"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -753,8 +753,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
     "categories": "Interaction",
-    "tags": "Target size|touch targets|hit area|minimum dimensions|button size|spacing|padding|icon buttons|mobile layout|interactive elements"
-  },
+    "tags": ["Target size", "Touch targets", "Hit area", "Minimum dimensions", "Button size", "Spacing", "Padding", "Icon buttons", "Mobile layout", "Interactive elements"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -765,8 +765,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html",
     "categories": "Structure|Text",
-    "tags": "Language of page|HTML lang attribute|lang tag|document language|screen reader pronunciation|character encoding|metadata|header element|human language"
-  },
+    "tags": ["Language of page", "HTML lang attribute", "Lang tag", "Document language", "Screen reader pronunciation", "Character encoding", "Metadata", "Header element", "Human language"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -777,9 +777,9 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html",
     "categories": "Structure|Text",
-    "tags": "Language of parts|lang attribute|inline translation|multi lingual content|span element|div element|screen reader pronunciation|text content|human language"
-  },
-  {
+    "tags": ["Language of parts", "Lang attribute", "Inline translation", "Multi lingual content", "Span element", "Div element", "Screen reader pronunciation", "Text content", "Human language"]
+  },,
+{
     "ver": 2.2,
     "level": "AAA",
     "name": "3.1.3 Unusual Words",
@@ -789,8 +789,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/unusual-words.html",
     "categories": "Text",
-    "tags": "Unusual words|glossary|definition links|technical jargon|idioms|tooltip definitions|text content|dictionary reference|reading level"
-  },
+    "tags": ["Unusual words", "Glossary", "Definition links", "Technical jargon", "Idioms", "Tooltip definitions", "Text content", "Dictionary reference", "Reading level"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -801,8 +801,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html",
     "categories": "Text",
-    "tags": "Abbreviations|acronyms|definition links|glossary|abbr element|screen reader expansion|title attribute|text content|terminology"
-  },
+    "tags": ["Abbreviations", "Acronyms", "Definition links", "Glossary", "Abbr element", "Screen reader expansion", "Title attribute", "Text content", "Terminology"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -813,8 +813,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/reading-level.html",
     "categories": "Text",
-    "tags": "Reading level|plain language|content complexity|vocabulary|sentence length|reading grade level|text content|supplementary content|readability tools"
-  },
+    "tags": ["Reading level", "Plain language", "Content complexity", "Vocabulary", "Sentence length", "Reading grade level", "Text content", "Supplementary content", "Readability tools"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -825,8 +825,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pronunciation.html",
     "categories": "Text",
-    "tags": "Pronunciation|ruby text|phonetics|screen reader pronunciation|homographs|text content|dictionary reference|supplemental markup"
-  },
+    "tags": ["Pronunciation", "Ruby text", "Phonetics", "Screen reader pronunciation", "Homographs", "Text content", "Dictionary reference", "Supplemental markup"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -837,9 +837,9 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/on-focus.html",
     "categories": "Navigation|Interactivity",
-    "tags": "On focus|context change|unexpected navigation|form fields|checkboxes|radio buttons|select menus|event handlers|keyboard navigation|focus management|combobox"
-  },
-{
+    "tags": ["On focus", "Context change", "Unexpected navigation", "Form fields", "Checkboxes", "Radio buttons", "Select menus", "Event handlers", "Keyboard navigation", "Focus management", "Combobox"]
+  },,
+  {
     "ver": 2.2,
     "level": "A",
     "name": "3.2.2 On Input",
@@ -849,8 +849,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/on-input.html",
     "categories": "Navigation|Interactivity",
-    "tags": "On input|context change|automatic submission|form fields|select menus|checkboxes|radio buttons|unexpected behavior|form submission|user control"
-  },
+    "tags": ["On input", "Context change", "Automatic submission", "Form fields", "Select menus", "Checkboxes", "Radio buttons", "Unexpected behavior", "Form submission", "User control"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -861,8 +861,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation.html",
     "categories": "Navigation",
-    "tags": "Consistent navigation|site architecture|navigation menus|page layout|user orientation|repetition|structural consistency|predictability"
-  },
+    "tags": ["Consistent navigation", "Site architecture", "Navigation menus", "Page layout", "User orientation", "Repetition", "Structural consistency", "Predictability"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -873,9 +873,9 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification.html",
     "categories": "Navigation|UI Components",
-    "tags": "Consistent identification|labels|icons|branding|functionality|buttons|input fields|UI components|predictability|interface design"
-  },
-  {
+    "tags": ["Consistent identification", "Labels", "Icons", "Branding", "Functionality", "Buttons", "Input fields", "UI components", "Predictability", "Interface design"]
+  },,
+{
     "ver": 2.2,
     "level": "AA",
     "name": "3.2.5 Change on Request",
@@ -885,8 +885,8 @@
     "disabilitie": "Cognitive Disabilities|Motor Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html",
     "categories": "Predictable",
-    "tags": "Change of context"
-  },
+    "tags": ["Change of context"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -897,8 +897,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html",
     "categories": "Predictable",
-    "tags": "Help"
-  },
+    "tags": ["Help"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -909,8 +909,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/visible-controls.html",
     "categories": "Predictable",
-    "tags": "Controls"
-  },
+    "tags": ["Controls"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -921,8 +921,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html",
     "categories": "Forms|Input",
-    "tags": "Error identification|form validation|error messages|input errors|text descriptions|screen reader announcements|form submission|ARIA"
-  },
+    "tags": ["Error identification", "Form validation", "Error messages", "Input errors", "Text descriptions", "Screen reader announcements", "Form submission", "ARIA"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -933,8 +933,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html",
     "categories": "Forms|Input",
-    "tags": "Labels|instructions|form controls|input fields|placeholders|accessible names|form requirements|user guidance|Forms"
-  },
+    "tags": ["Labels", "Instructions", "Form controls", "Input fields", "Placeholders", "Accessible names", "Form requirements", "User guidance", "Forms"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -945,8 +945,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html",
     "categories": "Forms|Input",
-    "tags": "Error suggestion|correction assistance|input validation|form fields|form submission|user guidance|accessibility help|ARIA"
-  },
+    "tags": ["Error suggestion", "Correction assistance", "Input validation", "Form fields", "Form submission", "User guidance", "Accessibility help", "ARIA"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -957,9 +957,9 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html",
     "categories": "Forms|Input|Security",
-    "tags": "Error prevention|financial transactions|legal commitments|data modification|confirmation steps|reversibility|data storage|form submission|data integrity"
-  },
-{
+    "tags": ["Error prevention", "Financial transactions", "Legal commitments", "Data modification", "Confirmation steps", "Reversibility", "Data storage", "Form submission", "Data integrity"]
+  },,
+  {
     "ver": 2.2,
     "level": "AAA",
     "name": "3.3.5 Help",
@@ -969,8 +969,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/help.html",
     "categories": "Forms|Input",
-    "tags": "Context sensitive help|instructions|support links|form guidance|accessibility documentation|user assistance|form labels"
-  },
+    "tags": ["Context sensitive help", "Instructions", "Support links", "Form guidance", "Accessibility documentation", "User assistance", "Form labels"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -981,9 +981,9 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html",
     "categories": "Forms|Input",
-    "tags": "Error prevention|form submission|confirmation steps|reversibility|data review|input checking|accessibility design"
-  },
-  {
+    "tags": ["Error prevention", "Form submission", "Confirmation steps", "Reversibility", "Data review", "Input checking", "Accessibility design"]
+  },,
+{
     "ver": 2.2,
     "level": "A",
     "name": "3.3.7 Redundant Entry",
@@ -993,8 +993,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
     "categories": "Input Assistance",
-    "tags": "Forms"
-  },
+    "tags": ["Forms"]
+  },,
   {
     "ver": 2.2,
     "level": "AA",
@@ -1005,8 +1005,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
     "categories": "Input Assistance",
-    "tags": "Authentication"
-  },
+    "tags": ["Authentication"]
+  },,
   {
     "ver": 2.2,
     "level": "AAA",
@@ -1017,8 +1017,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html",
     "categories": "Input Assistance",
-    "tags": "Authentication"
-  },
+    "tags": ["Authentication"]
+  },,
   {
     "ver": 2.2,
     "level": "A",
@@ -1029,9 +1029,9 @@
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html",
     "categories": "Structure|ARIA|UI Components|Forms",
-    "tags": "Name role value|accessible names|ARIA roles|state properties|UI components|screen reader support|custom widgets|input attributes|programmatic access|ARIA|Role|Forms"
-  },
-{
+    "tags": ["Name role value", "Accessible names", "ARIA roles", "State properties", "UI components", "Screen reader support", "Custom widgets", "Input attributes", "Programmatic access", "ARIA", "Role", "Forms"]
+  },,
+  {
     "ver": 2.2,
     "level": "AA",
     "name": "4.1.3 Status Messages",
@@ -1041,8 +1041,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
     "categories": "UI Components|Notifications",
-    "tags": "Status messages|aria live|notifications|toast messages|error alerts|success banners|loading spinners|progress bars|dynamic content updates|page updates|screen reader announcements|success messages"
-  },
+    "tags": ["Status messages", "Aria live", "Notifications", "Toast messages", "Error alerts", "Success banners", "Loading spinners", "Progress bars", "Dynamic content updates", "Page updates", "Screen reader announcements", "Success messages"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1053,8 +1053,8 @@
     "disabilitie": "Blindness|Low Vision|Color Blindness|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html",
     "categories": "Images|UI Components|Media|Forms",
-    "tags": "Alternate Text|Decorative Images|CAPTCHA|Form Controls|Graphic Symbols|Structural Markup|Alt Text Descriptions|Forms|Input|Buttons"
-  },
+    "tags": ["Alternate Text", "Decorative Images", "CAPTCHA", "Form Controls", "Graphic Symbols", "Structural Markup", "Alt Text Descriptions", "Forms", "Input", "Buttons"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1065,8 +1065,8 @@
     "disabilitie": "Blindness|Low Vision|Deafness|Hard of Hearing|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-only-and-video-only-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Audio-only|Video-only|Transcripts|Prerecorded Media|Media Alternatives"
-  },
+    "tags": ["Audio-only", "Video-only", "Transcripts", "Prerecorded Media", "Media Alternatives"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1077,9 +1077,9 @@
     "disabilitie": "Deafness|Hard of Hearing|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Captions|Synchronized Media|Prerecorded Media|Audio Tracks"
-  },
-  {
+    "tags": ["Captions", "Synchronized Media", "Prerecorded Media", "Audio Tracks"]
+  },,
+{
     "ver": 2.1,
     "level": "A",
     "name": "1.2.3 Audio Description or Media Alternative (Prerecorded)",
@@ -1089,8 +1089,8 @@
     "disabilitie": "Blindness|Low Vision|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-description-or-media-alternative-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Audio Description|Media Alternatives|Transcripts|Synchronized Media"
-  },
+    "tags": ["Audio Description", "Media Alternatives", "Transcripts", "Synchronized Media"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1101,8 +1101,8 @@
     "disabilitie": "Deafness|Hard of Hearing|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/captions-live.html",
     "categories": "Multimedia",
-    "tags": "Live Captions|Real-time Media|Synchronization|Live Broadcasts"
-  },
+    "tags": ["Live Captions", "Real-time Media", "Synchronization", "Live Broadcasts"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1113,8 +1113,8 @@
     "disabilitie": "Blindness|Low Vision|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-description-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Audio Description|Prerecorded Media|Video Descriptions|Text Overlays"
-  },
+    "tags": ["Audio Description", "Prerecorded Media", "Video Descriptions", "Text Overlays"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1125,8 +1125,8 @@
     "disabilitie": "Deafness|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/sign-language-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Sign Language|Interpretation|Prerecorded Media|Synchronized Media"
-  },
+    "tags": ["Sign Language", "Interpretation", "Prerecorded Media", "Synchronized Media"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1137,8 +1137,8 @@
     "disabilitie": "Blindness|Low Vision|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/extended-audio-description-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Extended Audio Description|Video Pauses|Media Alternatives|Prerecorded Media"
-  },
+    "tags": ["Extended Audio Description", "Video Pauses", "Media Alternatives", "Prerecorded Media"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1149,8 +1149,8 @@
     "disabilitie": "Blindness|Low Vision|Deafness|Hard of Hearing|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/media-alternative-prerecorded.html",
     "categories": "Multimedia",
-    "tags": "Media Alternatives|Text Transcripts|Storyboards|Prerecorded Media"
-  },
+    "tags": ["Media Alternatives", "Text Transcripts", "Storyboards", "Prerecorded Media"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1161,8 +1161,8 @@
     "disabilitie": "Deafness|Hard of Hearing|Deafblindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-only-live.html",
     "categories": "Multimedia",
-    "tags": "Live Audio|Real-time Transcripts|CART Services|Audio-only Streams"
-  },
+    "tags": ["Live Audio", "Real-time Transcripts", "CART Services", "Audio-only Streams"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1172,9 +1172,9 @@
     "fixes": "H42: Use h1-h6 for headings|H44: Use label elements|H48: Use li elements|ARIA1: Use role=\"combobox\"|ARIA2: Use aria-required.",
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities|Deafblindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html",
-    "Categories": "Structure|Forms|Tables|ARIA",
-"Tags": "Semantics|Landmarks|Headings|Form Labels|Data Tables|ARIA Roles|Info and relationships|semantic markup|lists|form controls|fieldsets|programmatic structure|Buttons|Input|Forms|Labels|Radio Groups|Tables|Accordians|Navigation|Checkboxes|Textvoxes|Comboboxes|Listboxes"
-  },
+    "categories": "Structure|Forms|Tables|ARIA",
+    "tags": ["Semantics", "Landmarks", "Headings", "Form Labels", "Data Tables", "ARIA Roles", "Info and relationships", "Semantic markup", "Lists", "Form controls", "Fieldsets", "Programmatic structure", "Buttons", "Input", "Forms", "Labels", "Radio Groups", "Tables", "Accordians", "Navigation", "Checkboxes", "Textboxes", "Comboboxes", "Listboxes"]
+  },,
 {
     "ver": 2.1,
     "level": "A",
@@ -1185,8 +1185,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/meaningful-sequence.html",
     "categories": "Structure|Layout",
-    "Tags": "Reading Order|DOM Sequence|CSS Positioning|Layout Tables|Meaningful sequence|navigation order|DOM structure|Headings|Heading Level"
-  },
+    "tags": ["Reading Order", "DOM Sequence", "CSS Positioning", "Layout Tables", "Meaningful sequence", "Navigation order", "DOM structure", "Headings", "Heading Level"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1197,8 +1197,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/sensory-characteristics.html",
     "categories": "Design|Instructions",
-    "tags": "Sensory Cues|Spatial Location|Audio Instructions"
-  },
+    "tags": ["Sensory Cues", "Spatial Location", "Audio Instructions"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1209,8 +1209,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/orientation.html",
     "categories": "Layout|Mobile",
-    "tags": "Orientation Lock|Responsive Design|Portrait|Landscape"
-  },
+    "tags": ["Orientation Lock", "Responsive Design", "Portrait", "Landscape"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1221,11 +1221,11 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html",
     "categories": "Forms|Input",
-    "tags": "Autocomplete|Input Purpose|Autofill Metadata"
-  },
-{
+    "tags": ["Autocomplete", "Input Purpose", "Autofill Metadata"]
+  },,
+  {
     "ver": 2.1,
- "level": "AAA",
+    "level": "AAA",
     "name": "1.3.6 Identify Purpose",
     "desc": "In content implemented using markup languages, the purpose of User Interface Components, icons, and regions can be programmatically determined.",
     "failures": "F106: Failure due to lack of personalization metadata for UI components and regions.",
@@ -1233,8 +1233,8 @@
     "disabilitie": "Cognitive Disabilities|Learning Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/identify-purpose.html",
     "categories": "Structure|Adaptability",
-    "tags": "Identify Purpose|Personalization|Semantics|Regions|Icons"
-  },
+    "tags": ["Identify Purpose", "Personalization", "Semantics", "Regions", "Icons"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1245,8 +1245,8 @@
     "disabilitie": "Color Blindness|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html",
     "categories": "Design|Color",
-    "Tags": "Color Dependence|Links|Headings|Visual Markers|Use of color|contrast|visual cues|indicators|forms|Buttons|Input"
-  },
+    "tags": ["Color Dependence", "Links", "Headings", "Visual Markers", "Use of color", "Contrast", "Visual cues", "Indicators", "Forms", "Buttons", "Input"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1257,8 +1257,8 @@
     "disabilitie": "Cognitive Disabilities|Hearing Impairments",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-control.html",
     "categories": "Multimedia|Audio",
-    "tags": "Audio Control|Autoplay|Interference|Volume Control"
-  },
+    "tags": ["Audio Control", "Autoplay", "Interference", "Volume Control"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1269,9 +1269,9 @@
     "disabilitie": "Low Vision|Color Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html",
     "categories": "Design|Contrast",
-    "tags": "Text Contrast|Background Images|Color Ratios"
-  },
-  {
+    "tags": ["Text Contrast", "Background Images", "Color Ratios"]
+  },,
+{
     "ver": 2.1,
     "level": "AA",
     "name": "1.4.4 Resize Text",
@@ -1281,8 +1281,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html",
     "categories": "Layout|Text",
-    "tags": "Text Scaling|Zoom 200%|Fixed Containers|Viewport Meta"
-  },
+    "tags": ["Text Scaling", "Zoom 200%", "Fixed Containers", "Viewport Meta"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1293,8 +1293,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/images-of-text.html",
     "categories": "Images|Text",
-    "tags": "Images of Text|CSS Layouts|Web Fonts|Styling Properties"
-  },
+    "tags": ["Images of Text", "CSS Layouts", "Web Fonts", "Styling Properties"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1305,8 +1305,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-enhanced.html",
     "categories": "Design|Contrast",
-    "tags": "Enhanced Contrast|7:1 Ratio|High Contrast"
-  },
+    "tags": ["Enhanced Contrast", "7:1 Ratio", "High Contrast"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1317,8 +1317,8 @@
     "disabilitie": "Hearing Impairments|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/low-or-no-background-audio.html",
     "categories": "Multimedia|Audio",
-    "tags": "Background Audio|Decibel Level|Speech Isolation"
-  },
+    "tags": ["Background Audio", "Decibel Level", "Speech Isolation"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1329,8 +1329,8 @@
     "disabilitie": "Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation.html",
     "categories": "Layout|Text",
-    "tags": "Visual Presentation|Text Blocks|Line Spacing|Paragraph Spacing"
-  },
+    "tags": ["Visual Presentation", "Text Blocks", "Line Spacing", "Paragraph Spacing"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1341,8 +1341,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/images-of-text-no-exception.html",
     "categories": "Images|Text",
-    "tags": "Images of Text|Text Graphics|Logos|Banners"
-  },
+    "tags": ["Images of Text", "Text Graphics", "Logos", "Banners"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1353,8 +1353,8 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/reflow.html",
     "categories": "Layout|Responsive",
-    "tags": "Reflow|Responsive Design|Viewport|Horizontal Scrolling"
-  },
+    "tags": ["Reflow", "Responsive Design", "Viewport", "Horizontal Scrolling"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1365,9 +1365,9 @@
     "disabilitie": "Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html",
     "categories": "Design|Contrast",
-    "tags": "Non-Text Contrast|UI Components|Graphical Objects"
-  },
-  {
+    "tags": ["Non-Text Contrast", "UI Components", "Graphical Objects"]
+  },,
+{
     "ver": 2.1,
     "level": "AA",
     "name": "1.4.12 Text Spacing",
@@ -1377,8 +1377,8 @@
     "disabilitie": "Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/text-spacing.html",
     "categories": "Layout|Text",
-    "tags": "Text Spacing|Line Height|Letter Spacing|Paragraph Spacing"
-  },
+    "tags": ["Text Spacing", "Line Height", "Letter Spacing", "Paragraph Spacing"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1389,8 +1389,8 @@
     "disabilitie": "Low Vision|Physical Disabilities|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html",
     "categories": "UI Components|Popups",
-    "tags": "Content on Hover|Tooltips|Pop-ups|Sub-menus"
-  },
+    "tags": ["Content on Hover", "Tooltips", "Pop-ups", "Sub-menus"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1401,8 +1401,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html",
     "categories": "Keyboard|Interaction",
-    "Tags": "Keyboard navigation|keyboard access|interactive elements|buttons|links|form controls|menus|widgets|tab index|event handlers|mouse dependent functionality|drag and drop|custom controls|tab key|tabbing|arrow keys|Activation"
-  },
+    "tags": ["Keyboard navigation", "Keyboard access", "Interactive elements", "Buttons", "Links", "Form controls", "Menus", "Widgets", "Tab index", "Event handlers", "Mouse dependent functionality", "Drag and drop", "Custom controls", "Tab key", "Tabbing", "Arrow keys", "Activation"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1413,8 +1413,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/no-keyboard-trap.html",
     "categories": "Keyboard|Navigation",
-    "tags": "Keyboard Trap|Focus Management|Modal Dialogs"
-  },
+    "tags": ["Keyboard Trap", "Focus Management", "Modal Dialogs"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1425,8 +1425,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/keyboard-no-exception.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Keyboard Navigation|Mouse Only Functionality"
-  },
+    "tags": ["Keyboard Navigation", "Mouse Only Functionality"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1437,8 +1437,8 @@
     "disabilitie": "Physical Disabilities|Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/character-key-shortcuts.html",
     "categories": "Keyboard|Interaction",
-    "tags": "Character Key Shortcuts|Hotkeys|Keyboard Mapping"
-  },
+    "tags": ["Character Key Shortcuts", "Hotkeys", "Keyboard Mapping"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1449,8 +1449,8 @@
     "disabilitie": "Physical Disabilities|Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html",
     "categories": "Timeouts|Interactivity",
-    "tags": "Timing Adjustable|Session Timeouts|Auto Refresh"
-  },
+    "tags": ["Timing Adjustable", "Session Timeouts", "Auto Refresh"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1461,9 +1461,9 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pause-stop-hide.html",
     "categories": "Animation|Interactivity",
-    "tags": "Pause|Stop|Hide|Auto Play|Scrolling Content"
-  },
-  {
+    "tags": ["Pause", "Stop", "Hide", "Auto Play", "Scrolling Content"]
+  },,
+{
     "ver": 2.1,
     "level": "AAA",
     "name": "2.2.3 No Timing",
@@ -1473,8 +1473,8 @@
     "disabilitie": "Cognitive Disabilities|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/no-timing.html",
     "categories": "Timeouts|Interactivity",
-    "tags": "No Timing|Real-time Processes|Synchronization"
-  },
+    "tags": ["No Timing", "Real-time Processes", "Synchronization"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1485,8 +1485,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/interruptions.html",
     "categories": "Interactivity|Notifications",
-    "tags": "Interruptions|Notifications|Alerts"
-  },
+    "tags": ["Interruptions", "Notifications", "Alerts"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1497,8 +1497,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/re-authenticating.html",
     "categories": "Timeouts|Forms",
-    "tags": "Re-authentication|Login Sessions|Session Expiry"
-  },
+    "tags": ["Re-authentication", "Login Sessions", "Session Expiry"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1509,8 +1509,8 @@
     "disabilitie": "Photosensitive Epilepsy",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/three-flashes-or-below-threshold.html",
     "categories": "Multimedia|Design",
-    "tags": "Three Flashes|Flashing Content|Strobing Effects"
-  },
+    "tags": ["Three Flashes", "Flashing Content", "Strobing Effects"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1521,18 +1521,18 @@
     "disabilitie": "Photosensitive Epilepsy",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/three-flashes.html",
     "categories": "Multimedia|Design",
-    "tags": "Three Flashes|Flashing Content|Strobing Effects"
-  },
-{
-  "ver": 2.1,
-  "level": "AAA",
-  "name": "2.3.3 Animation from Interactions",
-  "desc": "Animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed.",
-  "status": "active",
-  "Link": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html",
-  "categories": "Seizures and Physical Reactions",
-  "tags": "Animation|Motion|Vestibular Disorders|Interaction"
-},
+    "tags": ["Three Flashes", "Flashing Content", "Strobing Effects"]
+  },,
+  {
+    "ver": 2.1,
+    "level": "AAA",
+    "name": "2.3.3 Animation from Interactions",
+    "desc": "Animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed.",
+    "status": "active",
+    "Link": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html",
+    "categories": "Seizures and Physical Reactions",
+    "tags": ["Animation", "Motion", "Vestibular Disorders", "Interaction"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1543,8 +1543,8 @@
     "disabilitie": "Physical Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html",
     "categories": "Navigation|Structure",
-    "tags": "Bypass Blocks|Skip Links|Navigation Menus"
-  },
+    "tags": ["Bypass Blocks", "Skip Links", "Navigation Menus"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1555,9 +1555,9 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/page-titled.html",
     "categories": "Navigation|Structure",
-    "Tags": "Page titled|document title|head element|browser tab title|page context|document structure|meta tags|site navigation|title attribute|page title|site map|Popups"
-  },
-  {
+    "tags": ["Page titled", "Document title", "Head element", "Browser tab title", "Page context", "Document structure", "Meta tags", "Site navigation", "Title attribute", "Page title", "Site map", "Popups"]
+  },,
+{
     "ver": 2.1,
     "level": "A",
     "name": "2.4.3 Focus Order",
@@ -1567,8 +1567,8 @@
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html",
     "categories": "Navigation|Keyboard",
-    "tags": "Focus Order|Tab Order|Reading Order"
-  },
+    "tags": ["Focus Order", "Tab Order", "Reading Order"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1579,8 +1579,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html",
     "categories": "Navigation|Text",
-    "Tags": "Link purpose|anchor tags|link text|context clues|navigation menus|call to action|hypertext|accessible name|navigation flow|link name|link purpose|links"
-  },
+    "tags": ["Link purpose", "Anchor tags", "Link text", "Context clues", "Navigation menus", "Call to action", "Hypertext", "Accessible name", "Navigation flow", "Link name", "Link purpose", "Links"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1591,8 +1591,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways.html",
     "categories": "Navigation",
-    "tags": "Multiple Ways|Site Navigation|Search Functionality"
-  },
+    "tags": ["Multiple Ways", "Site Navigation", "Search Functionality"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1603,8 +1603,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/headings-and-labels.html",
     "categories": "Navigation|Structure",
-    "tags": "Headings|Labels|Form Labels|Page Structure"
-  },
+    "tags": ["Headings", "Labels", "Form Labels", "Page Structure"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1615,8 +1615,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html",
     "categories": "Navigation|Keyboard",
-    "tags": "Focus Visible|Focus Indicators|Keyboard Navigation"
-  },
+    "tags": ["Focus Visible", "Focus Indicators", "Keyboard Navigation"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1627,8 +1627,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/location.html",
     "categories": "Navigation",
-    "tags": "Location|Breadcrumbs|Site Navigation"
-  },
+    "tags": ["Location", "Breadcrumbs", "Site Navigation"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1639,8 +1639,8 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-link-only.html",
     "categories": "Navigation|Text",
-    "tags": "Link Purpose|Anchor Tags|Link Text"
-  },
+    "tags": ["Link Purpose", "Anchor Tags", "Link Text"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1651,9 +1651,9 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/section-headings.html",
     "categories": "Navigation|Structure",
-    "tags": "Section Headings|H1-H6|Content Organization"
-  },
-  {
+    "tags": ["Section Headings", "H1-H6", "Content Organization"]
+  },,
+{
     "ver": 2.1,
     "level": "A",
     "name": "2.5.1 Pointer Gestures",
@@ -1663,8 +1663,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pointer-gestures.html",
     "categories": "Interaction",
-    "tags": "Pointer Gestures|Multi-point|Path-based|Drag and Drop"
-  },
+    "tags": ["Pointer Gestures", "Multi-point", "Path-based", "Drag and Drop"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1675,8 +1675,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pointer-cancellation.html",
     "categories": "Interaction",
-    "tags": "Pointer Cancellation|Mouse Up|Touch End|Click Events"
-  },
+    "tags": ["Pointer Cancellation", "Mouse Up", "Touch End", "Click Events"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1687,8 +1687,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html",
     "categories": "Interaction|Forms",
-    "tags": "Label in Name|Accessible Name|ARIA Label"
-  },
+    "tags": ["Label in Name", "Accessible Name", "ARIA Label"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1699,9 +1699,9 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/motion-actuation.html",
     "categories": "Interaction",
-    "tags": "Motion Actuation|Device Motion|Accelerometer|Gyroscope"
-  },
-{
+    "tags": ["Motion Actuation", "Device Motion", "Accelerometer", "Gyroscope"]
+  },,
+  {
     "ver": 2.1,
     "level": "AAA",
     "name": "2.5.5 Target Size",
@@ -1711,8 +1711,8 @@
     "disabilitie": "Physical Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/target-size.html",
     "categories": "Interaction|Mobile",
-    "tags": "Target Size|Touch Targets|Button Size|Mobile Layout"
-  },
+    "tags": ["Target Size", "Touch Targets", "Button Size", "Mobile Layout"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1723,8 +1723,8 @@
     "disabilitie": "Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/concurrent-input-mechanisms.html",
     "categories": "Interaction",
-    "tags": "Concurrent Input|Touch|Mouse|Keyboard|Stylus"
-  },
+    "tags": ["Concurrent Input", "Touch", "Mouse", "Keyboard", "Stylus"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1735,8 +1735,8 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/language-of-page.html",
     "categories": "Structure|Text",
-    "tags": "Language of Page|HTML lang attribute|Screen Reader Pronunciation"
-  },
+    "tags": ["Language of Page", "HTML lang attribute", "Screen Reader Pronunciation"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1747,9 +1747,9 @@
     "disabilitie": "Blindness|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/language-of-parts.html",
     "categories": "Structure|Text",
-    "tags": "Language of Parts|lang attribute|Inline Translation"
-  },
-  {
+    "tags": ["Language of Parts", "lang attribute", "Inline Translation"]
+  },,
+{
     "ver": 2.1,
     "level": "AAA",
     "name": "3.1.3 Unusual Words",
@@ -1759,8 +1759,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/unusual-words.html",
     "categories": "Text",
-    "tags": "Unusual Words|Glossary|Definition Links"
-  },
+    "tags": ["Unusual Words", "Glossary", "Definition Links"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1771,8 +1771,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/abbreviations.html",
     "categories": "Text",
-    "tags": "Abbreviations|Acronyms|Definition Links"
-  },
+    "tags": ["Abbreviations", "Acronyms", "Definition Links"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1783,8 +1783,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/reading-level.html",
     "categories": "Text",
-    "tags": "Reading Level|Plain Language|Content Complexity"
-  },
+    "tags": ["Reading Level", "Plain Language", "Content Complexity"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1795,8 +1795,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pronunciation.html",
     "categories": "Text",
-    "tags": "Pronunciation|Ruby Text|Phonetics"
-  },
+    "tags": ["Pronunciation", "Ruby Text", "Phonetics"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1807,8 +1807,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/on-focus.html",
     "categories": "Navigation|Interactivity",
-    "tags": "On Focus|Context Change|Keyboard Navigation"
-  },
+    "tags": ["On Focus", "Context Change", "Keyboard Navigation"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1819,8 +1819,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/on-input.html",
     "categories": "Navigation|Interactivity",
-    "tags": "On Input|Context Change|Automatic Submission"
-  },
+    "tags": ["On Input", "Context Change", "Automatic Submission"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1831,8 +1831,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/consistent-navigation.html",
     "categories": "Navigation",
-    "tags": "Consistent Navigation|Site Architecture"
-  },
+    "tags": ["Consistent Navigation", "Site Architecture"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1843,8 +1843,9 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification.html",
     "categories": "Navigation|UI Components",
-    "tags": "Consistent Identification|Labels|Icons"
-  },
+    "tags": ["Consistent Identification", "Labels", "Icons"]
+  },,
+[
   {
     "ver": 2.1,
     "level": "A",
@@ -1855,8 +1856,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html",
     "categories": "Forms|Input|ARIA",
-    "tags": "Error Identification|Form Validation|ARIA"
-  },
+    "tags": ["Error Identification", "Form Validation", "ARIA"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1867,8 +1868,8 @@
     "disabilitie": "Cognitive Disabilities|Low Vision",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html",
     "categories": "Forms|Input",
-    "Tags": "Labels|instructions|form controls|input fields|placeholders|accessible names|form requirements|user guidance|Forms|Required"
-  },
+    "tags": ["Labels", "Instructions", "Form controls", "Input fields", "Placeholders", "Accessible names", "Form requirements", "User guidance", "Forms", "Required"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1879,8 +1880,8 @@
     "disabilitie": "Cognitive Disabilities|Blindness",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-suggestion.html",
     "categories": "Forms|Input|ARIA",
-    "tags": "Error Suggestion|Correction Assistance|ARIA"
-  },
+    "tags": ["Error Suggestion", "Correction Assistance", "ARIA"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1891,8 +1892,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-legal-financial-data.html",
     "categories": "Forms|Input|Security",
-    "tags": "Error Prevention|Financial Transactions|Legal Commitments"
-  },
+    "tags": ["Error Prevention", "Financial Transactions", "Legal Commitments"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1903,8 +1904,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/help.html",
     "categories": "Forms|Input",
-    "tags": "Context Sensitive Help|Support Links"
-  },
+    "tags": ["Context Sensitive Help", "Support Links"]
+  },,
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1915,8 +1916,8 @@
     "disabilitie": "Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-all.html",
     "categories": "Forms|Input",
-    "tags": "Error Prevention|Form Submission|Data Review"
-  },
+    "tags": ["Error Prevention", "Form Submission", "Data Review"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1927,8 +1928,8 @@
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/parsing.html",
     "categories": "Structure|Markup",
-    "tags": "Parsing|Valid Markup|HTML Syntax|Opening And Closing Tags"
-  },
+    "tags": ["Parsing", "Valid Markup", "HTML Syntax", "Opening And Closing Tags"]
+  },,
   {
     "ver": 2.1,
     "level": "A",
@@ -1938,9 +1939,9 @@
     "fixes": "ARIA4: Use aria-label.",
     "disabilitie": "Blindness|Physical Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html",
-    "Categories": "Structure|ARIA|UI Components|Forms",
-"Tags": "Name role value|accessible names|ARIA roles|state properties|UI components|screen reader support|custom widgets|input attributes|programmatic access|ARIA|Role|Forms"
-  },
+    "categories": "Structure|ARIA|UI Components|Forms",
+    "tags": ["Name role value", "Accessible names", "ARIA roles", "State properties", "UI components", "Screen reader support", "Custom widgets", "Input attributes", "Programmatic access", "ARIA", "Role", "Forms"]
+  },,
   {
     "ver": 2.1,
     "level": "AA",
@@ -1951,6 +1952,6 @@
     "disabilitie": "Blindness|Low Vision|Cognitive Disabilities",
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/status-messages.html",
     "categories": "UI Components|Notifications",
-    "tags": "Status Messages|ARIA Live|Notifications"
+    "tags": ["Status Messages", "ARIA Live", "Notifications"]
   }
 ]
