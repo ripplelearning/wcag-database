@@ -10,7 +10,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html",
     "categories": "Images|UI Components|Media|Forms|Buttons",
     "tags": ["Alternate Text", "Decorative Images", "CAPTCHA", "Form Controls", "Graphic Symbols", "Structural Markup", "Buttons", "Input", "Forms"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -22,7 +22,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Audio-only", "Video-only", "Transcripts", "Prerecorded Media", "Media Alternatives"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -34,7 +34,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Captions", "Synchronized Media", "Prerecorded Media", "Audio Tracks"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -46,7 +46,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Audio Description", "Media Alternatives", "Transcripts", "Synchronized Media"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -58,7 +58,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/captions-live.html",
     "categories": "Multimedia",
     "tags": ["Live Captions", "Real-time Media", "Synchronization", "Live Broadcasts"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -70,7 +70,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Audio Description", "Prerecorded Media", "Video Descriptions", "Text Overlays"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -82,7 +82,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/sign-language-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Sign Language", "Interpretation", "Prerecorded Media", "Synchronized Media"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -94,7 +94,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/extended-audio-description-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Extended Audio Description", "Video Pauses", "Media Alternatives", "Prerecorded Media"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -106,7 +106,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/media-alternative-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Media Alternatives", "Text Transcripts", "Storyboards", "Prerecorded Media"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -118,7 +118,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-live.html",
     "categories": "Multimedia",
     "tags": ["Live Audio", "Real-time Transcripts", "CART Services", "Audio-only Streams"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -130,7 +130,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html",
     "categories": "Structure|Forms|Tables|ARIA",
     "tags": ["Semantics", "Landmarks", "Headings", "Form Labels", "Data Tables", "ARIA Roles", "Info and relationships", "Semantic markup", "Lists", "Form controls", "Fieldsets", "Programmatic structure", "Buttons", "Input", "Forms", "Labels", "Radio Groups", "Tables", "Accordians", "Navigation", "Checkboxes", "Textboxes", "Comboboxes", "Listboxes"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -142,7 +142,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html",
     "categories": "Structure|Layout",
     "tags": ["Reading Order", "DOM Sequence", "CSS Positioning", "Layout Tables", "Meaningful sequence", "navigation order", "DOM structure", "Headings", "Heading Level"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -154,7 +154,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics.html",
     "categories": "Design|Instructions",
     "tags": ["Sensory Cues", "Spatial Location", "Audio Instructions", "Sensory characteristics", "Color", "Shape", "Size", "Location", "Orientation", "Sound"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -166,7 +166,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/orientation.html",
     "categories": "Layout|Mobile",
     "tags": ["Orientation Lock", "Responsive Design", "Portrait", "Landscape", "Orientation", "Responsive design"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -178,7 +178,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html",
     "categories": "Forms|Input",
     "tags": ["Autocomplete", "Input Purpose", "Autofill Metadata", "Identify input purpose", "Personal data", "Form fields"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -190,7 +190,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/identify-purpose.html",
     "categories": "Structure|ARIA",
     "tags": ["ARIA Landmarks", "Personalization UI", "Component Identification", "Identify purpose", "Icons", "Buttons", "Regions", "UI components"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -202,7 +202,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
     "categories": "Design|Color",
     "tags": ["Color Dependence", "Links", "Headings", "Visual Markers", "Use of color", "Contrast", "Visual cues", "Indicators", "Forms", "Buttons", "Input"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -226,7 +226,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
     "categories": "Design|Contrast",
     "tags": ["Text Contrast", "Background Images", "Color Ratios", "Contrast minimum", "Text", "Images of text", "Readability", "Color ratio"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -238,7 +238,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html",
     "categories": "Layout|Text",
     "tags": ["Text Scaling", "Zoom 200%", "Fixed Containers", "Viewport Meta", "Resize text", "Zoom", "Text scaling", "Readability", "Layout"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -250,7 +250,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html",
     "categories": "Images|Text",
     "tags": ["Images of Text", "CSS Layouts", "Web Fonts", "Styling Properties", "Images of text", "Logos", "Branding", "CSS styling"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -262,7 +262,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html",
     "categories": "Design|Contrast",
     "tags": ["Enhanced Contrast", "7:1 Ratio", "High Contrast", "Color Ratios", "Contrast enhanced", "Readability", "Color ratio"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -274,7 +274,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/low-or-no-background-audio.html",
     "categories": "Multimedia|Audio",
     "tags": ["Background Audio", "Decibel Level", "Speech Isolation", "Mixing Standards", "Low background audio", "Speech foreground", "Audio mixing", "Volume level", "Audio tracks", "Background noise", "Media player", "Multimedia content", "Volume controls"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -286,7 +286,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation.html",
     "categories": "Layout|Text",
     "tags": ["Visual presentation", "Text blocks", "Line spacing", "Paragraph spacing", "Letter spacing", "Word spacing", "Text alignment", "Column width", "Text justification", "CSS layout", "Font size", "Margin", "Padding", "Typography"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -298,7 +298,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text-no-exception.html",
     "categories": "Images|Text",
     "tags": ["Images of text", "Text graphics", "Logos", "Banners", "CSS styled text", "Web fonts", "SVG text", "Bitmap text", "Branding elements", "Icon labels", "Images", "Text"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -310,7 +310,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
     "categories": "Layout|Responsive",
     "tags": ["Reflow", "Responsive design", "Viewport", "Horizontal scrolling", "Zoom scaling", "CSS flexbox", "CSS grid", "Media queries", "Fluid layout", "Container width", "Content wrapping", "Mobile optimization"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -322,7 +322,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
     "categories": "Design|Contrast",
     "tags": ["Non text contrast", "UI components", "Graphical objects", "Focus indicators", "Form borders", "Icons", "Buttons", "Selection states", "Active states", "Hover states", "State indicators", "Color ratio", "Color palette"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "AA",
@@ -334,7 +334,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html",
     "categories": "Layout|Text",
     "tags": ["Text spacing", "Line height", "Letter spacing", "Paragraph spacing", "Word spacing", "CSS styles", "Text blocks", "Font size", "Layout overflow", "Content clipping", "Responsive typography"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -346,7 +346,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html",
     "categories": "UI Components|Popups",
     "tags": ["Content on hover or focus", "Tooltips", "Pop-ups", "Sub-menus", "Persistent content", "Dismissible content", "Hover states", "Focus states", "Mouse over", "Keyboard focus", "Transient elements", "Hidden content", "Hover", "Focus"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -358,7 +358,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
     "categories": "Keyboard|Interaction",
     "tags": ["Keyboard navigation", "Keyboard access", "Interactive elements", "Buttons", "Links", "Form controls", "Menus", "Widgets", "Tab index", "Event handlers", "Mouse dependent functionality", "Drag and drop", "Custom controls", "Tab key", "Tabbing", "Arrow keys", "Activation"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -370,7 +370,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html",
     "categories": "Keyboard|Navigation",
     "tags": ["Keyboard trap", "Focus management", "Modal dialogs", "Pop-ups", "Iframes", "Embedded content", "Keyboard navigation", "Navigation flow", "Focus recovery", "Tab key", "Tabbing", "Trap", "Stuck"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -382,7 +382,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard-no-exception.html",
     "categories": "Keyboard|Interaction",
     "tags": ["Keyboard navigation", "Mouse only functionality", "Drag and drop", "Drawing applications", "Path based gestures", "Specialized controls", "Pointer events", "Input devices", "Interactive canvases", "Interaction"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -394,7 +394,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts.html",
     "categories": "Keyboard|Interaction",
     "tags": ["Character key shortcuts", "Hotkeys", "Single key shortcuts", "Keyboard mapping", "Remapping tools", "Bypass mechanisms", "Application commands", "Toolbar actions", "Input device settings"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -406,7 +406,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html",
     "categories": "Timeouts|Interactivity",
     "tags": ["Timing adjustable", "Session timeouts", "Auto refresh", "Content updates", "Warning thresholds", "Session extension", "Pause button", "Stop button", "Time limit notifications", "Form submission", "Extend"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "A",
@@ -418,7 +418,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html",
     "categories": "Animation|Interactivity",
     "tags": ["Pause", "Stop", "Hide", "Auto play", "Scrolling content", "Blinking content", "Moving content", "Carousels", "Marquees", "Animations", "Sliders", "Dynamic updates", "Focus indicators", "Time based media", "Advertisements", "Interruptions", "Slides", "Slide shows"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -430,7 +430,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/no-timing.html",
     "categories": "Timeouts|Interactivity",
     "tags": ["No timing", "Real time processes", "Synchronization", "Session timeouts", "Interactive sequences", "User paced content", "Time independent navigation", "Task completion"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -442,7 +442,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/interruptions.html",
     "categories": "Interactivity|Notifications",
     "tags": ["Interruptions", "Notifications", "Alerts", "Modal dialogs", "Updates", "Pop-ups", "User postponement", "Content suppression", "System messages", "Focus management", "Advertisements"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -454,7 +454,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/re-authenticating.html",
     "categories": "Timeouts|Forms",
     "tags": ["Re-authentication", "Login sessions", "Session expiry", "Data persistence", "User authentication", "Forms", "Input fields", "Form submission", "Data loss prevention", "Expiration", "Session timeouts"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -466,7 +466,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/timeouts.html",
     "categories": "Timeouts|Forms",
     "tags": ["Timeouts", "Inactivity timers", "Session limits", "Data persistence", "User activity", "Background activity", "Idle state", "Session warnings", "Logout flow", "User data security", "Time limits"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -478,7 +478,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html",
     "categories": "Multimedia|Design",
     "tags": ["Three flashes", "Flashing content", "Strobing effects", "Animation", "Video content", "Motion graphics", "Screen flicker", "Photosensitive seizures", "Flash rate", "Flashing", "Flickering"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -490,7 +490,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/three-flashes.html",
     "categories": "Multimedia|Design",
     "tags": ["Three flashes", "Flashing content", "Strobing effects", "Animation", "Video content", "Motion graphics", "Screen flicker", "Photosensitive seizures", "Flash rate", "Flickering"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -502,7 +502,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html",
     "categories": "Animation|Design",
     "tags": ["Animation from interactions", "Motion triggers", "State transitions", "Hover effects", "Click effects", "Parallax scrolling", "Page transitions", "Scroll animations", "CSS transitions", "Web animations API"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -514,7 +514,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
     "categories": "Navigation|Structure",
     "tags": ["Bypass blocks", "Skip links", "Navigation menus", "Page headers", "Main content", "Landmark regions", "Header elements", "Navigation elements", "Document structure", "Keyboard navigation", "Main landmark", "Skip to content"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -526,7 +526,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html",
     "categories": "Navigation|Structure",
     "tags": ["Page titled", "Document title", "Head element", "Browser tab title", "Page context", "Document structure", "Meta tags", "Site navigation", "Title attribute", "Page title", "Site map", "Popups"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -538,7 +538,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html",
     "categories": "Navigation|Keyboard",
     "tags": ["Focus order", "Tab order", "Reading order", "Navigation flow", "Keyboard navigation", "Interactive elements", "Logical sequence", "Source order", "Scripts", "Event handlers", "Tabbing", "Tab key"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -550,7 +550,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html",
     "categories": "Navigation|Text",
     "tags": ["Link purpose", "Anchor tags", "Link text", "Context clues", "Navigation menus", "Call to action", "Hypertext", "Accessible name", "Navigation flow", "Link name", "Link purpose", "Links"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -562,7 +562,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/multiple-ways.html",
     "categories": "Navigation",
     "tags": ["Multiple ways", "Site navigation", "Search functionality", "Site map", "Table of contents", "Navigation menus", "Page links", "User orientation", "Content access"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -574,7 +574,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html",
     "categories": "Navigation|Structure",
     "tags": ["Headings", "Labels", "Form labels", "Input fields", "Page structure", "Content hierarchy", "Descriptive text", "Navigation", "Site architecture", "H1", "H2", "H3", "H4", "H5", "H6"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -586,7 +586,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
     "categories": "Navigation|Keyboard",
     "tags": ["Focus visible", "Focus indicators", "Keyboard navigation", "Interactive elements", "Buttons", "Links", "Form fields", "CSS outline", "Ring properties", "State indicators", "Tab index"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -598,7 +598,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/location.html",
     "categories": "Navigation",
     "tags": ["Location", "Breadcrumbs", "Site navigation", "Content hierarchy", "Page context", "Navigation menus", "Site structure", "User orientation"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -610,7 +610,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only.html",
     "categories": "Navigation|Text",
     "tags": ["Link purpose", "Anchor tags", "Link text", "Accessible name", "Aria label", "Unique links", "Call to action", "Navigation menus", "Hypertext", "Link"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -622,7 +622,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/section-headings.html",
     "categories": "Navigation|Structure",
     "tags": ["Section headings", "H1-H6", "Content organization", "Hierarchy", "Nesting", "Document structure", "Page sections", "Structural semantics"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -634,7 +634,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
     "categories": "Navigation|Layout",
     "tags": ["Focus not obscured (minimum)", "Focus visibility", "Sticky headers", "Fixed footers", "Floating action buttons", "Modal overlays", "Cookie banners", "Non-modal dialogs", "Interactive elements", "Links", "Buttons", "Form inputs", "Viewport scrolling", "Version 2.2"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -646,7 +646,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-enhanced.html",
     "categories": "Navigation|Layout",
     "tags": ["Focus not obscured (enhanced)", "Full focus visibility", "Sticky content", "Fixed positioning", "Overlapping UI", "Interactive elements", "Links", "Buttons", "Form inputs", "Zero occlusion", "Scroll into view", "Version 2.2"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -658,7 +658,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html",
     "categories": "Navigation|Design",
     "tags": ["Focus appearance", "Focus indicator", "Target size", "Area size", "Obstruction", "Clipping", "Occlusion", "Visual indicator", "Interactive elements"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -670,7 +670,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html",
     "categories": "Interaction",
     "tags": ["Pointer gestures", "Multi point", "Path based", "Drag and drop", "Pinch zoom", "Swipe", "Rotation", "Single pointer alternative", "Touch events", "Mouse events", "Interactive elements"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -682,7 +682,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html",
     "categories": "Interaction",
     "tags": ["Pointer cancellation", "Mouse up", "Touch end", "Click events", "Down event", "Button press", "Interactive elements", "Abort action", "Reversal mechanism"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "A",
@@ -694,7 +694,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
     "categories": "Interaction|Forms",
     "tags": ["Label in name", "Accessible name", "Aria label", "Aria labelledby", "Form labels", "Button text", "Icon labels", "Input fields", "Screen reader interaction", "Speech input", "Link text", "Mismatch"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -706,7 +706,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation.html",
     "categories": "Interaction",
     "tags": ["Motion actuation", "Device motion", "Accelerometer", "Gyroscope", "Shake to undo", "Tilt to scroll", "Gesture control", "Override mechanism", "Settings menu", "User controls"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -718,7 +718,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/target-size.html",
     "categories": "Interaction|Mobile",
     "tags": ["Target size", "Touch targets", "Button size", "Icon buttons", "Padding", "Margin", "Hit area", "Tap targets", "Minimum dimensions", "Mobile layout", "Interactive elements"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -730,7 +730,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/concurrent-input-mechanisms.html",
     "categories": "Interaction",
     "tags": ["Concurrent input", "Touch input", "Mouse input", "Keyboard input", "Stylus input", "Cross device compatibility", "Input flexibility", "Hardware abstraction", "User preference"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -742,7 +742,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
     "categories": "Interaction",
     "tags": ["Dragging movements", "Drag and drop", "Sliders", "Path based gestures", "Single pointer alternative", "Touch events", "Mouse events", "Interactive elements", "Click to move", "Keyboard shortcuts", "Mouse"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -754,7 +754,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
     "categories": "Interaction",
     "tags": ["Target size", "Touch targets", "Hit area", "Minimum dimensions", "Button size", "Spacing", "Padding", "Icon buttons", "Mobile layout", "Interactive elements"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -766,7 +766,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html",
     "categories": "Structure|Text",
     "tags": ["Language of page", "HTML lang attribute", "Lang tag", "Document language", "Screen reader pronunciation", "Character encoding", "Metadata", "Header element", "Human language"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -778,7 +778,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html",
     "categories": "Structure|Text",
     "tags": ["Language of parts", "Lang attribute", "Inline translation", "Multi lingual content", "Span element", "Div element", "Screen reader pronunciation", "Text content", "Human language"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "AAA",
@@ -790,7 +790,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/unusual-words.html",
     "categories": "Text",
     "tags": ["Unusual words", "Glossary", "Definition links", "Technical jargon", "Idioms", "Tooltip definitions", "Text content", "Dictionary reference", "Reading level"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -802,7 +802,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html",
     "categories": "Text",
     "tags": ["Abbreviations", "Acronyms", "Definition links", "Glossary", "Abbr element", "Screen reader expansion", "Title attribute", "Text content", "Terminology"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -814,7 +814,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/reading-level.html",
     "categories": "Text",
     "tags": ["Reading level", "Plain language", "Content complexity", "Vocabulary", "Sentence length", "Reading grade level", "Text content", "Supplementary content", "Readability tools"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -826,7 +826,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/pronunciation.html",
     "categories": "Text",
     "tags": ["Pronunciation", "Ruby text", "Phonetics", "Screen reader pronunciation", "Homographs", "Text content", "Dictionary reference", "Supplemental markup"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -838,7 +838,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/on-focus.html",
     "categories": "Navigation|Interactivity",
     "tags": ["On focus", "Context change", "Unexpected navigation", "Form fields", "Checkboxes", "Radio buttons", "Select menus", "Event handlers", "Keyboard navigation", "Focus management", "Combobox"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -850,7 +850,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/on-input.html",
     "categories": "Navigation|Interactivity",
     "tags": ["On input", "Context change", "Automatic submission", "Form fields", "Select menus", "Checkboxes", "Radio buttons", "Unexpected behavior", "Form submission", "User control"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -862,7 +862,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation.html",
     "categories": "Navigation",
     "tags": ["Consistent navigation", "Site architecture", "Navigation menus", "Page layout", "User orientation", "Repetition", "Structural consistency", "Predictability"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -874,7 +874,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification.html",
     "categories": "Navigation|UI Components",
     "tags": ["Consistent identification", "Labels", "Icons", "Branding", "Functionality", "Buttons", "Input fields", "UI components", "Predictability", "Interface design"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "AA",
@@ -886,7 +886,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/change-on-request.html",
     "categories": "Predictable",
     "tags": ["Change of context"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -898,7 +898,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html",
     "categories": "Predictable",
     "tags": ["Help"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -910,7 +910,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/visible-controls.html",
     "categories": "Predictable",
     "tags": ["Controls"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -922,7 +922,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html",
     "categories": "Forms|Input",
     "tags": ["Error identification", "Form validation", "Error messages", "Input errors", "Text descriptions", "Screen reader announcements", "Form submission", "ARIA"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -934,7 +934,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html",
     "categories": "Forms|Input",
     "tags": ["Labels", "Instructions", "Form controls", "Input fields", "Placeholders", "Accessible names", "Form requirements", "User guidance", "Forms"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -946,7 +946,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html",
     "categories": "Forms|Input",
     "tags": ["Error suggestion", "Correction assistance", "Input validation", "Form fields", "Form submission", "User guidance", "Accessibility help", "ARIA"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -958,7 +958,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-legal-financial-data.html",
     "categories": "Forms|Input|Security",
     "tags": ["Error prevention", "Financial transactions", "Legal commitments", "Data modification", "Confirmation steps", "Reversibility", "Data storage", "Form submission", "Data integrity"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -970,7 +970,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/help.html",
     "categories": "Forms|Input",
     "tags": ["Context sensitive help", "Instructions", "Support links", "Form guidance", "Accessibility documentation", "User assistance", "Form labels"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -982,7 +982,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html",
     "categories": "Forms|Input",
     "tags": ["Error prevention", "Form submission", "Confirmation steps", "Reversibility", "Data review", "Input checking", "Accessibility design"]
-  },,
+  },
 {
     "ver": 2.2,
     "level": "A",
@@ -994,7 +994,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
     "categories": "Input Assistance",
     "tags": ["Forms"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -1006,7 +1006,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
     "categories": "Input Assistance",
     "tags": ["Authentication"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AAA",
@@ -1018,7 +1018,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html",
     "categories": "Input Assistance",
     "tags": ["Authentication"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "A",
@@ -1030,7 +1030,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html",
     "categories": "Structure|ARIA|UI Components|Forms",
     "tags": ["Name role value", "Accessible names", "ARIA roles", "State properties", "UI components", "Screen reader support", "Custom widgets", "Input attributes", "Programmatic access", "ARIA", "Role", "Forms"]
-  },,
+  },
   {
     "ver": 2.2,
     "level": "AA",
@@ -1042,7 +1042,7 @@
     "Link": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
     "categories": "UI Components|Notifications",
     "tags": ["Status messages", "Aria live", "Notifications", "Toast messages", "Error alerts", "Success banners", "Loading spinners", "Progress bars", "Dynamic content updates", "Page updates", "Screen reader announcements", "Success messages"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1054,7 +1054,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html",
     "categories": "Images|UI Components|Media|Forms",
     "tags": ["Alternate Text", "Decorative Images", "CAPTCHA", "Form Controls", "Graphic Symbols", "Structural Markup", "Alt Text Descriptions", "Forms", "Input", "Buttons"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1066,7 +1066,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-only-and-video-only-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Audio-only", "Video-only", "Transcripts", "Prerecorded Media", "Media Alternatives"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1078,7 +1078,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Captions", "Synchronized Media", "Prerecorded Media", "Audio Tracks"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "A",
@@ -1090,7 +1090,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-description-or-media-alternative-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Audio Description", "Media Alternatives", "Transcripts", "Synchronized Media"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1102,7 +1102,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/captions-live.html",
     "categories": "Multimedia",
     "tags": ["Live Captions", "Real-time Media", "Synchronization", "Live Broadcasts"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1114,7 +1114,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-description-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Audio Description", "Prerecorded Media", "Video Descriptions", "Text Overlays"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1126,7 +1126,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/sign-language-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Sign Language", "Interpretation", "Prerecorded Media", "Synchronized Media"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1138,7 +1138,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/extended-audio-description-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Extended Audio Description", "Video Pauses", "Media Alternatives", "Prerecorded Media"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1150,7 +1150,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/media-alternative-prerecorded.html",
     "categories": "Multimedia",
     "tags": ["Media Alternatives", "Text Transcripts", "Storyboards", "Prerecorded Media"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1162,7 +1162,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-only-live.html",
     "categories": "Multimedia",
     "tags": ["Live Audio", "Real-time Transcripts", "CART Services", "Audio-only Streams"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1174,7 +1174,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html",
     "categories": "Structure|Forms|Tables|ARIA",
     "tags": ["Semantics", "Landmarks", "Headings", "Form Labels", "Data Tables", "ARIA Roles", "Info and relationships", "Semantic markup", "Lists", "Form controls", "Fieldsets", "Programmatic structure", "Buttons", "Input", "Forms", "Labels", "Radio Groups", "Tables", "Accordians", "Navigation", "Checkboxes", "Textboxes", "Comboboxes", "Listboxes"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "A",
@@ -1186,7 +1186,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/meaningful-sequence.html",
     "categories": "Structure|Layout",
     "tags": ["Reading Order", "DOM Sequence", "CSS Positioning", "Layout Tables", "Meaningful sequence", "Navigation order", "DOM structure", "Headings", "Heading Level"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1198,7 +1198,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/sensory-characteristics.html",
     "categories": "Design|Instructions",
     "tags": ["Sensory Cues", "Spatial Location", "Audio Instructions"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1210,7 +1210,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/orientation.html",
     "categories": "Layout|Mobile",
     "tags": ["Orientation Lock", "Responsive Design", "Portrait", "Landscape"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1222,7 +1222,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html",
     "categories": "Forms|Input",
     "tags": ["Autocomplete", "Input Purpose", "Autofill Metadata"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1234,7 +1234,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/identify-purpose.html",
     "categories": "Structure|Adaptability",
     "tags": ["Identify Purpose", "Personalization", "Semantics", "Regions", "Icons"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1246,7 +1246,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html",
     "categories": "Design|Color",
     "tags": ["Color Dependence", "Links", "Headings", "Visual Markers", "Use of color", "Contrast", "Visual cues", "Indicators", "Forms", "Buttons", "Input"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1258,7 +1258,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/audio-control.html",
     "categories": "Multimedia|Audio",
     "tags": ["Audio Control", "Autoplay", "Interference", "Volume Control"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1270,7 +1270,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html",
     "categories": "Design|Contrast",
     "tags": ["Text Contrast", "Background Images", "Color Ratios"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "AA",
@@ -1282,7 +1282,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html",
     "categories": "Layout|Text",
     "tags": ["Text Scaling", "Zoom 200%", "Fixed Containers", "Viewport Meta"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1294,7 +1294,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/images-of-text.html",
     "categories": "Images|Text",
     "tags": ["Images of Text", "CSS Layouts", "Web Fonts", "Styling Properties"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1306,7 +1306,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-enhanced.html",
     "categories": "Design|Contrast",
     "tags": ["Enhanced Contrast", "7:1 Ratio", "High Contrast"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1318,7 +1318,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/low-or-no-background-audio.html",
     "categories": "Multimedia|Audio",
     "tags": ["Background Audio", "Decibel Level", "Speech Isolation"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1330,7 +1330,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation.html",
     "categories": "Layout|Text",
     "tags": ["Visual Presentation", "Text Blocks", "Line Spacing", "Paragraph Spacing"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1342,7 +1342,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/images-of-text-no-exception.html",
     "categories": "Images|Text",
     "tags": ["Images of Text", "Text Graphics", "Logos", "Banners"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1354,7 +1354,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/reflow.html",
     "categories": "Layout|Responsive",
     "tags": ["Reflow", "Responsive Design", "Viewport", "Horizontal Scrolling"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1366,7 +1366,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html",
     "categories": "Design|Contrast",
     "tags": ["Non-Text Contrast", "UI Components", "Graphical Objects"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "AA",
@@ -1378,7 +1378,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/text-spacing.html",
     "categories": "Layout|Text",
     "tags": ["Text Spacing", "Line Height", "Letter Spacing", "Paragraph Spacing"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1390,7 +1390,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html",
     "categories": "UI Components|Popups",
     "tags": ["Content on Hover", "Tooltips", "Pop-ups", "Sub-menus"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1402,7 +1402,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html",
     "categories": "Keyboard|Interaction",
     "tags": ["Keyboard navigation", "Keyboard access", "Interactive elements", "Buttons", "Links", "Form controls", "Menus", "Widgets", "Tab index", "Event handlers", "Mouse dependent functionality", "Drag and drop", "Custom controls", "Tab key", "Tabbing", "Arrow keys", "Activation"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1414,7 +1414,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/no-keyboard-trap.html",
     "categories": "Keyboard|Navigation",
     "tags": ["Keyboard Trap", "Focus Management", "Modal Dialogs"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1426,7 +1426,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/keyboard-no-exception.html",
     "categories": "Keyboard|Interaction",
     "tags": ["Keyboard Navigation", "Mouse Only Functionality"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1438,7 +1438,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/character-key-shortcuts.html",
     "categories": "Keyboard|Interaction",
     "tags": ["Character Key Shortcuts", "Hotkeys", "Keyboard Mapping"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1450,7 +1450,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html",
     "categories": "Timeouts|Interactivity",
     "tags": ["Timing Adjustable", "Session Timeouts", "Auto Refresh"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1462,7 +1462,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pause-stop-hide.html",
     "categories": "Animation|Interactivity",
     "tags": ["Pause", "Stop", "Hide", "Auto Play", "Scrolling Content"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "AAA",
@@ -1474,7 +1474,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/no-timing.html",
     "categories": "Timeouts|Interactivity",
     "tags": ["No Timing", "Real-time Processes", "Synchronization"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1486,7 +1486,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/interruptions.html",
     "categories": "Interactivity|Notifications",
     "tags": ["Interruptions", "Notifications", "Alerts"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1498,7 +1498,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/re-authenticating.html",
     "categories": "Timeouts|Forms",
     "tags": ["Re-authentication", "Login Sessions", "Session Expiry"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1510,7 +1510,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/three-flashes-or-below-threshold.html",
     "categories": "Multimedia|Design",
     "tags": ["Three Flashes", "Flashing Content", "Strobing Effects"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1522,7 +1522,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/three-flashes.html",
     "categories": "Multimedia|Design",
     "tags": ["Three Flashes", "Flashing Content", "Strobing Effects"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1532,7 +1532,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html",
     "categories": "Seizures and Physical Reactions",
     "tags": ["Animation", "Motion", "Vestibular Disorders", "Interaction"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1544,7 +1544,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html",
     "categories": "Navigation|Structure",
     "tags": ["Bypass Blocks", "Skip Links", "Navigation Menus"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1556,7 +1556,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/page-titled.html",
     "categories": "Navigation|Structure",
     "tags": ["Page titled", "Document title", "Head element", "Browser tab title", "Page context", "Document structure", "Meta tags", "Site navigation", "Title attribute", "Page title", "Site map", "Popups"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "A",
@@ -1568,7 +1568,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html",
     "categories": "Navigation|Keyboard",
     "tags": ["Focus Order", "Tab Order", "Reading Order"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1580,7 +1580,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html",
     "categories": "Navigation|Text",
     "tags": ["Link purpose", "Anchor tags", "Link text", "Context clues", "Navigation menus", "Call to action", "Hypertext", "Accessible name", "Navigation flow", "Link name", "Link purpose", "Links"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1592,7 +1592,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways.html",
     "categories": "Navigation",
     "tags": ["Multiple Ways", "Site Navigation", "Search Functionality"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1604,7 +1604,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/headings-and-labels.html",
     "categories": "Navigation|Structure",
     "tags": ["Headings", "Labels", "Form Labels", "Page Structure"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1616,7 +1616,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html",
     "categories": "Navigation|Keyboard",
     "tags": ["Focus Visible", "Focus Indicators", "Keyboard Navigation"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1628,7 +1628,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/location.html",
     "categories": "Navigation",
     "tags": ["Location", "Breadcrumbs", "Site Navigation"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1640,7 +1640,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-link-only.html",
     "categories": "Navigation|Text",
     "tags": ["Link Purpose", "Anchor Tags", "Link Text"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1652,7 +1652,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/section-headings.html",
     "categories": "Navigation|Structure",
     "tags": ["Section Headings", "H1-H6", "Content Organization"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "A",
@@ -1664,7 +1664,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pointer-gestures.html",
     "categories": "Interaction",
     "tags": ["Pointer Gestures", "Multi-point", "Path-based", "Drag and Drop"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1676,7 +1676,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pointer-cancellation.html",
     "categories": "Interaction",
     "tags": ["Pointer Cancellation", "Mouse Up", "Touch End", "Click Events"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1688,7 +1688,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html",
     "categories": "Interaction|Forms",
     "tags": ["Label in Name", "Accessible Name", "ARIA Label"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1700,7 +1700,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/motion-actuation.html",
     "categories": "Interaction",
     "tags": ["Motion Actuation", "Device Motion", "Accelerometer", "Gyroscope"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1712,7 +1712,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/target-size.html",
     "categories": "Interaction|Mobile",
     "tags": ["Target Size", "Touch Targets", "Button Size", "Mobile Layout"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1724,7 +1724,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/concurrent-input-mechanisms.html",
     "categories": "Interaction",
     "tags": ["Concurrent Input", "Touch", "Mouse", "Keyboard", "Stylus"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1736,7 +1736,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/language-of-page.html",
     "categories": "Structure|Text",
     "tags": ["Language of Page", "HTML lang attribute", "Screen Reader Pronunciation"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1748,7 +1748,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/language-of-parts.html",
     "categories": "Structure|Text",
     "tags": ["Language of Parts", "lang attribute", "Inline Translation"]
-  },,
+  },
 {
     "ver": 2.1,
     "level": "AAA",
@@ -1760,7 +1760,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/unusual-words.html",
     "categories": "Text",
     "tags": ["Unusual Words", "Glossary", "Definition Links"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1772,7 +1772,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/abbreviations.html",
     "categories": "Text",
     "tags": ["Abbreviations", "Acronyms", "Definition Links"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1784,7 +1784,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/reading-level.html",
     "categories": "Text",
     "tags": ["Reading Level", "Plain Language", "Content Complexity"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1796,7 +1796,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/pronunciation.html",
     "categories": "Text",
     "tags": ["Pronunciation", "Ruby Text", "Phonetics"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1808,7 +1808,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/on-focus.html",
     "categories": "Navigation|Interactivity",
     "tags": ["On Focus", "Context Change", "Keyboard Navigation"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1820,7 +1820,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/on-input.html",
     "categories": "Navigation|Interactivity",
     "tags": ["On Input", "Context Change", "Automatic Submission"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1832,7 +1832,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/consistent-navigation.html",
     "categories": "Navigation",
     "tags": ["Consistent Navigation", "Site Architecture"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1844,7 +1844,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification.html",
     "categories": "Navigation|UI Components",
     "tags": ["Consistent Identification", "Labels", "Icons"]
-  },,
+  },
 [
   {
     "ver": 2.1,
@@ -1857,7 +1857,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html",
     "categories": "Forms|Input|ARIA",
     "tags": ["Error Identification", "Form Validation", "ARIA"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1869,7 +1869,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html",
     "categories": "Forms|Input",
     "tags": ["Labels", "Instructions", "Form controls", "Input fields", "Placeholders", "Accessible names", "Form requirements", "User guidance", "Forms", "Required"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1881,7 +1881,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-suggestion.html",
     "categories": "Forms|Input|ARIA",
     "tags": ["Error Suggestion", "Correction Assistance", "ARIA"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
@@ -1893,7 +1893,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-legal-financial-data.html",
     "categories": "Forms|Input|Security",
     "tags": ["Error Prevention", "Financial Transactions", "Legal Commitments"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1905,7 +1905,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/help.html",
     "categories": "Forms|Input",
     "tags": ["Context Sensitive Help", "Support Links"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AAA",
@@ -1917,7 +1917,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-all.html",
     "categories": "Forms|Input",
     "tags": ["Error Prevention", "Form Submission", "Data Review"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1929,7 +1929,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/parsing.html",
     "categories": "Structure|Markup",
     "tags": ["Parsing", "Valid Markup", "HTML Syntax", "Opening And Closing Tags"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "A",
@@ -1941,7 +1941,7 @@
     "Link": "https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html",
     "categories": "Structure|ARIA|UI Components|Forms",
     "tags": ["Name role value", "Accessible names", "ARIA roles", "State properties", "UI components", "Screen reader support", "Custom widgets", "Input attributes", "Programmatic access", "ARIA", "Role", "Forms"]
-  },,
+  },
   {
     "ver": 2.1,
     "level": "AA",
