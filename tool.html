@@ -18,44 +18,52 @@
 
         async function initTool() {
             const container = document.getElementById('container');
-            const res = await fetch('https://ripplelearning.github.io/wcag-database/wcag_data.js', { cache: "no-cache" });
-            const data = await res.json();
+            try {
+                // Using the raw URL you provided
+                const res = await fetch('https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js', { cache: "no-cache" });
+                if (!res.ok) throw new Error('Could not fetch data');
+                const data = await res.json();
 
-            container.innerHTML = `
-                <input id="s" type="search" placeholder="Search criteria..." aria-label="Search WCAG">
-                <div id="list-container"></div>
-                <footer>
-                    <details><summary style="cursor:pointer;"><strong>How to use this tool</strong></summary>
-                    <p>Shortcuts: <strong>Esc</strong> (Minimize), <strong>Alt+Shift+A</strong> (Restore), <strong>Alt+Shift+D</strong> (Reset).</p></details>
-                </footer>
-            `;
+                container.innerHTML = `
+                    <input id="s" type="search" placeholder="Search criteria..." aria-label="Search WCAG">
+                    <div id="list-container"></div>
+                    <footer>
+                        <details><summary style="cursor:pointer;"><strong>How to use this tool</strong></summary>
+                        <p>Shortcuts: <strong>Esc</strong> (Minimize), <strong>Alt+Shift+A</strong> (Restore), <strong>Alt+Shift+D</strong> (Reset).</p></details>
+                    </footer>
+                `;
 
-            const render = (list) => {
-                const listContainer = document.getElementById('list-container');
-                listContainer.innerHTML = '';
-                list.forEach(i => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `<button class="acc-btn">${i.name}</button><div class="acc-content">${formatAsList(i.fixes)}</div>`;
-                    div.querySelector('.acc-btn').onclick = function() { 
-                        this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; 
-                    };
-                    listContainer.appendChild(div);
+                const render = (list) => {
+                    const listContainer = document.getElementById('list-container');
+                    listContainer.innerHTML = '';
+                    if (!Array.isArray(list)) return; 
+                    list.forEach(i => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `<button class="acc-btn">${i.name || 'Untitled'}</button><div class="acc-content">${formatAsList(i.fixes)}</div>`;
+                        div.querySelector('.acc-btn').onclick = function() { 
+                            this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; 
+                        };
+                        listContainer.appendChild(div);
+                    });
+                };
+
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        window.opener.postMessage('SHOW_RESTORE_BUTTON', '*');
+                        window.moveTo(-3000, -3000);
+                        window.opener.focus();
+                    } else if (e.altKey && e.shiftKey && e.key === 'A') {
+                        window.moveTo(100, 100);
+                        window.focus();
+                    } else if (e.altKey && e.shiftKey && e.key === 'D') {
+                        window.location.reload();
+                    }
                 });
-            };
-
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    window.opener.postMessage('SHOW_RESTORE_BUTTON', '*');
-                    window.moveTo(-3000, -3000);
-                    window.opener.focus();
-                } else if (e.altKey && e.shiftKey && e.key === 'A') {
-                    window.moveTo(100, 100);
-                    window.focus();
-                } else if (e.altKey && e.shiftKey && e.key === 'D') {
-                    window.location.reload();
-                }
-            });
-            render(data);
+                render(data);
+            } catch (err) {
+                container.innerHTML = "Error loading data. Please check your JSON format.";
+                console.error(err);
+            }
         }
         initTool();
     </script>
