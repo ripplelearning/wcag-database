@@ -4,77 +4,15 @@
     <meta charset="UTF-8">
     <title>WCAG Lookup Tool</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
-        #s { width: 100%; padding: 10px; box-sizing: border-box; margin-bottom: 10px; }
-        .acc-btn { width: 100%; text-align: left; padding: 10px; cursor: pointer; background: #f8f8f8; border: 1px solid #ccc; margin-top: 5px; font-weight: bold; }
-        .acc-content { display: none; padding: 15px; border: 1px solid #ddd; background: #fff; }
-        footer { margin-top: 40px; border-top: 1px solid #ccc; padding-top: 10px; font-size: 0.9em; }
+        body { font-family: sans-serif; padding: 20px; line-height: 1.5; }
+        #container { margin-top: 20px; }
+        .criterion { border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; }
     </style>
 </head>
 <body>
-    <div id="container">Loading data...</div>
+    <h1>WCAG Lookup Tool</h1>
+    <div id="container">Loading criteria...</div>
 
-    <script>
-        const formatAsList = (val) => val ? `<ul>${val.toString().split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>` : '';
-
-        async function initTool() {
-            const container = document.getElementById('container');
-            const url = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
-            
-            try {
-                const res = await fetch(url, { cache: "no-cache" });
-                if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
-                
-                const text = await res.text();
-                
-                // Check if content is HTML (meaning wrong URL)
-                if (text.trim().startsWith('<')) {
-                    throw new Error("The link returned an HTML page instead of JSON. Please check the Raw URL.");
-                }
-
-                const data = JSON.parse(text);
-
-                container.innerHTML = `
-                    <input id="s" type="search" placeholder="Search criteria..." aria-label="Search WCAG">
-                    <div id="list-container"></div>
-                    <footer>
-                        <details><summary style="cursor:pointer;"><strong>How to use this tool</strong></summary>
-                        <p>Shortcuts: <strong>Esc</strong> (Minimize), <strong>Alt+Shift+A</strong> (Restore), <strong>Alt+Shift+D</strong> (Reset).</p></details>
-                    </footer>
-                `;
-
-                const render = (list) => {
-                    const listContainer = document.getElementById('list-container');
-                    listContainer.innerHTML = '';
-                    if (!Array.isArray(list)) return;
-                    list.forEach(i => {
-                        const div = document.createElement('div');
-                        div.innerHTML = `<button class="acc-btn">${i.name || 'Untitled'}</button><div class="acc-content">${formatAsList(i.fixes)}</div>`;
-                        div.querySelector('.acc-btn').onclick = function() { 
-                            this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; 
-                        };
-                        listContainer.appendChild(div);
-                    });
-                };
-
-                window.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        if(window.opener) window.opener.postMessage('SHOW_RESTORE_BUTTON', '*');
-                        window.moveTo(-3000, -3000);
-                    } else if (e.altKey && e.shiftKey && e.key === 'A') {
-                        window.moveTo(100, 100);
-                        window.focus();
-                    } else if (e.altKey && e.shiftKey && e.key === 'D') {
-                        window.location.reload();
-                    }
-                });
-                render(data);
-            } catch (err) {
-                container.innerHTML = `<strong>Error:</strong> ${err.message}<br><br>Check the Browser Console (F12) for more details.`;
-                console.error("Critical Failure:", err);
-            }
-        }
-        initTool();
-    </script>
+    <script src="loader.js"></script>
 </body>
 </html>
