@@ -12,20 +12,26 @@
     </style>
 </head>
 <body>
-    <div id="container">Loading data... Check Console (F12) for errors.</div>
+    <div id="container">Loading data...</div>
 
     <script>
         const formatAsList = (val) => val ? `<ul>${val.toString().split('|').map(i => `<li>${i.trim()}</li>`).join('')}</ul>` : '';
 
         async function initTool() {
             const container = document.getElementById('container');
+            const url = 'https://raw.githubusercontent.com/ripplelearning/wcag-database/main/wcag_data.js';
+            
             try {
-                const res = await fetch('https://raw.githubusercontent.com/ripplelearning/wcag-database/refs/heads/main/wcag_data.js', { cache: "no-cache" });
+                const res = await fetch(url, { cache: "no-cache" });
+                if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+                
                 const text = await res.text();
                 
-                // Debugging: Log what we actually got
-                console.log("Raw Response:", text);
-                
+                // Check if content is HTML (meaning wrong URL)
+                if (text.trim().startsWith('<')) {
+                    throw new Error("The link returned an HTML page instead of JSON. Please check the Raw URL.");
+                }
+
                 const data = JSON.parse(text);
 
                 container.innerHTML = `
@@ -40,7 +46,7 @@
                 const render = (list) => {
                     const listContainer = document.getElementById('list-container');
                     listContainer.innerHTML = '';
-                    if (!Array.isArray(list)) throw new Error("Data is not an array");
+                    if (!Array.isArray(list)) return;
                     list.forEach(i => {
                         const div = document.createElement('div');
                         div.innerHTML = `<button class="acc-btn">${i.name || 'Untitled'}</button><div class="acc-content">${formatAsList(i.fixes)}</div>`;
@@ -53,9 +59,8 @@
 
                 window.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
-                        window.opener.postMessage('SHOW_RESTORE_BUTTON', '*');
+                        if(window.opener) window.opener.postMessage('SHOW_RESTORE_BUTTON', '*');
                         window.moveTo(-3000, -3000);
-                        window.opener.focus();
                     } else if (e.altKey && e.shiftKey && e.key === 'A') {
                         window.moveTo(100, 100);
                         window.focus();
@@ -65,8 +70,8 @@
                 });
                 render(data);
             } catch (err) {
-                container.innerHTML = "<strong>Error loading data.</strong> Check the Browser Console (F12) to see if the file is valid JSON.";
-                console.error("Critical Error:", err);
+                container.innerHTML = `<strong>Error:</strong> ${err.message}<br><br>Check the Browser Console (F12) for more details.`;
+                console.error("Critical Failure:", err);
             }
         }
         initTool();
